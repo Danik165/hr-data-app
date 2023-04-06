@@ -1,0 +1,24 @@
+.App {
+  text-align: center;
+}
+
+.App button {
+  margin: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+}
+
+.App button:hover {
+  background-color: #ddd;
+}
+
+.App input,
+.App select {
+  margin: 5px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}

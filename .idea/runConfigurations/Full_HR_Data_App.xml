@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="Full HR Data App" type="CompoundRunConfigurationType">
+    <toRun name="Flask Backend" type="PythonConfigurationType" />
+    <toRun name="Sevrev Start" type="ShConfigurationType" />
+    <method v="2" />
+  </configuration>
+</component>
