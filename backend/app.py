@@ -14,6 +14,9 @@ class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     experience = db.Column(db.String(200), nullable=False)
+    knowledge_level = db.Column(db.String(100), nullable=True)
+    activity = db.Column(db.String(100), nullable=False)
+
 
     def __repr__(self):
         return f'<Employee {self.name}>'
@@ -23,6 +26,8 @@ class Employee(db.Model):
             'id': self.id,
             'name': self.name,
             'experience': self.experience,
+            'knowledge_level': self.knowledge_level,
+            'activity': self.activity,
         }
 
 
@@ -32,7 +37,8 @@ def employees():
         employees = Employee.query.all()
         return jsonify([e.to_dict() for e in employees])
     elif request.method == 'POST':
-        new_employee = Employee(name=request.json['name'], experience=request.json['experience'])
+        new_employee = Employee(name=request.json['name'], experience=request.json['experience'],
+                                knowledge_level=request.json['knowledge_level'], activity=request.json['activity'])
         db.session.add(new_employee)
         db.session.commit()
         return jsonify(new_employee.to_dict()), 201

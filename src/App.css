@@ -1,24 +1,84 @@
 .App {
+  font-family: 'Roboto', sans-serif;
+  background-color: #669999;
+  padding: 20px;
+  max-width: 800px;
+  margin: 0 auto;
+}
+body{
+background-color:#669999;
+}
+h1 {
   text-align: center;
+  margin-bottom: 20px;
+  color:white;
 }
 
-.App button {
-  margin: 5px;
-  padding: 5px 10px;
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+input,
+select,
+button {
+  padding: 10px;
+}
+
+input[type='text'],
+select {
   border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f1f1f1;
+  border-radius: 4px;
+  outline: none;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  border-radius: 4px;
+  color: white;
   cursor: pointer;
+  outline: none;
+  font-weight: bold;
 }
 
-.App button:hover {
-  background-color: #ddd;
+button:hover {
+  background-color: #45a049;
 }
 
-.App input,
-.App select {
-  margin: 5px;
-  padding: 5px;
+.sort-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  color:white;
+}
+
+.employee-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
 }
