@@ -17,7 +17,6 @@ class Employee(db.Model):
     knowledge_level = db.Column(db.String(100), nullable=True)
     activity = db.Column(db.String(100), nullable=False)
 
-
     def __repr__(self):
         return f'<Employee {self.name}>'
 

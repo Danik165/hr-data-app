@@ -26,7 +26,7 @@ function App() {
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, experience, knowledge_level, activity, created_at: new Date().toISOString() }),
+    body: JSON.stringify({ name, experience, knowledge_level, activity }),
   };
   fetch("http://localhost:5000/employees", requestOptions)
     .then((response) => {
@@ -67,6 +67,7 @@ const updateEmployee = (id) => {
         );
       });
   };
+
 
 
   const deleteEmployee = (id) => {
