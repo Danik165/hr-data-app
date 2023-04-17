@@ -9,13 +9,30 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
 
+# Added a new Skill class
+class Skill(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    skill = db.Column(db.String(100), nullable=False)
+    level = db.Column(db.String(100), nullable=False)
+    employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'), nullable=False)
+
+    def __repr__(self):
+        return f'<Skill {self.skill} - {self.level}>'
+
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'skill': self.skill,
+            'level': self.level
+        }
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
-    experience = db.Column(db.String(200), nullable=False)
-    knowledge_level = db.Column(db.String(100), nullable=True)
     activity = db.Column(db.String(100), nullable=False)
+    experience = db.Column(db.String(100), nullable=False)
+    skills = db.relationship('Skill', backref='employee', lazy=True, cascade="all, delete-orphan")
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Added created_at field
 
     def __repr__(self):
         return f'<Employee {self.name}>'
@@ -24,11 +41,11 @@ class Employee(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'experience': self.experience,
-            'knowledge_level': self.knowledge_level,
             'activity': self.activity,
+            'experience': self.experience,  # Include experience field
+            'created_at': self.created_at.isoformat(),  # Include created_at field
+            'skills': [skill.to_dict() for skill in self.skills],
         }
-
 
 @app.route('/employees', methods=['GET', 'POST'])
 def employees():
@@ -36,19 +53,32 @@ def employees():
         employees = Employee.query.all()
         return jsonify([e.to_dict() for e in employees])
     elif request.method == 'POST':
-        new_employee = Employee(name=request.json['name'], experience=request.json['experience'],
-                                knowledge_level=request.json['knowledge_level'], activity=request.json['activity'])
+        new_employee = Employee(name=request.json['name'], activity=request.json['activity'],
+                                experience=request.json['experience'])
+
+        # Updated the code to handle skills
+        skills = request.json['skills']
+        for skill_data in skills:
+            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], employee=new_employee)
+            db.session.add(skill)
+
         db.session.add(new_employee)
         db.session.commit()
         return jsonify(new_employee.to_dict()), 201
-
 
 @app.route('/employees/<int:employee_id>', methods=['PUT', 'DELETE'])
 def employee(employee_id):
     employee = Employee.query.get_or_404(employee_id)
     if request.method == 'PUT':
         employee.name = request.json['name']
+        employee.activity = request.json['activity']
         employee.experience = request.json['experience']
+        employee.skills = []
+        skills = request.json['skills']
+        for skill_data in skills:
+            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], employee=employee)
+            db.session.add(skill)
+
         db.session.commit()
         return jsonify(employee.to_dict())
     elif request.method == 'DELETE':
@@ -56,17 +86,14 @@ def employee(employee_id):
         db.session.commit()
         return jsonify({'result': 'success'})
 
-
 @app.errorhandler(500)
 def internal_server_error(error):
     app.logger.error('Server Error: %s', error)
     return jsonify({'error': 'Internal Server Error'}), 500
 
-
 def create_tables():
     with app.app_context():
         db.create_all()
-
 
 if __name__ == '__main__':
     with app.app_context():

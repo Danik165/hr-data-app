@@ -4,9 +4,9 @@ import './App.css';
 function App() {
   const [employees, setEmployees] = useState([]);
   const [name, setName] = useState('');
+  const [activity, setActivity] = useState('');
+  const [skills, setSkills] = useState([{ skill: '', level: '' }]);
   const [experience, setExperience] = useState('');
-  const [knowledge_level, setKnowledge_level] = useState('');
-  const [activity, setActivity] = useState('')
 
 
   useEffect(() => {
@@ -15,46 +15,53 @@ function App() {
       .then((data) => setEmployees(data));
   }, []);
 
-  const addEmployee = () => {
-    if (!name || !experience || !knowledge_level || !activity) {
-      alert("Fill all fields.");
-      return;
-    }
-
-
-
+const addEmployee = () => {
+  if (!name || !activity || !skills || skills.length === 0 || !experience ) {
+    alert("Fill all fields.");
+    return;
+  }
+  const emptySkillLevelIndex = skills.findIndex(skill => !skill.level);
+  if (emptySkillLevelIndex >= 0) {
+    alert(`Fill the skill level for skill ${emptySkillLevelIndex + 1}.`);
+    return;
+  }
   const requestOptions = {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ name, experience, knowledge_level, activity }),
+    body: JSON.stringify({ name, activity, skills, experience }),
   };
-  fetch("http://localhost:5000/employees", requestOptions)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Error with adding employee");
-      }
-      return response.json();
-    })
-    .then((data) => {
-      setEmployees([...employees, data]);
-      // Clear the input fields
-      setName('');
-      setExperience('');
-      setKnowledge_level('');
-      setActivity('');
-    })
-    .catch((error) => alert(error.message));
-}
+
+    fetch("http://localhost:5000/employees", requestOptions)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Error with adding employee");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setEmployees([...employees, data]);
+        setName('');
+        setActivity('');
+        setSkills([{ skill: '', level: '' }]);
+      })
+      .catch((error) => alert(error.message));
+  };
 
 const updateEmployee = (id) => {
-    const newName = prompt('Enter new  name:');
-    const newExperience = prompt('Enter new experience:');
-    const newKnowledge_level = prompt('Enter new knowledge level:');
-    const newActivity = prompt('Enter new activity:');
+  const newName = prompt('Enter new name:');
+  const newActivity = prompt('Enter new activity:');
+  const updatedSkills = skills.map((skill, index) => {
+    const newSkill = prompt(`Enter new skill for skill ${index + 1}:`);
+    const newLevel = prompt(`Enter new level for skill ${index + 1}:`);
+    return { ...skill, skill: newSkill, level: newLevel };
+  });
+  const newExperience = prompt('Enter new number of years (options: <1, 1, 2, 3, 4, 5, 5+):');
+
+  if (newName && newActivity && newExperience && updatedSkills.every(skill => skill.skill && skill.level)) {
     const requestOptions = {
       method: 'PUT',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: newName, experience: newExperience, knowledge_level: newKnowledge_level, activity: newActivity }),
+      body: JSON.stringify({ name: newName, activity: newActivity, skills: updatedSkills, experience: newExperience }),
     };
 
     fetch(`http://localhost:5000/employees/${id}`, requestOptions)
@@ -62,13 +69,28 @@ const updateEmployee = (id) => {
       .then((data) => {
         setEmployees(
           employees.map((employee) =>
-            employee.id === id ? { ...employee, name: data.name, experience: data.experience, knowledge_level: data.knowledge_level, activity: data.activity } : employee
+            employee.id === id ? { ...employee, name: data.name, activity: data.activity, skills: data.skills, experience: data.experience } : employee
           )
         );
       });
+  }
+};
+
+   const addSkill = () => {
+    setSkills([...skills, { skill: '', level: '' }]);
   };
 
+  const removeSkill = (index) => {
+    const updatedSkills = [...skills];
+    updatedSkills.splice(index, 1);
+    setSkills(updatedSkills);
+  };
 
+  const handleSkillChange = (index, field, value) => {
+    const updatedSkills = [...skills];
+    updatedSkills[index][field] = value;
+    setSkills(updatedSkills);
+  };
 
   const deleteEmployee = (id) => {
     const requestOptions = {
@@ -81,7 +103,8 @@ const updateEmployee = (id) => {
       }
     });
   };
-    const sortEmployees = (sortBy) => {
+
+const sortEmployees = (sortBy) => {
     const sortedEmployees = [...employees].sort((a, b) => {
       if (sortBy === 'name') {
         return a.name.localeCompare(b.name);
@@ -96,7 +119,6 @@ const updateEmployee = (id) => {
     setEmployees(sortedEmployees);
   };
 
-// ...
 
 return (
   <div className="App">
@@ -108,41 +130,64 @@ return (
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <input
-        type="text"
-        placeholder="Experience"
-        value={experience}
-        onChange={(e) => setExperience(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="Knowledge Level"
-        value={knowledge_level}
-        onChange={(e) => setKnowledge_level(e.target.value)}
-      />
       <select value={activity} onChange={(e) => setActivity(e.target.value)}>
         <option value="">Activity</option>
         <option value="HR">HR</option>
         <option value="IT">IT</option>
         <option value="SF">SF</option>
         <option value="VT">VT</option>
-        <option value="Admin">Admin</option>
+        <option value="TAX">TAX</option>
+        <option value="FIN">FIN</option>
+        <option value="ADMIN">ADMIN</option>
       </select>
+      {skills.map((skill, index) => (
+        <div key={index}>
+          <input
+            type="text"
+            placeholder="Skill or Technology"
+            value={skill.skill}
+            onChange={(e) => handleSkillChange(index, 'skill', e.target.value)}
+          />
+
+           <select value={skill.level } onChange={(e) => handleSkillChange(index, 'level', e.target.value)}>
+            //<option value="">Knowledge level</option>
+            <option value="Novice">Novice</option>
+            <option value="Beginner">Beginner</option>
+            <option value="Skillful">Skillful</option>
+            <option value="Experienced">Experienced</option>
+            <option value="Expert">Export</option>
+          </select>
+          <select value={experience} onChange={(e) => setExperience(e.target.value)}>
+              <option value="">Number of years</option>
+              <option value="<1">&lt;1</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+              <option value="5+">5+</option>
+            </select>
+
+          <button type="button" onClick={() => removeSkill(index)}>
+            Remove
+          </button>
+        </div>
+      ))}
+      <button type="button" onClick={addSkill}>
+        Add skill
+      </button>
       <button onClick={addEmployee}>Add employee</button>
     </form>
     <div className="sort-buttons">
       <button onClick={() => sortEmployees('name')}>Sort by name</button>
       <button onClick={() => sortEmployees('activity')}>Sort by activity</button>
-      <button onClick={() => sortEmployees('date')}>Sort by date</button>
-    </div>
 
+    </div>
     <ul>
       {employees.map((employee) => (
         <li key={employee.id}>
           <div className="employee-info">
             <div>Name: {employee.name}</div>
-            <div>Experience: {employee.experience}</div>
-            <div>Knowledge Level: {employee.knowledge_level}</div>
             <div>Activity: {employee.activity}</div>
           </div>
           <div className="action-buttons">
@@ -152,10 +197,9 @@ return (
         </li>
       ))}
     </ul>
-
-
   </div>
 );
+
 }
 
 export default App;
