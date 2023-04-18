@@ -5,8 +5,7 @@ function App() {
   const [employees, setEmployees] = useState([]);
   const [name, setName] = useState('');
   const [activity, setActivity] = useState('');
-  const [skills, setSkills] = useState([{ skill: '', level: '' }]);
-  const [experience, setExperience] = useState('');
+  const [skills, setSkills] = useState([{ skill: '', level: '', years: '' }]);
 
   useEffect(() => {
     fetch('http://localhost:5000/employees')
@@ -15,22 +14,21 @@ function App() {
   }, []);
 
   const addEmployee = () => {
-    if (!name || !activity || !skills || skills.length === 0 || !experience) {
+    if (!name || !activity || !skills || skills.length === 0) {
       alert("Fill all fields.");
       return;
     }
-    const emptySkillLevelIndex = skills.findIndex(skill => !skill.level);
-    if (emptySkillLevelIndex >= 0) {
-      alert(`Fill the skill level for skill ${emptySkillLevelIndex + 1}.`);
+    const emptySkillIndex = skills.findIndex(skill => !skill.level || !skill.years);
+    if (emptySkillIndex >= 0) {
+      alert(`Fill the skill level and years for skill ${emptySkillIndex + 1}.`);
       return;
     }
     const requestOptions = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, activity, skills, experience }),
+      body: JSON.stringify({ name, activity, skills }),
     };
-
-    fetch("http://localhost:5000/employees", requestOptions)
+fetch("http://localhost:5000/employees", requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error with adding employee");
@@ -41,7 +39,7 @@ function App() {
         setEmployees([...employees, data]);
         setName('');
         setActivity('');
-        setSkills([{ skill: '', level: '' }]);
+        setSkills([{ skill: '', level: '', years: '' }]);
       })
       .catch((error) => alert(error.message));
   };
@@ -52,15 +50,15 @@ function App() {
     const updatedSkills = skills.map((skill, index) => {
       const newSkill = prompt(`Enter new skill for skill ${index + 1}:`);
       const newLevel = prompt(`Enter new level for skill ${index + 1}:`);
-      return { ...skill, skill: newSkill, level: newLevel };
+      const newYears = prompt(`Enter new number of years for skill ${index + 1} (options: <1, 1, 2, 3, 4, 5, 5+):`);
+      return { ...skill, skill: newSkill, level: newLevel, years: newYears };
     });
-    const newExperience = prompt('Enter new number of years (options: <1, 1, 2, 3, 4, 5, 5+):');
 
-    if (newName && newActivity && newExperience && updatedSkills.every(skill => skill.skill && skill.level)) {
+    if (newName && newActivity && updatedSkills.every(skill => skill.skill && skill.level && skill.years)) {
       const requestOptions = {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name: newName, activity: newActivity, skills: updatedSkills, experience: newExperience }),
+        body: JSON.stringify({ name: newName, activity: newActivity, skills: updatedSkills }),
       };
 
       fetch(`http://localhost:5000/employees/${id}`, requestOptions)
@@ -68,7 +66,7 @@ function App() {
         .then((data) => {
           setEmployees(
             employees.map((employee) =>
-              employee.id === id ? { ...employee, name: data.name, activity: data.activity, skills: data.skills, experience: data.experience } : employee
+              employee.id === id ? { ...employee, name: data.name, activity: data.activity, skills: data.skills } : employee
             )
           );
         });
@@ -76,7 +74,7 @@ function App() {
   };
 
   const addSkill = () => {
-    setSkills([...skills, { skill: '', level: '' }]);
+    setSkills([...skills, { skill: '', level: '', years: '' }]);
   };
 
   const removeSkill = (index) => {
@@ -158,7 +156,7 @@ return (
             <option value="Experienced">Experienced</option>
             <option value="Expert">Export</option>
           </select>
-          <select value={experience} onChange={(e) => setExperience(e.target.value)}>
+          <select value={skill.years} onChange={(e) => handleSkillChange(index, 'years', e.target.value)}>
               <option value="">Number of years</option>
               <option value="<1">&lt;1</option>
               <option value="1">1</option>
@@ -174,61 +172,59 @@ return (
           </button>}
         </div>
       ))}
-      <button type="button" onClick={addSkill}>
+      <button type="button" onClick={      addSkill}>
         Add skill
       </button>
-    <button onClick={addEmployee}>Add employee</button>
-  </form>
-  <div className="sort-buttons">
+      <button onClick={addEmployee}>Add employee</button>
+    </form>
+    <div className="sort-buttons">
       <button onClick={() => sortEmployees('name')}>Sort by name</button>
-          <button onClick={() => sortEmployees('activity')}>Sort by activity</button>
-
-<table>
-
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Activity</th>
-      <th>Skills</th>
-      <th>Experience</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {employees.map((employee) => (
-      <tr key={employee.id}>
-        <td>{employee.name}</td>
-        <td>{employee.activity}</td>
-        <td>
-          <table>
-            <thead>
-              <tr>
-                <th>Skill</th>
-                <th>Level</th>
-              </tr>
-            </thead>
-            <tbody>
-              {employee.skills.map((skill, index) => (
-                <tr key={index}>
-                  <td>{skill.skill}</td>
-                  <td>{skill.level}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </td>
-        <td>{employee.experience}</td>
-        <td>
-          <button onClick={() => updateEmployee(employee.id)}>Edit</button>
-          <button onClick={() => deleteEmployee(employee.id)}>Delete</button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-</div>
+      <button onClick={() => sortEmployees('activity')}>Sort by activity</button>
     </div>
-  );
+    <table>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Activity</th>
+          <th>Skills</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {employees.map((employee) => (
+          <tr key={employee.id}>
+            <td>{employee.name}</td>
+            <td>{employee.activity}</td>
+            <td>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Skill</th>
+                    <th>Level</th>
+                    <th>Years</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {employee.skills.map((skill, index) => (
+                    <tr key={index}>
+                      <td>{skill.skill}</td>
+                      <td>{skill.level}</td>
+                      <td>{skill.years}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <button onClick={() => updateEmployee(employee.id)}>Edit</button>
+              <button onClick={() => deleteEmployee(employee.id)}>Delete</button>
+            </td>
+          </tr>
+        ))}
+      </tbody>
+    </table>
+  </div>
+);
 }
 
 export default App;

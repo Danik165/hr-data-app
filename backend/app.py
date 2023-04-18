@@ -10,29 +10,30 @@ db = SQLAlchemy(app)
 CORS(app)
 
 
-# Added a new Skill class
 class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     skill = db.Column(db.String(100), nullable=False)
     level = db.Column(db.String(100), nullable=False)
+    years = db.Column(db.String(100), nullable=False)  # Add the 'years' column
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'), nullable=False)
 
     def __repr__(self):
-        return f'<Skill {self.skill} - {self.level}>'
+        return f'<Skill {self.skill} - {self.level} - {self.years}>'
 
     def to_dict(self):
         return {
             'id': self.id,
             'skill': self.skill,
-            'level': self.level
+            'level': self.level,
+            'years': self.years  # Include 'years' field
         }
+
 
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(100), nullable=False)
     activity = db.Column(db.String(100), nullable=False)
-    experience = db.Column(db.String(100), nullable=False)
     skills = db.relationship('Skill', backref='employee', lazy=True, cascade="all, delete-orphan")
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Added created_at field
 
@@ -44,9 +45,9 @@ class Employee(db.Model):
             'id': self.id,
             'name': self.name,
             'activity': self.activity,
-            'experience': self.experience,  # Include experience field
-            'created_at': self.created_at.isoformat(),  # Include created_at field
+            'created_at': self.created_at.isoformat(),
             'skills': [skill.to_dict() for skill in self.skills],
+
         }
 
 
@@ -56,13 +57,11 @@ def employees():
         employees = Employee.query.all()
         return jsonify([e.to_dict() for e in employees])
     elif request.method == 'POST':
-        new_employee = Employee(name=request.json['name'], activity=request.json['activity'],
-                                experience=request.json['experience'])
+        new_employee = Employee(name=request.json['name'], activity=request.json['activity'])
 
-        # Updated the code to handle skills
         skills = request.json['skills']
         for skill_data in skills:
-            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], employee=new_employee)
+            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], years=skill_data['years'], employee=new_employee)
             db.session.add(skill)
 
         db.session.add(new_employee)
