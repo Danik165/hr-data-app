@@ -28,7 +28,7 @@ function App() {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, activity, skills }),
     };
-fetch("http://localhost:5000/employees", requestOptions)
+    fetch("http://localhost:5000/employees", requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error with adding employee");
@@ -43,6 +43,7 @@ fetch("http://localhost:5000/employees", requestOptions)
       })
       .catch((error) => alert(error.message));
   };
+
 
   const updateEmployee = (id) => {
     const newName = prompt('Enter new name:');
@@ -85,6 +86,7 @@ fetch("http://localhost:5000/employees", requestOptions)
     }
   };
 
+
   const handleSkillChange = (index, field, value) => {
     const updatedSkills = [...skills];
     updatedSkills[index][field] = value;
@@ -103,7 +105,7 @@ fetch("http://localhost:5000/employees", requestOptions)
     });
   };
 
-const sortEmployees = (sortBy) => {
+  const sortEmployees = (sortBy) => {
     const sortedEmployees = [...employees].sort((a, b) => {
       if (sortBy === 'name') {
         return a.name.localeCompare(b.name);
@@ -118,45 +120,44 @@ const sortEmployees = (sortBy) => {
     setEmployees(sortedEmployees);
   };
 
+  return (
+    <div className="App">
+      <h1>Employees</h1>
+      <form onSubmit={(e) => e.preventDefault()}>
+        <input
+          type="text"
+          placeholder="Name"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+        <select value={activity} onChange={(e) => setActivity(e.target.value)}>
+          <option value="">Activity</option>
+          <option value="HR">HR</option>
+          <option value="IT">IT</option>
+          <option value="SF">SF</option>
+          <option value="VT">VT</option>
+          <option value="TAX">TAX</option>
+          <option value="FIN">FIN</option>
+          <option value="ADMIN">ADMIN</option>
+        </select>
+        {skills.map((skill, index) => (
+          <div key={index}>
+            <input
+              type="text"
+              placeholder="Skill or Technology"
+              value={skill.skill}
+              onChange={(e) => handleSkillChange(index, 'skill', e.target.value)}
+            />
 
-return (
-  <div className="App">
-    <h1>Employees</h1>
-    <form onSubmit={(e) => e.preventDefault()}>
-      <input
-        type="text"
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
-      <select value={activity} onChange={(e) => setActivity(e.target.value)}>
-        <option value="">Activity</option>
-        <option value="HR">HR</option>
-        <option value="IT">IT</option>
-        <option value="SF">SF</option>
-        <option value="VT">VT</option>
-        <option value="TAX">TAX</option>
-        <option value="FIN">FIN</option>
-        <option value="ADMIN">ADMIN</option>
-      </select>
-      {skills.map((skill, index) => (
-        <div key={index}>
-          <input
-            type="text"
-            placeholder="Skill or Technology"
-            value={skill.skill}
-            onChange={(e) => handleSkillChange(index, 'skill', e.target.value)}
-          />
-
-           <select value={skill.level } onChange={(e) => handleSkillChange(index, 'level', e.target.value)}>
-            //<option value="">Knowledge level</option>
-            <option value="Novice">Novice</option>
-            <option value="Beginner">Beginner</option>
-            <option value="Skillful">Skillful</option>
-            <option value="Experienced">Experienced</option>
-            <option value="Expert">Export</option>
-          </select>
-          <select value={skill.years} onChange={(e) => handleSkillChange(index, 'years', e.target.value)}>
+            <select value={skill.level} onChange={(e) => handleSkillChange(index, 'level', e.target.value)}>
+              <option value="">Knowledge level</option>
+              <option value="Novice">Novice</option>
+              <option value="Beginner">Beginner</option>
+              <option value="Skillful">Skillful</option>
+              <option value="Experienced">Experienced</option>
+              <option value="Expert">Expert</option>
+            </select>
+            <select value={skill.years} onChange={(e) => handleSkillChange(index, 'years', e.target.value)}>
               <option value="">Number of years</option>
               <option value="<1">&lt;1</option>
               <option value="1">1</option>
@@ -167,55 +168,56 @@ return (
               <option value="5+">5+</option>
             </select>
 
-             { skills.length > 1 && <button type="button" onClick={() => removeSkill(index)}>
-            Remove
-          </button>}
-        </div>
-      ))}
-      <button type="button" onClick={      addSkill}>
-        Add skill
-      </button>
-      <button onClick={addEmployee}>Add employee</button>
-    </form>
-    <div className="sort-buttons">
-      <button onClick={() => sortEmployees('name')}>Sort by name</button>
-      <button onClick={() => sortEmployees('activity')}>Sort by activity</button>
-    </div>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Activity</th>
-          <th>Skills</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {employees.map((employee) => (
-          <tr key={employee.id}>
-            <td>{employee.name}</td>
-            <td>{employee.activity}</td>
-            <td>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Skill</th>
-                    <th>Level</th>
-                    <th>Years</th>
+            {skills.length > 1 && <button type="button" onClick={() => removeSkill(index)}>
+              Remove
+            </button>}
+          </div>
+        ))}
+        <button type="button" onClick={addSkill}>
+          Add skill
+        </button>
+        <button onClick={addEmployee}>Add employee</button>
+  </form>
+  <div className="sort-buttons">
+    <button onClick={() => sortEmployees('name')}>Sort by name</button>
+    <button onClick={() => sortEmployees('activity')}>Sort by activity</button>
+    <button onClick={() => sortEmployees('date')}>Sort by date</button>
+  </div>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Activity</th>
+        <th>Skills</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {employees.map((employee) => (
+        <tr key={employee.id}>
+          <td>{employee.name}</td>
+          <td>{employee.activity}</td>
+          <td>
+            <table>
+              <thead>
+                <tr>
+                  <th>Skill</th>
+                  <th>Level</th>
+                  <th>Years</th>
+                </tr>
+              </thead>
+              <tbody>
+                {employee.skills.map((skill, index) => (
+                  <tr key={index}>
+                    <td>{skill.skill}</td>
+                    <td>{skill.level}</td>
+                    <td>{skill.years}</td>
                   </tr>
-                </thead>
-                <tbody>
-                  {employee.skills.map((skill, index) => (
-                    <tr key={index}>
-                      <td>{skill.skill}</td>
-                      <td>{skill.level}</td>
-                      <td>{skill.years}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </td>
-            <td>
+                ))}
+              </tbody>
+            </table>
+          </td>
+         <td>
               <button onClick={() => updateEmployee(employee.id)}>Edit</button>
               <button onClick={() => deleteEmployee(employee.id)}>Delete</button>
             </td>
@@ -226,5 +228,4 @@ return (
   </div>
 );
 }
-
 export default App;

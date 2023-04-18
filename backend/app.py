@@ -14,7 +14,7 @@ class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     skill = db.Column(db.String(100), nullable=False)
     level = db.Column(db.String(100), nullable=False)
-    years = db.Column(db.String(100), nullable=False)  # Add the 'years' column
+    years = db.Column(db.String(100), nullable=False)
     employee_id = db.Column(db.Integer, db.ForeignKey('employee.id'), nullable=False)
 
     def __repr__(self):
@@ -25,9 +25,8 @@ class Skill(db.Model):
             'id': self.id,
             'skill': self.skill,
             'level': self.level,
-            'years': self.years  # Include 'years' field
+            'years': self.years
         }
-
 
 
 class Employee(db.Model):
@@ -35,7 +34,7 @@ class Employee(db.Model):
     name = db.Column(db.String(100), nullable=False)
     activity = db.Column(db.String(100), nullable=False)
     skills = db.relationship('Skill', backref='employee', lazy=True, cascade="all, delete-orphan")
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)  # Added created_at field
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
     def __repr__(self):
         return f'<Employee {self.name}>'
@@ -47,7 +46,6 @@ class Employee(db.Model):
             'activity': self.activity,
             'created_at': self.created_at.isoformat(),
             'skills': [skill.to_dict() for skill in self.skills],
-
         }
 
 
@@ -75,11 +73,10 @@ def employee(employee_id):
     if request.method == 'PUT':
         employee.name = request.json['name']
         employee.activity = request.json['activity']
-        employee.experience = request.json['experience']
         employee.skills = []
         skills = request.json['skills']
         for skill_data in skills:
-            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], employee=employee)
+            skill = Skill(skill=skill_data['skill'], level=skill_data['level'], years=skill_data['years'], employee=employee)
             db.session.add(skill)
 
         db.session.commit()
@@ -105,4 +102,3 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-

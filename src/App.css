@@ -5,13 +5,15 @@
   max-width: 800px;
   margin: 0 auto;
 }
-body{
-background-color:#669999;
+
+body {
+  background-color: #669999;
 }
+
 h1 {
   text-align: center;
   margin-bottom: 20px;
-  color:white;
+  color: white;
 }
 
 form {
@@ -68,17 +70,36 @@ li {
   border-radius: 4px;
   padding: 10px;
   margin-bottom: 10px;
-  color:white;
+  color: white;
 }
 
 .employee-info {
   display: flex;
   flex-direction: column;
   gap: 5px;
-
 }
 
 .action-buttons {
   display: flex;
   gap: 10px;
 }
+
+/* New table styles */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+th, td {
+  text-align: left;
+  padding: 8px;
+  border: 1px solid #ccc;
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
