@@ -9,6 +9,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 CORS(app)
 
+
 # Added a new Skill class
 class Skill(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -25,6 +26,7 @@ class Skill(db.Model):
             'skill': self.skill,
             'level': self.level
         }
+
 
 class Employee(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -47,6 +49,7 @@ class Employee(db.Model):
             'skills': [skill.to_dict() for skill in self.skills],
         }
 
+
 @app.route('/employees', methods=['GET', 'POST'])
 def employees():
     if request.method == 'GET':
@@ -65,6 +68,7 @@ def employees():
         db.session.add(new_employee)
         db.session.commit()
         return jsonify(new_employee.to_dict()), 201
+
 
 @app.route('/employees/<int:employee_id>', methods=['PUT', 'DELETE'])
 def employee(employee_id):
@@ -86,16 +90,20 @@ def employee(employee_id):
         db.session.commit()
         return jsonify({'result': 'success'})
 
+
 @app.errorhandler(500)
 def internal_server_error(error):
     app.logger.error('Server Error: %s', error)
     return jsonify({'error': 'Internal Server Error'}), 500
 
+
 def create_tables():
     with app.app_context():
         db.create_all()
+
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
