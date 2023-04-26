@@ -1,70 +1,37 @@
-import React, { useState } from "react";
-import "./App.css";
-import Login from "./Login";
-import Register from "./Register";
-import AdminDashboard from "./AdminDashboard";
-import UserDashboard from "./UserDashboard";
+import React, { useState, useEffect } from 'react';
+import Login from './Components/Login';
+import Register from './Components/Register';
+import UserDashboard from './Components/UserDashboard';
 
-function App() {
-  const [loggedIn, setLoggedIn] = useState(false);
-  const [isAdmin, setIsAdmin] = useState(false);
-  const [accessToken, setAccessToken] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
+const App = () => {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [page, setPage] = useState('login'); // Default page is login
 
+  useEffect(() => {
+    const token = localStorage.getItem('access_token');
+    if (token) {
+      setIsAuthenticated(true);
+    }
+  }, []);
 
-
-
-  const loginUser = (username, password) => {
-    fetch("http://localhost:5000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        username: username,
-        password: password,
-      }),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        localStorage.setItem("access_token", data.access_token);
-        setAccessToken(data.access_token);
-        setIsAdmin(data.isAdmin);
-        setLoggedIn(true);
-        alert("Login successful");
-      });
+  const renderPage = () => {
+    switch (page) {
+      case 'login':
+        return <Login setPage={setPage} setIsAuthenticated={setIsAuthenticated} />;
+      case 'register':
+        return <Register setPage={setPage} />;
+      case 'dashboard':
+        return isAuthenticated ? (
+          <UserDashboard setIsAuthenticated={setIsAuthenticated} />
+        ) : (
+          setPage('login')
+        );
+      default:
+        return <Login setPage={setPage} setIsAuthenticated={setIsAuthenticated} />;
+    }
   };
 
-  const logoutUser = () => {
-    localStorage.removeItem("access_token");
-    setAccessToken(null);
-    setIsAdmin(false);
-    setLoggedIn(false);
-  };
-
-  return (
-    <div className="App">
-      {!loggedIn ? (
-        <>
-          <Login loginUser={loginUser} />
-          <Register />
-        </>
-      ) : (
-        <>
-          {userProfile && <span>{userProfile.name}</span>}
-<button onClick={logoutUser}>Logout</button>
-
-
-          {isAdmin ? (
-            <AdminDashboard />
-          ) : (
-            <UserDashboard accessToken={accessToken} />
-
-          )}
-        </>
-      )}
-    </div>
-  );
-}
+  return <>{renderPage()}</>;
+};
 
 export default App;
