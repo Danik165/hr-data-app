@@ -28,7 +28,9 @@ def register():
 
 @auth_bp.route('/login', methods=['POST'])
 def login():
+
     form = LoginForm(request.form)
+    print(form)
 
     if form.validate():
         user = User.query.filter_by(email=form.email.data).first()
@@ -39,7 +41,7 @@ def login():
 
         return jsonify(message="Invalid email or password"), 401
 
-    return jsonify(message="Invalid input"), 400
+    return jsonify(message="Invalid input "), 400
 
 @auth_bp.route('/user_data', methods=['GET'])
 @jwt_required()
