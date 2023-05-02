@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
 
-const Login = ({ setPage, setIsAuthenticated }) => {
+
+
+
+const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
   const loginUser = async (e) => {
   e.preventDefault();
+  props.setIsAuthenticated(true);
+
   try {
     const response = await fetch('http://localhost:5000/login', {
       method: 'POST',
@@ -31,34 +36,36 @@ const Login = ({ setPage, setIsAuthenticated }) => {
 
 
 
-  const goToRegister = () => {
-    setPage('register');
-  };
+  // const goToRegister = () => {
+  //   setPage('register');
+  // };
 
 
-
+  
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={loginUser}>
-        <label>
-          Email:
-          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-        </label>
-        <br />
-        <label>
-          Password:
-          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-        </label>
-        <br />
-        <button type="submit">Login</button>
-      </form>
-      <p>{error}</p>
-      <p>
-        Don't have an account? <button onClick={goToRegister}>Register</button>
-      </p>
-    </div>
+        <div>
+
+          <h2>Login</h2>
+          <form onSubmit={loginUser}>
+            <label>
+              Email:
+              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+            </label>
+            <br />
+            <label>
+              Password:
+              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
+            </label>
+            <br />
+            <button type="submit">Login</button>
+          </form>
+          <p>{error}</p>
+          {/* <p>
+            Don't have an account? <button onClick={goToRegister}>Register</button>
+          </p> */}
+        </div>
+
   );
 };
 
