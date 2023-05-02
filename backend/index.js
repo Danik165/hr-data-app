@@ -61,7 +61,7 @@ app.post('/login', async (req, res) => {
   }
 
   try {
-    const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
+    const [rows] = await db.promise().query('SELECT * FROM users WHERE EmailID = ? AND Password = ?', [email, password]);
 
     if (rows.length > 0) {
       res.status(200).json({ message: 'Logged in successfully.' });

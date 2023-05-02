@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Login from './Components/Login';
-import Register from './Components/Register';
-import UserDashboard from './Components/UserDashboard';
+import Login from './Components/login/Login';
+//import Register from './Components/admin/Register';
+import UserDashboard from './Components/users/UserDashboard';
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import UserProtectedRoute from './Components/ProtectedRoute';
 
