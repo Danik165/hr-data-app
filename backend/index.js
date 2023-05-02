@@ -7,11 +7,15 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
+
+// const dbdetails = fetch("../databasedetail.json")
+
 const db = mysql.createConnection({
-  host: 'JTLAP_354',
-  user: 'root',
-  password: '1234',
-  database: 'company_skills',
+  host: '192.168.1.120',
+  user: 'dev1',
+  password: 'jeevan@12345',
+  port:3308,
+  database: 'company_skills'
 });
 
 db.connect((err) => {
@@ -47,6 +51,8 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Failed to register user. Please try again.' });
   }
 });
+
+
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
