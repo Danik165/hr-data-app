@@ -1,17 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
-
+const createJWT = require('./jwt/create_jwt')
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-  host: 'JTLAP_354',
-  user: 'root',
-  password: '1234',
-  database: 'company_skills',
+  host: '192.168.1.120',
+  user: 'dev1',
+  password: 'jeevan@12345',
+  port:3308,
+  database: 'company_skills'
 });
 
 db.connect((err) => {
@@ -68,3 +69,10 @@ app.post('/login', async (req, res) => {
 });
 
 
+app.post("/generatetoken", (req,res) => {
+  const { id } = req.body;
+  const token = createJWT.generatetoken(id);
+  res.cookie("hr-jwt",token,{httpOnly:true})
+  res.send("Successful").status(200)
+
+})
