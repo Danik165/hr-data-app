@@ -1,13 +1,20 @@
 // src/Components/AdminDashboard.js
 import React from 'react';
 
-const AdminDashboard = () => {
+const AdminDashboard = ({ setIsAuthenticated }) => {
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    setIsAuthenticated(false);
+  };
+
   return (
     <div>
       <h2>Admin Dashboard</h2>
-      {/* Add admin dashboard content here */}
+      <p>Welcome to your dashboard.</p>
+      <button onClick={handleLogout}>Logout</button>
     </div>
   );
 };
 
-export default AdminDashboard;
+
+export default (AdminDashboard);

@@ -41,9 +41,9 @@ const Login = (props) => {
 
 
 
-  // const goToRegister = () => {
-  //   setPage('register');
-  // };
+   const goToRegister = () => {
+//     setPage('register');
+   };
 
 
   
@@ -65,9 +65,9 @@ const Login = (props) => {
             <button type="submit">Login</button>
           </form>
           <p>{error}</p>
-          {/* <p>
-            Don't have an account? <button onClick={goToRegister}>Register</button>
-          </p> */}
+          {<p>
+            Don't have an account? <button onClick={goToRegister}>Have a nap</button>
+          </p> }
         </div>
 
   );
