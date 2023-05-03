@@ -1,11 +1,13 @@
 const express = require('express');
 const cors = require('cors');
 const mysql = require('mysql2');
-const createJWT = require('./jwt/create_jwt')
+const createJWT = require('./middleware/jwt/create_jwt')
 const app = express();
-
+const cookieParser = require('cookie-parser')
 app.use(cors());
 app.use(express.json());
+app.use(cookieParser());
+
 
 const db = mysql.createConnection({
   host: '192.168.1.120',
@@ -48,6 +50,8 @@ app.post('/register', async (req, res) => {
     res.status(500).json({ error: 'Failed to register user. Please try again.' });
   }
 });
+
+
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -56,9 +60,12 @@ app.post('/login', async (req, res) => {
   }
 
   try {
-    const [rows] = await db.promise().query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
+    const [rows] = await db.promise().query('SELECT * FROM users WHERE EmailID = ? AND Password = ?', [email, password]);
 
     if (rows.length > 0) {
+      //console.log(rows[0].UserID)
+      const token = createJWT.generateToken(rows[0].UserID)
+      res.cookie("hrjwt",token,{httpOnly:true})
       res.status(200).json({ message: 'Logged in successfully.' });
     } else {
       res.status(401).json({ error: 'Invalid email or password.' });
@@ -69,10 +76,24 @@ app.post('/login', async (req, res) => {
 });
 
 
+app.get("/userDashBoard",(req,res) => {
+  const token  = req.cookies.hrjwt;
+
+  if(token)
+  {
+    createJWT.verifyToken(token);
+      res.send("Authorised").status(200);
+      
+  }
+  else{
+    res.send("Unauthorized Access")
+  }
+})
+
 app.post("/generatetoken", (req,res) => {
   const { id } = req.body;
   const token = createJWT.generatetoken(id);
-  res.cookie("hr-jwt",token,{httpOnly:true})
+  res.cookie("hr-jwt",token,{httpOnly:true, expires:  2000})
   res.send("Successful").status(200)
 
 })
