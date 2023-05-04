@@ -4,19 +4,6 @@ const jwt = require("jsonwebtoken");
 
 
 
-
-// let data = {
-//     name: "ABC",
-//     time:Date(),
-//     id:1
-// }
-
-
-
-// console.log(token)
-
-//console.log(process.env.PORT)
-
 function verifyToken(token){
     dotenv.config()
     const jwtSecretKey = process.env.JWT_SECRET_KEY
@@ -26,7 +13,7 @@ function verifyToken(token){
         }
         else{
             const { exp } = decodedToken;
-            //console.log(decodedToken.getExpiresAt())
+           
             console.log(exp)
             console.log(Date.now())
             if ( Date.now() > exp *100)
@@ -34,7 +21,6 @@ function verifyToken(token){
                 console.log("Expired")
             }
 
-            //return (decodedToken)
         }
     })
 }
@@ -48,10 +34,10 @@ function generatetoken(id){
         time:Date()
     }
 
-    const token = jwt.sign(data,jwtSecretKey,{expiresIn:2})
+    const token = jwt.sign(data,jwtSecretKey,{expiresIn:259200})
     return token
 }
 
 
 module.exports.generateToken = generatetoken;
-module.exports.verifyToken = verifyToken;
+//module.exports.verifyToken = verifyToken;
