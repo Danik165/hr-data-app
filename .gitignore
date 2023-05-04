@@ -9,8 +9,8 @@
 /coverage
 
 # production
-/build
-
+/frontend/build
+/my-app
 #python 
 
 # misc
