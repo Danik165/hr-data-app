@@ -1,3 +1,5 @@
+const handleErrors = require("../error/errorhandler")
+
 const mysql = require('mysql2');
 
 
@@ -11,8 +13,12 @@ const sqlDb = mysql.createConnection({
 });
 
 sqlDb.connect((err) => {
-    if (err) throw err;
-    console.log('Connected to MySQL database.');
+    if (err) {
+        handleErrors(err)
+    }
+    else{
+        console.log('Connected to MySQL database.');
+    }
 });
  
 
