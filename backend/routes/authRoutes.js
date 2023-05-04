@@ -5,16 +5,6 @@ const handleErrors = require("../error/errorhandler")
 const router = Router();
 
 
-router.get("/signup",(req,res) =>{
-    res.send("Sign Up Page").status(200);
-
-});
-
-
-
-router.get("/login",(req,res) => {
-    res.send("Login Page").status(200)
-});
 
 
 

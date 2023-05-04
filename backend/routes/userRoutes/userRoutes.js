@@ -5,7 +5,7 @@ const { requireAuth } = require("../../middleware/authMiddleware");
 const router = Router();
 
 
-router.get("/userdashboard",requireAuth,(req,res) => {
+router.get("/user",requireAuth,(req,res) => {
     res.send("User DashBoard Page").status(200);
 })
 

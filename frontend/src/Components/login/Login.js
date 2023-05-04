@@ -25,10 +25,10 @@ const Login = (props) => {
 
       if (response.status === 200) {
         const data = await response.json();
-        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('access_token', data.hrjwt);
         //setIsAuthenticated(true);
         props.setIsAuthenticated(true);
-        navigate("/home");
+        navigate("/user");
         //setPage('dashboard');
       } else {
         setError('Failed to log in. Please try again.');
