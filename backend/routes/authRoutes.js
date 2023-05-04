@@ -1,7 +1,7 @@
 const { Router } = require("express")
 const db = require("../database/connectDb")
 const createJWT = require('../middleware/jwt/create_jwt')
-
+const handleErrors = require("../error/errorhandler")
 const router = Router();
 
 
@@ -30,13 +30,14 @@ router.post("/login",async (req,res) => {
 
     if (rows.length > 0) {
       const token = createJWT.generateToken(rows[0].UserID)
-      res.cookie("hrjwt",token,{httpOnly:true})
+      res.cookie("hrjwt",token,{httpOnly:true,maxAge:259200000})
       res.status(200).json({ message: 'Logged in successfully.' });
     } else {
       res.status(401).json({ error: 'Invalid email or password.' });
     }
   } catch (err) {
-    console.log(err);
+    //console.log(err);
+    handleErrors(err);
     res.status(500).json({ error: 'Failed to log in. Please try again.' });
   }
 });
@@ -60,7 +61,8 @@ router.post("/register",async (req,res) => {
     res.status(201).json({ message: 'User registered successfully.' });
   } 
   catch (err) {
-    console.log(err)
+    //console.log(err)
+    handleErrors(err);
     res.status(500).json({ error: 'Failed to register user. Please try again.' });
   }
 });
