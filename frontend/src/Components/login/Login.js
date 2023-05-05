@@ -50,10 +50,10 @@ const Login = (props) => {
   
 
   return (
-         <div className='Login-component'>
+      <div className='Login-component'>
         <div className='Jeevan-logo'>
           <img src={logo} alt="Jeevan Logo"></img>
-      </div>
+        </div>
         <div className="login-div" >
           <h2 className="login-header">Login</h2>
           <form onSubmit={loginUser} className="login-form">
@@ -76,7 +76,7 @@ const Login = (props) => {
             Don't have an account? <button onClick={goToRegister}>Have a nap</button>
           </p> } */}
         </div>
-        </div>
+      </div>
 
 
   );
