@@ -1,5 +1,5 @@
 import { func } from 'prop-types';
-import logo from '../../Images/logo.png'
+import logo from '../../Images/logo2.png'
 import './navheader.css';
 
 const NavHeader = () =>{
