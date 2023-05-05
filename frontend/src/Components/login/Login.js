@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
-
+import "./login.css";
 
 
 
@@ -9,7 +9,7 @@ const Login = (props) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   let navigate = useNavigate();
-
+ 
   const loginUser = async (e) => {
     e.preventDefault();
     
@@ -49,25 +49,27 @@ const Login = (props) => {
   
 
   return (
-        <div>
-          <h2>Login</h2>
-          <form onSubmit={loginUser}>
-            <label>
+        <div className="login-div" >
+          <h2 className="login-header">Login</h2>
+          <form onSubmit={loginUser} className="login-form">
+            <label className='input-label'>
               Email:
-              <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} required />
-            </label>
-            <br />
-            <label>
+              </label>
+              <input type="email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} required />
+       
+
+            <label className='input-label'>
               Password:
-              <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} required />
-            </label>
-            <br />
-            <button type="submit">Login</button>
+              </label>
+              <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
+            {error &&  <p className="err-message">{error}</p>}
+
+            <button type="submit" className="login-btn">Login</button>
           </form>
           <p>{error}</p>
-          {<p>
+          {/* {<p>
             Don't have an account? <button onClick={goToRegister}>Have a nap</button>
-          </p> }
+          </p> } */}
         </div>
 
   );
