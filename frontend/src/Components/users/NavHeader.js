@@ -8,19 +8,10 @@ const NavHeader = () =>{
             <div className="Jeevan-logo">
                 <img src={logo} alt="Jeevan Logo"></img>
             </div>
-            <p>Account</p>
+            <button>Account</button>
 
-            <p>Logout</p>
-            {/* <div className='ul-div'>
-                <ul>
-                    <li>
-                        Account
-                    </li>
-                    <li>
-                        Logout
-                    </li>
-                </ul>
-            </div> */}
+            <button>Logout</button>
+            
         </div>
     )
 };

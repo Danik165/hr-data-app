@@ -27,7 +27,7 @@
 
 }
 
-.nav-header>p{
+.nav-header>button{
     /* color: red; */
     /* margin:5px; */
     align-self: self-end;
@@ -35,4 +35,12 @@
     font-size:large;
     width: 60px;
     font-weight: 500;
+
+    background: none;
+	color: inherit;
+	border: none;
+	/* padding: 0; */
+	font: inherit;
+	/* cursor: pointer; */
+	outline: inherit;
 }
