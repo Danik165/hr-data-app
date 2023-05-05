@@ -1,14 +1,17 @@
 import { func } from 'prop-types';
 import logo from '../../Images/logo.png'
-
+import './navheader.css';
 
 const NavHeader = () =>{
     return(
-        <div> 
+        <div className='nav-header'> 
             <div className="Jeevan-logo">
                 <img src={logo} alt="Jeevan Logo"></img>
             </div>
-            <div className='ul-div'>
+            <p>Account</p>
+
+            <p>Logout</p>
+            {/* <div className='ul-div'>
                 <ul>
                     <li>
                         Account
@@ -17,7 +20,7 @@ const NavHeader = () =>{
                         Logout
                     </li>
                 </ul>
-            </div>
+            </div> */}
         </div>
     )
 };
