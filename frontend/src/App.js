@@ -9,7 +9,7 @@ import UserProtectedRoute from './Components/ProtectedRoute';
 import './App.css'
 
 const App = () => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(true);
   const [page, setPage] = useState('login');
   
 
