@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./login.css";
+import logo from "../../Images/logo.png";
 
 
 
@@ -49,6 +50,10 @@ const Login = (props) => {
   
 
   return (
+         <div className='Login-component'>
+        <div className='Jeevan-logo'>
+          <img src={logo} alt="Jeevan Logo"></img>
+      </div>
         <div className="login-div" >
           <h2 className="login-header">Login</h2>
           <form onSubmit={loginUser} className="login-form">
@@ -63,14 +68,16 @@ const Login = (props) => {
               </label>
               <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
             {error &&  <p className="err-message">{error}</p>}
-
+            <button type="button" className='forgot-password-btn'>Forgot Password?</button>
             <button type="submit" className="login-btn">Login</button>
           </form>
-          <p>{error}</p>
+          
           {/* {<p>
             Don't have an account? <button onClick={goToRegister}>Have a nap</button>
           </p> } */}
         </div>
+        </div>
+
 
   );
 };

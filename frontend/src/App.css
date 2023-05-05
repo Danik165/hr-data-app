@@ -1,4 +1,4 @@
-.App {
+/* .App {
   font-family: 'Roboto', sans-serif;
   background-color: #669999;
   padding: 20px;
@@ -8,6 +8,7 @@
 
 body {
   background-color: #669999;
+  
 }
 
 h1 {
@@ -85,7 +86,7 @@ li {
 }
 
 /* New table styles */
-table {
+/* table {
   width: 100%;
   border-collapse: collapse;
   margin-bottom: 20px;
@@ -101,5 +102,13 @@ th {
   background-color: #4caf50;
   color: white;
   font-weight: bold;
+} */
+ 
+/* .Jeevan-logo{
+  margin-left: 18%;
+  margin-top: 5%;
 }
-
+.Jeevan-logo>img{
+ width: 18%;
+ 
+} */

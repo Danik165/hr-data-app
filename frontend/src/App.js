@@ -6,6 +6,7 @@ import AdminDashboard from './Components/admin/AdminDashboard';
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import UserProtectedRoute from './Components/ProtectedRoute';
 
+import './App.css'
 
 const App = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -13,19 +14,21 @@ const App = () => {
   
 
   return(
-    
-    <BrowserRouter>
-      <Routes>
-        <Route exact path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
-        <Route exact path="/user" element={
-                                          <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                            <UserDashboard />
-                                          </UserProtectedRoute>
-                                        } />
-      </Routes>
+    <div className='App'>
+      
+      <BrowserRouter>
+        <Routes>
+          <Route exact path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+          <Route exact path="/user" element={
+                                            <UserProtectedRoute isAuthenticated={isAuthenticated}>
+                                              <UserDashboard />
+                                            </UserProtectedRoute>
+                                          } />
+        </Routes>
 
 
-    </BrowserRouter>
+      </BrowserRouter>
+    </div>
     
   )
 };
