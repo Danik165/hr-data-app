@@ -5,10 +5,10 @@ const mysql = require('mysql2');
 
 
 const sqlDb = mysql.createConnection({
-    host: 'JTDSK_082',
+    host: '192.168.1.13',
     user: 'dev1',
-    password: 'jeevan@12345',
-    port:3308,
+    password: 'Welcome@12345',
+    port:3306,
     database: 'company_skills'
 });
 
