@@ -3,12 +3,13 @@ const jwt = require("jsonwebtoken");
 
 
 
-function generatetoken(id){
+function generatetoken(userID,authID){
     dotenv.config()
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
 
     data = {
-        userId:id,
+        userId:userID,
+        authId:authID,
         time:Date()
     }
 

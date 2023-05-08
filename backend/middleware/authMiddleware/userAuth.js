@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv');
 
 
-const requireAuth = (req,res,next) =>{
+const requireUserAuth = (req,res,next) =>{
 
     dotenv.config()
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
@@ -12,7 +12,7 @@ const requireAuth = (req,res,next) =>{
         console.log("Token Available")
         jwt.verify(token,jwtSecretKey,(err,decodedToken) => {
             if(err){
-                console.log(err)
+                handleErrors(err)
                 res.redirect("/");
             }
             else{
@@ -24,7 +24,6 @@ const requireAuth = (req,res,next) =>{
     else{
         res.redirect('/');
     }
-}
+};
 
-
-module.exports = { requireAuth };
+module.exports = { requireUserAuth };

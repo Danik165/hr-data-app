@@ -2,9 +2,12 @@ const express = require('express');
 const cors = require('cors');
 const cookieParser = require('cookie-parser')
 const path = require("path")
-const { requireAuth } = require("./middleware/authMiddleware")
-const authRoutes = require("./routes/authRoutes")
-const userRoutes = require("./routes/userRoutes/userRoutes")
+const { requireUserAuth } = require("./middleware/authMiddleware/userAuth")
+const { requireAdminAuth } =require("./middleware/authMiddleware/adminAuth")
+const authRoutes = require("./routes/auth/authRoutes")
+const userRoutes = require("./routes/user/userRoutes")
+const adminRoutes = require("./routes/admin/adminRoutes")
+
 
 const app = express();
 
@@ -13,7 +16,8 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use(authRoutes);
-app.use(userRoutes)
+app.use(userRoutes);
+app.use(adminRoutes);
 
 app.use(express.static(path.join(__dirname,"..","frontend/build")))
 
