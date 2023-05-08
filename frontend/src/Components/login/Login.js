@@ -49,37 +49,38 @@ const Login = (props) => {
 
   
 
-  return (
-      <div className='Login-component'>
-        <div className='Jeevan-logo'>
-          <img src={logo} alt="Jeevan Logo"></img>
-        </div>
-        <div className="login-div" >
-          <h2 className="login-header">Login</h2>
-          <form onSubmit={loginUser} className="login-form">
-            <label className='input-label'>
-              Email:
-              </label>
-              <input type="email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} required />
-       
+return (
+  <div className='Login-component'>
+    <div className='Jeevan-logo'>
+      <img src={logo} alt="Jeevan Logo"></img>
+    </div>
+    <div className="Jeevan-description">
+      Jeevan Technologies will kill you.
+    </div>
+    <div className="login-div">
+      <h2 className="login-header">Login</h2>
+      <form onSubmit={loginUser} className="login-form">
+        <label className='input-label'>
+          Email:
+        </label>
+        <input type="email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} required />
 
-            <label className='input-label'>
-              Password:
-              </label>
-              <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
-            {error &&  <p className="err-message">{error}</p>}
-            <button type="button" className='forgot-password-btn'>Forgot Password?</button>
-            <button type="submit" className="login-btn">Login</button>
-          </form>
-          
-          {/* {<p>
-            Don't have an account? <button onClick={goToRegister}>Have a nap</button>
-          </p> } */}
-        </div>
-      </div>
+        <label className='input-label'>
+          Password:
+        </label>
+        <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
+        {error &&  <p className="err-message">{error}</p>}
+        <button type="button" className='forgot-password-btn'>Forgot Password?</button>
+        <button type="submit" className="login-btn">Login</button>
+      </form>
 
+      {/* {<p>
+        Don't have an account? <button onClick={goToRegister}>Have a nap</button>
+      </p> } */}
+    </div>
+  </div>
+);
 
-  );
 };
 
 export default Login;
