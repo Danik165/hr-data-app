@@ -19,7 +19,7 @@ router.post("/login",async (req,res) => {
     const [rows] = await db.promise().query('SELECT * FROM users WHERE EmailID = ? AND Password = ?', [email, password]);
 
     if (rows.length > 0) {
-      const token = createJWT.generateToken(rows[0].UserID,rows[0].RoleID);
+      const token = createJWT.generateToken(rows[0].UserID,rows[0].AccessID);
       res.cookie("hrjwt",token,{httpOnly:true,maxAge:259200000})
       res.status(200).json({ message: 'Logged in successfully.' });
     } else {

@@ -9,7 +9,7 @@ const requireUserAuth = (req,res,next) =>{
     const token = req.cookies.hrjwt
 
     if(token){
-        console.log("Token Available")
+        //console.log("Token Available")
         jwt.verify(token,jwtSecretKey,(err,decodedToken) => {
             if(err){
                 handleErrors(err)
