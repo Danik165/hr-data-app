@@ -34,5 +34,7 @@ router.post("/register",requireAdminAuth,async (req,res) => {
   res.send("Admin Call Successful").status(200);
 });
 
-
+router.get("/admindashboard",requireAdminAuth,(req,res)=>{
+  res.send("Admin Dashboard").status(200);
+})
 module.exports = router;
