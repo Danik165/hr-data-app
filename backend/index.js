@@ -1,6 +1,7 @@
 const express = require('express');
 const cors = require('cors');
-const cookieParser = require('cookie-parser')
+const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const path = require("path")
 const { requireUserAuth } = require("./middleware/authMiddleware/userAuth")
 const { requireAdminAuth } =require("./middleware/authMiddleware/adminAuth")
@@ -14,6 +15,8 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
+app.use(bodyParser.json());
+
 
 app.use(authRoutes);
 app.use(userRoutes);
