@@ -8,31 +8,42 @@ const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const router = Router();
 
 router.post("/api/register",requireAdminAuth,async (req,res) => {
-  //   const { email, password } = req.body;
+ // Name, empid, department,role, email
 
-  // if (!email || !password) {
-  //   return res.status(400).json({ error: 'Email and password are required.' });
-  // }
-
-  // try {
-    
-  //   const [rows] = await db.promise().query('SELECT * FROM users WHERE EmailID = ?', [email]);
-  //   if (rows.length > 0) {
-  //     return res.status(400).json({ error: 'Email is already registered.' });
-  //   }
-
-  //   const [result] = await db.promise().query('INSERT INTO users (email, password) VALUES (?, ?)', [email, password]);
-  //   res.status(201).json({ message: 'User registered successfully.' });
-  // } 
-  // catch (err) {
-  //   //console.log(err)
-  //   handleErrors(err);
-  //   res.status(500).json({ error: 'Failed to register user. Please try again.' });
-  // }
+  const { name, employeeid, role, department, emailId } = req.body;
+  var roleID,departmentID;
 
 
-  res.send("Admin Call Successful").status(200);
+  try{
+    const [rows] = await db.promise().query("Select departmentID from department where departmentName=?",[department])
+    departmentID = rows[0].departmentID;
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code)
+  }
+
+  try{
+    const [rows] = await db.promise().query("Select roleID from role where departmentID=? and RoleName = ?",[departmentID,role])
+    roleID = rows[0].roleID;
+
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code)
+  }
+
+  try{
+    await db.promise().query("Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",[employeeid,name,emailId,roleID,departmentID,0]);
+    res.send({message:"Successfully create object"}).status(201);
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code)
+  }
+
 });
+
 
 
 router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
@@ -43,12 +54,21 @@ router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
     res.send(rows[0]).status(200);
     }
   catch (err){
-    handleErrors(err);
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code)
     }
 
 })
 
-router.get("/api/admindashboard",requireAdminAuth,(req,res)=>{
+router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
   res.send("Admin Dashboard").status(200);
+  try{
+    const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
+    
+  }
+  catch (err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code)
+  }
 })
 module.exports = router;
