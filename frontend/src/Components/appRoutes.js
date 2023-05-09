@@ -11,7 +11,7 @@ const AppRoutes = () => (
       <Route path="/login" component={Login} />
       <Route path="/register" component={Register} />
       <Route path="/" component={UserDashboard} /> //User path
-      <Route path="/Admin" component={AdminDashboard}
+      <Route path="/Admin" component={AdminDashboard} />
     </Switch>
   </Router>
 );
