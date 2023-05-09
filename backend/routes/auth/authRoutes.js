@@ -21,21 +21,18 @@ router.post("/login",async (req,res) => {
     if (rows.length > 0) {
       const token = createJWT.generateToken(rows[0].UserID,rows[0].AccessID);
       res.cookie("hrjwt",token,{httpOnly:true,maxAge:259200000});
-      console.log(rows[0].AccessID)
+      let responseObj;
       if(rows[0].AccessID==1){
-        res.redirect("/admindashboard");
+       responseObj = {nextPage:"/admindashboard"}
       }
       else{
-        res.redirect("/user");
+       responseObj = {nextPage: "/user"}
       }
-      
-      //res.status(200).json({ message: 'Logged in successfully.' });
-
+      res.status(200).json(responseObj);
     } else {
       res.status(401).json({ error: 'Invalid email or password.' });
     }
   } catch (err) {
-    //console.log(err);
     handleErrors(err);
     res.status(500).json({ error: 'Failed to log in. Please try again.' });
   }

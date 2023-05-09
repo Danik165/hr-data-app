@@ -28,21 +28,17 @@ const Login = (props) => {
         const data = await response.json();
         localStorage.setItem('access_token', data.hrjwt);
         props.setIsAuthenticated(true);
-        navigate("/user");
+        navigate(data.nextPage);
       } else {
         setError('Failed to log in. Please try again.');
       }
     } catch (err) {
+      console.log(err.message)
       setError('Failed to log in. Please try again.');
     }
 
   };
 
-
-
-   const goToRegister = () => {
-//     setPage('register');
-   };
 
 
   
