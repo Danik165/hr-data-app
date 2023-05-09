@@ -8,7 +8,7 @@ const router = Router();
 
 
 
-router.post("/login",async (req,res) => {
+router.post("/api/login",async (req,res) => {
     const { email, password } = req.body;
 
   if (!email || !password) {
