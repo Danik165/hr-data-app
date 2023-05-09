@@ -1,18 +1,29 @@
-/* Add Google Fonts Roboto */
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body {
     font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.Login-component {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 80vh;
+    padding: 1rem;
+    padding-top:5%;
 }
 
 .login-div {
-    padding: 20px;
-    margin: 5% auto;
-    max-width: 350px;
+    padding: 1rem;
     background: linear-gradient(135deg, #81cfe0, #1eb1c8);
-    height: auto;
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 350px;
 }
 
 .login-header {
@@ -27,8 +38,8 @@ body {
     background: none;
     color: #ffffff;
     border: none;
-    padding: 0;
-    padding-right: 60%;
+    padding: auto;
+    padding-right: 10%;
     font: inherit;
     cursor: pointer;
     outline: inherit;
@@ -67,7 +78,7 @@ body {
     font-weight: 300;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #0d8ba1; /* Change input text color */
+    color: #0d8ba1;
 }
 
 .input-label {
@@ -80,14 +91,27 @@ body {
     margin-bottom: 10px;
 }
 
-.Jeevan-logo > img {
-    width: 60%;
+.Jeevan-logo {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-right:2%;
+    max-width: 350px;
+    width: 100%;
 }
 
-.Jeevan-description {
-    text-align: center;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 400;
-    margin-bottom: 20px;
+.Jeevan-logo > img {
+    width: 60%;
+    max-width: 100%;
+}
+
+@media screen and (max-width: 768px) {
+    .Jeevan-logo > img {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .Jeevan-logo > img {
+        width: 100%;
+    }
 }

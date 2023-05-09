@@ -27,10 +27,8 @@ const Login = (props) => {
       if (response.status === 200) {
         const data = await response.json();
         localStorage.setItem('access_token', data.hrjwt);
-        //setIsAuthenticated(true);
         props.setIsAuthenticated(true);
         navigate("/user");
-        //setPage('dashboard');
       } else {
         setError('Failed to log in. Please try again.');
       }
@@ -55,7 +53,7 @@ return (
       <img src={logo} alt="Jeevan Logo"></img>
     </div>
     <div className="Jeevan-description">
-      Jeevan Technologies will kill you.
+      JT easter egg.
     </div>
     <div className="login-div">
       <h2 className="login-header">Login</h2>
@@ -70,13 +68,9 @@ return (
         </label>
         <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
         {error &&  <p className="err-message">{error}</p>}
-        <button type="button" className='forgot-password-btn'>Forgot Password?</button>
+        <button type="button" className='forgot-password-btn'>Forgot Password or Have no Account yet?</button>
         <button type="submit" className="login-btn">Login</button>
       </form>
-
-      {/* {<p>
-        Don't have an account? <button onClick={goToRegister}>Have a nap</button>
-      </p> } */}
     </div>
   </div>
 );

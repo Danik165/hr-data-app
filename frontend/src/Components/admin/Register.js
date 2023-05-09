@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
-
+import "./Register.css"
+import logo from "../../Images/logo.png";
 
 const Register = (props) => {
   const [email, setEmail] = useState('');
