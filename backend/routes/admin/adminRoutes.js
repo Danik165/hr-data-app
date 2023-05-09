@@ -34,6 +34,20 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
   res.send("Admin Call Successful").status(200);
 });
 
+
+router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
+  const { userId } = req.body;
+
+  try{
+    const [rows] = await db.promise().query("SELECT UserID,Name,EmailID,PhoneNumber,CurrentProject,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID where UserID = ?",[userId]);
+    res.send(rows[0]).status(200);
+    }
+  catch (err){
+    handleErrors(err);
+    }
+
+})
+
 router.get("/api/admindashboard",requireAdminAuth,(req,res)=>{
   res.send("Admin Dashboard").status(200);
 })

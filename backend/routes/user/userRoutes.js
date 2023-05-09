@@ -6,7 +6,7 @@ const handleErrors = require("../../error/errorhandler");
 const router = Router();
 
 
-router.get("/api/user",requireUserAuth,(req,res) => {
+router.get("/api/userbyid",requireUserAuth,(req,res) => {
     const responseBody = {
         message:"User Dashboard Page",
         id:12,
@@ -16,16 +16,14 @@ router.get("/api/user",requireUserAuth,(req,res) => {
     res.set({
         'Content-Type':'application/json'
     }).send(jsonContent).status(200);
-})
+});
 
 
 
-router.get("/api/getUser",requireUserAuth,async (req,res)=>{
+router.get("/api/getUserProfile",requireUserAuth,async (req,res)=>{
     const userId = req.decodedToken.userId;
     try{
         const [rows] = await db.promise().query("SELECT UserID,Name,EmailID,PhoneNumber,CurrentProject,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID where UserID = ?",[userId]);
-        
-        console.log(rows[0]);
         res.send(rows[0]).status(200);
     }
     catch (err){
