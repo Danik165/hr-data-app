@@ -7,7 +7,7 @@ const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 
 const router = Router();
 
-router.post("/register",requireAdminAuth,async (req,res) => {
+router.post("/api/register",requireAdminAuth,async (req,res) => {
   //   const { email, password } = req.body;
 
   // if (!email || !password) {
