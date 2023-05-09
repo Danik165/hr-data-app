@@ -9,6 +9,7 @@ const Login = (props) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
  
   const loginUser = async (e) => {
@@ -40,16 +41,10 @@ const Login = (props) => {
   };
 
 
-
-  
-
 return (
   <div className='Login-component'>
     <div className='Jeevan-logo'>
       <img src={logo} alt="Jeevan Logo"></img>
-    </div>
-    <div className="Jeevan-description">
-      JT easter egg.
     </div>
     <div className="login-div">
       <h2 className="login-header">Login</h2>

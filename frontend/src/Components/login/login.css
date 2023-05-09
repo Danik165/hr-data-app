@@ -17,6 +17,19 @@ body {
     padding-top:5%;
 }
 
+.Jeevan-logo {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-right:2%;
+    max-width: 350px;
+    width: 100%;
+}
+
+.Jeevan-logo > img {
+    width: 50%;
+    max-width: 100%;
+}
+
 .login-div {
     padding: 1rem;
     background: linear-gradient(135deg, #81cfe0, #1eb1c8);
@@ -84,24 +97,6 @@ body {
 .input-label {
     font-weight: 700;
     color: #ffffff;
-}
-
-.Jeevan-logo {
-    text-align: center;
-    margin-bottom: 10px;
-}
-
-.Jeevan-logo {
-    text-align: center;
-    margin-bottom: 30px;
-    margin-right:2%;
-    max-width: 350px;
-    width: 100%;
-}
-
-.Jeevan-logo > img {
-    width: 60%;
-    max-width: 100%;
 }
 
 @media screen and (max-width: 768px) {
