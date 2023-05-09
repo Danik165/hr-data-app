@@ -6,17 +6,17 @@ const handleErrors = require("../../error/errorhandler");
 const router = Router();
 
 
-router.get("/user",requireUserAuth,(req,res) => {
-    const responseBody = {
-        message:"User Dashboard Page",
-        id:12,
-        userPage:true
-    }
-    const jsonContent  = JSON.stringify(responseBody);
-    res.set({
-        'Content-Type':'application/json'
-    }).send(jsonContent).status(200);
-})
+// router.get("/user",requireUserAuth,(req,res) => {
+//     const responseBody = {
+//         message:"User Dashboard Page",
+//         id:12,
+//         userPage:true
+//     }
+//     const jsonContent  = JSON.stringify(responseBody);
+//     res.set({
+//         'Content-Type':'application/json'
+//     }).send(jsonContent).status(200);
+// })
 
 
 
