@@ -1,0 +1,20 @@
+.page-header {
+    display: flex;
+
+    align-items: center;
+    border-bottom: 1px solid #ccc;
+    padding: 10px 20px;
+    background-color: #add8e6;
+  }
+  
+  .logo img {
+    height: 50px;
+    
+  }
+  
+
+
+.page-title{
+  margin-left: 35%;
+
+}

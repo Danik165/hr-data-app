@@ -1,36 +1,23 @@
 import React from 'react';
 import logo from '../../Images/logo.png';
 import './userdashboard.css';
+import Header from '../header/header';
+import SkillTable from './SkillTable';
+import Sidebar from '../sidebar/Sidebar';
+
 
 const UserDashboard = ({ setIsAuthenticated }) => {
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    setIsAuthenticated(false);
-  };
-
+  const isAdmin = false;
   return (
+  
     <div className="dashboard-container">
-      <div className="header">
-        <div className="logo">
-          <img src={logo} alt="Logo" />
-        </div>
-        <button className="logout-button" onClick={handleLogout}>Logout</button>
+      <Header pageHeader="User Profile"/>
+      <div className='dashboard-body'>
+        <Sidebar setIsAuthenticated={ setIsAuthenticated } isAdmin={isAdmin}/>
+        <SkillTable  />
       </div>
-      <div className="main-content">
-        <table>
-          <thead>
-            <tr>
-              <th>Skill</th>
-              <th>Years</th>
-              <th>Level</th>
-              <th>Certificate</th>
-            </tr>
-          </thead>
-          <tbody>
-            {/* Rows will go here */}
-          </tbody>
-        </table>
-      </div>
+      
+      
     </div>
   );
 };
