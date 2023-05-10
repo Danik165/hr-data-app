@@ -1,46 +1,49 @@
 import React from 'react';
 import logo from '../../Images/logo.png';
 import './adminprofile.css';
+
 const AdminDashboard = ({ setIsAuthenticated }) => {
   const handleLogout = () => {
     localStorage.removeItem('access_token');
     setIsAuthenticated(false);
   };
-//
-//  return (
-//    <div>
-//      <h2>Admin Dashboard</h2>
-//      <p>Welcome to your dashboard.</p>
-//      <button onClick={handleLogout}>Logout</button>
-//    </div>
-//  );
-//};
-//
-//
-//export default (AdminDashboard);
-
-
 
   return (
     <div className="dashboard-container">
-      <div className="Jeevan-logo">
-        <img src={logo} alt="Jeevan Logo" />
-      </div>
-      <div className="nav-header">
-        <button className="nav-button">Account</button>
-        <button className="nav-button" onClick={handleLogout}>Logout</button>
+      <div className="header">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <div className="header-right">
+          <div className="dropdown">
+            <button className="dropbtn">User</button>
+            <div className="dropdown-content">
+              <a href="#">Admin</a>
+              <a href="#">User1</a>
+              <a href="#">User2</a>
+            </div>
+          </div>
+          <button className="logout-button" onClick={handleLogout}>Logout</button>
+        </div>
       </div>
       <div className="main-content">
-        <div className="card-container">
-          <div className="userprofile gradient-bg box">
-            <h2 className="userprofile-header">Admin Profile</h2>
-            {/* User profile content will go here */}
-          </div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>UserID</th>
+              <th>Skill</th>
+              <th>Years</th>
+              <th>Level</th>
+              <th>Certificate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Rows will go here */}
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
 
 export default AdminDashboard;
-

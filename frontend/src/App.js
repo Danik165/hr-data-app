@@ -30,9 +30,6 @@ const App = () => {
                                             </UserProtectedRoute>
                                           } />
         </Routes>
-
-
-
       </BrowserRouter>
     </div>
     

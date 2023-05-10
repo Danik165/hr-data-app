@@ -1,29 +1,38 @@
 import React from 'react';
 import logo from '../../Images/logo.png';
 import './userdashboard.css';
-import Logout from '../functionbuttons';
 
 const UserDashboard = ({ setIsAuthenticated }) => {
+  const handleLogout = () => {
+    localStorage.removeItem('access_token');
+    setIsAuthenticated(false);
+  };
+
   return (
     <div className="dashboard-container">
-      <div className="Jeevan-logo">
-        <img src={logo} alt="Jeevan Logo" />
-      </div>
-      <div className="nav-header">
-        <button className="nav-button">Account</button>
-        <Logout setIsAuthenticated={setIsAuthenticated} /> {/* pass setIsAuthenticated as a prop */}
+      <div className="header">
+        <div className="logo">
+          <img src={logo} alt="Logo" />
+        </div>
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
       <div className="main-content">
-        <div className="card-container">
-          <div className="userprofile gradient-bg box">
-            <h2 className="userprofile-header">User Profile</h2>
-            {/* Your user profile content will go here */}
-          </div>
-        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Skill</th>
+              <th>Years</th>
+              <th>Level</th>
+              <th>Certificate</th>
+            </tr>
+          </thead>
+          <tbody>
+            {/* Rows will go here */}
+          </tbody>
+        </table>
       </div>
     </div>
   );
 };
-
 
 export default UserDashboard;
