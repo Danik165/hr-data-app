@@ -1,21 +1,17 @@
 import React from 'react';
 import logo from '../../Images/logo.png';
 import './userdashboard.css';
+import Logout from '../functionbuttons';
 
 const UserDashboard = ({ setIsAuthenticated }) => {
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    setIsAuthenticated(false);
-  };
-
   return (
     <div className="dashboard-container">
       <div className="Jeevan-logo">
         <img src={logo} alt="Jeevan Logo" />
       </div>
       <div className="nav-header">
-        <button className="nav-button">Account</button> {/* Added class to buttons */}
-        <button className="nav-button" onClick={handleLogout}>Logout</button>
+        <button className="nav-button">Account</button>
+        <Logout setIsAuthenticated={setIsAuthenticated} /> {/* pass setIsAuthenticated as a prop */}
       </div>
       <div className="main-content">
         <div className="card-container">
@@ -28,5 +24,6 @@ const UserDashboard = ({ setIsAuthenticated }) => {
     </div>
   );
 };
+
 
 export default UserDashboard;

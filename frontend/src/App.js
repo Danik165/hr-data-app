@@ -21,12 +21,12 @@ const App = () => {
           <Route exact path="/" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
           <Route exact path="/user" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                              <UserDashboard />
+                                              <UserDashboard setIsAuthenticated={setIsAuthenticated}/>
                                             </UserProtectedRoute>
                                           } />
           <Route exact path="/admindashboard" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                              <AdminDashboard />
+                                              <AdminDashboard setIsAuthenticated={setIsAuthenticated}/>
                                             </UserProtectedRoute>
                                           } />
         </Routes>
