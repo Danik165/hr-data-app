@@ -6,7 +6,7 @@ const handleErrors = (err) => {
     //console.log("Error Message: ",err.message)
     var Error ={
         code:1,
-        message:""
+        message:err.message
     };
 
     if(err.code == "ECONNREFUSED")  // Database connection Error
