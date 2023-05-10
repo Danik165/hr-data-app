@@ -15,14 +15,14 @@ body {
     background: linear-gradient(135deg, #81cfe0, #1eb1c8);
 }
 
-.userprofile {
+.adminprofile {
     padding: 20px;
     margin: 5% auto;
     width: 80%;
     height: auto;
 }
 
-.userprofile-header {
+.profiadminle-header {
     text-align: center;
     color: #ffffff;
     font-size: 28px;

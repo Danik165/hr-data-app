@@ -26,7 +26,7 @@ const App = () => {
                                           } />
           <Route exact path="/admindashboard" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                              <UserDashboard />
+                                              <AdminDashboard />
                                             </UserProtectedRoute>
                                           } />
         </Routes>

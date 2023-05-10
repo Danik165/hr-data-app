@@ -20,7 +20,7 @@ const UserDashboard = ({ setIsAuthenticated }) => {
       <div className="main-content">
         <div className="card-container">
           <div className="userprofile gradient-bg box">
-            <h2 className="userprofile-header">UserProfile</h2>
+            <h2 className="userprofile-header">User Profile</h2>
             {/* Your user profile content will go here */}
           </div>
         </div>
