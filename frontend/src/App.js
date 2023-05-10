@@ -24,7 +24,13 @@ const App = () => {
                                               <UserDashboard />
                                             </UserProtectedRoute>
                                           } />
+          <Route exact path="/admindashboard" element={
+                                            <UserProtectedRoute isAuthenticated={isAuthenticated}>
+                                              <UserDashboard />
+                                            </UserProtectedRoute>
+                                          } />
         </Routes>
+
 
 
       </BrowserRouter>
