@@ -29,16 +29,16 @@ const AdminSidebar = ({setIsAuthenticated}) => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/admindashboard" activeClassName="activeClicked">
+            <NavLink exact to="/admindashboard" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/search" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="search">Search</CDBSidebarMenuItem>
+            <NavLink exact to="/addUsers" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="user-plus">Add User/Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/skills" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Skills</CDBSidebarMenuItem>
+            <NavLink exact to="/skills" activeclasscame="activeClicked">
+              <CDBSidebarMenuItem icon="table">Your Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            <NavLink exact to="/profile" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
