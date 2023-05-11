@@ -82,6 +82,7 @@
     "caniuse-api": "^3.0.0",
     "caniuse-lite": "^1.0.30001474",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",
+    "cdbreact": "^1.5.14",
     "chalk": "^2.4.2",
     "char-regex": "^1.0.2",
     "check-types": "^11.2.2",

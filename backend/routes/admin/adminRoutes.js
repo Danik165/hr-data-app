@@ -71,4 +71,18 @@ router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
     res.send(Error).status(Error.code)
   }
 })
+
+
+router.get("/api/getallusers",requireAdminAuth,async (req,res) => {
+  try{
+    const [rows] = await db.promise().query("SELECT UserID as EmployeeId,Name,DepartmentName,RoleName from users inner join department on users.departmentID = department.departmentID inner join role on users.roleID = role.roleID")
+    const body = {data:rows}
+    res.send(body).status(200) ;
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code);
+
+  }
+})
 module.exports = router;

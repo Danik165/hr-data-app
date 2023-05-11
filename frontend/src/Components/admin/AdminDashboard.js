@@ -1,46 +1,29 @@
 import React from 'react';
-import logo from '../../Images/logo.png';
 import './adminprofile.css';
+import Header from '../header/header';
+import AdminSidebar from './adminsidebar/AdminSidebar';
+import SkillTable from '../users/SkillTable';
+import AddEmployeeForm from './addEmployee/addEmployee';
+import { Routes, Route } from 'react-router-dom';
+import Profile  from '../users/Profile';
+
 const AdminDashboard = ({ setIsAuthenticated }) => {
-  const handleLogout = () => {
-    localStorage.removeItem('access_token');
-    setIsAuthenticated(false);
-  };
-//
-//  return (
-//    <div>
-//      <h2>Admin Dashboard</h2>
-//      <p>Welcome to your dashboard.</p>
-//      <button onClick={handleLogout}>Logout</button>
-//    </div>
-//  );
-//};
-//
-//
-//export default (AdminDashboard);
-
-
+ 
 
   return (
     <div className="dashboard-container">
-      <div className="Jeevan-logo">
-        <img src={logo} alt="Jeevan Logo" />
+      <Header pageHeader="Admin Page" />
+      <div  className='dashboard-body'>
+        <AdminSidebar setIsAuthenticated={setIsAuthenticated}  />
+        <Routes>
+          <Route path="/addusers" element={<AddEmployeeForm />} />
+          <Route path="/skills" element={<SkillTable />} />
+          <Route path="/profile" element={<Profile />} />
+        </Routes>
       </div>
-      <div className="nav-header">
-        <button className="nav-button">Account</button>
-        <button className="nav-button" onClick={handleLogout}>Logout</button>
-      </div>
-      <div className="main-content">
-        <div className="card-container">
-          <div className="userprofile gradient-bg box">
-            <h2 className="userprofile-header">UserProfile</h2>
-            {/* User profile content will go here */}
-          </div>
-        </div>
-      </div>
+    
     </div>
   );
 };
 
 export default AdminDashboard;
-
