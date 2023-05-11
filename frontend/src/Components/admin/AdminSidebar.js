@@ -10,11 +10,11 @@ import {
 import { NavLink } from 'react-router-dom';
 
 
-import "./Sidebar.css"
+
 import Logout from '../functionbuttons';
 
 
-const Sidebar = ({setIsAuthenticated}) => {
+const AdminSidebar = ({setIsAuthenticated}) => {
 
    
 
@@ -29,8 +29,11 @@ const Sidebar = ({setIsAuthenticated}) => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink exact to="/admindashboard" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink exact to="/search" activeClassName="activeClicked">
+              <CDBSidebarMenuItem icon="search">Search</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/skills" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="table">Skills</CDBSidebarMenuItem>
@@ -52,4 +55,5 @@ const Sidebar = ({setIsAuthenticated}) => {
   );
 };
 
-export default Sidebar;
+
+export default AdminSidebar;
