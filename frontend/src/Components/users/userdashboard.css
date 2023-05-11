@@ -11,14 +11,6 @@ body {
   height: 100vh;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 20px;
-  background-color: #add8e6;
-}
 
 .logo img {
   height: 50px;
@@ -46,4 +38,9 @@ table td {
   border: 1px solid #ccc;
   padding: 10px;
   text-align: left;
+}
+
+
+.dashboard-body{
+  display: flex;
 }

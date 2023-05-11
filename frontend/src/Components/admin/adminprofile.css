@@ -11,23 +11,6 @@ body {
   height: 100vh;
 }
 
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid #ccc;
-  padding: 10px 20px;
-  background-color: #add8e6;
-}
-
-.logo img {
-  height: 50px;
-}
-
-.header-right {
-  display: flex;
-  align-items: center;
-}
 
 .dropdown {
   position: relative;
@@ -53,26 +36,6 @@ body {
   display: block;
 }
 
-.logout-button {
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-.main-content {
-  flex-grow: 1;
-  overflow: auto;
-  padding: 20px;
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-}
-
-table th,
-table td {
-  border: 1px solid #ccc;
-  padding: 10px;
-  text-align: left;
+.dashboard-body{
+  display: flex;
 }

@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 
+import './functionbuttons.css'
 
 const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setIsAuthenticated
   let navigate = useNavigate();
@@ -10,7 +11,7 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
 
     setIsAuthenticated(false);
 
-    navigate('/');
+    navigate('/login');
   };
 
   return (
