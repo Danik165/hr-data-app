@@ -5,7 +5,7 @@ import UserDashboard from './Components/users/UserDashboard';
 import AdminDashboard from './Components/admin/AdminDashboard';
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import UserProtectedRoute from './Components/ProtectedRoute';
-
+import AddEmployee from './Components/admin/addEmployee'
 import './App.css'
 
 const App = () => {
@@ -24,7 +24,7 @@ const App = () => {
                                             </UserProtectedRoute>
                                           } />
           <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
-          <Route exact path="/admindashboard" element={
+          <Route path="/admin/*" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
                                               <AdminDashboard setIsAuthenticated={setIsAuthenticated}/>
                                             </UserProtectedRoute>
