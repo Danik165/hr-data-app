@@ -7,7 +7,7 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
   let navigate = useNavigate();
 
   const logoutUser = () => {
-    localStorage.removeItem('access_token');
+    localStorage.removeItem('access_tokezn');
 
     setIsAuthenticated(false);
 

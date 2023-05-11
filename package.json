@@ -1,0 +1,7 @@
+{
+  "dependencies": {
+    "cdbreact": "^1.5.14",
+    "formik": "^2.2.9",
+    "yup": "^1.1.1"
+  }
+}
