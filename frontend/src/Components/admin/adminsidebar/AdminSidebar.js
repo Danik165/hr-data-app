@@ -11,7 +11,7 @@ import { NavLink, Route } from 'react-router-dom';
 
 
 
-import Logout from '../functionbuttons';
+import Logout from '../../functionbuttons';
 
 
 const AdminSidebar = ({setIsAuthenticated}) => {
