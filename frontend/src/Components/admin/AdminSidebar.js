@@ -7,7 +7,7 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Route } from 'react-router-dom';
 
 
 
@@ -20,6 +20,7 @@ const AdminSidebar = ({setIsAuthenticated}) => {
 
   return (
     <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
+ 
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
@@ -29,24 +30,25 @@ const AdminSidebar = ({setIsAuthenticated}) => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/admindashboard" activeclassname="activeClicked">
+            <NavLink to="/admin" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/addUsers" activeclassname="activeClicked">
+            <NavLink to="/admin/addusers" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user-plus">Add User/Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/skills" activeclasscame="activeClicked">
+            <NavLink  to="/admin/skills" activeclasscame="activeClicked">
               <CDBSidebarMenuItem icon="table">Your Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeclassname="activeClicked">
+            <NavLink to="/admin/profile" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
         <CDBSidebarFooter >
-          
-           <CDBSidebarMenuItem icon="power-off"  ><Logout setIsAuthenticated={setIsAuthenticated} />  </CDBSidebarMenuItem>
+          <CDBSidebarMenuItem icon='power-off'>
+           <Logout setIsAuthenticated={setIsAuthenticated} /> 
+           </CDBSidebarMenuItem>
            
           
         </CDBSidebarFooter>
