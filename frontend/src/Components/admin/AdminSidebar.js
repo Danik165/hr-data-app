@@ -19,7 +19,7 @@ const AdminSidebar = ({setIsAuthenticated}) => {
    
 
   return (
-    <div style={{ display: 'flex', height: '92vh', overflow: 'scroll initial' }}>
+    <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#333">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>

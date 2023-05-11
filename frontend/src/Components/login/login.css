@@ -60,9 +60,9 @@ body {
 }
 
 .login-btn {
-    background-color: #ffffff;
+    background-color: #0c4da2;
     border: none;
-    color: #1eb1c8;
+    color: #fff;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
@@ -75,8 +75,8 @@ body {
 }
 
 .login-btn:hover {
-    background-color: #f2f2f2;
-    color: #0d8ba1;
+    background-color: #57cb83;
+    color: #fff;
 }
 
 .login-form {

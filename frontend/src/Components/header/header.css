@@ -5,6 +5,8 @@
     border-bottom: 1px solid #ccc;
     padding: 10px 20px;
     background-color: #add8e6;
+    height: 10vh;
+    max-height: 10vh;
   }
   
   .logo img {
