@@ -85,4 +85,19 @@ router.get("/api/getallusers",requireAdminAuth,async (req,res) => {
 
   }
 })
+
+
+router.get("/api/getalldepartments",async (req,res) => {
+  try{
+    const [rows] = await db.promise().query("SELECT DepartmentName from department");
+    const body = {data:rows};
+    res.setHeader('Content-Type', 'text/html');
+    res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code);
+
+  }
+})
 module.exports = router;
