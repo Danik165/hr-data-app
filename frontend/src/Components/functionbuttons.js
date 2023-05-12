@@ -14,6 +14,8 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
     navigate('/login');
   };
 
+
+
   return (
     <button onClick={logoutUser} className="logout-btn">Logout</button>
   );
