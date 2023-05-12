@@ -16,6 +16,7 @@ const AdminDashboard = ({ setIsAuthenticated }) => {
       <div  className='dashboard-body'>
         <AdminSidebar setIsAuthenticated={setIsAuthenticated}  />
         <Routes>
+          <Route path="/" element={<SkillTable />} />
           <Route path="/addusers" element={<AddEmployeeForm />} />
           <Route path="/skills" element={<SkillTable />} />
           <Route path="/profile" element={<Profile />} />
