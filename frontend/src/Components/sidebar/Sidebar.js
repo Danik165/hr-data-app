@@ -16,7 +16,7 @@ import Logout from '../functionbuttons';
 
 const Sidebar = ({setIsAuthenticated}) => {
 
-   
+
 
   return (
     <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
@@ -42,10 +42,10 @@ const Sidebar = ({setIsAuthenticated}) => {
         </CDBSidebarContent>
 
         <CDBSidebarFooter >
-          
+
            <CDBSidebarMenuItem icon="power-off"  ><Logout setIsAuthenticated={setIsAuthenticated} />  </CDBSidebarMenuItem>
-           
-          
+
+
         </CDBSidebarFooter>
       </CDBSidebar>
     </div>

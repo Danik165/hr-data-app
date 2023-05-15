@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import Sidebar from '../sidebar/Sidebar.js';
+import Header from '../header/header';
 import './profile.css';
 
-const Profile = () => {
-  const [profile, setProfile] = useState({ email: '', phone: '' });
+const Profile = ({ setIsAuthenticated }) => {
+  const [profile, setProfile] = useState({ name: '', role: '', email: '', phone: '', currentProject: '', department: '' });
+  const isAdmin = false;
   const [isEditing, setIsEditing] = useState(false);
 
   useEffect(() => {
@@ -10,7 +13,6 @@ const Profile = () => {
   }, []);
 
   const fetchProfile = async () => {
-
     try {
       const response = await fetch('http://localhost:5000/api/profile');
       const data = await response.json();
@@ -43,44 +45,140 @@ const Profile = () => {
     }
   };
 
-if (isEditing) {
-  return (
-    <div className="profile-container">
-      <div className="profile-content">
-        <div className="profile-left">
-          <div className="profile-photo"></div>
-          <div className="profile-name">{profile.name}</div>
-          <div className="profile-role">{profile.role}</div>
-        </div>
-        <div className="profile-right">
-          <div className="profile-info">Information</div>
-          <div className="profile-email">Email: {profile.email}</div>
-          <div className="profile-phone">Phone: {profile.phone}</div>
-        </div>
-      </div>
-      <button onClick={() => setIsEditing(false)}>Back</button>
+
+  if (isEditing) {
+     return (
+        <div className="profile-container">
+          <form onSubmit={updateProfile}>
+            <div className="profile-content">
+              <div className="profile-left">
+                <div className="profile-photo"></div>
+                <div className="profile-item profile-name">
+                  <input
+                    type="text"
+                    value={profile.name}
+                    onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                  />
+                </div>
+                <div className="profile-item profile-role">
+                  <input
+                    type="text"
+                    value={profile.role}
+                    onChange={(e) => setProfile({ ...profile, role: e.target.value })}
+                  />
+                </div>
+              </div>
+              <div className="profile-right">
+                <div className="profile-info">
+                  <h2>Information</h2>
+                  <label>Email: </label>
+                  <input
+                    type="email"
+                    value={profile.email}
+                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                  />
+                  <label>Phone: </label>
+                  <input
+                    type="tel"
+                    value={profile.phone}
+                    onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                  />
+                </div>
+                <div className="profile-projects">
+                  <h2>Projects</h2>
+                  <label>Current Project: </label>
+                  <input
+                    type="text"
+                    value={profile.currentProject}
+                    onChange={(e) => setProfile({ ...profile, currentProject: e.target.value })}
+                  />
+                  <label>Department: </label>
+                  <input
+                    type="text"
+                    value={profile.department}
+                    onChange={(e) => setProfile({ ...profile, department: e.target.value })}
+                  />
+                </div>
+              </div>
+            </div>
+            <button type="submit">Save</button>
+          </form>
     </div>
   );
-}
+  }
+
+
 
 return (
-  <div className="profile-container">
-    <div className="profile-content">
-      <div className="profile-left">
-        <div className="profile-photo"></div>
-        <div className="profile-name">{profile.name}</div>
-        <div className="profile-role">{profile.role}</div>
+         <div className="profile-container">
+        <form onSubmit={(e) => { e.preventDefault(); updateProfile(profile.email, profile.phone); }}>
+          <div className="profile-content">
+            <div className="profile-left">
+              <div className="profile-photo"></div>
+              <div className="profile-item profile-name">
+                <input
+                  type="text"
+                  value={profile.name}
+                  onChange={(e) => setProfile({ ...profile, name: e.target.value })}
+                  disabled={!isEditing}
+                />
+              </div>
+              <div className="profile-item profile-role">
+                <input
+                  type="text"
+                  value={profile.role}
+                  onChange={(e) => setProfile({ ...profile, role: e.target.value })}
+                  disabled={!isEditing}
+                />
+              </div>
+            </div>
+            <div className="profile-right">
+              <div className="profile-info">
+                <h2>Information</h2>
+                <label>Email: </label>
+                <input
+                  type="email"
+                  value={profile.email}
+                  onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                  disabled={!isEditing}
+                />
+                <label>Phone: </label>
+                <input
+                  type="tel"
+                  value={profile.phone}
+                  onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
+                  disabled={!isEditing}
+                />
+              </div>
+              <div className="profile-projects">
+                <h2>Projects</h2>
+                <label>Current Project: </label>
+                <input
+                  type="text"
+                  value={profile.currentProject}
+                  onChange={(e) => setProfile({ ...profile, currentProject: e.target.value })}
+                  disabled={!isEditing}
+                />
+                <label>Department: </label>
+                <input
+                  type="text"
+                  value={profile.department}
+                  onChange={(e) => setProfile({ ...profile, department: e.target.value })}
+                  disabled={!isEditing}
+                />
+              </div>
+            </div>
+          </div>
+          <button type="submit" disabled={!isEditing}>Save</button>
+          {!isEditing && <button onClick={() => setIsEditing(true)}>Edit</button>}
+        </form>
       </div>
-      <div className="profile-right">
-        <div className="profile-info">Information</div>
-        <div className="profile-email">Email: {profile.email}</div>
-        <div className="profile-phone">Phone: {profile.phone}</div>
-      </div>
-    </div>
-    <button onClick={() => setIsEditing(true)}>Edit</button>
-  </div>
+
 );
 
-};
 
+
+};
 export default Profile;
+
+

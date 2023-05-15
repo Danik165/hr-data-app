@@ -19,19 +19,17 @@ const App = () => {
 
       <BrowserRouter>
         <Routes>
-          <Route exact path="/" element={
-                                            <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                              <UserDashboard setIsAuthenticated={setIsAuthenticated}/>
-                                            </UserProtectedRoute>
-                                          } />
           <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
-          <Route path="/profile" element={
-                                    <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                      <Profile /> {/* Render Profile component here */}
-                                    </UserProtectedRoute>
-                                  } />          <Route path="/admin/*" element={
+
+         <Route path="/admin/*" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
                                               <AdminDashboard setIsAuthenticated={setIsAuthenticated}/>
+                                            </UserProtectedRoute>
+                                          }     />
+
+         <Route  path="/*" element={
+                                            <UserProtectedRoute isAuthenticated={isAuthenticated}>
+                                              <UserDashboard setIsAuthenticated={setIsAuthenticated}/>
                                             </UserProtectedRoute>
                                           } />
         </Routes>
