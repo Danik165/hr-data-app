@@ -82,6 +82,39 @@ const AddEmployeeForm = () => {
     })
   }
 
+  // const fetchRole = () =>{
+  //   const dept = document.querySelector('#department').value;
+  //   fetch("localhost:5000/api/getrolebydepartment",{
+  //     body:{
+  //       departmentName:dept
+  //     }
+  //   })
+  //   .then((response) => {
+  //     if(response.redirected){
+  //       window.location.replace(response.url);
+
+  //     }
+  //     else{
+  //     response.json()
+  //       .then((rolelist) =>{
+  //         console.log(rolelist.data[0])
+  //         for(let i = 0; i <rolelist.data.length ; i++){
+
+  //           setRoles(oldArray => [...oldArray,rolelist.data[i].RoleName]);
+  //         }
+          
+
+  //       })
+
+  // }
+  // })
+  // .catch(err =>{
+  //   console.log(err.message);
+  //   setError(err.message)
+  // })
+
+
+  // }
   useEffect( () =>{ fetchDepartmentList() },[]);
 
   return (
@@ -104,6 +137,13 @@ const AddEmployeeForm = () => {
          
                  
           </select>
+          <br/ >
+          <label htmlFor="role">Select a Role:</label>
+          <br />
+          <select id="role" name="role" className='role-dropdown'>
+          {roles.map(role => 
+                <option id={role} value={role}>{role}</option>
+          )}
 
 
           <label htmlFor="role" >Role: </label>
