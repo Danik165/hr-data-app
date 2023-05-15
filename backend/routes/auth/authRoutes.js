@@ -23,7 +23,7 @@ router.post("/api/login",async (req,res) => {
       res.cookie("hrjwt",token,{httpOnly:true,maxAge:259200000});
       let responseObj;
       if(rows[0].AccessID==1){
-       responseObj = {nextPage:"/admindashboard"}
+       responseObj = {nextPage:"/admin"}
       }
       else{
        responseObj = {nextPage: "/user"}
