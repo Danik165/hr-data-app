@@ -12,9 +12,8 @@ const AddEmployeeForm = () => {
   const [error, setError] = useState('');
   const [departments,setDeparments] =useState([]);
   const [roles,setRoles] = useState([]);
-  //const [selectedDepartment,setSelectedDepartment] =useState();
   let selectedDepartment;
-  //let departments=[];
+
   const registerUser = () => {
     console.log("Register User called")
   }
@@ -82,39 +81,6 @@ const AddEmployeeForm = () => {
     })
   }
 
-  // const fetchRole = () =>{
-  //   const dept = document.querySelector('#department').value;
-  //   fetch("localhost:5000/api/getrolebydepartment",{
-  //     body:{
-  //       departmentName:dept
-  //     }
-  //   })
-  //   .then((response) => {
-  //     if(response.redirected){
-  //       window.location.replace(response.url);
-
-  //     }
-  //     else{
-  //     response.json()
-  //       .then((rolelist) =>{
-  //         console.log(rolelist.data[0])
-  //         for(let i = 0; i <rolelist.data.length ; i++){
-
-  //           setRoles(oldArray => [...oldArray,rolelist.data[i].RoleName]);
-  //         }
-          
-
-  //       })
-
-  // }
-  // })
-  // .catch(err =>{
-  //   console.log(err.message);
-  //   setError(err.message)
-  // })
-
-
-  // }
   useEffect( () =>{ fetchDepartmentList() },[]);
 
   return (
@@ -127,7 +93,7 @@ const AddEmployeeForm = () => {
           </div>
           <CDBInput label="Name" type="text" icon="user" iconClass="text-muted" />
           <CDBInput label="Email" type="email" icon="envelope" iconClass="text-muted" />
-          <CDBInput label="Confirm email" type="email" icon="exclamation-triangle" iconClass="text-muted" />
+          <CDBInput label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" />
           <label htmlFor="department">Select a Department:</label>
           <br />
           <select id="department" name="department" className='department-dropdown' onChange={e => handleDeptSelection(e.target.value)}>
