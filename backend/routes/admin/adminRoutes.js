@@ -100,4 +100,28 @@ router.get("/api/getalldepartments",async (req,res) => {
 
   }
 })
+
+router.get("/api/getrolebydepartment",async(req,res) =>{
+
+  var deptId; 
+
+  try{
+    //console.log(req.query)
+    const departmentName = req.query.departmentName;
+    var [rows] = await db.promise().query("Select DepartmentID from department where DepartmentName=?",[departmentName]);
+    deptId = rows[0].DepartmentID;
+
+    var [rows] = await db.promise().query("Select RoleName from role where DepartmentID =? ",[deptId]);
+    const body = {data:rows};
+    res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
+
+  }
+
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error).status(Error.code);
+
+  }
+  
+})
 module.exports = router;
