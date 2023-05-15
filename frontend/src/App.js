@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import Login from './Components/login/Login';
-//import Register from './Components/admin/Register';
 import UserDashboard from './Components/users/UserDashboard';
 import AdminDashboard from './Components/admin/AdminDashboard';
 import Profile from './Components/users/Profile';
