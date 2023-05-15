@@ -1,4 +1,6 @@
-/*body {
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -16,18 +18,18 @@
   flex: 0 0 250px;
   height: 100vh;
   overflow: auto;
-} */
+}
 
 .profile-container {
-    display: flex;
-    flex: 2;
-    justify-content: center;
-    align-items: center;
     padding: 1rem;
+    background: linear-gradient(135deg, #81cfe0, #1eb1c8);
     border-radius: 10px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: auto;
+    color: #ffffff;
+    display: flex;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
 }
 
 .profile-left, .profile-right {
@@ -38,19 +40,8 @@
 }
 
 .profile-left {
-    background-color: #0c4da2;
-    color: #ffffff;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
-}
-
-.profile-right {
-    background-color: #ffffff;
-    color: #333;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
 }
 
 .profile-photo {
@@ -82,12 +73,16 @@ button {
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 500;
-    border-radius: 15px;
+    border-radius: 4px;
     transition-duration: 0.4s;
-    width: 50%;
+    width: 100%;
+}
 
+button:hover {
+    background-color: #57cb83;
+    color: #fff;
 }
 
 @media screen and (max-width: 768px) {
