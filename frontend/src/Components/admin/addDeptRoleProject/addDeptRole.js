@@ -3,10 +3,8 @@ import { useState,useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
 
 const AddDeptRoleForm = () => {
-      // const departments = ["ABC","DEF"];
-      const [departments,setDeparments] =useState(["ABC","Add a new Department"]);
+      const [departments,setDeparments] =useState([]);
       const [disabled,setDisabled] = useState(true);
-      //let selectedDepartment = "New Department";
     const AddDeptRole = () => {
       console.log("")
     }
