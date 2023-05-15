@@ -21,7 +21,7 @@ const AdminSidebar = ({setIsAuthenticated}) => {
   return (
     <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
  
-      <CDBSidebar textColor="#fff" backgroundColor="#333">
+      <CDBSidebar textColor="#fff" backgroundColor="#0c4da2">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
           <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
             Sidebar
@@ -35,6 +35,9 @@ const AdminSidebar = ({setIsAuthenticated}) => {
             </NavLink>
             <NavLink to="/admin/addusers" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user-plus">Add User/Skills</CDBSidebarMenuItem>
+            </NavLink>
+            <NavLink to="/admin/adddept" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="hotel">Add Department/Role</CDBSidebarMenuItem>
             </NavLink>
             <NavLink  to="/admin/skills" activeclasscame="activeClicked">
               <CDBSidebarMenuItem icon="table">Your Skills</CDBSidebarMenuItem>
