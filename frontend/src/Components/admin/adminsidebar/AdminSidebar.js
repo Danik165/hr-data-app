@@ -36,7 +36,7 @@ const AdminSidebar = ({setIsAuthenticated}) => {
             <NavLink to="/admin/addusers" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user-plus">Add User/Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/admin/adddept" activeclassname="activeClicked">
+            <NavLink to="/admin/addProject" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="hotel">Add Department/Role</CDBSidebarMenuItem>
             </NavLink>
             <NavLink  to="/admin/skills" activeclasscame="activeClicked">
