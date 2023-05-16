@@ -103,14 +103,7 @@ const AddEmployeeForm = () => {
          
                  
           </select>
-          <br/ >
-          <label htmlFor="role">Select a Role:</label>
-          <br />
-          <select id="role" name="role" className='role-dropdown'>
-          {roles.map(role => 
-                <option id={role} value={role}>{role}</option>
-          )}
-
+         
 
           <label htmlFor="role" >Role: </label>
             <br />

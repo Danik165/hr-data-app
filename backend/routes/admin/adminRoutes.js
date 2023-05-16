@@ -47,9 +47,9 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
 
 
 router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
-  const { userId } = req.body;
-
+  
   try{
+    const { userId } = req.body;
     const [rows] = await db.promise().query("SELECT UserID,Name,EmailID,PhoneNumber,CurrentProject,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID where UserID = ?",[userId]);
     res.send(rows[0]).status(200);
     }
@@ -91,7 +91,6 @@ router.get("/api/getalldepartments",async (req,res) => {
   try{
     const [rows] = await db.promise().query("SELECT DepartmentName from department");
     const body = {data:rows};
-    res.setHeader('Content-Type', 'text/html');
     res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
   }
   catch(err){
