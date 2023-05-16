@@ -20,7 +20,7 @@ const AdminDashboard = ({ setIsAuthenticated }) => {
         <Routes>
           <Route path="/" element={<SkillTable />} />
           <Route path="/addusers" element={<UserSkillDetails />} />
-          <Route path="/adddept" element={ <AddDeptRoleProject />} />
+          <Route path="/addProject" element={ <AddDeptRoleProject />} />
           <Route path="/skills" element={<SkillTable />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
