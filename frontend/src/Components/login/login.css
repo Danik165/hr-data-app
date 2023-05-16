@@ -51,9 +51,8 @@ body {
 .forgot-password-btn {
     background: none;
     color: #ffffff;
-    border: none;
-    padding: auto;
-    padding-right: 10%;
+    width: 100%;
+    padding: 3% 2%;
     font: inherit;
     cursor: pointer;
     outline: inherit;

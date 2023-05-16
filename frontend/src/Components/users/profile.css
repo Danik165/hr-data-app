@@ -42,8 +42,8 @@
     color: #ffffff;
     align-items: center;
     justify-content: center;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-radius: 10px;
+
 }
 
 .profile-right {

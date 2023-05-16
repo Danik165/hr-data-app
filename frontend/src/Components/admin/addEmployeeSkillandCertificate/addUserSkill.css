@@ -1,5 +1,6 @@
 .forms-container{
     margin: auto;
+
 }
 .button-container{
    display: flex;
@@ -15,10 +16,10 @@
 
 .button-container > button {
     flex-grow: 1;
-    background-color: antiquewhite;
+    background-color: #007bff;
     border-color: black;
-    border-radius: 2px;
-    border-width: 1px;
+    border-radius: 10px;
+
     
 }
 

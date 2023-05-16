@@ -57,7 +57,7 @@ const AddDeptRoleForm = () => {
         <CDBCard style={{ width: '30rem' }}>
           <CDBCardBody className="mx-4">
             <div className="text-center mt-4 mb-2">
-              <p className="h4 font-weight-bold"> Add Skill </p>
+              <p className="h4 font-weight-bold"> Add Department </p>
             </div>
             
             <label htmlFor="department">Select a Department:</label>

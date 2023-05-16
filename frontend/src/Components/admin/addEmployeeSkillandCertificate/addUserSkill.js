@@ -12,14 +12,14 @@ const UserSkillDetails = () =>{
     }
 
     const unselectedStyle ={
-        "background-color":"antiquewhite",
+        "background-color":"#007bff",
         
     }
     return(
         <div className="forms-container">
             <div className="button-container">
                 <button onClick={() => setDisplayForm("Employee")} style={ displayForm == "Employee" ? selectedStyle:unselectedStyle}>Employee</button>
-                <button onClick={() => setDisplayForm("Skills")} style={ displayForm == "Skills" ? selectedStyle:unselectedStyle}>Skills</button>
+                <button onClick={() => setDisplayForm("Skills")} style={ displayForm == "Skills" ? selectedStyle:unselectedStyle}>Skill</button>
                 <button onClick={() => setDisplayForm("Certificate")} style={displayForm == "Certificate" ? selectedStyle:unselectedStyle}>Certificate</button>
             </div>
             { displayForm == "Employee" && <AddEmployeeForm />}
