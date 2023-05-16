@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./login.css";
 import logo from "../../Images/logo.png";
+import { Link } from 'react-router-dom';
 
 
 
@@ -59,7 +60,7 @@ return (
         </label>
         <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
         {error &&  <p className="err-message">{error}</p>}
-        <button type="button" className='forgot-password-btn'>Forgot Password or Have no Account yet?</button>
+        <Link to="/forgotpassword" type="button" className='forgot-password-btn'>Forgot Password or Have no Account yet?</Link>
         <button type="submit" className="login-btn">Login</button>
       </form>
     </div>
