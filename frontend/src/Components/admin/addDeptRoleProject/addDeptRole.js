@@ -54,7 +54,7 @@ const AddDeptRoleForm = () => {
     return (
       <div class="skill-form-container">
       <CDBContainer>
-        <CDBCard style={{ width: '30rem' }}>
+        <CDBCard style={{ width: '30rem','border-radius':'10px'  }}>
           <CDBCardBody className="mx-4">
             <div className="text-center mt-4 mb-2">
               <p className="h4 font-weight-bold"> Add Department </p>
