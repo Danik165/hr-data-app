@@ -6,6 +6,7 @@ const sqlQuery ={
     selectDepartmentIdByName:"Select DepartmentID from department where DepartmentName=?",
     selectRoleIdByDepartmentIdandRoleName:"Select roleID from role where departmentID=? and RoleName = ?",
     selectRoleNameByDepartmentId:"Select RoleName from role where DepartmentID =? ",
+    selectUserIdByEmailId:"Select UserID from users where emailId=?",
     insertNewUser:"Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",
 
 }

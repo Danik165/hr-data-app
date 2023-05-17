@@ -3,7 +3,8 @@ const db = require("../../database/connectDb")
 const createJWT = require('../../middleware/jwt/create_jwt')
 const handleErrors = require("../../error/errorhandler")
 const router = Router();
-
+const {sendEmail} = require("../../middleware/email/sendEmail");
+const { sqlQuery } = require("../../database/query");
 
 
 
@@ -38,6 +39,25 @@ router.post("/api/login",async (req,res) => {
   }
 });
 
-
+router.get("/api/forgotpassword",async(req,res) =>{
+  const emaiId = req.body.emailId;
+  try{
+    const [rows] = await db.promise().query(sqlQuery.selectUserIdByEmailId,[emaiId])
+    if(rows.length == 0){
+      throw {message:"Email Does Not Exist",code:404}
+    }
+    const emailContent = {
+      toEmail:req.body.emailId,
+      subject:"Password Recovery",
+      body:"You have raised a request to Reset Password"
+    }
+    sendEmail(emailContent);
+    res.send("Email Sent Successfully").status(1000)
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.send(Error.message).status(err.code);
+  }
+})
 
 module.exports = router;
