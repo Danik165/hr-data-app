@@ -2,9 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Sidebar from '../sidebar/Sidebar.js';
 import Header from '../header/header';
 import './profile.css';
+import { MDBIcon } from 'mdb-react-ui-kit';
 
 const Profile = ({ setIsAuthenticated }) => {
-  const [profile, setProfile] = useState({ name: '', role: '', email: '', phone: '', currentProject: '', department: '' });
+  const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.com', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
   const isAdmin = false;
   const [isEditing, setIsEditing] = useState(false);
 
@@ -52,7 +53,7 @@ const Profile = ({ setIsAuthenticated }) => {
           <form onSubmit={updateProfile}>
             <div className="profile-content">
               <div className="profile-left">
-                <div className="profile-photo"></div>
+                <div className="profile-photo"> <MDBIcon icon='user-circle' size='6x' /></div>
                 <div className="profile-item profile-name">
                   <input
                     type="text"
@@ -114,7 +115,7 @@ return (
         <form onSubmit={(e) => { e.preventDefault(); updateProfile(profile.email, profile.phone); }}>
           <div className="profile-content">
             <div className="profile-left">
-              <div className="profile-photo"></div>
+              <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
               <div className="profile-item profile-name">
                 <input
                   type="text"
