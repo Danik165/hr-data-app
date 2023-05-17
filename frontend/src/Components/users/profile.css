@@ -53,13 +53,13 @@
     border-bottom-right-radius: 10px;
 }
 
-.profile-photo {
+ .profile-photo {
     width: 100px;
     height: 100px;
-    background: #ccc;
-    border-radius: 50%;
+    /* background-color: #fff; */
+    /* border-radius: 50%; */
     margin-bottom: 1rem;
-}
+} 
 
 .profile-item {
     margin-bottom: 1rem;
@@ -67,11 +67,11 @@
 
 .profile-item input {
     padding: 10px;
-    font-size: 14px;
-    font-weight: 300;
+    font-size: 16px;
+    font-weight: 500;
     border: 1px solid #ccc;
     border-radius: 4px;
-    color: #0d8ba1;
+    color: #ffffff;
 }
 
 button {
