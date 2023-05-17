@@ -7,6 +7,7 @@ const sqlQuery ={
     selectRoleIdByDepartmentIdandRoleName:"Select roleID from role where departmentID=? and RoleName = ?",
     selectRoleNameByDepartmentId:"Select RoleName from role where DepartmentID =? ",
     insertNewUser:"Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",
+
 }
 
 module.exports.sqlQuery = sqlQuery;
