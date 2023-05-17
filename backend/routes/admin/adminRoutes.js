@@ -3,54 +3,43 @@ const db = require("../../database/connectDb")
 const createJWT = require('../../middleware/jwt/create_jwt')
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
-
+const {sqlQuery} = require("../../database/query");
 
 const router = Router();
 
-router.post("/api/register",requireAdminAuth,async (req,res) => {
- // Name, empid, department,role, email
+router.post("/api/register",async (req,res) => {
+  
 
-  const { name, employeeid, role, department, emailId } = req.body;
+  const { name, employeeId, role, department, emailId } = req.body;
   var roleID,departmentID;
 
 
   try{
-    const [rows] = await db.promise().query("Select departmentID from department where departmentName=?",[department])
-    departmentID = rows[0].departmentID;
-  }
-  catch(err){
-    const Error = handleErrors(err);
-    res.send(Error).status(Error.code)
-  }
+    let [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[department])
+    departmentID = rows[0].DepartmentID;
 
-  try{
-    const [rows] = await db.promise().query("Select roleID from role where departmentID=? and RoleName = ?",[departmentID,role])
+
+    [rows] = await db.promise().query(sqlQuery.selectRoleIdByDepartmentIdandRoleName,[departmentID,role])
     roleID = rows[0].roleID;
 
-  }
-  catch(err){
-    const Error = handleErrors(err);
-    res.send(Error).status(Error.code)
-  }
-
-  try{
-    await db.promise().query("Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",[employeeid,name,emailId,roleID,departmentID,0]);
+ 
+    await db.promise().query(sqlQuery.insertNewUser,[employeeId,name,emailId,roleID,departmentID,0]);
     res.send({message:"Successfully create object"}).status(201);
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code)
+    res.send(Error.message).status(Error.code)
   }
 
 });
 
 
 
-router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
+router.get("/api/userbyid",async (req,res) => {
   
   try{
     const { userId } = req.body;
-    const [rows] = await db.promise().query("SELECT UserID,Name,EmailID,PhoneNumber,CurrentProject,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID where UserID = ?",[userId]);
+    const [rows] = await db.promise().query(sqlQuery.selectUserById,[userId]);
     res.send(rows[0]).status(200);
     }
   catch (err){
@@ -61,7 +50,6 @@ router.get("/api/getuserbyid",requireAdminAuth,async (req,res) => {
 })
 
 router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
-  res.send("Admin Dashboard").status(200);
   try{
     const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
     
@@ -73,9 +61,9 @@ router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
 })
 
 
-router.get("/api/getallusers",requireAdminAuth,async (req,res) => {
+router.get("/api/users",async (req,res) => {
   try{
-    const [rows] = await db.promise().query("SELECT UserID as EmployeeId,Name,DepartmentName,RoleName from users inner join department on users.departmentID = department.departmentID inner join role on users.roleID = role.roleID")
+    const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
     res.send(body).status(200) ;
   }
@@ -87,9 +75,9 @@ router.get("/api/getallusers",requireAdminAuth,async (req,res) => {
 })
 
 
-router.get("/api/getalldepartments",async (req,res) => {
+router.get("/api/departments",async (req,res) => {
   try{
-    const [rows] = await db.promise().query("SELECT DepartmentName from department");
+    const [rows] = await db.promise().query(sqlQuery.selectDepartments);
     const body = {data:rows};
     res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
   }
@@ -100,17 +88,17 @@ router.get("/api/getalldepartments",async (req,res) => {
   }
 })
 
-router.get("/api/getrolebydepartment",async(req,res) =>{
+router.get("/api/rolebydepartment",async(req,res) =>{
 
   var deptId; 
 
   try{
     //console.log(req.query)
     const departmentName = req.query.departmentName;
-    var [rows] = await db.promise().query("Select DepartmentID from department where DepartmentName=?",[departmentName]);
+    var [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[departmentName]);
     deptId = rows[0].DepartmentID;
 
-    var [rows] = await db.promise().query("Select RoleName from role where DepartmentID =? ",[deptId]);
+    var [rows] = await db.promise().query(sqlQuery.selectRoleNameByDepartmentId,[deptId]);
     const body = {data:rows};
     res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
 
