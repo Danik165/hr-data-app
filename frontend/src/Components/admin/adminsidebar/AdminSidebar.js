@@ -23,7 +23,7 @@ const AdminSidebar = ({setIsAuthenticated}) => {
  
       <CDBSidebar textColor="#fff" backgroundColor="#0c4da2">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+          <a className="text-decoration-none" style={{ color: 'inherit' }}>
             Sidebar
           </a>
         </CDBSidebarHeader>

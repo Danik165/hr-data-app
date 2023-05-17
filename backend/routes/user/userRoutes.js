@@ -6,7 +6,6 @@ const handleErrors = require("../../error/errorhandler");
 const router = Router();
 
 
-
 router.post("/api/addSkill",async (req,res) =>{
 
 })

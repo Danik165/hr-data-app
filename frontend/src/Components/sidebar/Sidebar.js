@@ -22,7 +22,7 @@ const Sidebar = ({setIsAuthenticated}) => {
     <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
       <CDBSidebar textColor="#fff" backgroundColor="#0c4da2">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a href="/" className="text-decoration-none" style={{ color: 'inherit' }}>
+          <a className="text-decoration-none" style={{ color: 'inherit' }}>
             Sidebar
           </a>
         </CDBSidebarHeader>
