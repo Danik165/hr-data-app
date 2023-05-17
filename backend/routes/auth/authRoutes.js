@@ -3,9 +3,9 @@ const db = require("../../database/connectDb")
 const createJWT = require('../../middleware/jwt/create_jwt')
 const handleErrors = require("../../error/errorhandler")
 const router = Router();
-const {sendEmail} = require("../../middleware/email/sendEmail");
+const {sendEmail} = require("../../middleware/email/send_email");
 const { sqlQuery } = require("../../database/query");
-
+const {generateOtp} = require("../../middleware/email/create_otp")
 
 
 
@@ -46,6 +46,11 @@ router.get("/api/forgotpassword",async(req,res) =>{
     if(rows.length == 0){
       throw {message:"Email Does Not Exist",code:404}
     }
+
+    const {otp,uniqueId} = generateOtp();
+
+    await db.promise().query()
+
     const emailContent = {
       toEmail:req.body.emailId,
       subject:"Password Recovery",
