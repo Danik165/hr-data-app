@@ -1,6 +1,6 @@
 const { Router } = require("express")
 const db = require("../../database/connectDb")
-const createJWT = require('../../middleware/jwt/create_jwt')
+const {generateForgotPasswordToken} = require('../../middleware/jwt/create_jwt')
 const handleErrors = require("../../error/errorhandler")
 const router = Router();
 const {sendEmail} = require("../../middleware/email/send_email");
@@ -46,17 +46,22 @@ router.get("/api/forgotpassword",async(req,res) =>{
     if(rows.length == 0){
       throw {message:"Email Does Not Exist",code:404}
     }
-
+    const userId = rows[0].UserID;
     const {otp,uniqueId} = generateOtp();
 
-    await db.promise().query()
+    await db.promise().query(sqlQuery.insertNewOtpRequest,[userId,uniqueId,otp,false])
 
+    const token = generateForgotPasswordToken(userId,uniqueId);
+    
+    
+    
     const emailContent = {
       toEmail:req.body.emailId,
       subject:"Password Recovery",
-      body:"You have raised a request to Reset Password"
+      body:"You have raised a request to Reset Password. Use this OTP to change to your password " + otp + ". This Expires in 5 minutes."
     }
-    sendEmail(emailContent);
+    //sendEmail(emailContent);
+    res.cookie("fpwd",token,{httpOnly:true,maxAge:300000})
     res.send("Email Sent Successfully").status(1000)
   }
   catch(err){
@@ -65,4 +70,8 @@ router.get("/api/forgotpassword",async(req,res) =>{
   }
 })
 
+
+router.post("/api/resetpassword",async(req,res) =>{
+  
+} )
 module.exports = router;
