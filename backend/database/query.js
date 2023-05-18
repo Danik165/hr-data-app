@@ -8,6 +8,7 @@ const sqlQuery ={
     selectRoleNameByDepartmentId:"Select RoleName from role where DepartmentID =? ",
     selectUserIdByEmailId:"Select UserID from users where emailId=?",
     insertNewUser:"Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",
+    insertNewOtpRequest:"Insert into otp_request values(?,?,?,?)"
 
 }
 
