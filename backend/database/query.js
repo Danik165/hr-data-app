@@ -7,9 +7,11 @@ const sqlQuery ={
     selectRoleIdByDepartmentIdandRoleName:"Select roleID from role where departmentID=? and RoleName = ?",
     selectRoleNameByDepartmentId:"Select RoleName from role where DepartmentID =? ",
     selectUserIdByEmailId:"Select UserID from users where emailId=?",
+    selectOtpbyUserIdandUniqueId:"Select otp from otp_request where UserId =? and uniqueId = ?",
     insertNewUser:"Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",
-    insertNewOtpRequest:"Insert into otp_request values(?,?,?,?)"
-
+    insertNewOtpRequest:"Insert into otp_request values(?,?,?,?)",
+    updatePassword:"Update company_skills.users set password = ? where userId = ?",
+    LoginUser:"SELECT UserID,Password,AccessID FROM users WHERE EmailID = ? "
 }
 
 module.exports.sqlQuery = sqlQuery;
