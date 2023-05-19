@@ -7,6 +7,7 @@ import EnterNewPassword from './Components/login/EnterNewPassword';
 import Profile from './Components/users/Profile';
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import UserProtectedRoute from './Components/ProtectedRoute';
+import LoginPage from './Components/login/loginPage';
 
 import './App.css'
 
@@ -20,7 +21,7 @@ const App = () => {
 
       <BrowserRouter>
         <Routes>
-          <Route exact path="/login" element={<Login setIsAuthenticated={setIsAuthenticated}/>} />
+          <Route exact path="/login" element={<LoginPage setIsAuthenticated={setIsAuthenticated}/>} />
 
          <Route path="/admin/*" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
