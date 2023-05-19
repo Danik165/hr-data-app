@@ -24,7 +24,7 @@ const AddEmployeeForm = () => {
     fetchRole(dept);
   }
  const fetchRole = (dept) =>{
-    fetch("http://localhost:5000/api/getrolebydepartment?" + new URLSearchParams({departmentName:dept}))
+    fetch("http://localhost:5000/api/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
     .then((response) => {
       if(response.redirected){
         window.location.replace(response.url);
@@ -54,7 +54,7 @@ const AddEmployeeForm = () => {
 
 
   const fetchDepartmentList = () =>{
-    fetch("http://localhost:5000/api/getalldepartments")
+    fetch("http://localhost:5000/api/departments")
     .then((response)=>{
         if(response.redirected){
           window.location.replace(response.url);
