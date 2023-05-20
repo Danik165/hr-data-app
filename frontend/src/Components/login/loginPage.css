@@ -1,15 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
 body{
-    font-family: 'Roboto', sans-serif;
-    background-color: lightblue;
-    padding-top: 8rem ;
-    padding-left: 8%;
+    font-family: "Serif","Georgia";
+    background-color: #a1aeb9;
+    
     /* padding-right: 7rem; */
 }
 
 #login-card{
-    width: 70%;
+
+    width: 60%;
+    max-width: 820px;
+    /* max-height: 490px;  */
  
 }
 
