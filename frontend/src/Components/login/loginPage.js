@@ -3,11 +3,12 @@ import Login from './Login'
 import './loginPage.css';
 
 import logo from "../../Images/logo.png";
-import sideimg from '../../Images/LoginPageSideImg.jpg'
+import sideimg from '../../Images/LoginPageSideImageEdited.png'
 
 
 const LoginPage = () =>{
     return(
+      <div class="login-container h-100 d-flex align-items-center justify-content-center">
       <div class="card mb-2" id="login-card">
         <div class="row no-gutters">
           <div class="col-md-6">
@@ -22,6 +23,7 @@ const LoginPage = () =>{
             </div>
           </div>
         </div>
+      </div>
       </div>
     )
 }
