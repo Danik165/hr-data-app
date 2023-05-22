@@ -1,25 +1,35 @@
-.forms-container{
+.forms-container {
     margin: auto;
-
 }
-.button-container{
-   display: flex;
-   --bs-gutter-x: 1.5rem;
-   --bs-gutter-y: 0;
-   width: 100%;
-   padding-right: calc(var(--bs-gutter-x) * .5);
-   padding-left: calc(var(--bs-gutter-x) * .5);
-   margin-right: auto;
-   margin-left: auto;
+.form {
+    min-height: 500px; /* Adjust this value according to your need */
 }
 
 
-.button-container > button {
+.tabs {
+    display: flex;
+    margin: 5;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    border-bottom: 1px solid #ddd;
+    z-index: 1;
+}
+
+.tabs > div {
+    width: 100%;
     flex-grow: 1;
-    background-color: #007bff;
-    border-color: black;
-    border-radius: 10px;
-
-    
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    text-align: center;
+    box-sizing: border-box;
 }
 
+
+.tabs > div.active {
+    background-color: #007bff;
+    color: white;
+    border-bottom: auto solid #0c4da2;
+}
