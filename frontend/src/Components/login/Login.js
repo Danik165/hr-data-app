@@ -26,15 +26,14 @@ const Login = (props) => {
         body: JSON.stringify({ email, password }),
       });
 
+      const data = await response.json();
       if (response.status === 200) {
-        const data = await response.json();
         localStorage.setItem('access_token', data.hrjwt);
         props.setIsAuthenticated(true);
         console.log(data);
-
         navigate(data.nextPage);
       } else {
-        setError('Failed to log in. Please try again.');
+        setError(data.message);
       }
     } catch (err) {
       console.log(err.message)

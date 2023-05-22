@@ -13,7 +13,7 @@ const EnterEmail = () =>{
         .then((response)=>{
           response.json()
           .then((data) => {
-              if(data.status == 200){
+              if(response.status == 200){
                 navigate('/newpassword')
 
               }
