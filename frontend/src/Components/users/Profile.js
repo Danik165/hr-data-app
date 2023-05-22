@@ -73,14 +73,14 @@ const Profile = ({ setIsAuthenticated }) => {
                 <div className="profile-info">
                   <h2>Information</h2>
                   <label>Email: </label>
-                  <input
-                    type="email"
-                    value={profile.email}
-                    onChange={(e) => setProfile({ ...profile, email: e.target.value })}
-                  />
+                      <input
+                        type="text"
+                        value={profile.email}
+                        onChange={(e) => setProfile({ ...profile, email: e.target.value })}
+                      />
                   <label>Phone: </label>
                   <input
-                    type="tel"
+                    type="text"
                     value={profile.phone}
                     onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                   />
@@ -138,14 +138,14 @@ return (
                 <h2>Information</h2>
                 <label>Email: </label>
                 <input
-                  type="email"
+                  type="text"
                   value={profile.email}
                   onChange={(e) => setProfile({ ...profile, email: e.target.value })}
                   disabled={!isEditing}
                 />
                 <label>Phone: </label>
                 <input
-                  type="tel"
+                  type="text"
                   value={profile.phone}
                   onChange={(e) => setProfile({ ...profile, phone: e.target.value })}
                   disabled={!isEditing}
@@ -176,9 +176,6 @@ return (
       </div>
 
 );
-
-
-
 };
 export default Profile;
 

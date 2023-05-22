@@ -1,22 +1,33 @@
-/*body {
-    font-family: 'Roboto', sans-serif;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
+@import url('https://jeevantechnologies.com/images/slider/one-bg.png');
+
+body {
+    font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    background-image: url('https://jeevantechnologies.com/images/slider/one-bg.png');
 }
 
-.main-container {
-    display: flex;
-    height: 90vh;
-    align-items: center;
-    justify-content: center;
+.profile-input {
+  border:none;
+  border-bottom: 1px solid black;
 }
 
-.sidebar-container {
-  flex: 0 0 250px;
-  height: 100vh;
-  overflow: auto;
-} */
+.profile-input:read-only {
+  border: none;
+}
+
+.profile-item input {
+  border: none;
+  background: transparent;
+  outline: none;
+}
+
+.profile-item input.isEditing {
+  border: 10px solid black;
+}
+
 
 .profile-container {
     display: flex;
@@ -25,9 +36,11 @@
     align-items: center;
     padding: 1rem;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
     margin: auto;
     flex-direction: row;
+    font-family: 'Poppins', sans-serif;
+
 }
 
 .profile-left, .profile-right {
@@ -37,9 +50,13 @@
     padding: 1rem;
 }
 
+
+
+
+
 .profile-left {
     background-color: #0c4da2;
-    color: #ffffff;
+    color: lightcyan;
     align-items: center;
     justify-content: center;
     border-radius: 10px;
@@ -56,8 +73,6 @@
  .profile-photo {
     width: 100px;
     height: 100px;
-    /* background-color: #fff; */
-    /* border-radius: 50%; */
     margin-bottom: 1rem;
 } 
 
@@ -69,15 +84,22 @@
     padding: 10px;
     font-size: 16px;
     font-weight: 500;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+
+
     color: #ffffff;
+    font-family: 'Poppins', sans-serif;
 }
+.profile-item input:read-only {
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
 
 button {
     background-color: #0c4da2;
     border: none;
-    color: #fff;
+    color: lightcyan;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
