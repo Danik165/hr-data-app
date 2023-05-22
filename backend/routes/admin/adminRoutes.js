@@ -24,11 +24,11 @@ router.post("/api/register",async (req,res) => {
 
  
     await db.promise().query(sqlQuery.insertNewUser,[employeeId,name,emailId,roleID,departmentID,0]);
-    res.send({message:"Successfully create object"}).status(201);
+    res.status(201).send({message:"Successfully create object"});
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error.message).status(Error.code)
+    res.status(Error.code).send(Error.message)
   }
 
 });
@@ -40,11 +40,11 @@ router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
   try{
     const { userId } = req.body;
     const [rows] = await db.promise().query(sqlQuery.selectUserById,[userId]);
-    res.send(rows[0]).status(200);
+    res.status(200).send(rows[0]);
     }
   catch (err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code)
+    res.status(Error.code).send(Error)
     }
 
 })
@@ -56,7 +56,7 @@ router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
   }
   catch (err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code)
+    res.status(Error.code).send(Error)
   }
 })
 
@@ -65,11 +65,11 @@ router.get("/api/users",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
-    res.send(body).status(200) ;
+    res.status(200).send(body);
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code);
+    res.status(Error.code).send(Error);
 
   }
 })
@@ -79,11 +79,11 @@ router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
     const body = {data:rows};
-    res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
+    res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code);
+    res.status(Error.code).send(Error);
 
   }
 })
@@ -100,13 +100,13 @@ router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
     var [rows] = await db.promise().query(sqlQuery.selectRoleNameByDepartmentId,[deptId]);
     const body = {data:rows};
-    res.setHeader('Content-Type', 'application/json').send(body).status(200) ;
+    res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
 
   }
 
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error).status(Error.code);
+    res.status(Error.code).send(Error);
 
   }
   

@@ -15,7 +15,7 @@ router.post("/api/login",async (req,res) => {
     const { email, password } = req.body;
 
   if (!email || !password) {
-    return res.status(400).json({ error: 'Email and password are required.' });
+    return res.status(400).send({ success:false,message: 'Email and password are required.' });
   }
 
   const result = await Login({email:email,password:password})
@@ -38,7 +38,7 @@ router.post("/api/login",async (req,res) => {
   }
 
   else{
-    return res.send({message:result.message}).status(result.code)
+    return res.status(400).send({success:false,message:result.message})
   }
 
 });
@@ -69,7 +69,7 @@ router.get("/api/forgotpassword",async(req,res) =>{
     }
     sendEmail(emailContent);
     res.cookie("fpwd",token,{httpOnly:true,maxAge:300000})
-    res.send({status:200,message:"Email Sent Successfully"}).status(1000)
+    res.status(200).send({message:"Email Sent Successfully"})
   }
   catch(err){
     const Error = handleErrors(err);
@@ -83,7 +83,7 @@ router.post("/api/resetpassword",async(req,res) =>{
   const otp = req.body.otp;
   const newPassword = req.body.newPassword;
   if(!token){
-    res.send({status:403,message:"UnAuthorised Access"}).status(403);
+    res.status(403).send({message:"UnAuthorised Access"});
   }
   else{
     try{
@@ -114,15 +114,15 @@ router.post("/api/resetpassword",async(req,res) =>{
             
             console.log("OTP Verified Successfull");
             if(UpdatePasswordwithId({userId:userId,newPassword:newPassword})){
-              res.send({status:200,message:"Password Updated Successfully."}).status(200);
+              res.status(200).send({message:"Password Updated Successfully."});
             }
             else{
-              res.send({status:402,message:"Unable to Process Request now. Try Again Later"})
+              res.status(500).send({message:"Unable to Process Request now. Try Again Later"})
             }
 
           }
           else{
-            res.send({status:402,message:"OTP does not match"});
+            res.status(400).send({message:"OTP does not match"});
           }
         }
      }
