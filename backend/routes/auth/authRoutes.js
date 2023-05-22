@@ -28,6 +28,7 @@ router.post("/api/login",async (req,res) => {
       responseObj = {nextPage:"/admin"}
     }
     else{
+      console.log(result)
       responseObj = {nextPage: "/user"}
     }
     
@@ -43,7 +44,8 @@ router.post("/api/login",async (req,res) => {
 });
 
 router.get("/api/forgotpassword",async(req,res) =>{
-  const emaiId = req.body.emailId;
+  console.log(req.query.emailId)
+  const emaiId = req.query.emailId;
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUserIdByEmailId,[emaiId])
     if(rows.length == 0){
@@ -61,17 +63,17 @@ router.get("/api/forgotpassword",async(req,res) =>{
     
     
     const emailContent = {
-      toEmail:req.body.emailId,
+      toEmail:emaiId,
       subject:"Password Recovery",
       body:"You have raised a request to Reset Password. Use this OTP to change to your password " + otp + ". This Expires in 5 minutes."
     }
     sendEmail(emailContent);
     res.cookie("fpwd",token,{httpOnly:true,maxAge:300000})
-    res.send("Email Sent Successfully").status(1000)
+    res.send({status:200,message:"Email Sent Successfully"}).status(1000)
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error.message).status(err.code);
+    res.send(Error).status(err.code);
   }
 })
 
@@ -81,7 +83,7 @@ router.post("/api/resetpassword",async(req,res) =>{
   const otp = req.body.otp;
   const newPassword = req.body.newPassword;
   if(!token){
-    res.send("UnAuthorised Access").status(403);
+    res.send({status:403,message:"UnAuthorised Access"}).status(403);
   }
   else{
     try{
@@ -112,15 +114,15 @@ router.post("/api/resetpassword",async(req,res) =>{
             
             console.log("OTP Verified Successfull");
             if(UpdatePasswordwithId({userId:userId,newPassword:newPassword})){
-              res.send("Password Updated Successfully.").status(200);
+              res.send({status:200,message:"Password Updated Successfully."}).status(200);
             }
             else{
-              res.send("Unable to Process Request now. Try Again Later")
+              res.send({status:402,message:"Unable to Process Request now. Try Again Later"})
             }
 
           }
           else{
-            res.send("OTP does not match");
+            res.send({status:402,message:"OTP does not match"});
           }
         }
      }
@@ -129,7 +131,7 @@ router.post("/api/resetpassword",async(req,res) =>{
 catch(err){
   console.log(err)
   const Error = handleErrors(err);
-  res.send(Error.message).status(Error.code)
+  res.send(Error).status(Error.code)
 }
   }
 } )

@@ -35,7 +35,7 @@ router.post("/api/register",async (req,res) => {
 
 
 
-router.get("/api/userbyid",async (req,res) => {
+router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
   
   try{
     const { userId } = req.body;
@@ -61,7 +61,7 @@ router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
 })
 
 
-router.get("/api/users",async (req,res) => {
+router.get("/api/users",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
@@ -75,7 +75,7 @@ router.get("/api/users",async (req,res) => {
 })
 
 
-router.get("/api/departments",async (req,res) => {
+router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
     const body = {data:rows};
@@ -88,7 +88,7 @@ router.get("/api/departments",async (req,res) => {
   }
 })
 
-router.get("/api/rolebydepartment",async(req,res) =>{
+router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
   var deptId; 
 

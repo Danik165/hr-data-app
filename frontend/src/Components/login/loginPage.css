@@ -15,8 +15,14 @@ body{
  
 }
 
-.Jeevan-logo{
-    object-fit: cover;
+#Jeevan-logo-img{
+    width: 45%;
+    /* object-fit: cover; */
     padding-bottom: 0px;
     margin-bottom: 0px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+
 }

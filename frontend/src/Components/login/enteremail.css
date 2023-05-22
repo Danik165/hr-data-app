@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 @import url('https://jeevantechnologies.com/images/slider/one-bg.png');
 
-body {
+/* body {
     font-family: 'Roboto', sans-serif;
     margin: 0;
     padding: 0;
@@ -59,25 +59,6 @@ body {
     text-decoration: underline;
 }
 
-.otp-btn {
-    background-color: #0c4da2;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    font-weight: 500;
-    border-radius: 4px;
-    transition-duration: 0.4s;
-    width: 100%;
-}
-
-.otp-btn:hover {
-    background-color: #57cb83;
-    color: #fff;
-}
 
 .login-form {
     display: grid;
@@ -98,6 +79,43 @@ body {
     font-weight: 700;
     color: #ffffff;
 }
+ */
+
+.input-field{
+    width: 100%;
+}
+ .otp-btn {
+    background-color: #0c4da2;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 4px;
+    transition-duration: 0.4s;
+    width: 100%;
+}
+
+.otp-btn:hover {
+    background-color: #57cb83;
+    color: #fff;
+}
+
+.card-title{
+    color: #0c4da2;
+    font-family: "Georgia","Serif";
+}
+
+#Jeevan-logo{
+    width: 60%;
+}
+
+    #enter-email-card{
+        width:20rem;
+    }
 
 @media screen and (max-width: 768px) {
     .Jeevan-logo > img {

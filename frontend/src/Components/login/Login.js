@@ -30,6 +30,8 @@ const Login = (props) => {
         const data = await response.json();
         localStorage.setItem('access_token', data.hrjwt);
         props.setIsAuthenticated(true);
+        console.log(data);
+
         navigate(data.nextPage);
       } else {
         setError('Failed to log in. Please try again.');

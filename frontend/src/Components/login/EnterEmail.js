@@ -9,28 +9,38 @@ const EnterEmail = () =>{
     const [email,setEmail] = useState('');
     const [error,setError ] = useState('');
     const generateOTP = () =>{
-        console.log("Generate OTP called");
-        navigate('/newpassword')
+        fetch("http://localhost:5000/api/forgotpassword?"+ new URLSearchParams({emailId:email}))
+        .then((response)=>{
+          response.json()
+          .then((data) => {
+              if(data.status == 200){
+                navigate('/newpassword')
+
+              }
+              else{
+                setError(data.message)
+              }
+          })
+        })
+        .catch(err =>{
+            setError(err.message)
+            console.log(err)
+        })
     }
     return(
-        <div className='email-component'>
-        <div className='Jeevan-logo'>
-          <img src={logo} alt="Jeevan Logo"></img>
-        </div>
-        <div className="email-div">
-          <h2 className="email-header">Enter Email ID</h2>
-          <form onSubmit={generateOTP} className="login-form">
-            <label className='input-label'>
-              Email:
-            </label>
-            <input type="email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} required />
-
-            {error &&  <p className="err-message">{error}</p>}
-            <button type="submit" className="otp-btn">Generate OTP</button>
-          </form>
+     
+      <div class='d-flex justify-content-center align-items-center h-100 '>
+      <div class="card d-flex justify-content-center align-items-center pt-3 pb-2" id="enter-email-card">
+        <img class="card-img-top img-fluid" src={logo} alt="Jeevan Logo" id='Jeevan-logo' />
+        <div class="card-body d-flex flex-column justify-content-center align-items-center mt-3">
+          <h4 class="card-title ">Enter Email</h4 >
+          <input type="email" class="input-field " value={email} onChange={(e) => setEmail(e.target.value)} required />
+          {error &&  <p className="err-message">{error}</p>}
+          <button type="submit" class="otp-btn mt-3" onClick={generateOTP}>Generate OTP</button>
         </div>
       </div>
+      </div>
     )
-};
+};  
 
 export default EnterEmail;

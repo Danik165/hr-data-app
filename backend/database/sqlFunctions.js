@@ -28,17 +28,17 @@ const Login = async ({email,password}) =>{
         const [rows] = await db.promise().query(sqlQuery.LoginUser,[email]);
 
         if(rows.length == 0){
-            throw {message:"Incorrect Username",code:200}
+            throw {message:"Incorrect Username",code:404}
         }
 
       
         const result = await verifyPassword(password,rows[0].Password);
 
         if(!result){
-            throw {message:"Incorrect Password. Try Again",code:200}
+            throw {message:"Incorrect Password. Try Again",code:404}
         }
 
-        return {success:true,AccessId:rows[0].AccessId,UserId:rows[0].UserId}
+        return {success:true,AccessId:rows[0].AccessID,UserId:rows[0].UserID}
         
     }
     catch(err){
