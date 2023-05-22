@@ -1,13 +1,12 @@
 const { Router } = require("express");
 const db = require("../../database/connectDb")
-const createJWT = require('../../middleware/jwt/create_jwt')
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const {sqlQuery} = require("../../database/query");
 
 const router = Router();
 
-router.post("/api/register",async (req,res) => {
+router.post("/api/register",requireAdminAuth,async (req,res) => {
   
 
   const { name, employeeId, role, department, emailId } = req.body;
