@@ -27,7 +27,7 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
   }
   catch(err){
     const Error = handleErrors(err);
-    res.status(Error.code).send(Error.message)
+    res.status(Error.code).send({message:Error.message})
   }
 
 });
