@@ -10,8 +10,15 @@ const sqlQuery ={
     selectOtpbyUserIdandUniqueId:"Select otp from otp_request where UserId =? and uniqueId = ?",
     insertNewUser:"Insert into users(UserID,Name,EmailID,RoleID,DepartmentID,AccessID) values (?,?,?,?,?,?)",
     insertNewOtpRequest:"Insert into otp_request values(?,?,?,?)",
-    updatePassword:"Update company_skills.users set password = ? where userId = ?",
-    LoginUser:"SELECT UserID,Password,AccessID FROM users WHERE EmailID = ? "
+    updatePassword:"Update users set password = ? where userId = ?",
+    setOTPTransactionSuccess:"Update otp_request set success=? where uniqueId = ?",
+    LoginUser:"SELECT UserID,Password,AccessID FROM users WHERE EmailID = ? ",
+    selectCategories:"SELECT CategoryName FROM category",
+    selectSkillsbyCategoryId:"SELECT SkillName FROM company_skills.skills where CategoryID=?",
+    selectCategoryIdbyName:"Select CategoryID from category where CategoryName=?",
+    selectSkillIdbySkillName:"Select SkillID from skills where SkillName=?",
+    selectSubSkillbySkillID:"Select subSkillName from subskills where SkillID=?"
+
 }
 
 module.exports.sqlQuery = sqlQuery;

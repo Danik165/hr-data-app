@@ -12,6 +12,7 @@ const UpdatePasswordwithId = async ({userId,newPassword}) =>{
 
     try{
     db.promise().query(sqlQuery.updatePassword,[hashedPassword,userId]);
+    
     return true
     }
     catch(err){
@@ -47,6 +48,7 @@ const Login = async ({email,password}) =>{
     }
 
 }
+
 
 
 module.exports.UpdatePasswordwithId = UpdatePasswordwithId;

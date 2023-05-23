@@ -110,4 +110,6 @@ router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
   }
   
 })
+
+
 module.exports = router;
