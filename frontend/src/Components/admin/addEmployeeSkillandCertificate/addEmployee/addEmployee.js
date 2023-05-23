@@ -86,7 +86,7 @@ const AddEmployeeForm = () => {
   return (
     <div className="employee-form-container">
     <CDBContainer id='form-card'>
-      <CDBCard style={{ width: '30rem','border-radius':'10px' }} >
+      <CDBCard style={{ width: '30rem','border-radius':'0px 0px 10px 10px' }} >
             <CDBCardBody className="mx-4">
           <div className="text-center mt-4 mb-2">
             <p className="h4 font-weight-bold"> AddEmployee </p>
