@@ -17,7 +17,7 @@ const AddProjectForm = () => {
            
             <CDBInput label="Project Name" type="text" icon="user-tie" iconClass="text-muted" />
            
-            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mt-5 mx-auto" onClick={AddProject}>
+            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddProject}>
               Register
             </CDBBtn>
           </CDBCardBody>

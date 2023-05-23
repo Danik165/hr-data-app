@@ -22,7 +22,7 @@ const AddSkillForm = () => {
             <CDBInput label="Sub-Skill-Name" type="text" icon="code-branch" iconClass="text-muted" />
             {/* <CDBInput label="Confirm email" type="email" icon="exclamation-triangle" iconClass="text-muted" />
             <CDBInput label="Department" type="select" icon="lock" iconClass="text-muted" /> */}
-            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mt-5 mx-auto" onClick={addSkill}>
+            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={addSkill}>
               Register
             </CDBBtn>
           </CDBCardBody>

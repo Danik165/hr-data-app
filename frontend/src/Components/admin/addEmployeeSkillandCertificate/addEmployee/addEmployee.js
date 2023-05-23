@@ -114,7 +114,7 @@ const AddEmployeeForm = () => {
               }
             </select>
           
-          <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mt-5 mx-auto" onClick={registerUser}>
+          <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={registerUser}>
             Register
           </CDBBtn>
         </CDBCardBody>

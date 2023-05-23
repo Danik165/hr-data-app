@@ -18,7 +18,7 @@ const AddCertificateForm = () => {
             <CDBInput label="Certicate Name" type="text" icon="award" iconClass="text-muted" />
             {/* <CDBInput label="Confirm email" type="email" icon="exclamation-triangle" iconClass="text-muted" />
             <CDBInput label="Department" type="select" icon="lock" iconClass="text-muted" /> */}
-            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mt-5 mx-auto" onClick={AddCertificate}>
+            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddCertificate}>
               Register
             </CDBBtn>
           </CDBCardBody>
