@@ -7,12 +7,12 @@ import { useNavigate } from 'react-router';
 
 const AddEmployeeForm = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [departments,setDeparments] =useState([]);
   const [roles,setRoles] = useState([]);
-  let selectedDepartment;
+ // let selectedDepartment;
 
   const [newProfile,setNewProfile] = useState({
     employeeId:0,

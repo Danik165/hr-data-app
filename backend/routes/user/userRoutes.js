@@ -24,7 +24,7 @@ router.get("/api/userprofile",requireUserAuth,async (req,res)=>{
 })
 
 
-router.get("/api/categories",requireUserAuth, async (req,res) =>{
+router.get("/api/categories", async (req,res) =>{
 
     try{
       const [rows] = await db.promise().query(sqlQuery.selectCategories);
@@ -38,7 +38,7 @@ router.get("/api/categories",requireUserAuth, async (req,res) =>{
     }
   })
   
-router.get("/api/skillbycategory",requireUserAuth,async (req,res) =>{
+router.get("/api/skillbycategory",async (req,res) =>{
     const category = req.query.categoryName;
     try{
       let [rows] = await db.promise().query(sqlQuery.selectCategoryIdbyName,[category]);
@@ -53,7 +53,7 @@ router.get("/api/skillbycategory",requireUserAuth,async (req,res) =>{
     }
   })
     
-router.get("/api/subskillbyskill",requireUserAuth, async (req,res) =>{
+router.get("/api/subskillbyskill", async (req,res) =>{
     const skill = req.query.skill;
     //console.log(skill)
     try{

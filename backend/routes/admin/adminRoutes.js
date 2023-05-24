@@ -6,7 +6,7 @@ const {sqlQuery} = require("../../database/query");
 
 const router = Router();
 
-router.post("/api/register",requireAdminAuth,async (req,res) => {
+router.post("/api/register",async (req,res) => {
   
 
   const { name, employeeId, role, department, emailId } = req.body;
@@ -34,7 +34,7 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
 
 
 
-router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
+router.get("/api/userbyid",async (req,res) => {
   
   try{
     const { userId } = req.body;
@@ -48,7 +48,7 @@ router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
 
 })
 
-router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
+router.get("/api/admindashboard",async (req,res)=>{
   try{
     const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
     
@@ -60,7 +60,7 @@ router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
 })
 
 
-router.get("/api/users",requireAdminAuth,async (req,res) => {
+router.get("/api/users",async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
@@ -74,7 +74,7 @@ router.get("/api/users",requireAdminAuth,async (req,res) => {
 })
 
 
-router.get("/api/departments",requireAdminAuth,async (req,res) => {
+router.get("/api/departments",async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
     const body = {data:rows};
@@ -87,7 +87,7 @@ router.get("/api/departments",requireAdminAuth,async (req,res) => {
   }
 })
 
-router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
+router.get("/api/rolebydepartment",async(req,res) =>{
 
   var deptId; 
 
