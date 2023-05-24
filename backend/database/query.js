@@ -1,7 +1,7 @@
 
 const sqlQuery ={
     selectUsers :"SELECT UserID as EmployeeId,Name,DepartmentName,RoleName from users inner join department on users.departmentID = department.departmentID inner join role on users.roleID = role.roleID",
-    selectUserById:"SELECT UserID,Name,EmailID,PhoneNumber,CurrentProject,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID where UserID = ?",
+    selectUserById:"SELECT UserID,Name,EmailID,PhoneNumber,ProjectName,DepartmentName,RoleName FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID  inner join projects on users.ProjectID = projects.ProjectID where UserID = ?",
     selectDepartments:"SELECT DepartmentName from department",
     selectDepartmentIdByName:"Select DepartmentID from department where DepartmentName=?",
     selectRoleIdByDepartmentIdandRoleName:"Select roleID from role where departmentID=? and RoleName = ?",
