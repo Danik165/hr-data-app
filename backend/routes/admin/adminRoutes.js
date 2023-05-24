@@ -112,4 +112,50 @@ router.get("/api/rolebydepartment",async(req,res) =>{
 })
 
 
+router.post("/api/addnewsubskill",async(req,res) =>{
+  const {category,skill} = req.body;
+  var categoryId,skillId,message ;
+
+  try{
+    var [categoryRows] = await db.promise().query("Select CategoryID from category where CategoryName = ?",[category])
+
+    if(categoryRows.length <= 0 ){
+      let [newCategory] = await db.promise().query("Insert into category(CategoryName) values(?)",[category])
+      message = "Category Added Successfully"
+      categoryId = newCategory.insertId;
+      }
+    else{
+      categoryId = categoryRows[0].CategoryID;
+      message = "Category Category Already Exist"
+    }
+
+    var [skillRows] = await db.promise().query("Select SkillID from skills where CategoryID = ? and SkillName=?",[categoryId,skill])
+    if(skillRows.length <= 0){
+      let [newSkill] = await db.promise().query("Insert into skills(CategoryID,SkillName) values(?,?)",[categoryId,skill])
+      skillId = newSkill.insertId;
+      message = "Skill Added Successfully";
+      }    
+    else{
+      skillId = skillRows[0].SkillID;
+      message = "Skill Already exist";
+
+    }
+
+    if(req.body.subSkill){
+      await db.promise().query("Insert into subskills(SkillID,subSkillName) values(?,?)",[skillId,req.body.subSkill]);
+      message = "Sub Skill Added Successully"
+    }
+    res.status(201).send({message:message})
+
+    }
+
+
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+
+  }
+})
+
+
 module.exports = router;
