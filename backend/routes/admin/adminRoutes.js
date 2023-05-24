@@ -117,10 +117,10 @@ router.post("/api/addnewsubskill",async(req,res) =>{
   var categoryId,skillId,message ;
 
   try{
-    var [categoryRows] = await db.promise().query("Select CategoryID from category where CategoryName = ?",[category])
+    var [categoryRows] = await db.promise().query(sqlQuery.selectCategoryIdbyCategoryName,[category])
 
     if(categoryRows.length <= 0 ){
-      let [newCategory] = await db.promise().query("Insert into category(CategoryName) values(?)",[category])
+      let [newCategory] = await db.promise().query(sqlQuery.insertNewCategory,[category])
       message = "Category Added Successfully"
       categoryId = newCategory.insertId;
       }
@@ -129,9 +129,9 @@ router.post("/api/addnewsubskill",async(req,res) =>{
       message = "Category Category Already Exist"
     }
 
-    var [skillRows] = await db.promise().query("Select SkillID from skills where CategoryID = ? and SkillName=?",[categoryId,skill])
+    var [skillRows] = await db.promise().query(sqlQuery.selectSkillIdbySkillNameandCategoryId,[categoryId,skill])
     if(skillRows.length <= 0){
-      let [newSkill] = await db.promise().query("Insert into skills(CategoryID,SkillName) values(?,?)",[categoryId,skill])
+      let [newSkill] = await db.promise().query(sqlQuery.insertNewSkill,[categoryId,skill])
       skillId = newSkill.insertId;
       message = "Skill Added Successfully";
       }    
@@ -142,7 +142,7 @@ router.post("/api/addnewsubskill",async(req,res) =>{
     }
 
     if(req.body.subSkill){
-      await db.promise().query("Insert into subskills(SkillID,subSkillName) values(?,?)",[skillId,req.body.subSkill]);
+      await db.promise().query(sqlQuery.insertNewSubSkill,[skillId,req.body.subSkill]);
       message = "Sub Skill Added Successully"
     }
     res.status(201).send({message:message})

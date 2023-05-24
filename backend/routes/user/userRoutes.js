@@ -54,10 +54,14 @@ router.get("/api/skillbycategory",async (req,res) =>{
   })
     
 router.get("/api/subskillbyskill", async (req,res) =>{
+    const category = req.query.categoryName
     const skill = req.query.skill;
     //console.log(skill)
     try{
-        var [ rows ] = await db.promise().query(sqlQuery.selectSkillIdbySkillName,[skill]);
+        var [categoryRows] = await db.promise().query(sqlQuery.selectCategoryIdbyCategoryName,[category]);
+        const categoryId = categoryRows[0].CategoryID;
+
+        var [ rows ] = await db.promise().query(sqlQuery.selectSkillIdbySkillNameandCategoryId,[categoryId,skill]);
         const skillId = rows[0].SkillID;
 
        // console.log(skillId)
