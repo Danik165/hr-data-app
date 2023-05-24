@@ -3,7 +3,7 @@ import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDro
 import './addskill.css'
 
 const AddSkillForm = () => {
-    const [email, setEmail] = useState('');
+   // const [email, setEmail] = useState('');
     const [categoryEnabled, setCategoryEnabled] = useState(false);
     const [skillEnabled,setSkillEnabled] = useState(false)
     const [error, setError] = useState('');
@@ -18,7 +18,28 @@ const AddSkillForm = () => {
 
 
     const addSkill = () => {
-      console.log(newSubSkill)
+      //console.log(newSubSkill)
+      fetch("http://localhost:5000/api/addnewsubskill",{
+        method:"POST",
+        headers:{
+          "Content-Type":"application/json"
+        },
+        body:JSON.stringify({...newSubSkill })
+      })
+      .then(response =>{
+        if(response.status === 201){
+          console.log("Successfull Added")
+          setError("Successfull Added")
+        }
+        else{
+          setError("Unable to Add. Error Code" + response.status)
+          //console.log("Error")
+        }
+      })
+      .catch(err =>{
+        setError(err.message)
+        //console.log(err)
+      })
     }
 
     const handleCategorySelecetion = (category) =>{
