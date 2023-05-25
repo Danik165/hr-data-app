@@ -158,4 +158,35 @@ router.post("/api/addnewsubskill",async(req,res) =>{
 })
 
 
+
+router.post("/api/addcertificate",async(req,res) =>{
+  const certificate = req.body.certificate;
+
+  try{
+    await db.promise().query(sqlQuery.insertCertificate,[certificate])
+    res.status(201).send({message:"New Certificate Added Successfully"})
+
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+});
+
+
+router.post("/api/addproject",async(req,res) =>{
+  const project = req.body.project;
+  console.log(project)
+  try{
+    await db.promise().query(sqlQuery.insertProject,[project])
+    res.status(201).send({message:"New Project Added Successfully"})
+
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+});
+
+
 module.exports = router;

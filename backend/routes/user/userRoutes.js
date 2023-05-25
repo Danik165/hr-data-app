@@ -81,4 +81,26 @@ router.get("/api/subskillbyskill", async (req,res) =>{
     }
 })
 
+
+router.get("/api/certificates",async (req,res) =>{
+  try{
+    const [rows] = await db.promise().query(sqlQuery.selectCertificates);
+    res.status(200).send({data:rows})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+});
+
+router.get("/api/projects",async (req,res) =>{
+  try{
+    const [rows] = await db.promise().query(sqlQuery.selectProjects);
+    res.status(200).send({data:rows})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+}); 
 module.exports = router;

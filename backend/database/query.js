@@ -34,8 +34,14 @@ const sqlQuery ={
     // insert statement for category skill and subskill
     insertNewCategory:"Insert into category(CategoryName) values(?)",
     insertNewSkill:"Insert into skills(CategoryID,SkillName) values(?,?)",
-    insertNewSubSkill:"Insert into subskills(SkillID,subSkillName) values(?,?)"
+    insertNewSubSkill:"Insert into subskills(SkillID,subSkillName) values(?,?)",
 
+
+    //Projects and Certificates
+    selectProjects:"Select ProjectName from projects",
+    selectCertificates:"Select CertificateName from certificates",
+    insertProject:"Insert into projects(ProjectName) values(?)",
+    insertCertificate:"Insert into certificates(CertificateName) values(?)"
 }
 
 module.exports.sqlQuery = sqlQuery;
