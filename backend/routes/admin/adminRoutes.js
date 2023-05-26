@@ -3,7 +3,7 @@ const db = require("../../database/connectDb")
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const {sqlQuery} = require("../../database/query");
-
+const {Search} = require('../../database/sqlFunctions');
 const router = Router();
 
 router.post("/api/register",async (req,res) => {
@@ -189,4 +189,22 @@ router.post("/api/addproject",async(req,res) =>{
 });
 
 
+
+router.get("/api/getdetails", async(req,res) =>{
+  const search = req.query.searchValue;
+
+try{
+  const searchResults = await Search({searchValue:search})
+  if(!searchResults.success){
+    throw {message:searchResults.message,code:searchResults.code}
+  }
+
+  res.status(200).send({data:searchResults.data});
+}
+catch(err)
+{
+  const Error = handleErrors(err)
+  res.status(Error.code).send(Error)
+}
+})
 module.exports = router;
