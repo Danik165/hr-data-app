@@ -21,6 +21,31 @@ const Profile = ({ setIsAuthenticated }) => {
       console.error("Error:", error);
     }
   };
+//
+//  const fetchProfile = async () => {
+//  try {
+//    const token = localStorage.getItem('token'); // replace 'token' with the actual key you use to store the token
+//    const response = await fetch('http://localhost:5000/api/userprofile', {
+//      headers: {
+//        'Content-Type': 'application/json',
+//        'Authorization': `Bearer ${token}` // using Bearer token for authentication
+//      }
+//    });
+//    const data = await response.json();
+//    if (!response.ok) {
+//        throw new Error(data.message || 'Could not fetch profile.');
+//    }
+//    setProfile(data);
+//    setTempProfile(data);
+//  } catch (error) {
+//    console.error("Error:", error);
+//  }
+//};
+
+useEffect(() => {
+  fetchProfile();
+}, []);
+
 
   const updateProfile = async (event) => {
     event.preventDefault();
