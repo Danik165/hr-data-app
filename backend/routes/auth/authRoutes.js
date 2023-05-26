@@ -97,7 +97,7 @@ router.post("/api/resetpassword",async(req,res) =>{
       }
      else{
 
-        console.log("JWT Verified");
+       
         const uniqueId = decodedToken.transactionId;
         const userId = decodedToken.userId;
         const [rows] = await db.promise().query(sqlQuery.selectOtpbyUserIdandUniqueId,[userId,uniqueId])
@@ -111,9 +111,10 @@ router.post("/api/resetpassword",async(req,res) =>{
           const hashedOtp = rows[0].otp;
           const result = await verifyPassword(otp,hashedOtp);
           if(result){
-            
-            console.log("OTP Verified Successfull");
+      
             if(UpdatePasswordwithId({userId:userId,newPassword:newPassword})){
+              
+              db.promise().query(sqlQuery.setOTPTransactionSuccess,[1,uniqueId])
               res.status(200).send({message:"Password Updated Successfully."});
             }
             else{
