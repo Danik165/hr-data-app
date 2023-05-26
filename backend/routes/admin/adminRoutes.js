@@ -51,7 +51,7 @@ router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
 router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
   try{
     const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
-    
+    res.status(200).send(rows[0]);
   }
   catch (err){
     const Error = handleErrors(err);

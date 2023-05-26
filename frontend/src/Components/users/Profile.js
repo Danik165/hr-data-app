@@ -7,23 +7,31 @@ const Profile = ({ setIsAuthenticated }) => {
   const [tempProfile, setTempProfile] = useState(profile);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+useEffect(() => {
+  fetchProfile();
+}, []);
 
-  const fetchProfile = async () => {
-    try {
-      const response = await fetch('http://localhost:5000/api/profile');
-      const data = await response.json();
-      setProfile(data);
-      setTempProfile(data);
-    } catch (error) {
-      console.error("Error:", error);
-    }
-  };
+
+  const fetchProfile = async (userId) => {
+  try {
+    const response = await fetch('http://localhost:5000/api/userbyid', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ userId }),
+    });
+    const data = await response.json();
+    setProfile(data);
+    setTempProfile(data);
+  } catch (error) {
+    console.error("Error:", error);
+  }
+};
+
 
   const updateProfile = async (event) => {
-    event.preventDefault();
+    event.preventDefault(userId);
 
     try {
       const response = await fetch('http://localhost:5000/api/profile', {
