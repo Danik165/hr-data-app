@@ -3,7 +3,7 @@ const db = require("../../database/connectDb")
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const {sqlQuery} = require("../../database/query");
-const {Search} = require('../../database/sqlFunctions');
+const {Search,GetAllSkillDetails} = require('../../database/sqlFunctions');
 const router = Router();
 
 router.post("/api/register",async (req,res) => {
@@ -206,5 +206,18 @@ catch(err)
   const Error = handleErrors(err)
   res.status(Error.code).send(Error)
 }
+});
+
+router.get("/api/getallskills",async(req,res) =>{
+  const id = req.query.userId;
+  console.log(id)
+  try{
+      const {data} = await GetAllSkillDetails({id:id})
+      res.status(200).send({data:data})
+  }
+  catch(err){
+    const Error = handleErrors(err)
+    res.status(Error.code).send(Error)
+  }
 })
 module.exports = router;
