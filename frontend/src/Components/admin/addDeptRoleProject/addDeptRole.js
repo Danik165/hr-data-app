@@ -4,7 +4,7 @@ import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDro
 
 const AddDeptRoleForm = () => {
       const [departments,setDeparments] =useState([]);
-      const [disabled,setDisabled] = useState(true);
+      const [enabled,setEnabled] = useState(false);
     const AddDeptRole = () => {
       console.log("")
     }
@@ -12,10 +12,10 @@ const AddDeptRoleForm = () => {
     const handleDeptSelection = (dept) =>{
       console.log(dept)
       if( dept == "Add a new Department"){
-        setDisabled(false);
+        setEnabled(true);
       }
       else{
-        setDisabled(true);
+        setEnabled(false);
       }
     }
 
@@ -54,7 +54,7 @@ const AddDeptRoleForm = () => {
     return (
       <div class="skill-form-container">
       <CDBContainer>
-        <CDBCard style={{ width: '30rem','border-radius':'10px'  }}>
+        <CDBCard style={{ width: '30rem','border-radius':'0px 0px 10px 10px'  }}>
           <CDBCardBody className="mx-4">
             <div className="text-center mt-4 mb-2">
               <p className="h4 font-weight-bold"> Add Department </p>
@@ -68,10 +68,10 @@ const AddDeptRoleForm = () => {
           )}
           </select>
 
-            <CDBInput label="New Department" type="text" icon="user-friends" iconClass="text-muted" disabled={disabled}/>
+            {enabled && <CDBInput label="New Department" type="text" icon="user-friends" iconClass="text-muted" /> }
            
             <CDBInput label="Role" type="text" icon="lock" iconClass="text-muted" />
-            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mt-5 mx-auto" onClick={AddDeptRole}>
+            <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddDeptRole}>
               Register
             </CDBBtn>
           </CDBCardBody>

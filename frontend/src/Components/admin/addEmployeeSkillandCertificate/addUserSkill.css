@@ -8,15 +8,16 @@
 
 .tabs {
     display: flex;
-    margin: 5;
-    width: 100%;
+    margin-left: inherit;
+    margin-right: inherit;
+    width: 30rem;
+
     position: sticky;
     top: 0;
     background-color: #fff;
     border-bottom: 1px solid #ddd;
     z-index: 1;
 }
-
 .tabs > div {
     width: 100%;
     flex-grow: 1;

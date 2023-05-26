@@ -16,11 +16,18 @@ const AddDeptRoleProject = () =>{
     }
     return(
         <div className="forms-container">
-            <div className="button-container">
-                <button onClick={() => setDisplayForm("Department")} style={ displayForm == "Department" ? selectedStyle:unselectedStyle}>Department</button>
-                {/* <button onClick={() => setDisplayForm("Skills")} style={ displayForm == "Skills" ? selectedStyle:unselectedStyle}>Skills</button> */}
-                <button onClick={() => setDisplayForm("Project")} style={displayForm == "Project" ? selectedStyle:unselectedStyle}>Project</button>
-            </div>
+            <div className="tabs">
+            <div
+                    className={`tab ${displayForm === "Department" ? 'active' : ''}`}
+                    onClick={() => setDisplayForm("Department")}
+                    style={ displayForm === "Department" ? selectedStyle : unselectedStyle}>Department
+                </div>
+                <div
+                    className={`tab ${displayForm === "Project" ? 'active' : ''}`}
+                    onClick={() => setDisplayForm("Project")}
+                    style={ displayForm === "Project" ? selectedStyle : unselectedStyle}>Project
+                </div>
+            </div>    
             { displayForm == "Department" && <AddDeptRoleForm />}
             { displayForm == "Project" && <AddProjectForm />}
            

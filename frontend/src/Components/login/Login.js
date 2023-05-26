@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./login.css";
-import logo from "../../Images/logo.png";
+
 import { Link } from 'react-router-dom';
 
 
@@ -45,31 +45,14 @@ const Login = (props) => {
 
 return (
 
-    // <div class="d-flex flex-column p-2 align-items-center justify-content-center login-div">
-    //   <p class="login-header font-weight-light">Login Account</p>
-    //   <form onSubmit={loginUser} className="login-form">
-    //     <label className='input-label'>
-    //       Email:
-    //     </label>
-    //     <input type="email" className="input-field" value={email} onChange={(e) => setEmail(e.target.value)} required />
-
-    //     <label className='input-label'>
-    //       Password:
-    //     </label>
-    //     <input type="password" className="input-field"value={password} onChange={(e) => setPassword(e.target.value)} required />
-    //     {error &&  <p className="err-message">{error}</p>}
-    //     <Link to="/forgotpassword" type="button" className='forgot-password-btn'>Forgot Password or Have no Account yet?</Link>
-    //     <button type="submit" className="login-btn">Login</button>
-    //   </form>
-    // </div>
-
+    
     <form id="login-form" class="pt-4" onSubmit={loginUser}>
       <div class="header pt-2 d-flex justify-content-center">
         <p class='h3  login-header' >Login</p>
       </div>
 
     <div class="form-outline mb-4">
-      {/* <label class="form-label" for="form2Example1"></label> */}
+     
       <input type="email" id="form2Example1" class="form-control-sm w-100" onChange={(e) => setEmail(e.target.value)} placeholder="Email ID"/>
     </div>
   

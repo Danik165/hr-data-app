@@ -31,8 +31,8 @@ const EnterEmail = () =>{
      
       <div class='d-flex justify-content-center align-items-center h-100 '>
       <div class="card d-flex justify-content-center align-items-center pt-3 pb-2" id="enter-email-card">
-        <img class="card-img-top img-fluid" src={logo} alt="Jeevan Logo" id='Jeevan-logo' />
-        <div class="card-body d-flex flex-column justify-content-center align-items-center mt-3">
+        <img class="card-img-top img-fluid" src={logo} alt="Jeevan Logo" id='Jeevan-logo-img-2' />
+        <div class="card-body d-flex flex-column justify-content-center align-items-center mt-1">
           <h4 class="card-title ">Enter Email</h4 >
           <input type="email" class="input-field " value={email} onChange={(e) => setEmail(e.target.value)} required />
           {error &&  <p className="err-message">{error}</p>}
