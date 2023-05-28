@@ -82,6 +82,16 @@ const handleSubSkillChange = (sub) => {
     }
   };
 
+const handleEditSkill = (index) => {
+  const skillToEdit = userSkills[index];
+  setCategory(skillToEdit.category);
+  setSkill(skillToEdit.skill);
+  setSubSkill(skillToEdit.subSkills);
+  setYear(skillToEdit.years);
+  setLevel(skillToEdit.level);
+  // Remove the skill from the list while it's being edited
+  setUserSkills(userSkills.filter((_, i) => i !== index));
+};
 
 const removeSubSkill = (index) => {
   setUserSkills(userSkills.filter((_, i) => i !== index));
@@ -122,8 +132,10 @@ return (
             <td>{years}</td>
             <td>{level}</td>
             <td>
-              <button onClick={() => removeSubSkill(i)}>Remove</button>
-            </td>
+  <button onClick={() => handleEditSkill(i)}>Edit</button>
+  <button onClick={() => removeSubSkill(i)}>Remove</button>
+</td>
+
           </tr>
         ))}
       </tbody>
@@ -187,7 +199,8 @@ return (
         <option value="Expert">Expert</option>
       </select>
 
-      <button onClick={addSkill}>Add Skill</button>
+      <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level}>Add Skill</button>
+
     </div>
   )}
 </div>
