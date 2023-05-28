@@ -59,7 +59,7 @@ const Search = async ({searchValue}) =>{
         const data = matchedProfiles[0]
 
         if(data.length <= 0){
-            throw ({message:"Not Records Match the Search Value"})
+            throw ({message:"No Records Match the Search Value"})
         }
         for(let i=0;i<data.length;i++){
             [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS(?)",[data[i].UserID])
@@ -73,7 +73,30 @@ const Search = async ({searchValue}) =>{
     }
 };
 
+const GetAllSkillDetails = async ({id}) =>{
+    console.log("Get All skills func called",id)
+    try{
+        const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_SKILLS(?)",[id]);
+        const data=categoryDetails[0];
+        console.log(data);
+        if(data.length <= 0){
+            throw ({message:"No Skills Added for this User"})
+        }
+        for(let i=0;i<data.length;i++){
+            [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS(?)",[data[i].subSkillIDList]);
+            console.log(skillDetails)
+            data[i].subSkillName = skillDetails[0];
+        }
+
+       return ({data:data,success:true})
+    }
+    catch(err){
+        const Error = handleErrors(err)
+        return({success:false,message:Error.message,code:Error.code})
+    }
+}
 
 module.exports.UpdatePasswordwithId = UpdatePasswordwithId;
 module.exports.Login = Login;
 module.exports.Search = Search;
+module.exports.GetAllSkillDetails = GetAllSkillDetails; 
