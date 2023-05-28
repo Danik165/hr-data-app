@@ -115,13 +115,15 @@ const UserPage = () => {
   const [subSkill, setSubSkill] = useState([]);
   const [year, setYear] = useState("");
   const [level, setLevel] = useState("");
+  const [certificate, setCertificate] = useState("");
   const [userSkills, setUserSkills] = useState([
     {
       category: 'Frontend',
       skill: 'HTML',
       subSkills: ['HTML5', 'Semantic HTML'],
       years: '2 Years',
-      level: 'Intermediate'
+      level: 'Intermediate',
+      certificate: 'Yes'
     },
     // Add more existing skills here...
   ]);
@@ -157,7 +159,6 @@ const handleEditSkill = (index) => {
   setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.years);
   setLevel(skillToEdit.level);
-  // Remove the skill from the list while it's being edited
   setUserSkills(userSkills.filter((_, i) => i !== index));
 };
 
@@ -170,45 +171,47 @@ const removeSubSkill = (index) => {
 
   const subSkillOptions = skill ? skillOptions.find(({ skill: s }) => s === skill)?.subSkills : [];
 const addSkill = () => {
-  setUserSkills([...userSkills, { category, skill, subSkills: subSkill, years: year, level: level }]);
+  setUserSkills([...userSkills, { category, skill, subSkills: subSkill, years: year, level: level, certificate }]);
   setCategory("");
   setSkill("");
   setSubSkill([]);
   setYear("");
   setLevel("");
+  setCertificate("");
 };
 
+
 return (
-  <div className="main-content">
-    <table>
-      <thead>
-        <tr>
-          <th>Category</th>
-          <th>Skill</th>
-          <th>Subskill</th>
-          <th>Years</th>
-          <th>Level</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-        {userSkills.map(({ category, skill, subSkills, years, level }, i) => (
-          <tr key={i}>
-            <td>{category}</td>
-            <td>{skill}</td>
-            <td>{subSkills.join(', ')}</td>
-            <td>{years}</td>
-            <td>{level}</td>
-            <td>
-  <button onClick={() => handleEditSkill(i)}>Edit</button>
-  <button onClick={() => removeSubSkill(i)}>Remove</button>
-</td>
-
+    <div className="main-content">
+      <table>
+        <thead>
+          <tr>
+            <th>Category</th>
+            <th>Skill</th>
+            <th>Subskill</th>
+            <th>Years</th>
+            <th>Level</th>
+            <th>Certificate</th> {/* Add this line */}
+            <th>Action</th>
           </tr>
-        ))}
-      </tbody>
-    </table>
-
+        </thead>
+        <tbody>
+          {userSkills.map(({ category, skill, subSkills, years, level, certificate }, i) => ( // Edit this line
+            <tr key={i}>
+              <td>{category}</td>
+              <td>{skill}</td>
+              <td>{subSkills.join(', ')}</td>
+              <td>{years}</td>
+              <td>{level}</td>
+              <td>{certificate}</td> {/* Add this line */}
+              <td>
+                <button onClick={() => handleEditSkill(i)}>Edit</button>
+                <button onClick={() => removeSubSkill(i)}>Remove</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     <div>
       <select onChange={(e) => setCategory(e.target.value)} value={category}>
         <option value="">Select category</option>
@@ -266,9 +269,16 @@ return (
         <option value="Advanced">Advanced</option>
         <option value="Expert">Expert</option>
       </select>
+      <select
+            value={certificate}
+            onChange={(e) => setCertificate(e.target.value)}
+          >
+            <option value="">Certificate</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+          </select>
 
-<button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level}>Add Skill</button>
-
+ <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level || !certificate}>Add Skill</button>
     </div>
   )}
 </div>
