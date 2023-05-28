@@ -7,59 +7,63 @@ const Profile = ({ setIsAuthenticated }) => {
   const [tempProfile, setTempProfile] = useState(profile);
   const [isEditing, setIsEditing] = useState(false);
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/profile');
+      const response = await fetch('http://localhost:5000/api/userprofile', {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
       const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch profile.');
+      }
       setProfile(data);
       setTempProfile(data);
     } catch (error) {
       console.error("Error:", error);
     }
   };
-//
-//  const fetchProfile = async () => {
-//  try {
-//    const token = localStorage.getItem('token'); // replace 'token' with the actual key you use to store the token
-//    const response = await fetch('http://localhost:5000/api/userprofile', {
-//      headers: {
-//        'Content-Type': 'application/json',
-//        'Authorization': `Bearer ${token}` // using Bearer token for authentication
-//      }
-//    });
-//    const data = await response.json();
-//    if (!response.ok) {
-//        throw new Error(data.message || 'Could not fetch profile.');
-//    }
-//    setProfile(data);
-//    setTempProfile(data);
-//  } catch (error) {
-//    console.error("Error:", error);
-//  }
-//};
 
-useEffect(() => {
-  fetchProfile();
-}, []);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
-
-  const updateProfile = async (event) => {
+  // const updateProfile = async (event) => {
+  //   event.preventDefault();
+  //
+  //   try {
+  //     const response = await fetch('http://localhost:5000/api/userprofile', {
+  //       method: 'PUT',
+  //       headers: {
+  //         'Content-Type': 'application/json'
+  //       },
+  //       body: JSON.stringify(tempProfile),
+  //     });
+  //
+  //     const data = await response.json();
+  //     if (!response.ok) {
+  //       throw new Error(data.message || 'Could not update profile.');
+  //     }
+  //
+  //     setProfile(tempProfile);
+  //     setIsEditing(false);
+  //
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // };
+    const updateProfile = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await fetch('http://localhost:5000/api/profile', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(tempProfile),
-      });
+      // Mock the fetch operation.
+      const data = tempProfile;
 
-      const data = await response.json();
+      // No actual fetch operation so no actual response object.
+      // But we assume everything goes well.
+      const response = { ok: true };
+
       if (!response.ok) {
         throw new Error(data.message || 'Could not update profile.');
       }
@@ -72,14 +76,15 @@ useEffect(() => {
     }
   };
 
-  const profileItem = (label, value, type, disabled) => (
-    <div className={`profile-item-${type}`}>
+
+  const profileItem = (label, value, field, disabled) => (
+    <div className={`profile-item-${field}`}>
       {label && <label>{label}: </label>}
       <input
-        className={`profile-input-${type} ${isEditing ? "editable" : ""}`}
+        className={`profile-input-${field} ${isEditing ? "editable" : ""}`}
         type="text"
         value={value}
-        onChange={(e) => setTempProfile({ ...tempProfile, [type]: e.target.value })}
+        onChange={(e) => setTempProfile({ ...tempProfile, [field]: e.target.value })}
         disabled={!isEditing || disabled}
       />
     </div>
@@ -99,14 +104,20 @@ useEffect(() => {
             </div>
           </div>
           <div className="profile-right">
-            {profileItem('Email', tempProfile.email, 'right', false)}
-            {profileItem('Phone', tempProfile.phone, 'right', false)}
-            {profileItem('Current Project', tempProfile.currentProject, 'right', true)}
-            {profileItem('Department', tempProfile.department, 'right', true)}
+            {profileItem('Email', tempProfile.email, 'email', false)}
+            {profileItem('Phone', tempProfile.phone, 'phone', false)}
+            {profileItem('Current Project', tempProfile.currentProject, 'currentProject', true)}
+            {profileItem('Department', tempProfile.department, 'department', true)}
           </div>
         </div>
-        <button type="submit" disabled={!isEditing}>Save</button>
-        {!isEditing && <button onClick={() => { setIsEditing(true); setTempProfile(profile); }}>Edit</button>}
+        {isEditing
+          ? (
+            <>
+              <button type="submit">Save</button>
+              <button onClick={() => { setIsEditing(false); setTempProfile(profile); }}>Cancel</button>
+            </>
+          )
+          : <button onClick={() => setIsEditing(true)}>Edit</button>}
       </form>
     </div>
   );
