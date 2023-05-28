@@ -22,7 +22,6 @@ const DashboardPage = () =>{
                     //console.log(data);
                     setErrorMessage('')
                     setProfileList(data.data);
-
                 }
                     )
             }

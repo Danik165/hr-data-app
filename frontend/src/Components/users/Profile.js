@@ -3,7 +3,7 @@ import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 
 const Profile = ({ setIsAuthenticated }) => {
-  const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.com', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
+  const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.ru', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
   const [tempProfile, setTempProfile] = useState(profile);
   const [isEditing, setIsEditing] = useState(false);
 
