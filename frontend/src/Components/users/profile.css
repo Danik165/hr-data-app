@@ -1,13 +1,19 @@
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 2rem;
-  background-color: #f0f0f0;
-  border-radius: 10px;
-  width: 45rem;
-  height: 35rem;
+  margin: auto;
 }
 
 .profile-content {
@@ -40,21 +46,25 @@
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
   flex: 2;
+
 }
 
-.profile-item-left{margin-bottom:0.7rem
+.profile-item-left{
+  margin-bottom:0.7rem;
 }
+
 .profile-item-right {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 0.7rem;
+  margin-bottom: 1.5rem;
 }
 
 .profile-input-right {
   border: none;
   border-bottom: 1px solid black;
   padding-left: 0.5rem;
+  /*margin-bottom: 0.5rem ; add this thing on a page*/
 }
 
 .editable {
@@ -65,8 +75,8 @@
   font-size: 1rem;
   font-weight: 400;
 }
+
 .profile-text-role {
   font-size: 0.8rem;
   font-weight: 400;
 }
-
