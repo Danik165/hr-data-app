@@ -10,11 +10,11 @@ const skillStructure = [
       },
       {
         skill: "CSS",
-        subSkills: ["Flexbox", "Grid", "Bootstrap"],
+        subSkills: ["Flexbox", "Grid", "Bootstrap", "SASS", "LESS"],
       },
       {
         skill: "JavaScript",
-        subSkills: ["ES6+", "React", "Vue", "Angular"],
+        subSkills: ["ES6+", "React", "Vue", "Angular", "jQuery"],
       },
     ],
   },
@@ -23,20 +23,88 @@ const skillStructure = [
     skills: [
       {
         skill: "Node.js",
-        subSkills: ["Express", "Koa", "Hapi"],
+        subSkills: ["Express", "Koa", "Hapi", "Socket.io", "NestJS"],
       },
       {
         skill: "Python",
-        subSkills: ["Django", "Flask", "FastAPI"],
+        subSkills: ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"],
       },
       {
         skill: "Java",
-        subSkills: ["Spring Boot", "Hibernate", "Struts"],
+        subSkills: ["Spring Boot", "Hibernate", "Struts", "JavaFX", "JSP"],
       },
     ],
   },
-  // Additional categories go here...
+  {
+    category: "Full Stack",
+    skills: [
+      {
+        skill: "MERN Stack",
+        subSkills: ["MongoDB", "Express", "React", "Node.js"],
+      },
+      {
+        skill: "MEAN Stack",
+        subSkills: ["MongoDB", "Express", "Angular", "Node.js"],
+      },
+      {
+        skill: "Django + React",
+        subSkills: ["Django", "React", "PostgreSQL"],
+      },
+    ],
+  },
+  {
+    category: "Management",
+    skills: [
+      {
+        skill: "Project Management",
+        subSkills: ["Agile", "Scrum", "Waterfall", "Kanban"],
+      },
+      {
+        skill: "Product Management",
+        subSkills: ["Product Lifecycle Management", "Go-to-Market Strategy", "Competitive Analysis"],
+      },
+      {
+        skill: "People Management",
+        subSkills: ["Coaching", "Conflict Resolution", "Performance Management"],
+      },
+    ],
+  },
+  {
+    category: "IT",
+    skills: [
+      {
+        skill: "Networking",
+        subSkills: ["TCP/IP", "DNS", "VPN", "Firewalls"],
+      },
+      {
+        skill: "Security",
+        subSkills: ["Encryption", "Penetration Testing", "Intrusion Detection"],
+      },
+      {
+        skill: "Databases",
+        subSkills: ["SQL", "NoSQL", "Database Administration", "Data Warehousing"],
+      },
+    ],
+  },
+  {
+    category: "AWS",
+    skills: [
+      {
+        skill: "Compute Services",
+        subSkills: ["EC2", "Lambda", "Elastic Beanstalk", "Batch"],
+      },
+      {
+        skill: "Storage Services",
+        subSkills: ["S3", "EBS", "EFS", "Glacier"],
+      },
+      {
+        skill: "Database Services",
+        subSkills: ["RDS", "DynamoDB", "ElastiCache", "Redshift"],
+      },
+    ],
+  },
 ];
+
 
 import { useState } from "react";
 import './skilltable.css'
@@ -199,7 +267,7 @@ return (
         <option value="Expert">Expert</option>
       </select>
 
-      <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level}>Add Skill</button>
+<button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level}>Add Skill</button>
 
     </div>
   )}
