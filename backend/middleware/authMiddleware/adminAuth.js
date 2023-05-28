@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require('dotenv');
-
+const handleErrors = require("../../error/errorhandler")
 
 
 const requireAdminAuth = (req,res,next) =>{
@@ -14,8 +14,8 @@ const requireAdminAuth = (req,res,next) =>{
     if(token){
         jwt.verify(token,jwtSecretKey, (err,decodedToken) =>{
             if(err){
-                handleErrors(err);
-                res.redirect("/");
+                const Error = handleErrors(err);
+                res.status(Error.code).redirect("/");
             }
             else if(decodedToken.authId != 1){
                 console.log("UnAuthorised Access");

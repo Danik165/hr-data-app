@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
+body{
+    font-family: "Serif","Georgia";
+    background-color: #a1aeb9;
+    
+    /* padding-right: 7rem; */
+}
+
+#login-card{
+
+    width: 60%;
+    max-width: 820px;
+    /* max-height: 490px;  */
+ 
+}
+
+#Jeevan-logo-img{
+    width: 45%;
+    /* object-fit: cover; */
+    padding-bottom: 0px;
+    margin-bottom: 0px;
+    display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+
+}

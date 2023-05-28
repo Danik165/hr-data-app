@@ -6,6 +6,7 @@ import Header from '../header/header';
 import SkillTable from './SkillTable';
 import Sidebar from '../sidebar/Sidebar';
 import Profile  from '../users/Profile';
+import Statistics from './Statistics'
 
 
 const UserDashboard = ({ setIsAuthenticated }) => {
@@ -17,7 +18,7 @@ const UserDashboard = ({ setIsAuthenticated }) => {
         <Sidebar setIsAuthenticated={ setIsAuthenticated } isAdmin={isAdmin}/>
      <Routes>
           <Route path="/" element={<SkillTable />} />
-          <Route path="/skills" element={<SkillTable />} />
+          <Route path="/statistics" element={<Statistics />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>

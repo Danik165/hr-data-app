@@ -1,105 +1,91 @@
-/*body {
-    font-family: 'Roboto', sans-serif;
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+body, html {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
-
-.main-container {
-    display: flex;
-    height: 90vh;
-    align-items: center;
-    justify-content: center;
-}
-
-.sidebar-container {
-  flex: 0 0 250px;
-  height: 100vh;
-  overflow: auto;
-} */
 
 .profile-container {
-    display: flex;
-    flex: 2;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    margin: auto;
-    flex-direction: row;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  margin: auto;
 }
 
-.profile-left, .profile-right {
-    flex-basis: 50%;
-    display: flex;
-    flex-direction: column;
-    padding: 1rem;
+.profile-content {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  font-size: 1.1rem;
+  line-height: 1.5;
 }
 
 .profile-left {
-    background-color: #0c4da2;
-    color: #ffffff;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #0c4da2;
+  color: white;
+  padding: 1rem;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  flex: 1;
 }
 
 .profile-right {
-    background-color: #ffffff;
-    color: #333;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
- .profile-photo {
-    width: 100px;
-    height: 100px;
-    /* background-color: #fff; */
-    /* border-radius: 50%; */
-    margin-bottom: 1rem;
-} 
-
-.profile-item {
-    margin-bottom: 1rem;
-}
-
-.profile-item input {
-    padding: 10px;
-    font-size: 16px;
-    font-weight: 500;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #ffffff;
-}
-
-button {
-    background-color: #0c4da2;
-    border: none;
-    color: #fff;
-    padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    font-weight: 500;
-    border-radius: 15px;
-    transition-duration: 0.4s;
-    width: 50%;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  color: black;
+  padding: 1rem;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  flex: 2;
 
 }
 
-@media screen and (max-width: 768px) {
-    .profile-photo {
-        width: 80px;
-        height: 80px;
-    }
+.profile-item-left{
+  margin-bottom:0.7rem;
 }
 
-@media screen and (max-width: 480px) {
-    .profile-photo {
-        width: 60px;
-        height: 60px;
-    }
+.profile-item-right {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.profile-input-right {
+  border: none;
+  border-bottom: 1px solid black;
+  padding-left: 0.5rem;
+  /*margin-bottom: 0.5rem ; add this thing on a page*/
+}
+input.profile-input-email,
+input.profile-input-phone,
+input.profile-input-currentProject,
+input.profile-input-department
+{
+  border: none;
+  border-bottom:1px solid black;
+  margin: 0.5rem;
+  /*padding: 0px;*/
+}
+.editable {
+  border-bottom: 1px solid #000;
+}
+
+.profile-text-name {
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.profile-text-role {
+  font-size: 0.8rem;
+  font-weight: 400;
 }

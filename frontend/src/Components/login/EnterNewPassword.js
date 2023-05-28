@@ -4,6 +4,7 @@ import "./enternewpassword.css";
 import logo from "../../Images/logo.png";
 
 
+
 const EnterNewPassword = () =>{
     const navigate = useNavigate();
     const [otp,setOtp] = useState('');
@@ -11,36 +12,46 @@ const EnterNewPassword = () =>{
     const [confirmPassword,setConfirmPassword] = useState('')
     const [error,setError ] = useState('');
     const checkOTP = () =>{
-        console.log("Check OTP called");
-        navigate('/login');
+        if(password == confirmPassword){
+          fetch("http://localhost:5000/api/resetpassword",{
+            method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ otp, newPassword:password }),
+          })
+          .then((response) =>{
+            response.json()
+            .then((data) =>{
+              console.log(data)
+              navigate('/login');
+            })
+          })
+          .catch(err =>{
+            setError(err.message)
+          })
+        }
+        else{
+          setError("Passwords Do not match")
+        }
+
 
     }
     return(
-        <div className='new-password-component'>
-        <div className='Jeevan-logo'>
-          <img src={logo} alt="Jeevan Logo"></img>
-        </div>
-        <div className="new-password-div">
-          <h2 className="new-password-header">Set New Password</h2>
-          <form onSubmit={checkOTP} className="new-password-form">
-            <label className='input-label'>
-              OTP:
-            </label>
-            <input type="text" className="input-field" value={otp} onChange={(e) => setOtp(e.target.value)} required />
-            <label className='input-label'>
-              Password:
-            </label>
-            <input type="password" className="input-field" value={password} onChange={(e) => setPassword(e.target.value)} required />
+     
 
-            <label className='input-label'>
-              Confirm Password:
-            </label>
-            <input type="password" className="input-field" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
-
-            {error &&  <p className="err-message">{error}</p>}
-            <button type="submit" className="update-pwd-btn">Update Password</button>
-          </form>
+      <div class='d-flex justify-content-center align-items-center h-100 '>
+      <div class="card d-flex justify-content-center align-items-center p-3" id="new-password-card">
+        <img class="card-img-top img-fluid" src={logo} alt="Jeevan Logo" id='Jeevan-logo' />
+        <div class="card-body d-flex flex-column justify-content-center align-items-center mt-3">
+         
+          <input placeholder="Enter OTP" type="text" class="input-field mb-3 " value={otp} onChange={(e) => setOtp(e.target.value)} required />
+          <input placeholder="Enter New Password" type="password" class="input-field mb-3 " value={password} onChange={(e) => setPassword(e.target.value)} required />
+          <input placeholder="Confirm Password" type="password" class="input-field mb-3" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} required />
+          {error &&  <p className="err-message">{error}</p>}
+          <button type="submit" class="otp-btn mt-3" onClick={checkOTP}>Change Password</button>
         </div>
+      </div>
       </div>
     )
 };

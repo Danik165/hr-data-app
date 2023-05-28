@@ -5,18 +5,19 @@ const handleErrors = (err) => {
     //console.log("Error Code:",err.code)
     //console.log("Error Message: ",err.message)
     var Error ={
-        code:1,
+        code:400,
         message:err.message
     };
 
     if(err.code == "ECONNREFUSED")  // Database connection Error
     {
+        Error.code = 500;
         Error.message = "Database connection refused, check the database configuration ";
         console.log(Error.message)
     }
     else if(err.code == "ER_DUP_ENTRY")
     {   
-        Error.message = "Employee Already exist with the given employee Id";
+        Error.message = "Employee Already exist";
         console.log(Error.message);
     }
 

@@ -8,10 +8,16 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
 
   const logoutUser = () => {
     localStorage.removeItem('access_tokezn');
+    fetch("http://localhost:5000/api/logout")
+      .then((response) =>{
+        response.json()
+          .then(data =>{
+              console.log(data);
+              setIsAuthenticated(false);
+              navigate('/login');
+          })
+      })
 
-    setIsAuthenticated(false);
-
-    navigate('/login');
   };
 
 

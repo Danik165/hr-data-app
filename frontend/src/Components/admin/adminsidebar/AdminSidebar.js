@@ -27,7 +27,6 @@ const AdminSidebar = ({setIsAuthenticated}) => {
             Sidebar
           </a>
         </CDBSidebarHeader>
-
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
             <NavLink to="/admin" activeclassname="activeClicked">
