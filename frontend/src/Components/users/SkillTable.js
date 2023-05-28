@@ -128,22 +128,7 @@ const UserPage = () => {
     // Add more existing skills here...
   ]);
 
-  const addSubSkill = () => {
-    setUserSkills([...userSkills, { category, skill, subSkill }]);
-    setCategory("");
-    setSkill("");
-    setSubSkill("");
-  };
-  const handleSubSkillSelect = (e) => {
-  const options = e.target.options;
-  const value = [];
-  for (let i = 0, l = options.length; i < l; i++) {
-    if (options[i].selected) {
-      value.push(options[i].value);
-    }
-  }
-  setSubSkill(value);
-};
+
 const handleSubSkillChange = (sub) => {
     if (subSkill.includes(sub)) {
       setSubSkill(subSkill.filter(s => s !== sub));
@@ -159,6 +144,7 @@ const handleEditSkill = (index) => {
   setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.years);
   setLevel(skillToEdit.level);
+  setCertificate(skillToEdit.certificate);
   setUserSkills(userSkills.filter((_, i) => i !== index));
 };
 
@@ -191,19 +177,19 @@ return (
             <th>Subskill</th>
             <th>Years</th>
             <th>Level</th>
-            <th>Certificate</th> {/* Add this line */}
+            <th>Certificate</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {userSkills.map(({ category, skill, subSkills, years, level, certificate }, i) => ( // Edit this line
+          {userSkills.map(({ category, skill, subSkills, years, level, certificate }, i) => (
             <tr key={i}>
               <td>{category}</td>
               <td>{skill}</td>
               <td>{subSkills.join(', ')}</td>
               <td>{years}</td>
               <td>{level}</td>
-              <td>{certificate}</td> {/* Add this line */}
+              <td>{certificate}</td>
               <td>
                 <button onClick={() => handleEditSkill(i)}>Edit</button>
                 <button onClick={() => removeSubSkill(i)}>Remove</button>
