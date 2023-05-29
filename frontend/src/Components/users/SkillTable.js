@@ -106,10 +106,10 @@ const skillStructure = [
 ];
 
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import './skilltable.css'
 
-const UserPage = () => {
+const UserPage = ({id}) => {
   const [category, setCategory] = useState("");
   const [skill, setSkill] = useState("");
   const [subSkill, setSubSkill] = useState([]);
@@ -117,14 +117,14 @@ const UserPage = () => {
   const [level, setLevel] = useState("");
   const [certificate, setCertificate] = useState("");
   const [userSkills, setUserSkills] = useState([
-    {
-      category: 'Frontend',
-      skill: 'HTML',
-      subSkills: ['HTML5', 'Semantic HTML'],
-      years: '2 Years',
-      level: 'Intermediate',
-      certificate: 'Yes'
-    },
+    // {
+    //   category: 'Frontend',
+    //   skill: 'HTML',
+    //   subSkills: ['HTML5', 'Semantic HTML'],
+    //   years: '2 Years',
+    //   level: 'Intermediate',
+    //   certificate: 'Yes'
+    // },
     // Add more existing skills here...
   ]);
 
@@ -181,6 +181,47 @@ const addSkill = () => {
 };
 
 
+const fetchSubSkillsbyid = async () =>{
+
+  fetch("http://localhost:5000/api/getallskills?" + new URLSearchParams({userId:id}))
+  .then(response =>{
+    if(response.redirected){
+      window.location.replace(response.url);
+    }
+    else if(response.status ==200){
+      response.json()
+      .then(skillList =>{
+        const data = skillList.data;
+       console.log(data);
+       let tempobj;
+       for(let i=0;i<data.length;i++)
+       {
+          let subSkillList = [];
+          tempobj = {category:data[i].CategoryName,skill:data[i].SkillName,years:data[i].experience,level:data[i].level,certificate:"YES"}
+          for(let j=0;j<data[i].subSkillName.length;j++){
+            subSkillList.push(data[i].subSkillName[j].SubSkillName)
+          }
+          console.log(subSkillList)
+          tempobj.subSkills = subSkillList
+         console.log(tempobj)
+         setUserSkills((arr) => [...arr,tempobj])
+        }
+       })
+    }
+  })
+  .catch(err =>{
+    console.log("Error in fetchin subskills",err)
+  })
+}
+ 
+useEffect(() =>{
+    if(id){
+      fetchSubSkillsbyid()
+    }
+    else{
+      console.log("Fetch sub skills for the user")
+    }
+  },[])
 return (
     <div className="main-content">
       <table>
