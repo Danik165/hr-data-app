@@ -16,7 +16,9 @@ const DashboardPage = () =>{
         fetch("http://localhost:5000/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
             console.log(response.status)
-            if(response.status == 200){
+            if(response.redirected){
+            window.location.replace(response.url)}
+            else if (response.status == 200){
                 response.json()
                 .then(data =>{
                     //console.log(data);
