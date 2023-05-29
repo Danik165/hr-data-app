@@ -7,7 +7,7 @@ const {sqlQuery} = require("../../database/query")
 const router = Router();
 
 
-router.post("/api/addSkill",async (req,res) =>{
+router.post("/api/addSkill",requireUserAuth,async (req,res) =>{
 
 })
 
@@ -24,7 +24,7 @@ router.get("/api/userprofile",requireUserAuth,async (req,res)=>{
 })
 
 
-router.get("/api/categories", async (req,res) =>{
+router.get("/api/categories",requireUserAuth, async (req,res) =>{
 
     try{
       const [rows] = await db.promise().query(sqlQuery.selectCategories);
@@ -38,7 +38,7 @@ router.get("/api/categories", async (req,res) =>{
     }
   })
   
-router.get("/api/skillbycategory",async (req,res) =>{
+router.get("/api/skillbycategory",requireUserAuth,async (req,res) =>{
     const category = req.query.categoryName;
     try{
       let [rows] = await db.promise().query(sqlQuery.selectCategoryIdbyName,[category]);
@@ -53,7 +53,7 @@ router.get("/api/skillbycategory",async (req,res) =>{
     }
   })
     
-router.get("/api/subskillbyskill", async (req,res) =>{
+router.get("/api/subskillbyskill",requireUserAuth, async (req,res) =>{
     const category = req.query.categoryName
     const skill = req.query.skill;
     //console.log(skill)
@@ -82,7 +82,7 @@ router.get("/api/subskillbyskill", async (req,res) =>{
 })
 
 
-router.get("/api/certificates",async (req,res) =>{
+router.get("/api/certificates",requireUserAuth,async (req,res) =>{
   try{
     const [rows] = await db.promise().query(sqlQuery.selectCertificates);
     res.status(200).send({data:rows})
@@ -93,7 +93,7 @@ router.get("/api/certificates",async (req,res) =>{
   }
 });
 
-router.get("/api/projects",async (req,res) =>{
+router.get("/api/projects",requireUserAuth,async (req,res) =>{
   try{
     const [rows] = await db.promise().query(sqlQuery.selectProjects);
     res.status(200).send({data:rows})

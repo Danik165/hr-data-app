@@ -6,7 +6,7 @@ const {sqlQuery} = require("../../database/query");
 const {Search,GetAllSkillDetails} = require('../../database/sqlFunctions');
 const router = Router();
 
-router.post("/api/register",async (req,res) => {
+router.post("/api/register",requireAdminAuth,async (req,res) => {
   
 
   const { name, employeeId, role, department, emailId } = req.body;
@@ -34,7 +34,7 @@ router.post("/api/register",async (req,res) => {
 
 
 
-router.get("/api/userbyid",async (req,res) => {
+router.get("/api/userbyid",requireAdminAuth,async (req,res) => {
   
   try{
     const { userId } = req.body;
@@ -48,7 +48,7 @@ router.get("/api/userbyid",async (req,res) => {
 
 })
 
-router.get("/api/admindashboard",async (req,res)=>{
+router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
   try{
     const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
     res.status(200).send(rows[0]);
@@ -60,7 +60,7 @@ router.get("/api/admindashboard",async (req,res)=>{
 })
 
 
-router.get("/api/users",async (req,res) => {
+router.get("/api/users",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
@@ -74,7 +74,7 @@ router.get("/api/users",async (req,res) => {
 })
 
 
-router.get("/api/departments",async (req,res) => {
+router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
     const body = {data:rows};
@@ -87,7 +87,7 @@ router.get("/api/departments",async (req,res) => {
   }
 })
 
-router.get("/api/rolebydepartment",async(req,res) =>{
+router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
   var deptId; 
 
@@ -112,7 +112,7 @@ router.get("/api/rolebydepartment",async(req,res) =>{
 })
 
 
-router.post("/api/addnewsubskill",async(req,res) =>{
+router.post("/api/addnewsubskill",requireAdminAuth,async(req,res) =>{
   const {category,skill} = req.body;
   var categoryId,skillId,message ;
 
@@ -159,7 +159,7 @@ router.post("/api/addnewsubskill",async(req,res) =>{
 
 
 
-router.post("/api/addcertificate",async(req,res) =>{
+router.post("/api/addcertificate",requireAdminAuth,async(req,res) =>{
   const certificate = req.body.certificate;
 
   try{
@@ -174,7 +174,7 @@ router.post("/api/addcertificate",async(req,res) =>{
 });
 
 
-router.post("/api/addproject",async(req,res) =>{
+router.post("/api/addproject",requireAdminAuth,async(req,res) =>{
   const project = req.body.project;
   console.log(project)
   try{
@@ -190,7 +190,7 @@ router.post("/api/addproject",async(req,res) =>{
 
 
 
-router.get("/api/getdetails", async(req,res) =>{
+router.get("/api/getdetails",requireAdminAuth, async(req,res) =>{
   const search = req.query.searchValue;
 
 try{
@@ -208,7 +208,7 @@ catch(err)
 }
 });
 
-router.get("/api/getallskills",async(req,res) =>{
+router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
   const id = req.query.userId;
   console.log(id)
   try{
