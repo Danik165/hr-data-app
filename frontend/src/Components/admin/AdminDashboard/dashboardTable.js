@@ -75,17 +75,12 @@ const DashboardTable = ({profileList}) => {
                 <th>Skills</th>
                 <th>Exp</th>
                 <th>Level</th>
+                <th>Certificate</th>
             </thead>
             <tbody>
                 {profileList.map(profile =>
                 <EmployeeRow profile={profile} />
                     )}
-                {/* <tr>
-                <td>User Name</td>
-                <td>JavaScript</td>
-                <td> 2 Years</td>
-                <td> Beginner</td>
-                </tr> */}
             </tbody>
         </table>
     )

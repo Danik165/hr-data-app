@@ -71,7 +71,7 @@ const AddEmployeeForm = () => {
   const handleDeptSelection = (dept) =>{
 
     setNewProfile({...newProfile,department:dept})
-    //selectedDepartment = dept;
+    selectedDepartment = dept;
     fetchRole(dept);
   }
 
