@@ -106,8 +106,8 @@ const Profile = ({ setIsAuthenticated }) => {
           <div className="profile-right">
             {profileItem('Email', tempProfile.email, 'email', false)}
             {profileItem('Phone', tempProfile.phone, 'phone', false)}
-            {profileItem('Current Project', tempProfile.currentProject, 'currentProject', false)}
-            {profileItem('Department', tempProfile.department, 'department', false)}
+            {profileItem('Current Project', tempProfile.currentProject, 'currentProject', true)}
+            {profileItem('Department', tempProfile.department, 'department', true)}
           </div>
         </div>
         {isEditing
