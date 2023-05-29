@@ -128,7 +128,22 @@ const UserPage = ({id}) => {
     // Add more existing skills here...
   ]);
 
-
+  const addSubSkill = () => {
+    setUserSkills([...userSkills, { category, skill, subSkill }]);
+    setCategory("");
+    setSkill("");
+    setSubSkill("");
+  };
+  const handleSubSkillSelect = (e) => {
+  const options = e.target.options;
+  const value = [];
+  for (let i = 0, l = options.length; i < l; i++) {
+    if (options[i].selected) {
+      value.push(options[i].value);
+    }
+  }
+  setSubSkill(value);
+};
 const handleSubSkillChange = (sub) => {
     if (subSkill.includes(sub)) {
       setSubSkill(subSkill.filter(s => s !== sub));
