@@ -71,8 +71,7 @@ const AddEmployeeForm = () => {
   const handleDeptSelection = (dept) =>{
 
     setNewProfile({...newProfile,department:dept})
-    // selectedDepartment = dept;
-    //selectedDepartment = dept;
+//    selectedDepartment = dept;
     fetchRole(dept);
   }
 
@@ -90,10 +89,10 @@ const AddEmployeeForm = () => {
           setRoles([])
           for(let i = 0; i <rolelist.data.length ; i++){
 
-            setRoles(oldArray => [...oldArray,rolelist.data[i]]);
+            setRoles(oldArray => [...oldArray,rolelist.data[i].RoleName]);
           }
           
-          setNewProfile({...newProfile,department:dept,role:rolelist.data[0]})
+          setNewProfile({...newProfile,department:dept,role:rolelist.data[0].RoleName})
         })
 
   }
@@ -121,9 +120,9 @@ const AddEmployeeForm = () => {
               
               for(let i = 0; i <departmentlist.data.length ; i++){
 
-                setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
+                setDeparments(oldArray => [...oldArray,departmentlist.data[i].DepartmentName]);
               }
-              fetchRole(departmentlist.data[0])
+              fetchRole(departmentlist.data[0].DepartmentName)
              // setNewProfile({...newProfile,department:departmentlist.data[0].DepartmentName})
             })
           }
