@@ -80,10 +80,10 @@ const AddSkillForm = () => {
                 
                 for(let i = 0; i <categorylist.data.length ; i++){
   
-                  setCategorys(oldArray => [...oldArray,categorylist.data[i].CategoryName]);
+                  setCategorys(oldArray => [...oldArray,categorylist.data[i]]);
                 }
                 setCategorys(oldArray =>[...oldArray,"Add a new Category"]);
-                fetchSkills(categorylist.data[0].CategoryName)
+                fetchSkills(categorylist.data[0])
                 //setNewSubSkill({...newSubSkill,category:categorylist.data[0].CategoryName})
               })
             }
@@ -108,10 +108,10 @@ const AddSkillForm = () => {
           .then(skillList => {
             setSkills([])
             for(let i =0; i<skillList.data.length;i++){
-              setSkills(oldArray => [...oldArray,skillList.data[i].SkillName])
+              setSkills(oldArray => [...oldArray,skillList.data[i]])
             }
               setSkills(oldArray => [...oldArray,"Add a new Skill"])
-              setNewSubSkill({...newSubSkill,skill:skillList.data[0].SkillName,category:category})
+              setNewSubSkill({...newSubSkill,skill:skillList.data[0],category:category})
           })
         }
       })
