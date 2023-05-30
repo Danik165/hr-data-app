@@ -62,7 +62,7 @@ const Search = async ({searchValue}) =>{
             throw ({message:"No Records Match the Search Value"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS(?)",[data[i].UserID])
+            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].UserID])
             data[i].skills = skillDetails[0];
         }
         return ({data:data,success:true})
@@ -76,14 +76,14 @@ const Search = async ({searchValue}) =>{
 const GetAllSkillDetails = async ({id}) =>{
     console.log("Get All skills func called",id)
     try{
-        const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_SKILLS(?)",[id]);
+        const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];
         console.log(data);
         if(data.length <= 0){
             throw ({message:"No Skills Added for this User"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS(?)",[data[i].subSkillIDList]);
+            [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].subSkillIDList]);
             console.log(skillDetails)
             data[i].subSkillName = skillDetails[0];
         }
