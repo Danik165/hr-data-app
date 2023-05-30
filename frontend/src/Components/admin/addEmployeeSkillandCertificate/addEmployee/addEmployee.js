@@ -90,10 +90,10 @@ const AddEmployeeForm = () => {
           setRoles([])
           for(let i = 0; i <rolelist.data.length ; i++){
 
-            setRoles(oldArray => [...oldArray,rolelist.data[i].RoleName]);
+            setRoles(oldArray => [...oldArray,rolelist.data[i]]);
           }
           
-          setNewProfile({...newProfile,department:dept,role:rolelist.data[0].RoleName})
+          setNewProfile({...newProfile,department:dept,role:rolelist.data[0]})
         })
 
   }
@@ -121,9 +121,9 @@ const AddEmployeeForm = () => {
               
               for(let i = 0; i <departmentlist.data.length ; i++){
 
-                setDeparments(oldArray => [...oldArray,departmentlist.data[i].DepartmentName]);
+                setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
               }
-              fetchRole(departmentlist.data[0].DepartmentName)
+              fetchRole(departmentlist.data[0])
              // setNewProfile({...newProfile,department:departmentlist.data[0].DepartmentName})
             })
           }

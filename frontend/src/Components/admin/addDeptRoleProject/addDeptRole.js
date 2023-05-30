@@ -33,7 +33,7 @@ const AddDeptRoleForm = () => {
                 
                 for(let i = 0; i <departmentlist.data.length ; i++){
   
-                  setDeparments(oldArray => [...oldArray,departmentlist.data[i].DepartmentName]);
+                  setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
                 }
                 setDeparments(oldArray =>[...oldArray,"Add a new Department"]);
   
