@@ -62,7 +62,7 @@ const Search = async ({searchValue}) =>{
             throw ({message:"No Records Match the Search Value"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS(?)",[data[i].UserID])
+            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].UserID])
             data[i].skills = skillDetails[0];
         }
         return ({data:data,success:true})
