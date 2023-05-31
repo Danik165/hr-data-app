@@ -5,6 +5,12 @@ const dotenv = require('dotenv');
 const requireUserAuth = (req,res,next) =>{
 
     dotenv.config()
+
+    if(process.env.Development == 'true'){
+    return next();
+
+    }
+
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
     const token = req.cookies.hrjwt
 
