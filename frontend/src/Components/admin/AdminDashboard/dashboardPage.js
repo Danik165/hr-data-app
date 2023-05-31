@@ -21,7 +21,7 @@ const DashboardPage = () =>{
             else if (response.status == 200){
                 response.json()
                 .then(data =>{
-                    //console.log(data);
+                    console.log(data);
                     setErrorMessage('')
                     setProfileList(data.data);
                 }
