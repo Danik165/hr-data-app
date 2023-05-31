@@ -32,7 +32,7 @@ const EmployeeRow = ({profile}) =>{
                 {profile.skills.map(skill =>
                 <div>
         
-                    {skill.skillName}
+                    {skill.SkillName}
                 </div>
                     )}
             </td>
