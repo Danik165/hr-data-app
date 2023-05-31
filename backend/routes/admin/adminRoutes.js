@@ -100,7 +100,7 @@ router.get("/api/departments",requireAdminAuth,async (req,res) => {
 router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
   try{
-
+   
     const departmentName = req.query.departmentName;
 
     var [departmentRows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[departmentName]);
