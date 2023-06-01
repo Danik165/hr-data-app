@@ -1,6 +1,8 @@
 import { CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
 import DashboardTable from "./dashboardTable";
+import ProfileCard from "./profileCard";
+import SearchCards from "./SeachCards";
 
 const DashboardPage = () =>{
     
@@ -49,7 +51,9 @@ const DashboardPage = () =>{
             </div>
             {errorMessage && <p>{errorMessage}</p>}
             <div className="search-table overflow-hidden  ">
-                <DashboardTable profileList={profileList}/>
+                {/* <DashboardTable profileList={profileList}/> */}
+                {/* <ProfileCard /> */}
+                <SearchCards />
             </div>
         </div>
     )
