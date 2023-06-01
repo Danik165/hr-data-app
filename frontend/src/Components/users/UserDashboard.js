@@ -13,8 +13,8 @@ const UserDashboard = ({ setIsAuthenticated }) => {
   const isAdmin = false;
   return (
     <div className="dashboard-container">
-      <Header pageHeader="User Profile" hrefHeader="/"/>
-      <div className='dashboard-body'>
+      {/* <Header pageHeader="User Profile" hrefHeader="/"/> */}
+      <div className='dashboard-body'>    
         <Sidebar setIsAuthenticated={ setIsAuthenticated } isAdmin={isAdmin}/>
      <Routes>
           <Route path="/" element={<SkillTable />} />

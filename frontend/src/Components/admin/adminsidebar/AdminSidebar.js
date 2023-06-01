@@ -7,25 +7,29 @@ import {
   CDBSidebarMenu,
   CDBSidebarMenuItem,
 } from 'cdbreact';
-import { NavLink, Route } from 'react-router-dom';
+import { Link,NavLink, Route } from 'react-router-dom';
 
-
-
+import logo from '../../../Images/Logo_alt.png';
 import Logout from '../../functionbuttons';
 
-
+import './adminSidebar.css'
 const AdminSidebar = ({setIsAuthenticated}) => {
 
    
 
   return (
-    <div style={{ display: 'flex', height: '90vh', overflow: 'scroll initial' }}>
+    <div style={{ display: 'flex', height: '100%', overflow: 'scroll initial' }}>
  
       <CDBSidebar textColor="#fff" backgroundColor="#0c4da2">
         <CDBSidebarHeader prefix={<i className="fa fa-bars fa-large"></i>}>
-          <a className="text-decoration-none" style={{ color: 'inherit' }}>
-            Sidebar
-          </a>
+        <div className="container" style={{ display: 'flex', alignItems: 'center',justifyContent:'center' }}>
+            <Link to='/admin'  ><img
+              src={logo}
+              alt=""
+              style={{ width: '40%' }}
+            />
+           </Link>
+          </div>
         </CDBSidebarHeader>
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>

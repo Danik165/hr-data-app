@@ -15,7 +15,7 @@ const AdminPage = ({ setIsAuthenticated }) => {
 
   return (
     <div className="dashboard-container">
-      <Header pageHeader="Admin Page" hrefHeader='/admin' />
+        {/* <Header pageHeader="Admin Page" hrefHeader='/admin' /> */}
       <div  className='dashboard-body'>
         <AdminSidebar setIsAuthenticated={setIsAuthenticated}  />
         <Routes>
