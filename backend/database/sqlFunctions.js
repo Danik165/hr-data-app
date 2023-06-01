@@ -49,10 +49,26 @@ const Login = async ({email,password}) =>{
 
 }
 
+function searchJSON(obj, val) {
+    let results = [];
+    for (let k in obj) {
 
+      if (obj.hasOwnProperty(k)) {
+        if (typeof obj[k] === "object") {
+            results = results.concat(searchJSON(obj[k], val));
+        }else if (typeof obj[k] == 'string' && obj[k].search(val) >=0) {
+           // console.log(obj[k].search(/Gowtham/i))
+          results.push({matchedKey:k,matchValue:obj[k]});
+        } 
+      }
+    }
+    return results;
+  }
+  
 const Search = async ({searchValue}) =>{
 
     const searchParameter = '%' + searchValue + '%';
+    let val = /searchValue/i;
     var skillDetails;
     try{
         const [matchedProfiles] = await db.promise().query("CALL SEARCH_ALL(?)",[searchParameter])
@@ -65,6 +81,11 @@ const Search = async ({searchValue}) =>{
             [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].UserID])
             data[i].skills = skillDetails[0];
         }
+        for(let index in data){
+      
+            data[index].matchedResults = searchJSON(data[index], searchValue);
+        }
+      
         return ({data:data,success:true})
     }
     catch(err){
