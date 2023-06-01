@@ -53,7 +53,7 @@ const DashboardPage = () =>{
             <div className="search-table overflow-hidden  ">
                 {/* <DashboardTable profileList={profileList}/> */}
                 {/* <ProfileCard /> */}
-                <SearchCards />
+                <SearchCards profileList={profileList}/>
             </div>
         </div>
     )

@@ -2,3 +2,9 @@
   height: 100%;
   font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
 }
+
+input[type="text"],input[type="password"],input[type="email"],
+input[type="text"]:focus,input[type="password"]:focus,select{
+ border:none !important;
+ border-bottom:1px solid black !important;
+}

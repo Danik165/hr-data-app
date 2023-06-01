@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 
-const Profile = ({ setIsAuthenticated }) => {
+const Profile = ({ setIsAuthenticated,id }) => {
   const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.ru', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
   const [tempProfile, setTempProfile] = useState(profile);
   const [isEditing, setIsEditing] = useState(false);
@@ -25,8 +25,30 @@ const Profile = ({ setIsAuthenticated }) => {
     }
   };
 
+     const fetchProfilebyid = async () => {
+    try {
+
+      const response = await fetch('http://localhost:5000/api/userprofilebyid?' + new URLSearchParams({userId:id}), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      });
+      const data = await response.json();
+      if (!response.ok) {
+        throw new Error(data.message || 'Could not fetch profile.');
+      }
+      setProfile(data);
+      setTempProfile(data);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  };
   useEffect(() => {
-    fetchProfile();
+  if(id){
+   fetchProfilebyid()
+  }
+   else {
+    fetchProfile()}
   }, []);
 
   // const updateProfile = async (event) => {
