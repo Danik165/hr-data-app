@@ -145,6 +145,7 @@ const UserPage = ({id}) => {
   setSubSkill(value);
 };
 const handleSubSkillChange = (sub) => {
+    
     if (subSkill.includes(sub)) {
       setSubSkill(subSkill.filter(s => s !== sub));
     } else {
@@ -153,6 +154,7 @@ const handleSubSkillChange = (sub) => {
   };
 
 const handleEditSkill = (index) => {
+  console.log(index);
   const skillToEdit = userSkills[index];
   setCategory(skillToEdit.category);
   setSkill(skillToEdit.skill);
@@ -164,6 +166,7 @@ const handleEditSkill = (index) => {
 };
 
 const removeSubSkill = (index) => {
+  console.log(index)
   setUserSkills(userSkills.filter((_, i) => i !== index));
 };
 
@@ -193,18 +196,18 @@ const fetchSubSkillsbyid = async () =>{
       response.json()
       .then(skillList =>{
         const data = skillList.data;
-       console.log(data);
+       console.log("Data",data);
        let tempobj;
        for(let i=0;i<data.length;i++)
        {
           let subSkillList = [];
-          tempobj = {category:data[i].CategoryName,skill:data[i].SkillName,years:data[i].experience,level:data[i].level,certificate:"YES"}
+          tempobj = {listId:data[i].UsersSkillID,category:data[i].CategoryName,skill:data[i].SkillName,years:data[i].experience,level:data[i].level,certificate:"YES"}
           for(let j=0;j<data[i].subSkillName.length;j++){
             subSkillList.push(data[i].subSkillName[j].SubSkillName)
           }
-          console.log(subSkillList)
+          //console.log(subSkillList)
           tempobj.subSkills = subSkillList
-         console.log(tempobj)
+         //console.log(tempobj)
          setUserSkills((arr) => [...arr,tempobj])
         }
        })
@@ -238,8 +241,8 @@ return (
           </tr>
         </thead>
         <tbody>
-          {userSkills.map(({ category, skill, subSkills, years, level, certificate }, i) => (
-            <tr key={i}>
+          {userSkills.map(({ listId,category, skill, subSkills, years, level, certificate }, i) => (
+            <tr key={listId}>
               <td>{category}</td>
               <td>{skill}</td>
               <td>{subSkills.join(', ')}</td>
@@ -247,8 +250,8 @@ return (
               <td>{level}</td>
               <td>{certificate}</td>
               <td>
-                <button onClick={() => handleEditSkill(i)}>Edit</button>
-                <button onClick={() => removeSubSkill(i)}>Remove</button>
+                <button onClick={() => handleEditSkill(listId)}>Edit</button>
+                <button onClick={() => removeSubSkill(listId)}>Remove</button>
               </td>
             </tr>
           ))}
