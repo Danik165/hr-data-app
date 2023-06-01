@@ -2,7 +2,7 @@ import { CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
 import DashboardTable from "./dashboardTable";
 import ProfileCard from "./profileCard";
-import SearchCards from "./SeachCards";
+import SearchCards from "./SearchCards";
 
 const DashboardPage = () =>{
     
