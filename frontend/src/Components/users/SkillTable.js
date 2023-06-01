@@ -155,19 +155,19 @@ const handleSubSkillChange = (sub) => {
 
 const handleEditSkill = (index) => {
   console.log(index);
-  const skillToEdit = userSkills[index];
+  const skillToEdit = userSkills.filter((obj,i) => obj.listId === index);
   setCategory(skillToEdit.category);
   setSkill(skillToEdit.skill);
   setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.years);
   setLevel(skillToEdit.level);
   setCertificate(skillToEdit.certificate);
-  setUserSkills(userSkills.filter((_, i) => i !== index));
+  setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
 const removeSubSkill = (index) => {
   console.log(index)
-  setUserSkills(userSkills.filter((_, i) => i !== index));
+  setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
   const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
