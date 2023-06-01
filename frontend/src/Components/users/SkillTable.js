@@ -128,22 +128,22 @@ const UserPage = ({id}) => {
     // Add more existing skills here...
   ]);
 
-  const addSubSkill = () => {
-    setUserSkills([...userSkills, { category, skill, subSkill }]);
-    setCategory("");
-    setSkill("");
-    setSubSkill("");
-  };
-  const handleSubSkillSelect = (e) => {
-  const options = e.target.options;
-  const value = [];
-  for (let i = 0, l = options.length; i < l; i++) {
-    if (options[i].selected) {
-      value.push(options[i].value);
-    }
-  }
-  setSubSkill(value);
-};
+//  const addSubSkill = () => {
+//    setUserSkills([...userSkills, { category, skill, subSkill }]);
+//    setCategory("");
+//    setSkill("");
+//    setSubSkill("");
+//  };
+//  const handleSubSkillSelect = (e) => {
+//  const options = e.target.options;
+//  const value = [];
+//  for (let i = 0, l = options.length; i < l; i++) {
+//    if (options[i].selected) {
+//      value.push(options[i].value);
+//    }
+//  }
+//  setSubSkill(value);
+//};
 const handleSubSkillChange = (sub) => {
     
     if (subSkill.includes(sub)) {
@@ -156,12 +156,12 @@ const handleSubSkillChange = (sub) => {
 const handleEditSkill = (index) => {
   console.log(index);
   const skillToEdit = userSkills.filter((obj,i) => obj.listId === index);
-  setCategory(skillToEdit.category);
-  setSkill(skillToEdit.skill);
-  setSubSkill(skillToEdit.subSkills);
-  setYear(skillToEdit.years);
+  setCategory(skillToEdit.CategoryName);
+  setSkill(skillToEdit.SkillName);
+  setSubSkill(skillToEdit.subSkillName);
+  setYear(skillToEdit.experience);
   setLevel(skillToEdit.level);
-  setCertificate(skillToEdit.certificate);
+  setCertificate("Yes");
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
@@ -264,7 +264,8 @@ return (
           <option key={i} value={category}>{category}</option>
         ))}
       </select>
-
+    {console.log("Skills" ,skillOptions)}
+    {console.log("Subskills",subSkillOptions)}
       {category && (
         <select onChange={(e) => setSkill(e.target.value)} value={skill}>
           <option value="">Select skill</option>
