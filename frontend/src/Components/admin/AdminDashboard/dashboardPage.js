@@ -1,9 +1,9 @@
-import { CDBInput } from "cdbreact";
+import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
 import DashboardTable from "./dashboardTable";
 import ProfileCard from "./profileCard";
 import SearchCards from "./SearchCards";
-
+import { MDBIcon } from "mdb-react-ui-kit";
 const DashboardPage = () =>{
     
     const [searchValue,setSearchValue] = useState('')
@@ -40,16 +40,23 @@ const DashboardPage = () =>{
         console.log("Search Called")
     }
 
-    useEffect(getSearchResults,[])
+    useEffect(getSearchResults,[]);
+
+    const showFilterDropDown = () => {
+        console.log("Filter Called")
+    }
     return(
-        <div class='dashboard-container w-100 h-100 d-flex'>
-            <div class='search-bar d-flex flex-row-reverse p-2'>
-               
+        <div class='dashboard-container w-100 h-100 d-flex pt-2'>
+            <div class='search-bar d-flex  justify-content-end p-2 pe-3 '>
+
+                    <button class='btn btn-light ps-2 pe-2 pt-0 pb-0 me-2' onClick={showFilterDropDown} ><MDBIcon fas icon="filter" size="xs"/>  </button> 
                 <form onSubmit={e => getSearchResults(e)}>
                 <CDBInput placeholder="Search" type='text' icon="search" iconClass="text-muted" onChange={ e => setSearchValue(e.target.value)}/>
                 </form>
             </div>
+
             {errorMessage && <p>{errorMessage}</p>}
+            
             <div className="search-table overflow-hidden  ">
                 {/* <DashboardTable profileList={profileList}/> */}
                 {/* <ProfileCard /> */}
