@@ -1,7 +1,8 @@
 const DoNotMatchList = new Set(['Name', 'EmailID', 'Department','Role', 'PhoneNumber'])
 
-const result = !DoNotMatchList.has("Manager")
-
+//const result = !DoNotMatchList.has("Manager")
+const str = "Hello"
+const result = str.toLowerCase().search("hell")
 console.log(result)
 //
 //const data = [

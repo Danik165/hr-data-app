@@ -57,7 +57,7 @@ function searchJSON(obj, val) {
       if (obj.hasOwnProperty(k)) {
         if (typeof obj[k] === "object") {
             results = results.concat(searchJSON(obj[k], val));
-        }else if (typeof obj[k] == 'string' && obj[k].search(val) >=0 && !DoNotMatchList.has(k) ) {
+        }else if (typeof obj[k] == 'string' && obj[k].toLowerCase().search(val) >=0 && !DoNotMatchList.has(k) ) {
            // console.log(obj[k].search(/Gowtham/i))
           results.push({matchedKey:k,matchValue:obj[k]});
         } 
@@ -69,7 +69,7 @@ function searchJSON(obj, val) {
 const Search = async ({searchValue}) =>{
 
     const searchParameter = '%' + searchValue + '%';
-    let val = /searchValue/i;
+    let val = searchValue.toLowerCase()
     var skillDetails;
     try{
         const [matchedProfiles] = await db.promise().query("CALL SEARCH_ALL(?)",[searchParameter])
@@ -79,12 +79,13 @@ const Search = async ({searchValue}) =>{
             throw ({message:"No Records Match the Search Value"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].UserID])
+            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].EmployeeID])
+            //console.log(skillDetails)
             data[i].skills = skillDetails[0];
         }
         for(let index in data){
       
-            data[index].matchedResults = searchJSON(data[index], searchValue);
+            data[index].matchedResults = searchJSON(data[index], val);
         }
       
         return ({data:data,success:true})

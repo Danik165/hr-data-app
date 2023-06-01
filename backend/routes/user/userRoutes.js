@@ -8,7 +8,18 @@ const router = Router();
 
 
 router.post("/api/addSkill",requireUserAuth,async (req,res) =>{
+  try{
+    const { category, skill, level, experience, subSkillList } = req.body;
+    const userId = 1001;
+    // req.decodedToken.userId? req.decodedToken.userId:1001;
 
+    await db.promise().query("CALL ADD_NEW_SKILL_FOR_USER(?,?,?,?,?,?)",[userId,category,skill,subSkillList,level,experience])
+    res.status(201).send({message:"New Skill Set Added Successfully"})
+  }
+  catch(err){
+    const Err = handleErrors(err)
+    res.status(Err.code).send({message:Err.message})
+  }
 })
 
 
