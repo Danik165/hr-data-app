@@ -5,19 +5,15 @@ import './searchcards.css'
 export default function SearchCards(){
     
     return(
-        // <div>
-            <div class='card-deck row m-2'>
+            <div class='search-grid'>
                 <ProfileCard />
                 <ProfileCard />
-            
                 <ProfileCard />
                 <ProfileCard />
-            {/* <div class='card-deck row m-2'>    
                 <ProfileCard />
                 <ProfileCard />
-            </div>
-        </div>
-    ) */}
+                <ProfileCard />
+                <ProfileCard />
     </div>
     )
 }
