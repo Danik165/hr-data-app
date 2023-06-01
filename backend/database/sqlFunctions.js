@@ -49,6 +49,7 @@ const Login = async ({email,password}) =>{
 
 }
 
+const DoNotMatchList = new Set(['Name', 'EmailID', 'Department','Role', 'PhoneNumber'])
 function searchJSON(obj, val) {
     let results = [];
     for (let k in obj) {
@@ -56,7 +57,7 @@ function searchJSON(obj, val) {
       if (obj.hasOwnProperty(k)) {
         if (typeof obj[k] === "object") {
             results = results.concat(searchJSON(obj[k], val));
-        }else if (typeof obj[k] == 'string' && obj[k].search(val) >=0) {
+        }else if (typeof obj[k] == 'string' && obj[k].search(val) >=0 && !DoNotMatchList.has(k) ) {
            // console.log(obj[k].search(/Gowtham/i))
           results.push({matchedKey:k,matchValue:obj[k]});
         } 

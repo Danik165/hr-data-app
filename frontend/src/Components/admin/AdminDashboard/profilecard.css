@@ -13,6 +13,13 @@
     }
 }
 
+.clickable{
+    cursor: pointer;
+}
+
+.clickable:hover{
+ transform: scale(1.05);
+}
 
 .card-container{
     max-width: 40%;
@@ -23,14 +30,31 @@
 
 .contact-pane > div >  p{
     text-align: center;
+    font-size:0.75em;
 }
 
-
-.match-details >div > p{
+.match-pane-tag{
     font-size: small;
+    padding:0px;
+    padding-left:0.5rem;
+    margin-bottom:0.5rem;
 }
 
+hr{
+    margin:0.5rem;
+}
 .font-weight-light{
     font-weight: 100;
     font-size: smaller;
+}
+
+.row.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+
+  & > [class^="col-"],
+  & > [class*=" col-"] {
+    padding-right: 0;
+    padding-left: 0;
+  }
 }

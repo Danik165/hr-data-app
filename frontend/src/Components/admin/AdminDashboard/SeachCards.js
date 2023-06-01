@@ -2,18 +2,15 @@ import React, { useState, useEffect } from 'react';
 import ProfileCard from './profileCard';
 import './searchcards.css'
 
-export default function SearchCards(){
-    
+export default function SearchCards({profileList}) {
+
     return(
             <div class='search-grid'>
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
-                <ProfileCard />
+            {profileList.map(profile =>{
+            console.log(profile)
+            return <ProfileCard profile={profile} />
+            })}
+
     </div>
     )
 }

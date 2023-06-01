@@ -6,5 +6,5 @@
     align-items: flex-start;
     /* padding-bottom: 10px; */
     overflow-y:auto;
-    max-height: 84vh;
+    max-height: 100%;
 }
