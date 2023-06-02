@@ -106,7 +106,8 @@
 //];
 
 let skillStructure=[];
-
+import {confirmAlert} from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import './skilltable.css'
 
@@ -135,7 +136,22 @@ const UserPage = ({id}) => {
 //  }
 //  setSubSkill(value);
 //};
-
+const delConfirmation = ({index}) =>{
+  confirmAlert({
+    title:"Confirm Remove",
+    message:"Are you sure you want to remove this skill?",
+    buttons:[
+      {
+        label:"Yes",
+        onClick:() => removeSubSkill(index)
+      },
+      {
+        label:"No",
+        onClick:() => {return false}
+      }
+    ]
+  })
+}
 
 const handleSubSkillChange = (sub) => {
     
@@ -159,8 +175,20 @@ const handleEditSkill = (index) => {
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
-const removeSubSkill = (index) => {
-  setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
+const removeSubSkill = async (index) => {
+  fetch("http://localhost:5000/api/deleteuser?" + new URLSearchParams({userskillId:index}),{
+    method:"DELETE"
+  } )
+  .then(response => {
+    if(response.status == 200){
+      setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
+    }
+  })
+  .catch(err =>{
+    console.log(err)
+    alert("Error in Removing User Skill Try Again");
+  })
+ 
 };
 
 const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
@@ -259,7 +287,7 @@ return (
               <td>{certificate}</td>
               <td>
                 <button onClick={() => handleEditSkill(listId)}>Edit</button>
-                <button onClick={() => removeSubSkill(listId)}>Remove</button>
+                <button onClick={() => delConfirmation({index:listId})}>Remove</button>
               </td>
             </tr>
           ))}
