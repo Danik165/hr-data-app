@@ -3,7 +3,7 @@ const { requireUserAuth } = require("../../middleware/authMiddleware/userAuth");
 const db = require("../../database/connectDb");
 const handleErrors = require("../../error/errorhandler");
 const {sqlQuery} = require("../../database/query")
-
+const {GetAllSkillSet} = require("../../database/sqlFunctions")
 const router = Router();
 
 
@@ -129,6 +129,24 @@ router.get("/api/projects",requireUserAuth,async (req,res) =>{
     const Error = handleErrors(err);
     res.status(Error.code).send(Error)
   }
-}); 
+});
+
+
+
+router.get("/api/skilllist",requireUserAuth,async (req,res) =>{
+    try{
+        const {data} = await GetAllSkillSet();
+        res.status(200).send({data:data});
+
+    }
+    catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+    }
+
+
+
+
+})
 
 module.exports = router;

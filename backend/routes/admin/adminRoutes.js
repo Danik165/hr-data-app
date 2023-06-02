@@ -3,7 +3,7 @@ const db = require("../../database/connectDb")
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const {sqlQuery} = require("../../database/query");
-const {Search,GetAllSkillDetails} = require('../../database/sqlFunctions');
+const {Search,GetAllSkillDetailsofUser} = require('../../database/sqlFunctions');
 const router = Router();
 
 
@@ -223,7 +223,7 @@ router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
   const id = req.query.userId;
   console.log(id)
   try{
-      const {data} = await GetAllSkillDetails({id:id})
+      const {data} = await GetAllSkillDetailsofUser({id:id})
       res.status(200).send({data:data})
   }
   catch(err){

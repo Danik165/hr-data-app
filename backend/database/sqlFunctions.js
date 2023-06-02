@@ -96,7 +96,7 @@ const Search = async ({searchValue}) =>{
     }
 };
 
-const GetAllSkillDetails = async ({id}) =>{
+const GetAllSkillDetailsofUser = async ({id}) =>{
     console.log("Get All skills func called",id)
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
@@ -121,7 +121,21 @@ const GetAllSkillDetails = async ({id}) =>{
     }
 }
 
+
+const GetAllSkillSet = async () =>{
+    try{
+    const [skills] = await db.promise().query("CALL GET_COMPLETE_SKILL_SET()")
+    console.log(skills[0])
+    //for ()
+        return {data:skills[0],success:true}
+
+    }
+    catch(err){
+        return {success:false,message:"Error at GET_COMPLETE_SKILL_SET"}
+      }
+}
 module.exports.UpdatePasswordwithId = UpdatePasswordwithId;
 module.exports.Login = Login;
 module.exports.Search = Search;
-module.exports.GetAllSkillDetails = GetAllSkillDetails; 
+module.exports.GetAllSkillDetailsofUser = GetAllSkillDetailsofUser;
+module.exports.GetAllSkillSet = GetAllSkillSet;
