@@ -152,4 +152,17 @@ router.get("/api/skilllist",requireUserAuth,async (req,res) =>{
 
 })
 
+
+router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
+    try{
+        const userSkillID = req.query.userskillId;
+        console.log(userSkillID)
+        db.promise().query("DELETE from userskills where UsersSkillID = (?)",[userSkillID])
+        res.status(200).send({data:"Skill Set Successfully Removed"})
+    }
+    catch(err){
+        const Error = handleErrors(err);
+        res.status(Error.code).send(Error);
+    }
+})
 module.exports = router;
