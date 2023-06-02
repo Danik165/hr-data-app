@@ -101,15 +101,15 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];
-        console.log(data);
+        //console.log(data);
         if(data.length <= 0){
             throw ({message:"No Skills Added for this User"})
         }
         for(let i=0;i<data.length;i++){
-            console.log(data[i])
+            //console.log(data[i])
            const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].subSkillIDList]);
-            console.log(skillDetails)
-            console.log(skillDetails[0][0].subskills.split(",")) //.split(","))
+            //console.log(skillDetails)
+            //console.log(skillDetails[0][0].subskills.split(",")) //.split(","))
             data[i].subSkills = skillDetails[0][0].subskills.split(",");
         }
 
@@ -124,13 +124,32 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
 
 const GetAllSkillSet = async () =>{
     try{
-    const [skills] = await db.promise().query("CALL GET_COMPLETE_SKILL_SET()")
-    console.log(skills[0])
-    //for ()
-        return {data:skills[0],success:true}
+    const [category] = await db.promise().query("CALL GET_COMPLETE_SKILL_SET()")
+    const skills = category[0]
+   // console.log(skills)
+    let tempObj = []
+    let skillList = []
+    let subskills =[]
+    for(let i=0; i<skills.length; i++) {
+        tempObj = []
+        skillList = skills[i].skills.split(",")
+         for(let j=0;j<skillList.length;j++) {
+             [subskills] = await db.promise().query("CALL GET_COMPLETE_SUB_SKILL_SET(?)",[skillList[j]]);
+                if(subskills[0][0]){
+                   // console.log(subskills[0][0])
+                    tempObj.push({skill:skillList[j], subskills:subskills[0][0].subSkills.split(",") } )
+                }
+                else{
+                    tempObj.push({skill:skillList[j]})
+                }
+         }
+       skills[i].skills = tempObj;
+    }
+            return {data:skills,success:true}
 
     }
     catch(err){
+    console.log(err)
         return {success:false,message:"Error at GET_COMPLETE_SKILL_SET"}
       }
 }

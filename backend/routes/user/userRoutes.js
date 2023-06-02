@@ -135,8 +135,11 @@ router.get("/api/projects",requireUserAuth,async (req,res) =>{
 
 router.get("/api/skilllist",requireUserAuth,async (req,res) =>{
     try{
-        const {data} = await GetAllSkillSet();
-        res.status(200).send({data:data});
+        const reply= await GetAllSkillSet();
+        if(!reply.success){
+            throw(reply)
+        }
+        res.status(200).send({data:reply.data});
 
     }
     catch(err){
