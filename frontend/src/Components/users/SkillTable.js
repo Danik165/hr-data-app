@@ -154,13 +154,17 @@ const handleSubSkillChange = (sub) => {
   };
 
 const handleEditSkill = (index) => {
-  console.log(index);
-  const skillToEdit = userSkills.filter((obj,i) => obj.listId === index);
-  setCategory(skillToEdit.CategoryName);
-  setSkill(skillToEdit.SkillName);
-  setSubSkill(skillToEdit.subSkillName);
+  //console.log(index);
+  const skillToEdit = userSkills.filter((obj,i) => obj.listId === index)[0];
+  //console.log("SKill to Edit" ,skillToEdit.category)
+  setCategory(skillToEdit.category);
+  setSkill(skillToEdit.skill);
+  //console.log('boo')
+  //console.log(category)
+  setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.experience);
   setLevel(skillToEdit.level);
+  //console.log(level)
   setCertificate("Yes");
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
@@ -170,10 +174,10 @@ const removeSubSkill = (index) => {
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
-  const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
+const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
 
 
-  const subSkillOptions = skill ? skillOptions.find(({ skill: s }) => s === skill)?.subSkills : [];
+const subSkillOptions = skill ? skillOptions.find(({ skill: s }) => s === skill)?.subSkills : [];
 const addSkill = () => {
   setUserSkills([...userSkills, { category, skill, subSkills: subSkill, years: year, level: level, certificate }]);
   setCategory("");
@@ -196,18 +200,12 @@ const fetchSubSkillsbyid = async () =>{
       response.json()
       .then(skillList =>{
         const data = skillList.data;
-       console.log("Data",data);
+      // console.log("Data",data);
        let tempobj;
        for(let i=0;i<data.length;i++)
        {
-          let subSkillList = [];
-          tempobj = {listId:data[i].UsersSkillID,category:data[i].CategoryName,skill:data[i].SkillName,years:data[i].experience,level:data[i].level,certificate:"YES"}
-          for(let j=0;j<data[i].subSkillName.length;j++){
-            subSkillList.push(data[i].subSkillName[j].SubSkillName)
-          }
-          //console.log(subSkillList)
-          tempobj.subSkills = subSkillList
-         //console.log(tempobj)
+          tempobj = {listId:data[i].UsersSkillID,category:data[i].category,skill:data[i].skill,subSkills:data[i].subSkills,years:data[i].experience,level:data[i].level,certificate:"YES"}
+         //console.log("Temp Obj",tempobj)
          setUserSkills((arr) => [...arr,tempobj])
         }
        })
@@ -264,8 +262,6 @@ return (
           <option key={i} value={category}>{category}</option>
         ))}
       </select>
-    {console.log("Skills" ,skillOptions)}
-    {console.log("Subskills",subSkillOptions)}
       {category && (
         <select onChange={(e) => setSkill(e.target.value)} value={skill}>
           <option value="">Select skill</option>
