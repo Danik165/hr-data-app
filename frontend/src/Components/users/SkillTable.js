@@ -1,110 +1,111 @@
 
 
-const skillStructure = [
-  {
-    category: "Frontend",
-    skills: [
-      {
-        skill: "HTML",
-        subSkills: ["HTML5", "Semantic HTML"],
-      },
-      {
-        skill: "CSS",
-        subSkills: ["Flexbox", "Grid", "Bootstrap", "SASS", "LESS"],
-      },
-      {
-        skill: "JavaScript",
-        subSkills: ["ES6+", "React", "Vue", "Angular", "jQuery"],
-      },
-    ],
-  },
-  {
-    category: "Backend",
-    skills: [
-      {
-        skill: "Node.js",
-        subSkills: ["Express", "Koa", "Hapi", "Socket.io", "NestJS"],
-      },
-      {
-        skill: "Python",
-        subSkills: ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"],
-      },
-      {
-        skill: "Java",
-        subSkills: ["Spring Boot", "Hibernate", "Struts", "JavaFX", "JSP"],
-      },
-    ],
-  },
-  {
-    category: "Full Stack",
-    skills: [
-      {
-        skill: "MERN Stack",
-        subSkills: ["MongoDB", "Express", "React", "Node.js"],
-      },
-      {
-        skill: "MEAN Stack",
-        subSkills: ["MongoDB", "Express", "Angular", "Node.js"],
-      },
-      {
-        skill: "Django + React",
-        subSkills: ["Django", "React", "PostgreSQL"],
-      },
-    ],
-  },
-  {
-    category: "Management",
-    skills: [
-      {
-        skill: "Project Management",
-        subSkills: ["Agile", "Scrum", "Waterfall", "Kanban"],
-      },
-      {
-        skill: "Product Management",
-        subSkills: ["Product Lifecycle Management", "Go-to-Market Strategy", "Competitive Analysis"],
-      },
-      {
-        skill: "People Management",
-        subSkills: ["Coaching", "Conflict Resolution", "Performance Management"],
-      },
-    ],
-  },
-  {
-    category: "IT",
-    skills: [
-      {
-        skill: "Networking",
-        subSkills: ["TCP/IP", "DNS", "VPN", "Firewalls"],
-      },
-      {
-        skill: "Security",
-        subSkills: ["Encryption", "Penetration Testing", "Intrusion Detection"],
-      },
-      {
-        skill: "Databases",
-        subSkills: ["SQL", "NoSQL", "Database Administration", "Data Warehousing"],
-      },
-    ],
-  },
-  {
-    category: "AWS",
-    skills: [
-      {
-        skill: "Compute Services",
-        subSkills: ["EC2", "Lambda", "Elastic Beanstalk", "Batch"],
-      },
-      {
-        skill: "Storage Services",
-        subSkills: ["S3", "EBS", "EFS", "Glacier"],
-      },
-      {
-        skill: "Database Services",
-        subSkills: ["RDS", "DynamoDB", "ElastiCache", "Redshift"],
-      },
-    ],
-  },
-];
+//let skillStructure = [
+//  {
+//    category: "Frontend",
+//    skills: [
+//      {
+//        skill: "HTML",
+//        subSkills: ["HTML5", "Semantic HTML"],
+//      },
+//      {
+//        skill: "CSS",
+//        subSkills: ["Flexbox", "Grid", "Bootstrap", "SASS", "LESS"],
+//      },
+//      {
+//        skill: "JavaScript",
+//        subSkills: ["ES6+", "React", "Vue", "Angular", "jQuery"],
+//      },
+//    ],
+//  },
+//  {
+//    category: "Backend",
+//    skills: [
+//      {
+//        skill: "Node.js",
+//        subSkills: ["Express", "Koa", "Hapi", "Socket.io", "NestJS"],
+//      },
+//      {
+//        skill: "Python",
+//        subSkills: ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"],
+//      },
+//      {
+//        skill: "Java",
+//        subSkills: ["Spring Boot", "Hibernate", "Struts", "JavaFX", "JSP"],
+//      },
+//    ],
+//  },
+//  {
+//    category: "Full Stack",
+//    skills: [
+//      {
+//        skill: "MERN Stack",
+//        subSkills: ["MongoDB", "Express", "React", "Node.js"],
+//      },
+//      {
+//        skill: "MEAN Stack",
+//        subSkills: ["MongoDB", "Express", "Angular", "Node.js"],
+//      },
+//      {
+//        skill: "Django + React",
+//        subSkills: ["Django", "React", "PostgreSQL"],
+//      },
+//    ],
+//  },
+//  {
+//    category: "Management",
+//    skills: [
+//      {
+//        skill: "Project Management",
+//        subSkills: ["Agile", "Scrum", "Waterfall", "Kanban"],
+//      },
+//      {
+//        skill: "Product Management",
+//        subSkills: ["Product Lifecycle Management", "Go-to-Market Strategy", "Competitive Analysis"],
+//      },
+//      {
+//        skill: "People Management",
+//        subSkills: ["Coaching", "Conflict Resolution", "Performance Management"],
+//      },
+//    ],
+//  },
+//  {
+//    category: "IT",
+//    skills: [
+//      {
+//        skill: "Networking",
+//        subSkills: ["TCP/IP", "DNS", "VPN", "Firewalls"],
+//      },
+//      {
+//        skill: "Security",
+//        subSkills: ["Encryption", "Penetration Testing", "Intrusion Detection"],
+//      },
+//      {
+//        skill: "Databases",
+//        subSkills: ["SQL", "NoSQL", "Database Administration", "Data Warehousing"],
+//      },
+//    ],
+//  },
+//  {
+//    category: "AWS",
+//    skills: [
+//      {
+//        skill: "Compute Services",
+//        subSkills: ["EC2", "Lambda", "Elastic Beanstalk", "Batch"],
+//      },
+//      {
+//        skill: "Storage Services",
+//        subSkills: ["S3", "EBS", "EFS", "Glacier"],
+//      },
+//      {
+//        skill: "Database Services",
+//        subSkills: ["RDS", "DynamoDB", "ElastiCache", "Redshift"],
+//      },
+//    ],
+//  },
+//];
 
+let skillStructure=[];
 
 import { useEffect, useState } from "react";
 import './skilltable.css'
@@ -116,17 +117,7 @@ const UserPage = ({id}) => {
   const [year, setYear] = useState("");
   const [level, setLevel] = useState("");
   const [certificate, setCertificate] = useState("");
-  const [userSkills, setUserSkills] = useState([
-    // {
-    //   category: 'Frontend',
-    //   skill: 'HTML',
-    //   subSkills: ['HTML5', 'Semantic HTML'],
-    //   years: '2 Years',
-    //   level: 'Intermediate',
-    //   certificate: 'Yes'
-    // },
-    // Add more existing skills here...
-  ]);
+  const [userSkills, setUserSkills] = useState([ ]);
 
 //  const addSubSkill = () => {
 //    setUserSkills([...userSkills, { category, skill, subSkill }]);
@@ -144,6 +135,8 @@ const UserPage = ({id}) => {
 //  }
 //  setSubSkill(value);
 //};
+
+
 const handleSubSkillChange = (sub) => {
     
     if (subSkill.includes(sub)) {
@@ -154,23 +147,19 @@ const handleSubSkillChange = (sub) => {
   };
 
 const handleEditSkill = (index) => {
-  //console.log(index);
+
   const skillToEdit = userSkills.filter((obj,i) => obj.listId === index)[0];
-  //console.log("SKill to Edit" ,skillToEdit.category)
+
   setCategory(skillToEdit.category);
   setSkill(skillToEdit.skill);
-  //console.log('boo')
-  //console.log(category)
   setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.experience);
   setLevel(skillToEdit.level);
-  //console.log(level)
   setCertificate("Yes");
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
 const removeSubSkill = (index) => {
-  console.log(index)
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
 };
 
@@ -200,12 +189,10 @@ const fetchSubSkillsbyid = async () =>{
       response.json()
       .then(skillList =>{
         const data = skillList.data;
-      // console.log("Data",data);
        let tempobj;
        for(let i=0;i<data.length;i++)
        {
           tempobj = {listId:data[i].UsersSkillID,category:data[i].category,skill:data[i].skill,subSkills:data[i].subSkills,years:data[i].experience,level:data[i].level,certificate:"YES"}
-         //console.log("Temp Obj",tempobj)
          setUserSkills((arr) => [...arr,tempobj])
         }
        })
@@ -215,8 +202,31 @@ const fetchSubSkillsbyid = async () =>{
     console.log("Error in fetchin subskills",err)
   })
 }
+
+const getSkillStructure = () =>{
+    fetch("http://localhost:5000/api/skilllist")
+    .then(res =>{
+      if(res.redirected){
+      window.location.replace(res.url);
+        }
+      else if(res.status == 200){
+        res.json()
+         .then(data =>{
+            console.log(data.data)
+            skillStructure = data.data;
+            console.log("Skill Structure= " ,skillStructure)
+        })
+        }
+
+    })
+    .catch(err =>{
+        console.log(err.message)
+    })
+
+}
  
 useEffect(() =>{
+    getSkillStructure();
     if(id){
       fetchSubSkillsbyid()
     }

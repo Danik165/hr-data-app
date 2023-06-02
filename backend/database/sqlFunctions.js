@@ -126,7 +126,6 @@ const GetAllSkillSet = async () =>{
     try{
     const [category] = await db.promise().query("CALL GET_COMPLETE_SKILL_SET()")
     const skills = category[0]
-   // console.log(skills)
     let tempObj = []
     let skillList = []
     let subskills =[]
@@ -136,8 +135,7 @@ const GetAllSkillSet = async () =>{
          for(let j=0;j<skillList.length;j++) {
              [subskills] = await db.promise().query("CALL GET_COMPLETE_SUB_SKILL_SET(?)",[skillList[j]]);
                 if(subskills[0][0]){
-                   // console.log(subskills[0][0])
-                    tempObj.push({skill:skillList[j], subskills:subskills[0][0].subSkills.split(",") } )
+                    tempObj.push({skill:skillList[j], subSkills:subskills[0][0].subSkills.split(",") } )
                 }
                 else{
                     tempObj.push({skill:skillList[j]})
