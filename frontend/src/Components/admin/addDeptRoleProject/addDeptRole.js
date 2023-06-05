@@ -70,7 +70,7 @@ const AddDeptRoleForm = () => {
 
             {enabled && <CDBInput label="New Department" type="text" icon="user-friends" iconClass="text-muted" /> }
            
-            <CDBInput label="Role" type="text" icon="lock" iconClass="text-muted" />
+            <CDBInput style={{'border-radius':'0px'}} label="Role" type="text" icon="lock" iconClass="text-muted" />
             <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddDeptRole}>
               Register
             </CDBBtn>

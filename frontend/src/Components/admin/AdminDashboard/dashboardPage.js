@@ -1,7 +1,5 @@
 import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
-import DashboardTable from "./dashboardTable";
-import ProfileCard from "./profileCard";
 import SearchCards from "./SearchCards";
 import { MDBIcon } from "mdb-react-ui-kit";
 const DashboardPage = () =>{
@@ -17,14 +15,14 @@ const DashboardPage = () =>{
         }
         fetch("http://localhost:5000/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
-            console.log(response.status)
+            //console.log(response.status)
             if(response.redirected){
             window.location.replace(response.url)}
             else if (response.status == 200){
                 response.json()
                 .then(data =>{
-                    console.log(data);
-                    setErrorMessage('')
+                    //console.log(data);
+                    setErrorMessage('Total Records Found(' + data.data.length + ')')
                     setProfileList(data.data);
                 }
                     )
@@ -54,12 +52,13 @@ const DashboardPage = () =>{
                 <CDBInput placeholder="Search" type='text' icon="search" iconClass="text-muted" onChange={ e => setSearchValue(e.target.value)}/>
                 </form>
             </div>
+            <div class='msg-box align-self-end me-5'>
 
             {errorMessage && <p>{errorMessage}</p>}
+            </div>
+
             
             <div className="search-table overflow-hidden  ">
-                {/* <DashboardTable profileList={profileList}/> */}
-                {/* <ProfileCard /> */}
                 <SearchCards profileList={profileList}/>
             </div>
         </div>
