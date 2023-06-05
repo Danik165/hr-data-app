@@ -109,7 +109,8 @@ let skillStructure=[];
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
-import './skilltable.css'
+import './skilltable.css';
+import { MDBIcon } from 'mdb-react-ui-kit';
 
 const UserPage = ({id}) => {
   const [category, setCategory] = useState("");
@@ -176,7 +177,7 @@ const handleEditSkill = (index) => {
 };
 
 const removeSubSkill = async (index) => {
-  fetch("http://localhost:5000/api/deleteuser?" + new URLSearchParams({userskillId:index}),{
+  fetch("http://localhost:5000/api/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
     method:"DELETE"
   } )
   .then(response => {
@@ -286,8 +287,8 @@ return (
               <td>{level}</td>
               <td>{certificate}</td>
               <td>
-                <button onClick={() => handleEditSkill(listId)}>Edit</button>
-                <button onClick={() => delConfirmation({index:listId})}>Remove</button>
+                <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button>
+                <button onClick={() => delConfirmation({index:listId})} ><MDBIcon fas icon="trash-alt" /></button>
               </td>
             </tr>
           ))}
