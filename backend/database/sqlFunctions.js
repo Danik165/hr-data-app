@@ -97,7 +97,7 @@ const Search = async ({searchValue}) =>{
 };
 
 const GetAllSkillDetailsofUser = async ({id}) =>{
-    console.log("Get All skills func called",id)
+    //console.log("Get All skills func called",id)
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];

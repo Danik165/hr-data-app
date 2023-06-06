@@ -54,7 +54,7 @@ const handleEditSkill = (index) => {
   setCategory(skillToEdit.category);
   setSkill(skillToEdit.skill);
   setSubSkill(skillToEdit.subSkills);
-  setYear(skillToEdit.experience);
+  setYear(skillToEdit.years);
   setLevel(skillToEdit.level);
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
   removeSubSkill(index)
@@ -106,6 +106,9 @@ const addSkill = () => {
       )
     }
   })
+  .catch(err =>{
+    console.log(err)
+  })
   setCategory("");
   setSkill("");
   setSubSkill([]);
@@ -115,9 +118,9 @@ const addSkill = () => {
 };
 
 
-const fetchSubSkillsbyid = async () =>{
+const fetchSubSkillsbyid = async (url) =>{
 
-  fetch("http://localhost:5000/api/getallskills?" + new URLSearchParams({userId:id}))
+  fetch(url)
   .then(response =>{
     if(response.redirected){
       window.location.replace(response.url);
@@ -160,10 +163,13 @@ const getSkillStructure = () =>{
 useEffect(() =>{
     getSkillStructure();
     if(id){
-      fetchSubSkillsbyid()
+      const url = "http://localhost:5000/api/getallskillsofuser?" + new URLSearchParams({userId:id})
+      fetchSubSkillsbyid(url)
     }
     else{
-      console.log("Fetch sub skills for the user")
+        const userUrl = "http://localhost:5000/api/getallskills";
+        fetchSubSkillsbyid(userUrl)
+      //console.log("Fetch sub skills for the user")
     }
   },[])
 return (

@@ -3,7 +3,7 @@ const { requireUserAuth } = require("../../middleware/authMiddleware/userAuth");
 const db = require("../../database/connectDb");
 const handleErrors = require("../../error/errorhandler");
 const {sqlQuery} = require("../../database/query")
-const {GetAllSkillSet} = require("../../database/sqlFunctions")
+const {GetAllSkillSet, GetAllSkillDetailsofUser} = require("../../database/sqlFunctions")
 const router = Router();
 
 
@@ -11,10 +11,8 @@ router.post("/api/addskill",requireUserAuth,async (req,res) =>{
   try{
     console.log(req.body)
     const { category, skill, level, years, subSkillList } = req.body;
-    const userId = 1001;
-    // req.decodedToken.userId? req.decodedToken.userId:1001;
+    const userId =  req.decodedToken.userId? req.decodedToken.userId:1001;
     const subSkillStringList = subSkillList.join(',');
-    //console.log(subSkillStringList)
     const [rows] = await db.promise().query("CALL ADD_NEW_SKILL_FOR_USER(?,?,?,?,?,?)",[userId,category,skill,subSkillStringList,level,years])
     res.status(201).send({message:"New Skill Set Added Successfully",newId:rows[0][0].userId})
   }
@@ -74,22 +72,11 @@ router.get("/api/skillbycategory",requireUserAuth,async (req,res) =>{
 
 // Updated with List Type Return
 router.get("/api/subskillbyskill",requireUserAuth, async (req,res) =>{
-  //console.log(skill)
+
   try{
        const category = req.query.categoryName
       const skill = req.query.skill;
 
-      //   var [categoryRows] = await db.promise().query(sqlQuery.selectCategoryIdbyCategoryName,[category]);
-      //   const categoryId = categoryRows[0].CategoryID;
-
-      //   var [ skillRows ] = await db.promise().query(sqlQuery.selectSkillIdbySkillNameandCategoryId,[categoryId,skill]);
-      //   const skillId = skillRows[0].SkillID;
-
-      //  console.log(skillId)
-
-
-      //   const [ subSkillRow ]  = await db.promise().query(sqlQuery.selectSubSkillbySkillID,[skillId]);
-      //   console.log(subSkillRow)
 
 
     const [subSkillRows] = await db.promise().query("CALL GET_SUB_SKILLS_BY_CATEGORY_AND_SKILL(?,?)",[category,skill])
@@ -106,18 +93,6 @@ router.get("/api/subskillbyskill",requireUserAuth, async (req,res) =>{
     }
 })
 
-// Updated with List Type Return
-// router.get("/api/certificates",requireUserAuth,async (req,res) =>{
-//   try{
-//     const [rows] = await db.promise().query(sqlQuery.selectCertificates);
-//     const certificateList = rows.map(a => a.CertificateName)
-//     res.status(200).send({data:certificateList})
-//   }
-//   catch(err){
-//     const Error = handleErrors(err);
-//     res.status(Error.code).send(Error)
-//   }
-// });
 
 
 // Updated with List Type Return
@@ -156,7 +131,7 @@ router.get("/api/skilllist",requireUserAuth,async (req,res) =>{
 router.get("/api/certificates",requireUserAuth,async (req,res) =>{
 
   try{
-    const userId = 1444; // req.decodedToken.userId;
+    const userId = req.decodedToken.userId || 1444;
     const [rows] = await db.promise().query("CALL GET_CERTIFICATES_OF_USER(?)",[userId])
     res.status(200).send({data:rows[0]})
   }
@@ -169,7 +144,7 @@ router.get("/api/certificates",requireUserAuth,async (req,res) =>{
 router.post("/api/certificate",requireUserAuth,async(req,res) =>{
 
   try{
-    const userId= 1444 //req.decodedToken.userId;
+    const userId= req.decodedToken.userId || 1444;
     const certi_name = req.body.Certificate_Name;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
@@ -195,5 +170,18 @@ router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
         const Error = handleErrors(err);
         res.status(Error.code).send(Error);
     }
+})
+
+
+router.get("/api/getallskills",requireUserAuth,async(req,res) =>{
+      const id = req.decodedToken.userId || 1001;
+  try{
+      const {data} = await GetAllSkillDetailsofUser({id:id})
+      res.status(200).send({data:data})
+  }
+  catch(err){
+    const Error = handleErrors(err)
+    res.status(Error.code).send(Error)
+  }
 })
 module.exports = router;

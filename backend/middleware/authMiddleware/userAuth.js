@@ -5,7 +5,6 @@ const dotenv = require('dotenv');
 const requireUserAuth = (req,res,next) =>{
 
     dotenv.config()
-
     if(process.env.Development == 'true'){
     return next();
 
@@ -15,7 +14,6 @@ const requireUserAuth = (req,res,next) =>{
     const token = req.cookies.hrjwt
 
     if(token){
-        //console.log("Token Available")
         jwt.verify(token,jwtSecretKey,(err,decodedToken) => {
             if(err){
                 handleErrors(err)
