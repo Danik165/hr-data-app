@@ -1,6 +1,8 @@
 import { CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
 import DashboardTable from "./dashboardTable";
+import ProfileCard from "./profileCard";
+import SearchCards from "./SeachCards";
 
 const DashboardPage = () =>{
     
@@ -16,10 +18,12 @@ const DashboardPage = () =>{
         fetch("http://localhost:5000/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
             console.log(response.status)
-            if(response.status == 200){
+            if(response.redirected){
+            window.location.replace(response.url)}
+            else if (response.status == 200){
                 response.json()
                 .then(data =>{
-                    //console.log(data);
+                    console.log(data);
                     setErrorMessage('')
                     setProfileList(data.data);
                 }
@@ -47,7 +51,9 @@ const DashboardPage = () =>{
             </div>
             {errorMessage && <p>{errorMessage}</p>}
             <div className="search-table overflow-hidden  ">
-                <DashboardTable profileList={profileList}/>
+                {/* <DashboardTable profileList={profileList}/> */}
+                {/* <ProfileCard /> */}
+                <SearchCards profileList={profileList}/>
             </div>
         </div>
     )

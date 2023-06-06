@@ -1,10 +1,8 @@
 import React, { useState} from 'react';
-import Login from './Components/login/Login';
 import UserDashboard from './Components/users/UserDashboard';
-import AdminDashboard from './Components/admin/AdminDashboard';
+import AdminPage from './Components/admin/AdminPage';
 import EnterEmail from './Components/login/EnterEmail';
 import EnterNewPassword from './Components/login/EnterNewPassword';
-import Profile from './Components/users/Profile';
 import { BrowserRouter,Routes, Route } from 'react-router-dom';
 import UserProtectedRoute from './Components/ProtectedRoute';
 import LoginPage from './Components/login/loginPage';
@@ -30,7 +28,7 @@ const App = () => {
          
          <Route path="/admin/*" element={
                                             <UserProtectedRoute isAuthenticated={isAuthenticated}>
-                                              <AdminDashboard setIsAuthenticated={setIsAuthenticated}/>
+                                              <AdminPage setIsAuthenticated={setIsAuthenticated}/>
                                             </UserProtectedRoute>
                                           }     />
         <Route exact path='/forgotpassword' element={<EnterEmail />} />

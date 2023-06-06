@@ -6,10 +6,12 @@ const {sqlQuery} = require("../../database/query");
 const {Search,GetAllSkillDetails} = require('../../database/sqlFunctions');
 const router = Router();
 
-router.post("/api/register",async (req,res) => {
+
+//Completed with new data and stored procedure
+router.post("/api/register",requireAdminAuth,async (req,res) => {
   
 
-  const { name, employeeId, role, department, emailId } = req.body;
+  const { name, employeeId, role, department, emailId,phone,gender,address,city,state,managerID,worktype,workstatus,DOB,joiningdate } = req.body;
   var roleID,departmentID;
 
 
@@ -22,7 +24,7 @@ router.post("/api/register",async (req,res) => {
     roleID = rows[0].roleID;
 
  
-    await db.promise().query(sqlQuery.insertNewUser,[employeeId,name,emailId,roleID,departmentID,0]);
+    await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleID,departmentID]);
     res.status(201).send({message:"Successfully create object"});
   }
   catch(err){
@@ -33,13 +35,13 @@ router.post("/api/register",async (req,res) => {
 });
 
 
-
-router.get("/api/userbyid",async (req,res) => {
+//Completed with new data and stored procedure
+router.get("/api/userprofilebyid",requireAdminAuth,async (req,res) => {
   
   try{
-    const { userId } = req.body;
-    const [rows] = await db.promise().query(sqlQuery.selectUserById,[userId]);
-    res.status(200).send(rows[0]);
+    const { userId } = req.query;
+    const [rows] = await db.promise().query("CALL GET_USER_PROFILE(?)",[userId]);
+    res.status(200).send({data:rows[0][0]});
     }
   catch (err){
     const Error = handleErrors(err);
@@ -48,7 +50,7 @@ router.get("/api/userbyid",async (req,res) => {
 
 })
 
-router.get("/api/admindashboard",async (req,res)=>{
+router.get("/api/admindashboard",requireAdminAuth,async (req,res)=>{
   try{
     const[rows] = await db.promise().query("SELECT * FROM company_skills.users inner join company_skills.department on users.departmentID = department.departmentID inner join company_skills.role on users.roleID = role.roleID ",[userId]);
     res.status(200).send(rows[0]);
@@ -60,7 +62,7 @@ router.get("/api/admindashboard",async (req,res)=>{
 })
 
 
-router.get("/api/users",async (req,res) => {
+router.get("/api/users",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUsers)
     const body = {data:rows}
@@ -74,10 +76,15 @@ router.get("/api/users",async (req,res) => {
 })
 
 
-router.get("/api/departments",async (req,res) => {
+
+// Updated with List Type Return
+router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
-    const body = {data:rows};
+
+    let departmentlist = rows.map(a => a.DepartmentName);
+   // console.log(departmentlist);
+    const body = {data:departmentlist};
     res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
   }
   catch(err){
@@ -87,18 +94,22 @@ router.get("/api/departments",async (req,res) => {
   }
 })
 
-router.get("/api/rolebydepartment",async(req,res) =>{
 
-  var deptId; 
+
+// Updated with List Type Return
+router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
   try{
-    //console.log(req.query)
+   
     const departmentName = req.query.departmentName;
-    var [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[departmentName]);
-    deptId = rows[0].DepartmentID;
+
+    var [departmentRows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[departmentName]);
+    const deptId = departmentRows[0].DepartmentID;
 
     var [rows] = await db.promise().query(sqlQuery.selectRoleNameByDepartmentId,[deptId]);
-    const body = {data:rows};
+
+    const rolelist = rows.map(a => a.RoleName)
+    const body = {data:rolelist};
     res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
 
   }
@@ -112,7 +123,7 @@ router.get("/api/rolebydepartment",async(req,res) =>{
 })
 
 
-router.post("/api/addnewsubskill",async(req,res) =>{
+router.post("/api/addnewsubskill",requireAdminAuth,async(req,res) =>{
   const {category,skill} = req.body;
   var categoryId,skillId,message ;
 
@@ -159,7 +170,7 @@ router.post("/api/addnewsubskill",async(req,res) =>{
 
 
 
-router.post("/api/addcertificate",async(req,res) =>{
+router.post("/api/addcertificate",requireAdminAuth,async(req,res) =>{
   const certificate = req.body.certificate;
 
   try{
@@ -174,7 +185,7 @@ router.post("/api/addcertificate",async(req,res) =>{
 });
 
 
-router.post("/api/addproject",async(req,res) =>{
+router.post("/api/addproject",requireAdminAuth,async(req,res) =>{
   const project = req.body.project;
   console.log(project)
   try{
@@ -190,7 +201,7 @@ router.post("/api/addproject",async(req,res) =>{
 
 
 
-router.get("/api/getdetails", async(req,res) =>{
+router.get("/api/getdetails",requireAdminAuth, async(req,res) =>{
   const search = req.query.searchValue;
 
 try{
@@ -208,7 +219,7 @@ catch(err)
 }
 });
 
-router.get("/api/getallskills",async(req,res) =>{
+router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
   const id = req.query.userId;
   console.log(id)
   try{

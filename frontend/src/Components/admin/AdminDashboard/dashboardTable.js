@@ -73,8 +73,9 @@ const DashboardTable = ({profileList}) => {
                 <th>ID</th>
                 <th>Employee</th>
                 <th>Skills</th>
-                <th>Exp</th>
+                <th>Experience</th>
                 <th>Level</th>
+                <th>Certificate</th>
             </thead>
             <tbody>
                 {profileList.map(profile =>

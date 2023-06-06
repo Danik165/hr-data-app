@@ -10,7 +10,7 @@ import AddDeptRoleProject from './addDeptRoleProject/addDeptRoleProject';
 import DashboardPage from './AdminDashboard/dashboardPage';
 import UserProfile from './userprofile/UserProfile';
 
-const AdminDashboard = ({ setIsAuthenticated }) => {
+const AdminPage = ({ setIsAuthenticated }) => {
  
 
   return (
@@ -32,4 +32,4 @@ const AdminDashboard = ({ setIsAuthenticated }) => {
   );
 };
 
-export default AdminDashboard;
+export default AdminPage;

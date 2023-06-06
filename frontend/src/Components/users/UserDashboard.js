@@ -22,8 +22,8 @@ const UserDashboard = ({ setIsAuthenticated }) => {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
-      
-      
+
+
     </div>
   );
 };
