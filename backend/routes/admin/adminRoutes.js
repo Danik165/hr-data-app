@@ -170,19 +170,19 @@ router.post("/api/addnewsubskill",requireAdminAuth,async(req,res) =>{
 
 
 
-router.post("/api/addcertificate",requireAdminAuth,async(req,res) =>{
-  const certificate = req.body.certificate;
+// router.post("/api/addcertificate",requireAdminAuth,async(req,res) =>{
+//   const certificate = req.body.certificate;
 
-  try{
-    await db.promise().query(sqlQuery.insertCertificate,[certificate])
-    res.status(201).send({message:"New Certificate Added Successfully"})
+//   try{
+//     await db.promise().query(sqlQuery.insertCertificate,[certificate])
+//     res.status(201).send({message:"New Certificate Added Successfully"})
 
-  }
-  catch(err){
-    const Error = handleErrors(err);
-    res.status(Error.code).send(Error)
-  }
-});
+//   }
+//   catch(err){
+//     const Error = handleErrors(err);
+//     res.status(Error.code).send(Error)
+//   }
+// });
 
 
 router.post("/api/addproject",requireAdminAuth,async(req,res) =>{
@@ -231,4 +231,38 @@ router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
     res.status(Error.code).send(Error)
   }
 })
+
+
+router.get("/api/certificatesofuser",requireAdminAuth,async (req,res) =>{
+
+  try{
+    const userId = req.query.userId;
+    const [rows] = await db.promise().query("CALL GET_CERTIFICATES_OF_USER(?)",[userId])
+    res.status(200).send({data:rows[0]})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error);
+  }
+})
+
+router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
+
+  try{
+    const userId= req.body.userId;
+    const certi_name = req.body.Certificate_Name;
+    const issue_date = req.body.Issue_date || null;
+    const validity_date = req.body.Validity_date || null;
+
+    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certi_name,issue_date,validity_date,userId]);
+    res.status(201).send({data:rows[0]})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+
+})
+
+
 module.exports = router;
