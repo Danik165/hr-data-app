@@ -1,111 +1,4 @@
 
-
-//let skillStructure = [
-//  {
-//    category: "Frontend",
-//    skills: [
-//      {
-//        skill: "HTML",
-//        subSkills: ["HTML5", "Semantic HTML"],
-//      },
-//      {
-//        skill: "CSS",
-//        subSkills: ["Flexbox", "Grid", "Bootstrap", "SASS", "LESS"],
-//      },
-//      {
-//        skill: "JavaScript",
-//        subSkills: ["ES6+", "React", "Vue", "Angular", "jQuery"],
-//      },
-//    ],
-//  },
-//  {
-//    category: "Backend",
-//    skills: [
-//      {
-//        skill: "Node.js",
-//        subSkills: ["Express", "Koa", "Hapi", "Socket.io", "NestJS"],
-//      },
-//      {
-//        skill: "Python",
-//        subSkills: ["Django", "Flask", "FastAPI", "PyTorch", "TensorFlow"],
-//      },
-//      {
-//        skill: "Java",
-//        subSkills: ["Spring Boot", "Hibernate", "Struts", "JavaFX", "JSP"],
-//      },
-//    ],
-//  },
-//  {
-//    category: "Full Stack",
-//    skills: [
-//      {
-//        skill: "MERN Stack",
-//        subSkills: ["MongoDB", "Express", "React", "Node.js"],
-//      },
-//      {
-//        skill: "MEAN Stack",
-//        subSkills: ["MongoDB", "Express", "Angular", "Node.js"],
-//      },
-//      {
-//        skill: "Django + React",
-//        subSkills: ["Django", "React", "PostgreSQL"],
-//      },
-//    ],
-//  },
-//  {
-//    category: "Management",
-//    skills: [
-//      {
-//        skill: "Project Management",
-//        subSkills: ["Agile", "Scrum", "Waterfall", "Kanban"],
-//      },
-//      {
-//        skill: "Product Management",
-//        subSkills: ["Product Lifecycle Management", "Go-to-Market Strategy", "Competitive Analysis"],
-//      },
-//      {
-//        skill: "People Management",
-//        subSkills: ["Coaching", "Conflict Resolution", "Performance Management"],
-//      },
-//    ],
-//  },
-//  {
-//    category: "IT",
-//    skills: [
-//      {
-//        skill: "Networking",
-//        subSkills: ["TCP/IP", "DNS", "VPN", "Firewalls"],
-//      },
-//      {
-//        skill: "Security",
-//        subSkills: ["Encryption", "Penetration Testing", "Intrusion Detection"],
-//      },
-//      {
-//        skill: "Databases",
-//        subSkills: ["SQL", "NoSQL", "Database Administration", "Data Warehousing"],
-//      },
-//    ],
-//  },
-//  {
-//    category: "AWS",
-//    skills: [
-//      {
-//        skill: "Compute Services",
-//        subSkills: ["EC2", "Lambda", "Elastic Beanstalk", "Batch"],
-//      },
-//      {
-//        skill: "Storage Services",
-//        subSkills: ["S3", "EBS", "EFS", "Glacier"],
-//      },
-//      {
-//        skill: "Database Services",
-//        subSkills: ["RDS", "DynamoDB", "ElastiCache", "Redshift"],
-//      },
-//    ],
-//  },
-//];
-
-let skillStructure=[];
 import {confirmAlert} from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
@@ -119,24 +12,15 @@ const UserPage = ({id}) => {
   const [year, setYear] = useState("");
   const [level, setLevel] = useState("");
   const [certificate, setCertificate] = useState("");
-  const [userSkills, setUserSkills] = useState([ ]);
+  const [userSkills, setUserSkills] = useState([]);
+  const [skillStructure,setSkillStructure] = useState([]);
 
-//  const addSubSkill = () => {
-//    setUserSkills([...userSkills, { category, skill, subSkill }]);
-//    setCategory("");
-//    setSkill("");
-//    setSubSkill("");
-//  };
-//  const handleSubSkillSelect = (e) => {
-//  const options = e.target.options;
-//  const value = [];
-//  for (let i = 0, l = options.length; i < l; i++) {
-//    if (options[i].selected) {
-//      value.push(options[i].value);
-//    }
-//  }
-//  setSubSkill(value);
-//};
+const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
+
+
+const subSkillOptions = skill ? skillOptions.find(({ skill: s }) => s === skill)?.subSkills : [];
+
+
 const delConfirmation = ({index}) =>{
   confirmAlert({
     title:"Confirm Remove",
@@ -145,14 +29,14 @@ const delConfirmation = ({index}) =>{
       {
         label:"Yes",
         onClick:() => removeSubSkill(index)
-      },
+      },  
       {
         label:"No",
         onClick:() => {return false}
-      }
-    ]
-  })
-}
+      }  
+    ]  
+  })  
+}  
 
 const handleSubSkillChange = (sub) => {
     
@@ -160,8 +44,8 @@ const handleSubSkillChange = (sub) => {
       setSubSkill(subSkill.filter(s => s !== sub));
     } else {
       setSubSkill([...subSkill, sub]);
-    }
-  };
+    }  
+  };  
 
 const handleEditSkill = (index) => {
 
@@ -172,32 +56,56 @@ const handleEditSkill = (index) => {
   setSubSkill(skillToEdit.subSkills);
   setYear(skillToEdit.experience);
   setLevel(skillToEdit.level);
-  setCertificate("Yes");
   setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
-};
+  removeSubSkill(index)
+};  
 
 const removeSubSkill = async (index) => {
   fetch("http://localhost:5000/api/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
     method:"DELETE"
-  } )
+  } )  
   .then(response => {
     if(response.status == 200){
+      
       setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
-    }
-  })
+      console.log(userSkills)
+    }  
+  })  
   .catch(err =>{
     console.log(err)
     alert("Error in Removing User Skill Try Again");
-  })
+  })  
  
-};
-
-const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
+};  
 
 
-const subSkillOptions = skill ? skillOptions.find(({ skill: s }) => s === skill)?.subSkills : [];
+
 const addSkill = () => {
-  setUserSkills([...userSkills, { category, skill, subSkills: subSkill, years: year, level: level, certificate }]);
+  console.log({ category, skill, subSkills: subSkill, years: year, level: level, certificate })
+  fetch("http://localhost:5000/api/addskill",{
+    method:"POST",
+    headers:{
+      'Content-Type':"application/json"
+    },
+    body:JSON.stringify({
+      category:category, skill:skill, subSkillList: subSkill, years: year, level: level 
+    })
+
+  })
+  .then(response =>{
+    if(response.redirected){
+      window.location.replace(response.url);
+    }
+    else if(response.status == 201){
+      response.json()
+      .then(data => {
+        console.log(data.newId)
+        setUserSkills([...userSkills, { listId:data.newId,category, skill, subSkills: subSkill, years: year, level: level, certificate }]);
+      }
+
+      )
+    }
+  })
   setCategory("");
   setSkill("");
   setSubSkill([]);
@@ -218,12 +126,9 @@ const fetchSubSkillsbyid = async () =>{
       response.json()
       .then(skillList =>{
         const data = skillList.data;
-       let tempobj;
-       for(let i=0;i<data.length;i++)
-       {
-          tempobj = {listId:data[i].UsersSkillID,category:data[i].category,skill:data[i].skill,subSkills:data[i].subSkills,years:data[i].experience,level:data[i].level,certificate:"YES"}
-         setUserSkills((arr) => [...arr,tempobj])
-        }
+
+      setUserSkills([...data])
+
        })
     }
   })
@@ -241,9 +146,7 @@ const getSkillStructure = () =>{
       else if(res.status == 200){
         res.json()
          .then(data =>{
-            console.log(data.data)
-            skillStructure = data.data;
-            console.log("Skill Structure= " ,skillStructure)
+            setSkillStructure(data.data);
         })
         }
 
@@ -264,7 +167,9 @@ useEffect(() =>{
     }
   },[])
 return (
+
     <div className="main-content">
+      {console.log(userSkills)}
       <table>
         <thead>
           <tr>
@@ -273,7 +178,7 @@ return (
             <th>Subskill</th>
             <th>Years</th>
             <th>Level</th>
-            <th>Certificate</th>
+            {/* <th>Certificate</th> */}
             <th>Action</th>
           </tr>
         </thead>
@@ -285,7 +190,7 @@ return (
               <td>{subSkills.join(', ')}</td>
               <td>{years}</td>
               <td>{level}</td>
-              <td>{certificate}</td>
+              {/* <td>{certificate}</td> */}
               <td>
                 <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button>
                 <button onClick={() => delConfirmation({index:listId})} ><MDBIcon fas icon="trash-alt" /></button>
@@ -350,16 +255,16 @@ return (
         <option value="Advanced">Advanced</option>
         <option value="Expert">Expert</option>
       </select>
-      <select
+      {/* <select
             value={certificate}
             onChange={(e) => setCertificate(e.target.value)}
           >
             <option value="">Certificate</option>
             <option value="Yes">Yes</option>
             <option value="No">No</option>
-          </select>
+          </select> */}
 
- <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level || !certificate}>Add Skill</button>
+ <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level }>Add Skill</button>
     </div>
   )}
 </div>

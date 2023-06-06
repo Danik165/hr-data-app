@@ -221,7 +221,7 @@ catch(err)
 
 router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
   const id = req.query.userId;
-  console.log(id)
+  //console.log(id)
   try{
       const {data} = await GetAllSkillDetailsofUser({id:id})
       res.status(200).send({data:data})
