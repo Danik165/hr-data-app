@@ -81,15 +81,23 @@ const removeSubSkill = async (index) => {
 
 
 const addSkill = () => {
-  console.log({ category, skill, subSkills: subSkill, years: year, level: level, certificate })
-  fetch("http://localhost:5000/api/addskill",{
+
+    var url,tempObj;
+ if(id){
+     tempObj = {userId:id, category:category, skill:skill, subSkillList: subSkill, years: year, level: level
+    }
+     url = "http://localhost:5000/api/addskillforuser"
+ }
+ else{
+     tempObj ={ category:category, skill:skill, subSkillList: subSkill, years: year, level: level}
+     url = "http://localhost:5000/api/addskill"
+   }
+  fetch(url,{
     method:"POST",
     headers:{
       'Content-Type':"application/json"
     },
-    body:JSON.stringify({
-      category:category, skill:skill, subSkillList: subSkill, years: year, level: level 
-    })
+    body:JSON.stringify(tempObj)
 
   })
   .then(response =>{
@@ -175,7 +183,6 @@ useEffect(() =>{
 return (
 
     <div className="main-content">
-      {console.log(userSkills)}
       <table>
         <thead>
           <tr>
