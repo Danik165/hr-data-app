@@ -11,9 +11,9 @@ export default function ProfileCard({profile}){
     }
 
     return(
-        <div class='m-2 card-container container card bg-light pb clickable' onClick={() => seeProfile(profile.EmployeeID)}>
-            <div class='card-body pb-0'> 
-            <div class="row header-row">
+        <div class='mb-4 card-container container card bg-light px-0 clickable' onClick={() => seeProfile(profile.EmployeeID)}>
+            <div class='card-body p-0'> 
+            <div class="row header-row py-2 w-100 m-0">
                 <div class='col-4'>
                 <MDBIcon far icon="smile" size='4x' />
                 </div>
@@ -21,7 +21,7 @@ export default function ProfileCard({profile}){
                     <div class='user-details container'>
                         <div class='row'>
                             <div class='col'>
-                                <p class='p-0 m-0'>{profile.Name}</p>
+                                <p class='p-0 m-0 profile-name-value'>{profile.Name}</p>
                             </div>
                         </div>
                         <div class='row'>
@@ -33,8 +33,8 @@ export default function ProfileCard({profile}){
                     </div>
                 </div>
             </div>
-            <hr />
-            <div class='row match-details g-0 no-gutters'>
+            
+            <div class='row pt-2 match-details g-0 no-gutters'>
 
                 {
                     profile.matchedResults.length > 0 ? profile.matchedResults.slice(0,4).map(matchObjs => {
@@ -51,7 +51,7 @@ export default function ProfileCard({profile}){
 
             </div>
             <hr />  
-            <div class='row contact-pane p-2'>
+            <div class='row contact-pane ps-2 g-0 no-gutters'>
                 <div class='col col-6 '>
                     <p  class='p-0 m-0 contact-tag'>{profile.EmailID}</p>
                 </div>

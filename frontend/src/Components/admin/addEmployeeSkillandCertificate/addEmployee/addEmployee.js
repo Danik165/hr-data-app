@@ -147,10 +147,10 @@ const AddEmployeeForm = () => {
           <div className="text-center mt-4 mb-2">
             <p className="h4 font-weight-bold"> Add Employee </p>
           </div>
-          <CDBInput label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:parseInt(e.target.value)})} />
-          <CDBInput label="Name" type="text" icon="user" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,name:e.target.value})} />
-          <CDBInput label="Email" type="email" icon="envelope" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,email:e.target.value})} />
-          <CDBInput label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,confirmEmail:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:parseInt(e.target.value)})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Name" type="text" icon="user" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,name:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Email" type="email" icon="envelope" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,email:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}}  label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,confirmEmail:e.target.value})} />
           <label htmlFor="department">Select a Department:</label>
           <br />
           <select id="department" name="department" className='department-dropdown' onChange={e => handleDeptSelection(e.target.value)}>

@@ -39,7 +39,7 @@ const AddCertificateForm = () => {
             <div className="text-center mt-4 mb-2">
               <p className="h4 font-weight-bold"> Add Certicate </p>
             </div>
-            <CDBInput label="Certicate Name" type="text" icon="award" iconClass="text-muted" onChange={e => setCertificate(e.target.value)} />
+            <CDBInput style={{'border-radius':'0px'}}label="Certicate Name" type="text" icon="award" iconClass="text-muted" onChange={e => setCertificate(e.target.value)} />
           
             {message && <p>{message}</p>}
             <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddCertificate}>

@@ -57,7 +57,7 @@ function searchJSON(obj, val) {
       if (obj.hasOwnProperty(k)) {
         if (typeof obj[k] === "object") {
             results = results.concat(searchJSON(obj[k], val));
-        }else if (typeof obj[k] == 'string' && obj[k].search(val) >=0 && !DoNotMatchList.has(k) ) {
+        }else if (typeof obj[k] == 'string' && obj[k].toLowerCase().search(val) >=0 && !DoNotMatchList.has(k) ) {
            // console.log(obj[k].search(/Gowtham/i))
           results.push({matchedKey:k,matchValue:obj[k]});
         } 
@@ -69,7 +69,7 @@ function searchJSON(obj, val) {
 const Search = async ({searchValue}) =>{
 
     const searchParameter = '%' + searchValue + '%';
-    let val = /searchValue/i;
+    const val = searchValue.toLowerCase()
     var skillDetails;
     try{
         const [matchedProfiles] = await db.promise().query("CALL SEARCH_ALL(?)",[searchParameter])
@@ -79,12 +79,13 @@ const Search = async ({searchValue}) =>{
             throw ({message:"No Records Match the Search Value"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].UserID])
+            [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].EmployeeID])
+            //console.log(skillDetails)
             data[i].skills = skillDetails[0];
         }
         for(let index in data){
       
-            data[index].matchedResults = searchJSON(data[index], searchValue);
+            data[index].matchedResults = searchJSON(data[index], val);
         }
       
         return ({data:data,success:true})
@@ -95,19 +96,21 @@ const Search = async ({searchValue}) =>{
     }
 };
 
-const GetAllSkillDetails = async ({id}) =>{
-    console.log("Get All skills func called",id)
+const GetAllSkillDetailsofUser = async ({id}) =>{
+    //console.log("Get All skills func called",id)
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];
-        console.log(data);
+        //console.log(data);
         if(data.length <= 0){
             throw ({message:"No Skills Added for this User"})
         }
         for(let i=0;i<data.length;i++){
-            [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].subSkillIDList]);
-            console.log(skillDetails)
-            data[i].subSkillName = skillDetails[0];
+            //console.log(data[i])
+           const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].subSkillIDList]);
+            //console.log(skillDetails)
+            //console.log(skillDetails[0][0].subskills.split(",")) //.split(","))
+            data[i].subSkills = skillDetails[0][0].subskills.split(",");
         }
 
        return ({data:data,success:true})
@@ -118,7 +121,38 @@ const GetAllSkillDetails = async ({id}) =>{
     }
 }
 
+
+const GetAllSkillSet = async () =>{
+    try{
+    const [category] = await db.promise().query("CALL GET_COMPLETE_SKILL_SET()")
+    const skills = category[0]
+    let tempObj = []
+    let skillList = []
+    let subskills =[]
+    for(let i=0; i<skills.length; i++) {
+        tempObj = []
+        skillList = skills[i].skills.split(",")
+         for(let j=0;j<skillList.length;j++) {
+             [subskills] = await db.promise().query("CALL GET_COMPLETE_SUB_SKILL_SET(?)",[skillList[j]]);
+                if(subskills[0][0]){
+                    tempObj.push({skill:skillList[j], subSkills:subskills[0][0].subSkills.split(",") } )
+                }
+                else{
+                    tempObj.push({skill:skillList[j]})
+                }
+         }
+       skills[i].skills = tempObj;
+    }
+            return {data:skills,success:true}
+
+    }
+    catch(err){
+    console.log(err)
+        return {success:false,message:"Error at GET_COMPLETE_SKILL_SET"}
+      }
+}
 module.exports.UpdatePasswordwithId = UpdatePasswordwithId;
 module.exports.Login = Login;
 module.exports.Search = Search;
-module.exports.GetAllSkillDetails = GetAllSkillDetails; 
+module.exports.GetAllSkillDetailsofUser = GetAllSkillDetailsofUser;
+module.exports.GetAllSkillSet = GetAllSkillSet;

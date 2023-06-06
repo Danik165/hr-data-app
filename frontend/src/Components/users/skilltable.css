@@ -23,10 +23,11 @@ table tr:hover {
 }
 
 button {
-    color: white;
-    background-color: #4CAF50;
-    border-width: 0.5px;
-    padding: 10px 20px;
+    /* color: white; */
+    background-color: #ffffff;
+    border:none;
+    /* border-width: 0.5px; */
+    padding: 10px 10px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

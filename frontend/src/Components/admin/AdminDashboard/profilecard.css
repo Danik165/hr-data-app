@@ -13,6 +13,10 @@
     }
 }
 
+/* .header-row{
+    background-color: #ffffff;
+} */
+
 .clickable{
     cursor: pointer;
 }
@@ -26,6 +30,17 @@
     min-width: 350px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
+    /* border-color: #c49c82; */
+    /* border-width: 2px; */
+    border-radius: 15px;
+}
+
+.header-row{
+    background-color: #07428f;
+    color: #f8f9fa;
+    border-top-right-radius: 15px;
+    border-top-left-radius: 15px;
+    /* border-top: ; */
 }
 
 .contact-pane > div >  p{
@@ -42,10 +57,17 @@
 
 hr{
     margin:0.5rem;
+    border-color:#6691ff;
+    border-width: 3px;
 }
 .font-weight-light{
     font-weight: 100;
     font-size: smaller;
+}
+
+
+.profile-name-value{
+    font-weight: 700;
 }
 
 .row.no-gutters {

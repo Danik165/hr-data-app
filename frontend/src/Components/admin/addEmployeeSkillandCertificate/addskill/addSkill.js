@@ -137,21 +137,21 @@ const AddSkillForm = () => {
                 <option id={category} value={category}>{category}</option>
           )}
           </select>
-            { categoryEnabled && <CDBInput label="New Category" type="text" icon="tags" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,category:e.target.value})}/>}
+            { categoryEnabled && <CDBInput style={{'border-radius':'0px'}} label="New Category" type="text" icon="tags" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,category:e.target.value})}/>}
             <label htmlFor="skill">Select a skill:</label>
           <select id="skill" name="skill" className='skill-dropdown' onChange={e => handleSkillSelection(e.target.value)}>
           {skills.map(skill => 
                 <option key={skill} value={skill}>{skill}</option>
           )}
           </select>
-           {skillEnabled && <CDBInput label="New Skill" type="text" icon="stream" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,skill:e.target.value})}/>  }
-            <CDBInput label="Sub-Skill-Name" type="text" icon="code-branch" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,subSkill:e.target.value})} />
+           {skillEnabled && <CDBInput style={{'border-radius':'0px'}} label="New Skill" type="text" icon="stream" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,skill:e.target.value})}/>  }
+            <CDBInput style={{'border-radius':'0px'}} label="Sub-Skill-Name" type="text" icon="code-branch" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,subSkill:e.target.value})} />
           
-            <CDBDropDown>
+            {/* <CDBDropDown>
               <CDBDropDownMenu>
                 <CDBDropDownItem>Select a Category</CDBDropDownItem>
               </CDBDropDownMenu>
-            </CDBDropDown>
+            </CDBDropDown> */}
             <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={addSkill}>
               Register
             </CDBBtn>

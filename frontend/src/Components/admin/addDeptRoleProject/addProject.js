@@ -43,7 +43,7 @@ const AddProjectForm = () => {
               <p className="h4 font-weight-bold"> Add Project </p>
             </div>
            
-            <CDBInput label="Project Name" type="text" icon="user-tie" iconClass="text-muted" onChange={e => setProject(e.target.value)} />
+            <CDBInput style={{'border-radius':'0px'}} label="Project Name" type="text" icon="user-tie" iconClass="text-muted" onChange={e => setProject(e.target.value)} />
             {message && <p>{message}</p>}
             <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={AddProject}>
               Register

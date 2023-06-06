@@ -3,7 +3,7 @@ const db = require("../../database/connectDb")
 const handleErrors = require("../../error/errorhandler")
 const {requireAdminAuth} = require("../../middleware/authMiddleware/adminAuth")
 const {sqlQuery} = require("../../database/query");
-const {Search,GetAllSkillDetails} = require('../../database/sqlFunctions');
+const {Search,GetAllSkillDetailsofUser} = require('../../database/sqlFunctions');
 const router = Router();
 
 
@@ -76,6 +76,21 @@ router.get("/api/users",requireAdminAuth,async (req,res) => {
 })
 
 
+router.post("/api/addskillforuser",requireAdminAuth,async (req,res) =>{
+  try{
+    //console.log(req.body)
+    const { userId,category, skill, level, years, subSkillList } = req.body;
+    //const userId =  req.decodedToken.userId? req.decodedToken.userId:1001;
+    const subSkillStringList = subSkillList.join(',');
+    //console.log(subSkillStringList)
+    const [rows] = await db.promise().query("CALL ADD_NEW_SKILL_FOR_USER(?,?,?,?,?,?)",[userId,category,skill,subSkillStringList,level,years])
+    res.status(201).send({message:"New Skill Set Added Successfully",newId:rows[0][0].userId})
+  }
+  catch(err){
+    const Err = handleErrors(err)
+    res.status(Err.code).send({message:Err.message})
+  }
+})
 
 // Updated with List Type Return
 router.get("/api/departments",requireAdminAuth,async (req,res) => {
@@ -170,21 +185,6 @@ router.post("/api/addnewsubskill",requireAdminAuth,async(req,res) =>{
 
 
 
-router.post("/api/addcertificate",requireAdminAuth,async(req,res) =>{
-  const certificate = req.body.certificate;
-
-  try{
-    await db.promise().query(sqlQuery.insertCertificate,[certificate])
-    res.status(201).send({message:"New Certificate Added Successfully"})
-
-  }
-  catch(err){
-    const Error = handleErrors(err);
-    res.status(Error.code).send(Error)
-  }
-});
-
-
 router.post("/api/addproject",requireAdminAuth,async(req,res) =>{
   const project = req.body.project;
   console.log(project)
@@ -219,11 +219,10 @@ catch(err)
 }
 });
 
-router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
+router.get("/api/getallskillsofuser",requireAdminAuth,async(req,res) =>{
   const id = req.query.userId;
-  console.log(id)
   try{
-      const {data} = await GetAllSkillDetails({id:id})
+      const {data} = await GetAllSkillDetailsofUser({id:id})
       res.status(200).send({data:data})
   }
   catch(err){
@@ -231,4 +230,38 @@ router.get("/api/getallskills",requireAdminAuth,async(req,res) =>{
     res.status(Error.code).send(Error)
   }
 })
+
+
+router.get("/api/certificatesofuser",requireAdminAuth,async (req,res) =>{
+
+  try{
+    const userId = req.query.userId;
+    const [rows] = await db.promise().query("CALL GET_CERTIFICATES_OF_USER(?)",[userId])
+    res.status(200).send({data:rows[0]})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error);
+  }
+})
+
+router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
+
+  try{
+    const userId= req.body.userId;
+    const certi_name = req.body.Certificate_Name;
+    const issue_date = req.body.Issue_date || null;
+    const validity_date = req.body.Validity_date || null;
+
+    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certi_name,issue_date,validity_date,userId]);
+    res.status(201).send({data:rows[0]})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+
+})
+
+
 module.exports = router;
