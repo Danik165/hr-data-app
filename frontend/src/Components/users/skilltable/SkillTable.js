@@ -183,7 +183,6 @@ useEffect(() =>{
 return (
 
     <div className="main-content">
-
       <table className="overflow-hidden">
         <thead>
           <tr>
@@ -211,6 +210,7 @@ return (
           ))}
         </tbody>
       </table>
+      <h2 >Add skills</h2>
     <div>
       <select onChange={(e) => setCategory(e.target.value)} value={category}>
         <option value="">Select category</option>

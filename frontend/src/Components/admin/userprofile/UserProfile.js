@@ -2,6 +2,7 @@ import Profile from '../../users/profile/Profile';
 import UserPage from '../../users/skilltable/SkillTable';
 import './UserProfile.css'; // Import your CSS file
 
+
 const UserProfile = () =>{
     const queryParameters = new URLSearchParams(window.location.search)
     const id = queryParameters.get("id")
@@ -12,7 +13,9 @@ const UserProfile = () =>{
                 <Profile id={id} />
             </div>
             <div class="scrollable-content">
-                <h2>Skills</h2>
+                 <h1 class=" text-center">
+        Skills
+    </h1>
                 <UserPage id={id}/>
             </div>
         </div>
