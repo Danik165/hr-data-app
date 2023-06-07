@@ -5,7 +5,7 @@ import SkillTable from './skilltable/SkillTable';
 import Sidebar from '../sidebar/Sidebar';
 import Profile  from './profile/Profile';
 import Statistics from './Statistics'
-
+import {apiurl} from '../../utils/HostData';
 
 const UserDashboard = ({ setIsAuthenticated }) => {
   const isAdmin = false;

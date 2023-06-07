@@ -3,7 +3,7 @@ import Sidebar from '../sidebar/Sidebar.js';
 import Header from '../header/header';
 import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
-
+import { apiurl } from '../frontend/src/utils/HostData.js';
 const Profile = ({ setIsAuthenticated }) => {
   const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.com', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
   const isAdmin = false;
@@ -15,7 +15,7 @@ const Profile = ({ setIsAuthenticated }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://11.11.1.18:83/api/profile');
+      const response = await fetch(apiurl+'/profile');
       const data = await response.json();
       setProfile(data);
     } catch (error) {
@@ -25,7 +25,7 @@ const Profile = ({ setIsAuthenticated }) => {
 
   const updateProfile = async (email, phone) => {
     try {
-      const response = await fetch('http://11.11.1.18:83/api/profile', {
+      const response = await fetch(apiurl+'/profile', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

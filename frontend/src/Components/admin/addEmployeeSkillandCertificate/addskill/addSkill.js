@@ -1,5 +1,6 @@
 import { useState,useEffect } from "react";
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
+import { apiurl } from "../../../../utils/HostData";
 import './addskill.css'
 
 const AddSkillForm = () => {
@@ -20,7 +21,7 @@ const AddSkillForm = () => {
     const addSkill = () => {
       console.log(newSubSkill)
       //console.log(newSubSkill)
-      fetch("http://11.11.1.18:83/api/addnewsubskill",{
+      fetch(apiurl+"/addnewsubskill",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
@@ -67,7 +68,7 @@ const AddSkillForm = () => {
       console.log("Handle Skill Called")
     }
     const fetchCategorys = () =>{
-      fetch("http://11.11.1.18:83/api/categories")
+      fetch(apiurl+"/categories")
       .then((response)=>{
           if(response.redirected){
             window.location.replace(response.url);
@@ -98,7 +99,7 @@ const AddSkillForm = () => {
     const fetchSkills = (category) =>{
       
       console.log("Fetch Skills called")
-      fetch("http://11.11.1.18:83/api/skillbycategory?" + new URLSearchParams({categoryName:category}))
+      fetch(apiurl+"/skillbycategory?" + new URLSearchParams({categoryName:category}))
       .then(response => {
         if(response.redirected){
           window.location.replace(response.url);

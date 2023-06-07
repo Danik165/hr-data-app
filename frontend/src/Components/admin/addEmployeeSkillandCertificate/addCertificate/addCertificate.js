@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
-
+import { apiurl } from "../../../../utils/HostData";
 const AddCertificateForm = () => {
   const [certificate,setCertificate] = useState('');
   const [message,setMessage] =useState('');
   
   const AddCertificate = () => {
 
-    fetch("http://11.11.1.18:83/api/addcertificate",{
+    fetch(apiurl+"/addcertificate",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

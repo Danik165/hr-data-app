@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
-
+import { apiurl } from "../../../utils/HostData";
 
 const AddProjectForm = () => {
     
@@ -9,7 +9,7 @@ const AddProjectForm = () => {
     
     const AddProject = () => {
 
-      fetch("http://11.11.1.18:83/api/addproject",{
+      fetch(apiurl+"/addproject",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

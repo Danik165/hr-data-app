@@ -3,7 +3,7 @@ import { useState,useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
 import './addEmployee.css';
 import { useNavigate } from 'react-router';
-
+import { apiurl } from '../../../../utils/HostData';
 
 const AddEmployeeForm = () => {
   const navigate = useNavigate();
@@ -41,7 +41,7 @@ const AddEmployeeForm = () => {
     console.log(newProfile)
     if(validateInput()){
 
-      fetch("http://11.11.1.18:83/api/register",{
+      fetch(apiurl+"/register",{
         method:"POST",
         headers:{
           'Content-Type':"application/json"
@@ -77,7 +77,7 @@ const AddEmployeeForm = () => {
 
   
  const fetchRole = (dept) =>{
-    fetch("http://11.11.1.18:83/api/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
+    fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
     .then((response) => {
       if(response.redirected){
         window.location.replace(response.url);
@@ -107,7 +107,7 @@ const AddEmployeeForm = () => {
 
 
   const fetchDepartmentList = () =>{
-    fetch("http://11.11.1.18:83/api/departments")
+    fetch(apiurl+"/departments")
     .then((response)=>{
         if(response.redirected){
           window.location.replace(response.url);

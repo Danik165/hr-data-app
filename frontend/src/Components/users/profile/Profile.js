@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
-
+import { apiurl } from '../../../utils/HostData';
 const Profile = ({ setIsAuthenticated,id }) => {
   const [profile, setProfile] = useState({ name: 'User Name', role: 'Developer', email: 'username@example.ru', phone: '123456789', currentProject: 'Project Name', department: 'Salesforce' });
   const [tempProfile, setTempProfile] = useState(profile);
@@ -9,7 +9,7 @@ const Profile = ({ setIsAuthenticated,id }) => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch('http://11.11.1.18:83/api/userprofile', {
+      const response = await fetch(apiurl+'/userprofile', {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -28,7 +28,7 @@ const Profile = ({ setIsAuthenticated,id }) => {
      const fetchProfilebyid = async () => {
     try {
 
-      const response = await fetch('http://11.11.1.18:83/api/userprofilebyid?' + new URLSearchParams({userId:id}), {
+      const response = await fetch(apiurl+'/userprofilebyid?' + new URLSearchParams({userId:id}), {
         headers: {
           'Content-Type': 'application/json'
         }
@@ -55,7 +55,7 @@ const Profile = ({ setIsAuthenticated,id }) => {
   //   event.preventDefault();
   //
   //   try {
-  //     const response = await fetch('http://11.11.1.18:83/api/userprofile', {
+  //     const response = await fetch('apiurl+'/userprofile', {
   //       method: 'PUT',
   //       headers: {
   //         'Content-Type': 'application/json'

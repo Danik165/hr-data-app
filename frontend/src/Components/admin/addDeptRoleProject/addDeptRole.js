@@ -1,7 +1,7 @@
 
 import { useState,useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
-
+import { apiurl } from '../../../utils/HostData';
 const AddDeptRoleForm = () => {
       const [departments,setDeparments] =useState([]);
       const [enabled,setEnabled] = useState(false);
@@ -20,7 +20,7 @@ const AddDeptRoleForm = () => {
     }
 
     const fetchDepartmentList = () =>{
-      fetch("http://11.11.1.18:83/api/departments")
+      fetch(apiurl+"/departments")
       .then((response)=>{
           if(response.redirected){
             window.location.replace(response.url);
