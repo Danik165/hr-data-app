@@ -1,12 +1,12 @@
-import Profile from '../../users/Profile';
-import UserPage from '../../users/SkillTable';
+import Profile from '../../users/profile/Profile';
+import UserPage from '../../users/skilltable/SkillTable';
 import './UserProfile.css'; // Import your CSS file
 
 const UserProfile = () =>{
     const queryParameters = new URLSearchParams(window.location.search)
     const id = queryParameters.get("id")
     return(
-        <div class='user-profile-page-container h-100 overflow-auto'>
+        <div class='user-profile-page-container h-100 w-100 overflow-auto'>
 
             <div class="sidebar">
                 <Profile id={id} />
