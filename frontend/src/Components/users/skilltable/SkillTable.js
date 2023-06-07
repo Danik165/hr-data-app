@@ -61,7 +61,7 @@ const handleEditSkill = (index) => {
 };  
 
 const removeSubSkill = async (index) => {
-  fetch("http://localhost:83/api/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
+  fetch("http://11.11.1.18:83/api/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
     method:"DELETE"
   } )  
   .then(response => {
@@ -86,11 +86,11 @@ const addSkill = () => {
  if(id){
      tempObj = {userId:id, category:category, skill:skill, subSkillList: subSkill, years: year, level: level
     }
-     url = "http://localhost:83/api/addskillforuser"
+     url = "http://11.11.1.18:83/api/addskillforuser"
  }
  else{
      tempObj ={ category:category, skill:skill, subSkillList: subSkill, years: year, level: level}
-     url = "http://localhost:83/api/addskill"
+     url = "http://11.11.1.18:83/api/addskill"
    }
   fetch(url,{
     method:"POST",
@@ -149,7 +149,7 @@ const fetchSubSkillsbyid = async (url) =>{
 }
 
 const getSkillStructure = () =>{
-    fetch("http://localhost:83/api/skilllist")
+    fetch("http://11.11.1.18:83/api/skilllist")
     .then(res =>{
       if(res.redirected){
       window.location.replace(res.url);
@@ -171,11 +171,11 @@ const getSkillStructure = () =>{
 useEffect(() =>{
     getSkillStructure();
     if(id){
-      const url = "http://localhost:83/api/getallskillsofuser?" + new URLSearchParams({userId:id})
+      const url = "http://11.11.1.18:83/api/getallskillsofuser?" + new URLSearchParams({userId:id})
       fetchSubSkillsbyid(url)
     }
     else{
-        const userUrl = "http://localhost:83/api/getallskills";
+        const userUrl = "http://11.11.1.18:83/api/getallskills";
         fetchSubSkillsbyid(userUrl)
       //console.log("Fetch sub skills for the user")
     }

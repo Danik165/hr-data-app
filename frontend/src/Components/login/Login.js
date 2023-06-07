@@ -18,7 +18,7 @@ const Login = (props) => {
     
 
     try {
-      const response = await fetch('http://localhost:83/api/login', {
+      const response = await fetch('http://11.11.1.18:83/api/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
