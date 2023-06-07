@@ -183,7 +183,8 @@ useEffect(() =>{
 return (
 
     <div className="main-content">
-      <table>
+
+      <table className="overflow-hidden">
         <thead>
           <tr>
             <th>Category</th>
@@ -191,7 +192,6 @@ return (
             <th>Subskill</th>
             <th>Years</th>
             <th>Level</th>
-            {/* <th>Certificate</th> */}
             <th>Action</th>
           </tr>
         </thead>
@@ -203,7 +203,6 @@ return (
               <td>{subSkills.join(', ')}</td>
               <td>{years}</td>
               <td>{level}</td>
-              {/* <td>{certificate}</td> */}
               <td>
                 <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button>
                 <button onClick={() => delConfirmation({index:listId})} ><MDBIcon fas icon="trash-alt" /></button>
@@ -268,14 +267,6 @@ return (
         <option value="Advanced">Advanced</option>
         <option value="Expert">Expert</option>
       </select>
-      {/* <select
-            value={certificate}
-            onChange={(e) => setCertificate(e.target.value)}
-          >
-            <option value="">Certificate</option>
-            <option value="Yes">Yes</option>
-            <option value="No">No</option>
-          </select> */}
 
  <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level }>Add Skill</button>
     </div>

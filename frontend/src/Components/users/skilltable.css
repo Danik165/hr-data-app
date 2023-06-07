@@ -4,11 +4,13 @@
     padding: 20px;
     font-family: Arial, sans-serif;
     color: #333;
+
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
+    overflow:auto
 }
 
 table th,

@@ -57,7 +57,7 @@ const DashboardPage = () =>{
             {errorMessage && <p>{errorMessage}</p>}
             </div>
 
-            
+
             <div className="search-table overflow-hidden  ">
                 <SearchCards profileList={profileList}/>
             </div>
