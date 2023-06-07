@@ -13,9 +13,7 @@ const UserProfile = () =>{
                 <Profile id={id} />
             </div>
             <div class="scrollable-content">
-                 <h1 class=" text-center">
-        Skills
-    </h1>
+                 <h1 class=" text-center">Skills</h1>
                 <UserPage id={id}/>
             </div>
         </div>
