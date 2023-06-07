@@ -30,15 +30,10 @@ const UserSkillDetails = () => {
                     onClick={() => setDisplayForm("Skills")}
                     style={ displayForm === "Skills" ? selectedStyle : unselectedStyle}>Skill
                 </div>
-                <div
-                    className={`tab ${displayForm === "Certificate" ? 'active' : ''}`}
-                    onClick={() => setDisplayForm("Certificate")}
-                    style={ displayForm === "Certificate" ? selectedStyle : unselectedStyle}>Certificate
-                </div>
+
             </div>
            { displayForm === "Employee" && <div className="form"><AddEmployeeForm /></div> }
-{ displayForm === "Skills" && <div className="form"><AddSkillForm /></div> }
-{ displayForm === "Certificate" && <div className="form"><AddCertificateForm /></div> }
+           { displayForm === "Skills" && <div className="form"><AddSkillForm /></div> }
 </div>
     )
 }
