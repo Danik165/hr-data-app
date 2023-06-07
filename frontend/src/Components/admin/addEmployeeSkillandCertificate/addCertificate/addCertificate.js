@@ -7,7 +7,7 @@ const AddCertificateForm = () => {
   
   const AddCertificate = () => {
 
-    fetch("http://localhost:5000/api/addcertificate",{
+    fetch("http://localhost:83/api/addcertificate",{
       method:"POST",
       headers:{
         "Content-Type":"application/json"

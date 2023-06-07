@@ -13,7 +13,7 @@ const DashboardPage = () =>{
 
             e.preventDefault();
         }
-        fetch("http://localhost:5000/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
+        fetch("http://localhost:83/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
             //console.log(response.status)
             if(response.redirected){

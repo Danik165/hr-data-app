@@ -20,7 +20,7 @@ const AddSkillForm = () => {
     const addSkill = () => {
       console.log(newSubSkill)
       //console.log(newSubSkill)
-      fetch("http://localhost:5000/api/addnewsubskill",{
+      fetch("http://localhost:83/api/addnewsubskill",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
@@ -67,7 +67,7 @@ const AddSkillForm = () => {
       console.log("Handle Skill Called")
     }
     const fetchCategorys = () =>{
-      fetch("http://localhost:5000/api/categories")
+      fetch("http://localhost:83/api/categories")
       .then((response)=>{
           if(response.redirected){
             window.location.replace(response.url);
@@ -98,7 +98,7 @@ const AddSkillForm = () => {
     const fetchSkills = (category) =>{
       
       console.log("Fetch Skills called")
-      fetch("http://localhost:5000/api/skillbycategory?" + new URLSearchParams({categoryName:category}))
+      fetch("http://localhost:83/api/skillbycategory?" + new URLSearchParams({categoryName:category}))
       .then(response => {
         if(response.redirected){
           window.location.replace(response.url);

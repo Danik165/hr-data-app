@@ -41,7 +41,7 @@ const AddEmployeeForm = () => {
     console.log(newProfile)
     if(validateInput()){
 
-      fetch("http://localhost:5000/api/register",{
+      fetch("http://localhost:83/api/register",{
         method:"POST",
         headers:{
           'Content-Type':"application/json"
@@ -77,7 +77,7 @@ const AddEmployeeForm = () => {
 
   
  const fetchRole = (dept) =>{
-    fetch("http://localhost:5000/api/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
+    fetch("http://localhost:83/api/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
     .then((response) => {
       if(response.redirected){
         window.location.replace(response.url);
@@ -107,7 +107,7 @@ const AddEmployeeForm = () => {
 
 
   const fetchDepartmentList = () =>{
-    fetch("http://localhost:5000/api/departments")
+    fetch("http://localhost:83/api/departments")
     .then((response)=>{
         if(response.redirected){
           window.location.replace(response.url);
