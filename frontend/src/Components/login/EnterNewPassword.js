@@ -13,7 +13,7 @@ const EnterNewPassword = () =>{
     const [error,setError ] = useState('');
     const checkOTP = () =>{
         if(password == confirmPassword){
-          fetch("http://localhost:83/api/resetpassword",{
+          fetch("http://11.11.1.18:83/api/resetpassword",{
             method: 'POST',
         headers: {
           'Content-Type': 'application/json',

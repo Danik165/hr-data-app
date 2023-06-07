@@ -20,7 +20,7 @@ const AddDeptRoleForm = () => {
     }
 
     const fetchDepartmentList = () =>{
-      fetch("http://localhost:83/api/departments")
+      fetch("http://11.11.1.18:83/api/departments")
       .then((response)=>{
           if(response.redirected){
             window.location.replace(response.url);

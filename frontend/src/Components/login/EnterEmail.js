@@ -9,7 +9,7 @@ const EnterEmail = () =>{
     const [email,setEmail] = useState('');
     const [error,setError ] = useState('');
     const generateOTP = () =>{
-        fetch("http://localhost:83/api/forgotpassword?"+ new URLSearchParams({emailId:email}))
+        fetch("http://11.11.1.18:83/api/forgotpassword?"+ new URLSearchParams({emailId:email}))
         .then((response)=>{
           response.json()
           .then((data) => {
