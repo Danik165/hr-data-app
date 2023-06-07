@@ -20,7 +20,7 @@ const AddSkillForm = () => {
     const addSkill = () => {
       console.log(newSubSkill)
       //console.log(newSubSkill)
-      fetch("http://localhost:5000/api/addnewsubskill",{
+      fetch("http://localhost:83/api/addnewsubskill",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"

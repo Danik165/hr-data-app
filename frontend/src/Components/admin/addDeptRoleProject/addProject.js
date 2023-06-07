@@ -9,7 +9,7 @@ const AddProjectForm = () => {
     
     const AddProject = () => {
 
-      fetch("http://localhost:5000/api/addproject",{
+      fetch("http://localhost:83/api/addproject",{
         method:"POST",
         headers:{
           "Content-Type":"application/json"
