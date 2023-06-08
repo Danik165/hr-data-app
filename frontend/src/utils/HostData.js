@@ -1,4 +1,4 @@
-const apiurl = "http://11.11.1.18:83/api";
+const apiurl = "http://localhost:5000/api";
 
 
 export {apiurl}

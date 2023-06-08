@@ -1,8 +1,8 @@
-import './skilltable/SkillTable';
-import './certificatetable/CertificateTable'
+import SkillTable from './skilltable/SkillTable';
+//import './certificatetable/CertificateTable'
 import CertificateTable from './certificatetable/CertificateTable';
 
-export default function skillPage(){
+export default function SkillPage(){
 
     return(
         <div className="skill-page-container">

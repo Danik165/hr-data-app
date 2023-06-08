@@ -2,7 +2,7 @@ import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './userdashboard.css';
 //import SkillTable from './skilltable/SkillTable';
-import './skillPage'
+import SkillPage from './skillPage'
 import Sidebar from '../sidebar/Sidebar';
 import Profile  from './profile/Profile';
 import Statistics from './Statistics'
