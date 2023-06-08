@@ -1,7 +1,8 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import './userdashboard.css';
-import SkillTable from './skilltable/SkillTable';
+//import SkillTable from './skilltable/SkillTable';
+import './skillPage'
 import Sidebar from '../sidebar/Sidebar';
 import Profile  from './profile/Profile';
 import Statistics from './Statistics'
@@ -14,7 +15,7 @@ const UserDashboard = ({ setIsAuthenticated }) => {
       <div className='dashboard-body'>    
         <Sidebar setIsAuthenticated={ setIsAuthenticated } isAdmin={isAdmin}/>
      <Routes>
-          <Route path="/" element={<SkillTable />} />
+          <Route path="/" element={<SkillPage />} />
           <Route path="/statistics" element={<Statistics />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
