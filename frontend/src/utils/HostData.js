@@ -1,4 +1,4 @@
-const apiurl = "http://localhost:5000/api";
+const apiurl = "https://skillmatrix.jeevantechnologies.com/api";
 
 
 export {apiurl}
