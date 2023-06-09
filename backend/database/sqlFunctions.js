@@ -106,7 +106,7 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
             throw ({message:"No Skills Added for this User"})
         }
         for(let i=0;i<data.length;i++){
-            console.log( "Data i :",data[i])
+            //console.log( "Data i :",data[i])
            const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].SubSkillIDList]);
            // console.log("skilldetails: ",skillDetails)
            // console.log("subskills: ",skillDetails[0][0].subskills.split(",")) //.split(","))
