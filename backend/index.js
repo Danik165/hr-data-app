@@ -27,11 +27,9 @@ app.get('/*', function(req,res) {
   res.sendFile(path.join(__dirname,'..','frontend/build', 'index.html'));
 });
 
-<<<<<<< HEAD
-const PORT = 83;
-=======
+
+
 const PORT =  83;
->>>>>>> d6dbbaf3db91e7098fc33f6ccb70f1bf5aea8217
 
 
 
