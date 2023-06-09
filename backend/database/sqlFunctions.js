@@ -107,7 +107,7 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
         }
         for(let i=0;i<data.length;i++){
             //console.log(data[i])
-           const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].subSkillIDList]);
+           const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].SubSkillIDList]);
             //console.log(skillDetails)
             //console.log(skillDetails[0][0].subskills.split(",")) //.split(","))
             data[i].subSkills = skillDetails[0][0].subskills.split(",");
