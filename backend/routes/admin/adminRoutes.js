@@ -25,7 +25,7 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
 
  
     await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleID,departmentID]);
-    res.status(201).send({message:"Successfully create object"});
+    res.status(201).send({message:"Successfully added new employee"});
   }
   catch(err){
     const Error = handleErrors(err);
@@ -263,5 +263,15 @@ router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
 
 })
 
-
+router.get("/api/listmanagers",requireAdminAuth,async (req,res) => {
+    const manager_access_id = 1;
+  try{
+    const [rows] = await db.promise().query("Select userId as employeeId,Name from users where AccessId = ?",[manager_access_id]);
+    res.status(200).send({data:rows})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+})
 module.exports = router;

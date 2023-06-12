@@ -1,12 +1,22 @@
 .employee-form-container{
     margin: auto;
+    overflow-y: auto;
+    max-height: 80vh;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
 }
 
+/* Hide scrollbar for Chrome, Safari and Opera */
+.employee-form-container::-webkit-scrollbar {
+    display: none;
+  }
+  
+ 
 .input-design-add-employee{
     border-radius: 0px;
 }
 
-.department-dropdown, .role-dropdown {
+.department-dropdown, .role-dropdown, .worktype-dropdown,.workstatus-dropdown, .manager-dropdown {
     width: 100%;
     border: 1px solid rgb(218, 220, 224);
     box-sizing: border-box;

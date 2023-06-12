@@ -5,6 +5,7 @@ import './addEmployee.css';
 import { useNavigate } from 'react-router';
 import { apiurl } from '../../../../utils/HostData';
 
+
 const AddEmployeeForm = () => {
   const navigate = useNavigate();
   // const [email, setEmail] = useState('');
@@ -12,6 +13,7 @@ const AddEmployeeForm = () => {
   const [error, setError] = useState('');
   const [departments,setDeparments] =useState([]);
   const [roles,setRoles] = useState([]);
+  const [managerList,setManagerList] = useState([]);
  // let selectedDepartment;
 
   const [newProfile,setNewProfile] = useState({
@@ -20,7 +22,17 @@ const AddEmployeeForm = () => {
     email:"",
     confirmEmail:"",
     department:"",
-    role:""
+    role:"",
+    gender:"",
+    phone:"",
+    address:"",
+    city:"",
+    state:"",
+    managerID:0,
+    joiningDate:"",
+    worktype:"",
+    workstatus:"",
+    DOB:""
   })
 
   const validateInput = () =>{
@@ -51,7 +63,16 @@ const AddEmployeeForm = () => {
           "employeeId":newProfile.employeeId,
           "role":newProfile.role,
           "department":newProfile.department,
-          "emailId":newProfile.email
+          "emailId":newProfile.email,
+          "gender":newProfile.gender,
+          "address":newProfile.address,
+          "city":newProfile.city,
+          "state":newProfile.state,
+          "worktype":newProfile.worktype,
+          "workstatus":newProfile.workstatus,
+          "joiningdate":newProfile.joiningDate,
+          "DOB":newProfile.DOB,
+          "managerID":newProfile.managerID
       })
     })
       .then((response)=>{
@@ -135,9 +156,31 @@ const AddEmployeeForm = () => {
   }
 
 
+  const fetchManagers = () =>{
+    fetch(apiurl + "/listmanagers")
+    .then((response) =>{
+      if(response.redirected){
+        window.location.replace(response.url);
 
+      }
+      else if (response.status == 200){
+        response.json()
+        .then(data =>{
+          console.log(data.data)
+          setManagerList(data.data)
+        })
+      }
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+
+    }
   
-  useEffect( () =>{ fetchDepartmentList() },[]);
+  useEffect( () =>{ 
+    fetchDepartmentList(); 
+    fetchManagers();
+  },[]);
 
   return (
     <div className="employee-form-container">
@@ -151,6 +194,13 @@ const AddEmployeeForm = () => {
           <CDBInput style={{'border-radius':'0px'}} label="Name" type="text" icon="user" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,name:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}} label="Email" type="email" icon="envelope" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,email:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}}  label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,confirmEmail:e.target.value})} />
+          
+          <CDBInput style={{'border-radius':'0px'}} label="Gender" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,gender:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Phone Number" type="text" icon="phone-alt" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,phone:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Address" type="text" icon="home" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,address:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="City" type="text" icon="city" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,city:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}} label="State" type="text" icon="globe-asia" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,state:e.target.value})} />
+             
           <label htmlFor="department">Select a Department:</label>
           <br />
           <select id="department" name="department" className='department-dropdown' onChange={e => handleDeptSelection(e.target.value)}>
@@ -165,11 +215,52 @@ const AddEmployeeForm = () => {
           <label htmlFor="role" >Role: </label>
             <br />
             <select id="role" name="role" className='role-dropdown' onChange={e => setNewProfile({...newProfile,role:e.target.value})} >
-              {
+            {
                 roles.map(role =>
                   <option id={role} value={role}>{role}</option>)
               }
+              
             </select>
+
+
+            <label htmlFor="Work Type" >Work Type: </label>
+            <br />
+            <select id="worktype" name="worktype" className='worktype-dropdown' onChange={e => setNewProfile({...newProfile,worktype:e.target.value})} >
+            <option id="1" value='WFH'>Work From Home</option>
+              <option id="2" value='WFO'>Work From Office</option>
+              <option id="3" value='Hybrid'>Hybrid</option>
+            </select>
+
+            <label htmlFor="Work Status" >Work Status: </label>
+            <br />
+            <select id="workstatus" name="workstatus" className='workstatus-dropdown' onChange={e => setNewProfile({...newProfile,workstatus:e.target.value})} >
+            <option id="1" value='Salaried'>Salaried</option>
+              <option id="2" value='Contract'>Contract</option>
+              <option id="3" value='Intern'>Intern</option>
+            </select>
+
+
+            <label htmlFor='Manager'>Manager: </label>
+              <br />
+              <select id='manager' name='manager' className='manager-dropdown' onChange={e => setNewProfile({...newProfile,managerID:e.target.value})} >
+              {
+                managerList.map(manager =>
+                  <option id={manager.employeeId} value={manager.employeeId}>{manager.Name}</option>)
+              }
+
+                </select>
+
+
+
+
+          <label htmlFor="DOB" >Date of Birth: </label>
+            <input type="date" name="DOB" required pattern="\d{4}-\d{2}-\d{2}" onChange={e => setNewProfile({...newProfile,DOB:e.target.value})}/>
+            <br />
+            
+            <label htmlFor="Joining Date " >Joining Date: </label>
+            <input type="date" name="joiningdate" required pattern="\d{4}-\d{2}-\d{2}" onChange={e => setNewProfile({...newProfile,joiningDate:e.target.value})}/>
+            <br />  
+
               <div class="d-flex align-items-center justify-content-center mt-2">
              <p class="err-message" >{error}</p> 
              </div>
