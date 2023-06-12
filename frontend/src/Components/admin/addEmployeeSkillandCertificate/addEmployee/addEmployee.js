@@ -30,8 +30,8 @@ const AddEmployeeForm = () => {
     state:"",
     managerID:0,
     joiningDate:"",
-    worktype:"",
-    workstatus:"",
+    worktype:"WFH",
+    workstatus:"Salaried",
     DOB:""
   })
 
@@ -46,7 +46,10 @@ const AddEmployeeForm = () => {
       setError("Employee ID must be a Number greater than 0")
       return false
     }
-
+    if(newProfile.managerID <=0){
+      setError("Manager must be selected")
+      return false
+    }
     return true
   }
   const registerUser = () => {
@@ -166,7 +169,6 @@ const AddEmployeeForm = () => {
       else if (response.status == 200){
         response.json()
         .then(data =>{
-          console.log(data.data)
           setManagerList(data.data)
         })
       }
@@ -243,6 +245,7 @@ const AddEmployeeForm = () => {
             <label htmlFor='Manager'>Manager: </label>
               <br />
               <select id='manager' name='manager' className='manager-dropdown' onChange={e => setNewProfile({...newProfile,managerID:e.target.value})} >
+              <option id='sel' value={0}>Select a Manager</option>
               {
                 managerList.map(manager =>
                   <option id={manager.employeeId} value={manager.employeeId}>{manager.Name}</option>)
