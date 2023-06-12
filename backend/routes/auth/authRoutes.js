@@ -64,11 +64,11 @@ router.get("/api/forgotpassword",async(req,res) =>{
     
     const emailContent = {
       toEmail:emaiId,
-      subject:"Password Recovery",
-      body:"You have raised a request to Reset Password. Use this OTP to change to your password " + otp + ". This Expires in 5 minutes."
+      subject:"Password Recovery - Skill Matrix",
+      body:"You have raised a request to Reset Password. Use this OTP to change to your password \n" + otp + ".\n This Expires in 10 minutes."
     }
     sendEmail(emailContent);
-    res.cookie("fpwd",token,{httpOnly:true,maxAge:300000})
+    res.cookie("fpwd",token,{httpOnly:true,maxAge:600000})
     res.status(200).send({message:"Email Sent Successfully"})
   }
   catch(err){
