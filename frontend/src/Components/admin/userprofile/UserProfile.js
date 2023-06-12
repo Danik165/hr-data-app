@@ -1,6 +1,6 @@
 import Profile from '../../users/profile/Profile';
 import UserPage from '../../users/skilltable/SkillTable';
-import './UserProfile.css'; // Import your CSS file
+import './UserProfile.css';
 
 
 const UserProfile = () =>{
