@@ -11,20 +11,20 @@ const router = Router();
 router.post("/api/register",requireAdminAuth,async (req,res) => {
   
 
-  const { name, employeeId, role, department, emailId,phone,gender,address,city,state,managerID,worktype,workstatus,DOB,joiningdate } = req.body;
+  const { name, employeeId, roleId, departmentId, emailId,phone,gender,address,city,state,managerID,worktype,workstatus,DOB,joiningdate } = req.body;
   var roleID,departmentID;
 
 
   try{
-    let [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[department])
-    departmentID = rows[0].DepartmentID;
+    // let [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[department])
+    // departmentID = rows[0].DepartmentID;
 
 
-    [rows] = await db.promise().query(sqlQuery.selectRoleIdByDepartmentIdandRoleName,[departmentID,role])
-    roleID = rows[0].roleID;
+    // [rows] = await db.promise().query(sqlQuery.selectRoleIdByDepartmentIdandRoleName,[departmentID,role])
+    // roleID = rows[0].roleID;
 
  
-    await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleID,departmentID]);
+    await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleId,departmentId]);
     res.status(201).send({message:"Successfully added new employee"});
   }
   catch(err){
