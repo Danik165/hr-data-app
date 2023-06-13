@@ -96,11 +96,11 @@ router.post("/api/addskillforuser",requireAdminAuth,async (req,res) =>{
 router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
-
-    let departmentlist = rows.map(a => a.DepartmentName);
+    //console.log(rows)
+    //let departmentlist = rows.map(a => a.DepartmentName);
    // console.log(departmentlist);
-    const body = {data:departmentlist};
-    res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
+    //const body = {data:departmentlist};
+    res.status(200).setHeader('Content-Type', 'application/json').send({data:rows}) ;
   }
   catch(err){
     const Error = handleErrors(err);
@@ -115,17 +115,12 @@ router.get("/api/departments",requireAdminAuth,async (req,res) => {
 router.get("/api/rolebydepartment",requireAdminAuth,async(req,res) =>{
 
   try{
-   
-    const departmentName = req.query.departmentName;
 
-    var [departmentRows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[departmentName]);
-    const deptId = departmentRows[0].DepartmentID;
+    const deptId = req.query.deptId;
+
 
     var [rows] = await db.promise().query(sqlQuery.selectRoleNameByDepartmentId,[deptId]);
-
-    const rolelist = rows.map(a => a.RoleName)
-    const body = {data:rolelist};
-    res.status(200).setHeader('Content-Type', 'application/json').send(body) ;
+    res.status(200).setHeader('Content-Type', 'application/json').send({data:rows}) ;
 
   }
 
@@ -272,6 +267,22 @@ router.get("/api/listmanagers",requireAdminAuth,async (req,res) => {
   catch(err){
     const Error = handleErrors(err);
     res.status(Error.code).send(Error)
+  }
+})
+
+
+
+
+router.put("/api/updateuser",requireAdminAuth,async(req,res) =>{
+  try{
+    
+    const { name, employeeId, roleID, departmentID, emailId,phone,gender,address,city,state,managerID,worktype,workstatus,DOB,joiningdate } = req.body;
+
+
+  }
+  catch(err){
+    const Error = handleErrors(err)
+
   }
 })
 module.exports = router;
