@@ -207,7 +207,7 @@ const fetchProfilebyid = async () => {
             <Card title='Work Information' content={
               <>
                 {profileItem("Work Type", tempProfile.WorkType, 'WorkType', true)}
-                {profileItem("Joining Date", tempProfile.JoiningDate.slice(0,10), 'JoiningDate', true)}
+                {profileItem("Joining Date", tempProfile.JoiningDate, 'JoiningDate', true)}
                 {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
                 {profileItem("Department", tempProfile.Department, 'Department', true)}
                 {profileItem("Reporting Manager ID", tempProfile.ReportingManagerID, 'ReportingManagerID', true)}
