@@ -12,12 +12,12 @@ const sqlQuery ={
     updatePassword:"Update users set password = ? where userId = ?",
 
     //select Departments    
-    selectDepartments:"SELECT DepartmentName from department",
+    selectDepartments:"SELECT DepartmentID,DepartmentName from department",
     selectDepartmentIdByName:"Select DepartmentID from department where DepartmentName=?",
 
     //Select Roles
     selectRoleIdByDepartmentIdandRoleName:"Select roleID from role where departmentID=? and RoleName = ?",
-    selectRoleNameByDepartmentId:"Select RoleName from role where DepartmentID =? ",
+    selectRoleNameByDepartmentId:"Select roleID,RoleName from role where DepartmentID =? ",
 
     // OTP table update or select
     selectOtpbyUserIdandUniqueId:"Select otp from otp_request where UserId =? and uniqueId = ?",
