@@ -10,12 +10,18 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
     localStorage.removeItem('access_tokezn');
     fetch(apiurl+"/logout")
       .then((response) =>{
-        response.json()
-          .then(data =>{
-              console.log(data);
-              setIsAuthenticated(false);
-              navigate('/login');
-          })
+        if(response.status == 200){
+
+          //window.location.replace(response.url)
+          navigate('/login')
+        }
+        // response.json()
+        //   .then(data =>{
+        //       console.log(data);
+        //       setIsAuthenticated(false);
+        //       window.location.replace
+        //       navigate('/login');
+        //   })
       })
 
   };
