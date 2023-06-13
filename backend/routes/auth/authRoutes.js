@@ -73,7 +73,7 @@ router.get("/api/forgotpassword",async(req,res) =>{
   }
   catch(err){
     const Error = handleErrors(err);
-    res.send(Error).status(err.code);
+    res.status(err.code).send(Error);
   }
 })
 
@@ -132,7 +132,7 @@ router.post("/api/resetpassword",async(req,res) =>{
 catch(err){
   console.log(err)
   const Error = handleErrors(err);
-  res.send(Error).status(Error.code)
+  res.status(Error.code).send(Error)
 }
   }
 } )
