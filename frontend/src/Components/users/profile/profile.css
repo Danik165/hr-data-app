@@ -90,3 +90,26 @@ input.profile-input-department
   font-size: 0.8rem;
   font-weight: 400;
 }
+
+.card {
+  border: 1px solid #000;
+  border-radius: 5px;
+  padding: 10px;
+  margin-bottom: 10px;
+  background-color: #fff;
+}
+
+.card-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.card-content {
+  margin-bottom: 5px;
+}
+
+.card-content-input {
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid black;
+}

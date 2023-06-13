@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl} from '../../../utils/HostData';
+import Card from './Card';
 
 
 const Profile = ({ setIsAuthenticated, id }) => {
@@ -142,12 +143,7 @@ try {
     setIsLoading(false);
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
-
-
-
-  const profileItem = (label, value, field, disabled) => (
+ const profileItem = (label, value, field, disabled) => (
     <div className={`profile-item-${field}`}>
       {label && <label>{label}: </label>}
       <input
@@ -160,33 +156,44 @@ try {
     </div>
   );
 
-return (
+  if (isLoading) return <p>Loading...</p>;
+  if (error) return <p>Error: {error}</p>;
+
+  return (
     <div className="profile-container">
       <form onSubmit={updateProfile}>
         <div className="profile-content">
           <div className="profile-left">
             <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
-            <div className="profile-item-left">
-              <p className="profile-text-name">{profile.Name}</p>
-            </div>
-            <div className="profile-item-left">
-              <p className="profile-text-role">{profile.Role}</p>
-            </div>
           </div>
           <div className="profile-right">
-            {profileItem('Email', tempProfile.EmailID, 'EmailID', true)}
-            {profileItem('Phone', tempProfile.PhoneNumber, 'PhoneNumber', false)}
-            {profileItem('Address', tempProfile.Address, 'Address', false)}
-            {profileItem('City', tempProfile.City, 'City', false)}
-            {profileItem('State', tempProfile.State, 'State', false)}
-            {profileItem('Work Type', tempProfile.WorkType, 'WorkType', true)}
-            {profileItem('Joining Date', tempProfile.JoiningDate.slice(0,10), 'JoiningDate', true)}
-            {profileItem('Date of Birth', tempProfile.DOB.slice(0,10), 'DOB', true)}
-            {profileItem('Age', tempProfile.Age, 'Age', true)}
-            {profileItem('Time at Jeevan', tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
-            {profileItem('Department', tempProfile.Department, 'Department', true)}
-            {profileItem('Reporting Manager ID', tempProfile.ReportingManagerID, 'ReportingManagerID', true)}
-            {profileItem('Manager Name', tempProfile.ManagerName, 'ManagerName', true)}
+            <Card title='Profile Information' content={
+              <>
+                {profileItem("Name", tempProfile.Name, 'Name', true)}
+                {profileItem("Role", tempProfile.Role, 'Role', true)}
+                {profileItem("Email", tempProfile.EmailID, 'EmailID', true)}
+                {profileItem("Phone", tempProfile.PhoneNumber, 'PhoneNumber', false)}
+                {profileItem("Date of Birth", tempProfile.DOB.slice(0,10), 'DOB', true)}
+                {profileItem("Age", tempProfile.Age, 'Age', true)}
+              </>
+            }/>
+            <Card title='Address Information' content={
+              <>
+                {profileItem("Address", tempProfile.Address, 'Address', false)}
+                {profileItem("City", tempProfile.City, 'City', false)}
+                {profileItem("State", tempProfile.State, 'State', false)}
+              </>
+            }/>
+            <Card title='Work Information' content={
+              <>
+                {profileItem("Work Type", tempProfile.WorkType, 'WorkType', true)}
+                {profileItem("Joining Date", tempProfile.JoiningDate.slice(0,10), 'JoiningDate', true)}
+                {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
+                {profileItem("Department", tempProfile.Department, 'Department', true)}
+                {profileItem("Reporting Manager ID", tempProfile.ReportingManagerID, 'ReportingManagerID', true)}
+                {profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', true)}
+              </>
+            }/>
           </div>
         </div>
         {isEditing
@@ -203,5 +210,6 @@ return (
 };
 
 export default Profile;
+
 
 
