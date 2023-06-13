@@ -3,14 +3,24 @@ import { useEffect, useState } from 'react';
 import './certificatetable.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl } from '../../../utils/HostData';
+import AddUserCertificate from './addusercertificate/AddUserCertificate';
+import {Modal, ModalBody} from "reactstrap"
+
+
 export default function CertificateTable({id}){
     const [userCertificates,setUserCertificates] = useState([]);
 
     const [errorMsg,setErrorMsg] = useState('')
+    const [showAddCertificateForm,setShowAddCertificateForm] = useState(false)
+    
+    
+    
     const handleEditCertificate = (index) =>{
         console.log("Handle Edit Called for ",index);
     }
     
+
+
     const delCertificateConfirmation = (index) =>{
         console.log("Del Confirmation Called for ",index);
         confirmAlert({
@@ -63,6 +73,12 @@ export default function CertificateTable({id}){
             fetchCertificate({url:userUrl})
         }
     },[])
+
+
+
+    const toggleAddCertificateForm = () =>{
+        setShowAddCertificateForm(!showAddCertificateForm)  }
+
     return(
         <div class='certificate-table-container'>
            <table>
@@ -88,6 +104,12 @@ export default function CertificateTable({id}){
                 ))}
             </tbody>
            </table>
+        <button onClick={toggleAddCertificateForm}>Add new Certificate</button>   
+        <Modal isOpen={showAddCertificateForm} toggle={toggleAddCertificateForm}>
+            <ModalBody>
+                <AddUserCertificate toggleForm={toggleAddCertificateForm}/>
+            </ModalBody>
+        </Modal>
         </div>
     )
 }
