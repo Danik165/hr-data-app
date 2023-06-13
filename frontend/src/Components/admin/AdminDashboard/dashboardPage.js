@@ -2,6 +2,7 @@ import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
 import SearchCards from "./SearchCards";
 import { MDBIcon } from "mdb-react-ui-kit";
+import { apiurl } from "../../../utils/HostData";
 const DashboardPage = () =>{
     
     const [searchValue,setSearchValue] = useState('')
@@ -13,7 +14,7 @@ const DashboardPage = () =>{
 
             e.preventDefault();
         }
-        fetch("http://localhost:5000/api/getdetails?" + new URLSearchParams({searchValue:searchValue}))
+        fetch(apiurl+"/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
             //console.log(response.status)
             if(response.redirected){

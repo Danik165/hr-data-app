@@ -35,13 +35,13 @@ const Sidebar = ({setIsAuthenticated}) => {
 
         <CDBSidebarContent className="sidebar-content">
           <CDBSidebarMenu>
-            <NavLink exact to="/" activeClassName="activeClicked">
+            <NavLink to="/" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/skills" activeClassName="activeClicked">
+            <NavLink to="/skills" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="table">Skills</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink exact to="/profile" activeClassName="activeClicked">
+            <NavLink to="/profile" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>

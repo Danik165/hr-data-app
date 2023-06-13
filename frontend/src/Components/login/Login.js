@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./login.css";
-
+import { apiurl } from '../../utils/HostData';
 import { Link } from 'react-router-dom';
 
 
@@ -18,7 +18,7 @@ const Login = (props) => {
     
 
     try {
-      const response = await fetch('http://localhost:5000/api/login', {
+      const response = await fetch(apiurl+'/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

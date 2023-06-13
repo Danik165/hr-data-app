@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./enternewpassword.css";
 import logo from "../../Images/logo.png";
-
+import { apiurl } from '../../utils/HostData';
 
 
 const EnterNewPassword = () =>{
@@ -13,7 +13,7 @@ const EnterNewPassword = () =>{
     const [error,setError ] = useState('');
     const checkOTP = () =>{
         if(password == confirmPassword){
-          fetch("http://localhost:5000/api/resetpassword",{
+          fetch(apiurl+"/resetpassword",{
             method: 'POST',
         headers: {
           'Content-Type': 'application/json',

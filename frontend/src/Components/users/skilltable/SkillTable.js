@@ -3,7 +3,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 import { useEffect, useState } from "react";
 import './skilltable.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
-
+import { apiurl } from '../../../utils/HostData';
 const UserPage = ({id}) => {
   const [category, setCategory] = useState("");
   const [skill, setSkill] = useState("");
@@ -60,7 +60,7 @@ const handleEditSkill = (index) => {
 };  
 
 const removeSubSkill = async (index) => {
-  fetch("http://localhost:5000/api/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
+  fetch(apiurl+"/deleteuserskill?" + new URLSearchParams({userskillId:index}),{
     method:"DELETE"
   } )  
   .then(response => {
@@ -85,11 +85,11 @@ const addSkill = () => {
  if(id){
      tempObj = {userId:id, category:category, skill:skill, subSkillList: subSkill, years: year, level: level
     }
-     url = "http://localhost:5000/api/addskillforuser"
+     url = apiurl+"/addskillforuser"
  }
  else{
      tempObj ={ category:category, skill:skill, subSkillList: subSkill, years: year, level: level}
-     url = "http://localhost:5000/api/addskill"
+     url = apiurl+"/addskill"
    }
   fetch(url,{
     method:"POST",
@@ -148,7 +148,7 @@ const fetchSubSkillsbyid = async (url) =>{
 }
 
 const getSkillStructure = () =>{
-    fetch("http://localhost:5000/api/skilllist")
+    fetch(apiurl+"/skilllist")
     .then(res =>{
       if(res.redirected){
       window.location.replace(res.url);
@@ -170,11 +170,11 @@ const getSkillStructure = () =>{
 useEffect(() =>{
     getSkillStructure();
     if(id){
-      const url = "http://localhost:5000/api/getallskillsofuser?" + new URLSearchParams({userId:id})
+      const url = apiurl+"/getallskillsofuser?" + new URLSearchParams({userId:id})
       fetchSubSkillsbyid(url)
     }
     else{
-        const userUrl = "http://localhost:5000/api/getallskills";
+        const userUrl = apiurl+"/getallskills";
         fetchSubSkillsbyid(userUrl)
       //console.log("Fetch sub skills for the user")
     }

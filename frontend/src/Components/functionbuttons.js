@@ -1,6 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-
+import { apiurl } from '../utils/HostData';
 import './functionbuttons.css'
 
 const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setIsAuthenticated
@@ -8,7 +8,7 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
 
   const logoutUser = () => {
     localStorage.removeItem('access_tokezn');
-    fetch("http://localhost:5000/api/logout")
+    fetch(apiurl+"/logout")
       .then((response) =>{
         response.json()
           .then(data =>{

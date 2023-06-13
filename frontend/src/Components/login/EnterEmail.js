@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
 import "./enteremail.css";
 import logo from "../../Images/logo.png";
+import { apiurl } from '../../utils/HostData';
 
 
 const EnterEmail = () =>{
@@ -9,7 +10,7 @@ const EnterEmail = () =>{
     const [email,setEmail] = useState('');
     const [error,setError ] = useState('');
     const generateOTP = () =>{
-        fetch("http://localhost:5000/api/forgotpassword?"+ new URLSearchParams({emailId:email}))
+        fetch(apiurl+"/forgotpassword?"+ new URLSearchParams({emailId:email}))
         .then((response)=>{
           response.json()
           .then((data) => {

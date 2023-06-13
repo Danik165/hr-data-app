@@ -1,15 +1,15 @@
 const handleErrors = require("../error/errorhandler")
-
+const dotenv = require('dotenv');
 const mysql = require('mysql2');
 
 
-
+dotenv.config()
 const sqlDb = mysql.createConnection({
-    host: '192.168.1.13',
-    user: 'dev1',
-    password: 'Welcome@12345',
-    port:3306,
-    database: 'company_skills'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port:process.env.DB_PORT,
+    database:process.env.DB_NAME
 });
 
 sqlDb.connect((err) => {

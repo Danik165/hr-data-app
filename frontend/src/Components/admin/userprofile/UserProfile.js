@@ -1,3 +1,4 @@
+import CertificateTable from '../../users/certificatetable/CertificateTable';
 import Profile from '../../users/profile/Profile';
 import UserPage from '../../users/skilltable/SkillTable';
 import './UserProfile.css';
@@ -15,6 +16,10 @@ const UserProfile = () =>{
             <div class="scrollable-content">
                  <h1 class=" text-center">Skills</h1>
                 <UserPage id={id}/>
+            </div>
+            <div class='certificate-table'>
+                <h2>Certificates</h2>
+                <CertificateTable id={id} />
             </div>
         </div>
     )

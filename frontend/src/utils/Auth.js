@@ -15,7 +15,7 @@ function Auth({ onLogin }) {
       body: JSON.stringify({ username, password }),
     };
 
-    fetch(`http://localhost:5000/${isRegistering ? "register" : "login"}`, requestOptions)
+    fetch(`http://11.11.1.18:83/${isRegistering ? "register" : "login"}`, requestOptions)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Error with authentication");
