@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router';
 import "./enternewpassword.css";
 import logo from "../../Images/logo.png";
 import { apiurl } from '../../utils/HostData';
-
+import { confirmAlert } from 'react-confirm-alert';
 
 const EnterNewPassword = () =>{
     const navigate = useNavigate();
@@ -16,6 +16,21 @@ const EnterNewPassword = () =>{
         setError('Password cannot be empty');
     }
     else if(password == confirmPassword){
+
+      // confirmAlert({
+      //   title:"Success",
+      //   message:"Password Changed",
+      //   buttons:[
+      //     {
+      //       label:"Ok",
+      //       onClick:()=> navigate('/login')
+      //     }
+      //   ]
+  
+      // })
+
+      //navigate('/login');
+
           fetch(apiurl+"/resetpassword",{
             method: 'POST',
         headers: {
@@ -26,7 +41,19 @@ const EnterNewPassword = () =>{
           .then((response) =>{
             if(response.status == 200)
              { 
-              navigate('/login');
+              confirmAlert({
+                title:"Success",
+                message:"Password Changed",
+                buttons:[
+                  {
+                    label:"Ok",
+                    onClick:() => navigate('/login')
+                  }
+                ]
+          
+              })
+    
+              //navigate('/login');
             }
             else{
               response.json()
