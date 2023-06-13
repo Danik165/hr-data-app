@@ -12,7 +12,10 @@ const EnterNewPassword = () =>{
     const [confirmPassword,setConfirmPassword] = useState('')
     const [error,setError ] = useState('');
     const checkOTP = () =>{
-        if(password == confirmPassword){
+    if(password.length <=0){
+        setError('Password cannot be empty');
+    }
+    else if(password == confirmPassword){
           fetch(apiurl+"/resetpassword",{
             method: 'POST',
         headers: {
