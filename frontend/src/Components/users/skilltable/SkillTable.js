@@ -4,6 +4,15 @@ import { useEffect, useState } from "react";
 import './skilltable.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl } from '../../../utils/HostData';
+import AddUserSkill from './addskill/AddSkill';
+import {
+  Button, Modal, ModalFooter,
+  ModalHeader, ModalBody
+} from "reactstrap"
+
+
+
+
 const UserPage = ({id}) => {
   const [category, setCategory] = useState("");
   const [skill, setSkill] = useState("");
@@ -13,6 +22,9 @@ const UserPage = ({id}) => {
   const [certificate, setCertificate] = useState("");
   const [userSkills, setUserSkills] = useState([]);
   const [skillStructure,setSkillStructure] = useState([]);
+  const [showAddSkillForm,setShowAddSkillForm] = useState(false)
+
+  const toggleAddSkillForm = () => setShowAddSkillForm(!showAddSkillForm);
 
 const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
 
@@ -210,67 +222,13 @@ return (
         </tbody>
       </table>
       <h2 >Add skills</h2>
-    <div>
-      <select onChange={(e) => setCategory(e.target.value)} value={category}>
-        <option value="">Select category</option>
-        {skillStructure.map(({ category }, i) => (
-          <option key={i} value={category}>{category}</option>
-        ))}
-      </select>
-      {category && (
-        <select onChange={(e) => setSkill(e.target.value)} value={skill}>
-          <option value="">Select skill</option>
-          {skillOptions.map(({ skill }, i) => (
-            <option key={i} value={skill}>{skill}</option>
-          ))}
-        </select>
-      )}
+      <button onClick={toggleAddSkillForm} >Add Skill </button>
+      <Modal isOpen={showAddSkillForm}  toggle={toggleAddSkillForm}>
+            <ModalBody>
+              <AddUserSkill />
+            </ModalBody>
 
-      {skill && subSkillOptions.length > 0 && (
-        <div>
-          {subSkillOptions.map((sub, index) => (
-            <label key={index}>
-              <input
-                type="checkbox"
-                checked={subSkill.includes(sub)}
-                onChange={() => handleSubSkillChange(sub)}
-              />
-              {sub}
-            </label>
-          ))}
-        </div>
-      )}
-
-      {subSkill.length > 0 && (
-    <div>
-      <select
-        value={year}
-        onChange={(e) => setYear(e.target.value)}
-      >
-        <option value="">Years of Experience</option>
-        <option value="1 year">1 Year</option>
-        <option value="2 years">2 Years</option>
-        <option value="3 years">3 Years</option>
-        <option value="4 years">4 Years</option>
-        <option value="5 years">5 Years</option>
-        <option value="More than 5 years">More than 5 Years</option>
-      </select>
-
-      <select
-        value={level}
-        onChange={(e) => setLevel(e.target.value)}
-      >
-        <option value="">Level of Expertise</option>
-        <option value="Beginner">Beginner</option>
-        <option value="Intermediate">Intermediate</option>
-        <option value="Advanced">Advanced</option>
-        <option value="Expert">Expert</option>
-      </select>
-
- <button onClick={addSkill} disabled={!category || !skill || !subSkill.length || !year || !level }>Add Skill</button>
-    </div>
-  )}
-</div>
+      </Modal>
   </div>
 );
 
