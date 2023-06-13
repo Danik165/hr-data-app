@@ -4,7 +4,8 @@ import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDro
 import './addEmployee.css';
 import { useNavigate } from 'react-router';
 import { apiurl } from '../../../../utils/HostData';
-
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
 
 const AddEmployeeForm = () => {
   const navigate = useNavigate();
@@ -50,15 +51,14 @@ const AddEmployeeForm = () => {
       setError("Must have an Email Id")
       return false
     }
-    if(newProfile.managerID <=0){
+    if(newProfile.managerID <0){
       setError("Manager must be selected")
       return false
     }
-    
+   
     return true
   }
   const registerUser = () => {
-    console.log("Register User Called")
     if(validateInput()){
 
       fetch(apiurl+"/register",{
@@ -86,6 +86,16 @@ const AddEmployeeForm = () => {
     })
       .then((response)=>{
         if(response.status == 201){
+          confirmAlert({
+            title:"Success",
+            message:"New Employee Created",
+            buttons:[
+              {
+                label:"Ok",
+              }
+            ]
+      
+          })
           setError("New Employee Created Successfully")
           setTimeout(()=>setError(''),2000)
         }
@@ -101,7 +111,7 @@ const AddEmployeeForm = () => {
     })
       
     }
-    console.log(error)
+    
   }
   
   const handleDeptSelection = (dept) =>{
