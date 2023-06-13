@@ -8,21 +8,20 @@ import { apiurl } from '../../../../utils/HostData';
 
 const AddEmployeeForm = () => {
   const navigate = useNavigate();
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [departments,setDeparments] =useState([]);
   const [roles,setRoles] = useState([]);
   const [managerList,setManagerList] = useState([]);
- // let selectedDepartment;
+
+
 
   const [newProfile,setNewProfile] = useState({
     employeeId:0,
     name:"",
     email:"",
     confirmEmail:"",
-    department:"",
-    role:"",
+    departmentId:"",
+    roleId:"",
     gender:"",
     phone:"",
     address:"",
@@ -36,24 +35,30 @@ const AddEmployeeForm = () => {
   })
 
   const validateInput = () =>{
-    if(newProfile.email != newProfile.confirmEmail )
+    console.log(newProfile)
+    if( !/^\d+$/.test(newProfile.employeeId) || newProfile.employeeId <= 0)
+    {
+      setError("Employee ID must be a Number greater than 0")
+      return false
+    }
+    else if(newProfile.email != newProfile.confirmEmail )
     {
       setError("Emails Do Not match")
       return false
     } 
-    if(isNaN(newProfile.employeeId)  || newProfile.employeeId <= 0)
-    {
-      setError("Employee ID must be a Number greater than 0")
+    else if(newProfile.email.length == 0){
+      setError("Must have an Email Id")
       return false
     }
     if(newProfile.managerID <=0){
       setError("Manager must be selected")
       return false
     }
+    
     return true
   }
   const registerUser = () => {
-    console.log(newProfile)
+    console.log("Register User Called")
     if(validateInput()){
 
       fetch(apiurl+"/register",{
@@ -65,8 +70,8 @@ const AddEmployeeForm = () => {
           "name":newProfile.name,
           "phone":newProfile.phone,
           "employeeId":newProfile.employeeId,
-          "role":newProfile.role,
-          "department":newProfile.department,
+          "roleId":newProfile.roleId,
+          "departmentId":parseInt(newProfile.departmentId),
           "emailId":newProfile.email,
           "gender":newProfile.gender,
           "address":newProfile.address,
@@ -89,20 +94,18 @@ const AddEmployeeForm = () => {
     })
       
     }
-
-    console.log("Register User called")
+    console.log(error)
   }
   
   const handleDeptSelection = (dept) =>{
 
-    setNewProfile({...newProfile,department:dept})
-    //selectedDepartment = dept;
+    setNewProfile({...newProfile,departmentId:dept})
     fetchRole(dept);
   }
 
   
- const fetchRole = (dept) =>{
-    fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({departmentName:dept}))
+ const fetchRole = (deptId) =>{
+    fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({deptId:deptId}))
     .then((response) => {
       if(response.redirected){
         window.location.replace(response.url);
@@ -111,13 +114,10 @@ const AddEmployeeForm = () => {
       else{
       response.json()
         .then((rolelist) =>{
-          setRoles([])
-          for(let i = 0; i <rolelist.data.length ; i++){
+          setRoles(rolelist.data)
+          //console.log(rolelist.data[0].roleID)
+          setNewProfile({...newProfile,departmentId:deptId,roleId:rolelist.data[0].roleID})
 
-            setRoles(oldArray => [...oldArray,rolelist.data[i]]);
-          }
-          
-          setNewProfile({...newProfile,department:dept,role:rolelist.data[0]})
         })
 
   }
@@ -141,20 +141,15 @@ const AddEmployeeForm = () => {
         else {
           response.json()
             .then((departmentlist) => {
-              console.log(departmentlist)
-              
-              for(let i = 0; i <departmentlist.data.length ; i++){
-
-                setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
-              }
-              fetchRole(departmentlist.data[0])
-             // setNewProfile({...newProfile,department:departmentlist.data[0].DepartmentName})
+              //console.log(departmentlist)
+              setDeparments(departmentlist.data) 
+              fetchRole(departmentlist.data[0].DepartmentID);
             })
           }
 
     })
     .catch(err =>{
-      console.log(err.message);
+     // console.log(err.message);
       setError(err.message)
     })
   }
@@ -193,7 +188,7 @@ const AddEmployeeForm = () => {
           <div className="text-center mt-4 mb-2">
             <p className="h4 font-weight-bold"> Add Employee </p>
           </div>
-          <CDBInput style={{'border-radius':'0px'}} label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:parseInt(e.target.value)})} />
+          <CDBInput style={{'border-radius':'0px'}} label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}} label="Name" type="text" icon="user" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,name:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}} label="Email" type="email" icon="envelope" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,email:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}}  label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,confirmEmail:e.target.value})} />
@@ -208,7 +203,7 @@ const AddEmployeeForm = () => {
           <br />
           <select id="department" name="department" className='department-dropdown' onChange={e => handleDeptSelection(e.target.value)}>
           {departments.map(department => 
-                <option key={department} value={department}>{department}</option>
+                <option key={department.DepartmentID} value={department.DepartmentID}>{department.DepartmentName}</option>
           )}
          
                  
@@ -217,10 +212,10 @@ const AddEmployeeForm = () => {
 
           <label htmlFor="role" >Role: </label>
             <br />
-            <select id="role" name="role" className='role-dropdown' onChange={e => setNewProfile({...newProfile,role:e.target.value})} >
+            <select id="role" name="role" className='role-dropdown' onChange={e => setNewProfile({...newProfile,roleId:e.target.value})} >
             {
                 roles.map(role =>
-                  <option id={role} value={role}>{role}</option>)
+                  <option id={role.roleID} value={role.roleID}>{role.RoleName}</option>)
               }
               
             </select>
