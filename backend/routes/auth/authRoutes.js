@@ -29,7 +29,7 @@ router.post("/api/login",async (req,res) => {
     }
     else{
       console.log(result)
-      responseObj = {nextPage: "/user"}
+      responseObj = {nextPage: "/"}
     }
     
     res.cookie("hrjwt",token,{httpOnly:true,maxAge:259200000});
