@@ -120,28 +120,48 @@ const fetchProfilebyid = async () => {
 
   const updateProfile = async (event) => {
     event.preventDefault();
-
-try {
+    try {
       setIsLoading(true);
       setError(null);
       const data = tempProfile;
+      console.log('Updating with data:', data);
+      const response = await fetch(apiurl + '/updateuser', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name: data.Name,
+          employeeId: data.EmployeeID,
+          roleID: data.Role,
+          departmentID: data.Department,
+          emailId: data.EmailID,
+          phone: data.PhoneNumber,
+          gender: data.Gender,
+          address: data.Address,
+          city: data.City,
+          state: data.State,
+          managerID: data.ReportingManagerID,
+          worktype: data.WorkType,
 
-      // No actual fetch operation so no actual response object.
-      // But we assume everything goes well.
-      const response = { ok: true };
-
+          DOB: data.DOB,
+          joiningdate: data.JoiningDate
+        })
+      });
+      const responseData = await response.json();
+      console.log('Server responded with:', responseData);
       if (!response.ok) {
-        throw new Error(data.message || 'Could not update profile.');
+        throw new Error(responseData.message || 'Could not update profile.');
       }
-
       setProfile(tempProfile);
       setIsEditing(false);
-
     } catch (err) {
+      console.error('Updating profile failed with error:', err);
       setError(err.message);
     }
     setIsLoading(false);
   };
+
 
  const profileItem = (label, value, field, disabled) => (
     <div className={`profile-item-${field}`}>
