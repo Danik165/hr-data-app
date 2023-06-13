@@ -24,7 +24,7 @@ router.post("/api/register",requireAdminAuth,async (req,res) => {
     // roleID = rows[0].roleID;
 
  
-    await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleId,departmentId]);
+    await db.promise().query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,departmentId,roleId]);
     res.status(201).send({message:"Successfully added new employee"});
   }
   catch(err){
