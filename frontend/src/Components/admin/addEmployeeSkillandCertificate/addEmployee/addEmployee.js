@@ -87,6 +87,13 @@ const AddEmployeeForm = () => {
       .then((response)=>{
         if(response.status == 201){
           setError("New Employee Created Successfully")
+          setTimeout(()=>setError(''),2000)
+        }
+        else{
+          response.json()
+          .then(data =>{
+            setError(data.message)
+          })
         }
       })
     .catch(err =>{
