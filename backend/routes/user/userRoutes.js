@@ -46,7 +46,7 @@ router.get("/api/userprofile",requireUserAuth,async (req,res)=>{
     const userId = req.decodedToken.userId;
     try{
         const [rows] = await db.promise().query("CALL GET_USER_PROFILE(?)",[userId]);
-        res.status(200).send({data:rows[0]});
+        res.status(200).send({data:rows[0][0]});
     }
     catch (err){
         handleErrors(err);

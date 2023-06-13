@@ -63,6 +63,7 @@ const AddEmployeeForm = () => {
         },
         body:JSON.stringify({
           "name":newProfile.name,
+          "phone":newProfile.phone,
           "employeeId":newProfile.employeeId,
           "role":newProfile.role,
           "department":newProfile.department,

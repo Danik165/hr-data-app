@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
+import { apiurl} from '../../../utils/HostData';
+
 
 const Profile = ({ setIsAuthenticated, id }) => {
   const initialProfile = {
@@ -73,11 +75,11 @@ const fetchProfile = async (url) => {
       }
     });
     const data = await response.json();
-    console.log('fetchProfile data', data);
     if (!response.ok) {
       throw new Error(data.message || 'Could not fetch profile.');
     }
-    const profileData = data.data[0];
+    const profileData = data.data;
+    console.log('profileData', profileData);
     profileData.Age = calculateAge(profileData.DOB);
     profileData.TimeatJeevan = calculateTimeAtJeevan(profileData.JoiningDate);
     setProfile(profileData);
@@ -90,8 +92,8 @@ const fetchProfile = async (url) => {
 
   useEffect(() => {
     const url = id
-      ? `http://localhost:5000/api/userprofilebyid?${new URLSearchParams({ userId: id })}`
-      : 'http://localhost:5000/api/userprofile';
+      ? apiurl + '/userprofilebyid?'+new URLSearchParams({ userId: id })
+      : apiurl + '/userprofile';
     fetchProfile(url);
   }, [id]);
 
@@ -114,58 +116,6 @@ const fetchProfilebyid = async () => {
     console.error("Error:", error);
   }
 };
-
-
-//
-//const updateProfile = async (event) => {
-//  event.preventDefault();
-//
-//  try {
-//    const response = await fetch('http://localhost:5000/api/userprofile', {
-//      method: 'PATCH',
-//      headers: {
-//        'Content-Type': 'application/json'
-//      },
-//      body: JSON.stringify({userId: id, ...tempProfile}),
-//    });
-//
-//    const data = await response.json();
-//    if (!response.ok) {
-//      throw new Error(data.message || 'Could not update profile.');
-//    }
-//
-//    setProfile(tempProfile);
-//    setIsEditing(false);
-//
-//  } catch (err) {
-//    console.error(err);
-//  }
-//};
-
-  // const updateProfile = async (event) => {
-  //   event.preventDefault();
-  //
-  //   try {
-  //     const response = await fetch('http://localhost:5000/api/userprofile', {
-  //       method: 'PUT',
-  //       headers: {
-  //         'Content-Type': 'application/json'
-  //       },
-  //       body: JSON.stringify(tempProfile),
-  //     });
-  //
-  //     const data = await response.json();
-  //     if (!response.ok) {
-  //       throw new Error(data.message || 'Could not update profile.');
-  //     }
-  //
-  //     setProfile(tempProfile);
-  //     setIsEditing(false);
-  //
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // };
 
   const updateProfile = async (event) => {
     event.preventDefault();
@@ -224,7 +174,7 @@ return (
             </div>
           </div>
           <div className="profile-right">
-            {profileItem('Email', tempProfile.EmailID.slice(0,-23), 'EmailID', true)}
+            {profileItem('Email', tempProfile.EmailID, 'EmailID', true)}
             {profileItem('Phone', tempProfile.PhoneNumber, 'PhoneNumber', false)}
             {profileItem('Address', tempProfile.Address, 'Address', false)}
             {profileItem('City', tempProfile.City, 'City', false)}
