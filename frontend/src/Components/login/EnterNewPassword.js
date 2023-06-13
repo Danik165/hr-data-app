@@ -21,11 +21,19 @@ const EnterNewPassword = () =>{
         body: JSON.stringify({ otp, newPassword:password }),
           })
           .then((response) =>{
-            response.json()
-            .then((data) =>{
-              console.log(data)
+            if(response.status == 200)
+             { 
               navigate('/login');
-            })
+            }
+            else{
+              response.json()
+              .then((data) =>{
+                //console.log(data)
+                setError(data.message)
+              })
+
+            }
+            
           })
           .catch(err =>{
             setError(err.message)

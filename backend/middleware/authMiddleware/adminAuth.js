@@ -23,7 +23,7 @@ const requireAdminAuth = (req,res,next) =>{
             }
             else if(decodedToken.authId != 1){
                 console.log("UnAuthorised Access");
-                res.status(403).send("Access Forbidden");
+                res.status(403).send("Access Forbidden").redirect("/");
             }
             else{
                 req.decodedToken = decodedToken;
