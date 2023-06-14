@@ -16,6 +16,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
     City: '',
     State: '',
     WorkType: '',
+    WorkStatus: '',
     JoiningDate: '',
     DOB: '',
     Age: '',
@@ -113,6 +114,7 @@ const fetchProfilebyid = async () => {
     }
     setProfile(data.data[0]);
     setTempProfile(data.data[0]);
+
   } catch (error) {
     console.error("Error:", error);
   }
@@ -133,19 +135,19 @@ const fetchProfilebyid = async () => {
         body: JSON.stringify({
           name: data.Name,
           employeeId: data.EmployeeID,
-          roleID: data.Role,
-          departmentID: data.Department,
-          emailId: data.EmailID,
+          roleId: data.RoleID,
+          departmentId: data.DepartmentID,
           phone: data.PhoneNumber,
+          emailId: data.EmailID,
           gender: data.Gender,
           address: data.Address,
-          city: data.City,
-          state: data.State,
+          city: data.CurrentCity,
+          state: data.CurrentState,
           managerID: data.ReportingManagerID,
+          joiningdate: data.JoiningDate.slice(0,10),
           worktype: data.WorkType,
-
-          DOB: data.DOB,
-          joiningdate: data.JoiningDate
+          workstatus: data.WorkStatus,
+          DOB: data.DOB.slice(0,10)
         })
       });
       const responseData = await response.json();
@@ -193,7 +195,7 @@ const fetchProfilebyid = async () => {
                 {profileItem("Role", tempProfile.Role, 'Role', true)}
                 {profileItem("Email", tempProfile.EmailID, 'EmailID', true)}
                 {profileItem("Phone", tempProfile.PhoneNumber, 'PhoneNumber', false)}
-                {profileItem("Date of Birth", tempProfile.DOB.slice(0,10), 'DOB', true)}
+                {profileItem("Date of Birth", tempProfile.DOB, 'DOB', true)}
                 {profileItem("Age", tempProfile.Age, 'Age', true)}
               </>
             }/>
@@ -207,6 +209,7 @@ const fetchProfilebyid = async () => {
             <Card title='Work Information' content={
               <>
                 {profileItem("Work Type", tempProfile.WorkType, 'WorkType', true)}
+                {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', true)}
                 {profileItem("Joining Date", tempProfile.JoiningDate, 'JoiningDate', true)}
                 {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
                 {profileItem("Department", tempProfile.Department, 'Department', true)}
