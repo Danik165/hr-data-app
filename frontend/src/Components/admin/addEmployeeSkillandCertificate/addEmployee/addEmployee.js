@@ -51,7 +51,7 @@ const AddEmployeeForm = () => {
       setError("Must have an Email Id")
       return false
     }
-    if(newProfile.managerID <0){
+    if(newProfile.managerID <=0){
       setError("Manager must be selected")
       return false
     }
@@ -92,12 +92,31 @@ const AddEmployeeForm = () => {
             buttons:[
               {
                 label:"Ok",
+                onClick:() =>  window.location.reload()
+
               }
             ]
-      
           })
-          setError("New Employee Created Successfully")
-          setTimeout(()=>setError(''),2000)
+         
+          setNewProfile({
+            employeeId:1,
+            name:"",
+            email:"",
+            confirmEmail:"",
+            departmentId:"",
+            roleId:"",
+            gender:"",
+            phone:"",
+            address:"",
+            city:"",
+            state:"",
+            managerID:0,
+            joiningDate:"",
+            worktype:"WFH",
+            workstatus:"Salaried",
+            DOB:""})
+         // setError("New Employee Created Successfully")
+         // setTimeout(()=>setError(''),2000)
         }
         else{
           response.json()
@@ -205,7 +224,7 @@ const AddEmployeeForm = () => {
           <div className="text-center mt-4 mb-2">
             <p className="h4 font-weight-bold"> Add Employee </p>
           </div>
-          <CDBInput style={{'border-radius':'0px'}} label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:e.target.value})} />
+          <CDBInput style={{'border-radius':'0px'}}  label="Employee ID" type="text" icon="id-card" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,employeeId:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}} label="Name" type="text" icon="user" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,name:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}} label="Email" type="email" icon="envelope" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,email:e.target.value})} />
           <CDBInput style={{'border-radius':'0px'}}  label="Confirm email" type="email" icon="envelope-square" iconClass="text-muted" onChange={e => setNewProfile({...newProfile,confirmEmail:e.target.value})} />
