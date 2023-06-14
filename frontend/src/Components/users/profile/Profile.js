@@ -22,6 +22,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
     Age: '',
     TimeatJeevan: '',
     Department: '',
+    DepartmentId:'',
     Role: '',
     ReportingManagerID: '',
     ManagerName: ''
@@ -32,6 +33,8 @@ const Profile = ({ setIsAuthenticated, id }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [departments, setDepartments] = useState([]);
+  const [roles, setRoles] = useState([]);
 
 const calculateAge = dob => {
   const today = new Date();
@@ -92,13 +95,69 @@ const fetchProfile = async (url) => {
   setIsLoading(false);
 };
 
+
+const handleDeptChChange = (deptId) =>{
+    setTempProfile({...tempProfile,departmentId:deptId})
+    fetchRole(deptId);
+}
+const fetchRole = (deptId) =>{
+    console.log("deptId",deptId)
+    fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({deptId:deptId}))
+    .then((response) => {
+      if(response.redirected){
+        window.location.replace(response.url);
+
+      }
+      else{
+      response.json()
+        .then((rolelist) =>{
+          setRoles(rolelist.data)
+          console.log(rolelist.data)
+          //console.log(rolelist.data[0].roleID)
+          //setNewProfile({...newProfile,departmentId:deptId,roleId:rolelist.data[0].roleID})
+
+        })
+
+  }
+  })
+  .catch(err =>{
+    console.log(err.message);
+    setError(err.message)
+  })
+
+
+  }
+
   useEffect(() => {
     const url = id
       ? apiurl + '/userprofilebyid?'+new URLSearchParams({ userId: id })
       : apiurl + '/userprofile';
     fetchProfile(url);
+    fetchDepartmentList();
   }, [id]);
 
+const fetchDepartmentList = () =>{
+    fetch(apiurl+"/departments")
+    .then((response)=>{
+        if(response.redirected){
+          window.location.replace(response.url);
+
+        }
+        else {
+          response.json()
+            .then((departmentlist) => {
+              //console.log("departmentList",departmentlist)
+              setDepartments(departmentlist.data)
+              //fetchRole(tempProfile.DepartmentId);
+            })
+          }
+
+    })
+    .catch(err =>{
+     // console.log(err.message);
+      setError(err.message)
+    })
+  }
 
 const fetchProfilebyid = async () => {
   try {
@@ -136,7 +195,7 @@ const fetchProfilebyid = async () => {
           name: data.Name,
           employeeId: data.EmployeeID,
           roleId: data.RoleID,
-          departmentId: data.DepartmentID,
+          departmentId: data.DepartmentId,
           phone: data.PhoneNumber,
           emailId: data.EmailID,
           gender: data.Gender,
@@ -212,7 +271,33 @@ const fetchProfilebyid = async () => {
                 {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', true)}
                 {profileItem("Joining Date", tempProfile.JoiningDate, 'JoiningDate', true)}
                 {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
-                {profileItem("Department", tempProfile.Department, 'Department', true)}
+                {!isEditing && profileItem("Department", tempProfile.Department, 'Department', true)}
+                {isEditing && <div>
+                    <label> Department: </label>
+
+                    <select onChange={e => handleDeptChChange(e.target.value)}>
+                        {
+                            departments.map(department =>
+                                <option key={department.DepartmentID} value={department.DepartmentID}>{department.DepartmentName}</option>
+                                )}
+                   </select>
+                   </div>
+                   }
+
+                    {!isEditing && profileItem("Role", tempProfile.Role, 'Role', true)}
+                {isEditing && <div>
+                    <label> Role: </label>
+
+                    <select onChange={e => setTempProfile({...tempProfile,roleId:e.target.value})}>
+                        {
+                            roles.map(role =>
+                                <option key={role.roleID} value={role.roleID}>{role.RoleName}</option>
+                                )}
+                   </select>
+                   </div>
+                   }
+
+
                 {profileItem("Reporting Manager ID", tempProfile.ReportingManagerID, 'ReportingManagerID', true)}
                 {profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', true)}
               </>
