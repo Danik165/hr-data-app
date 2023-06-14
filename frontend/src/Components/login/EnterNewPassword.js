@@ -3,7 +3,7 @@ import { Navigate, useNavigate } from 'react-router';
 import "./enternewpassword.css";
 import logo from "../../Images/logo.png";
 import { apiurl } from '../../utils/HostData';
-
+import { confirmAlert } from 'react-confirm-alert';
 
 const EnterNewPassword = () => {
     const navigate = useNavigate();
@@ -47,6 +47,59 @@ const EnterNewPassword = () => {
             .catch(err =>{
                 setError(err.message)
             })
+    else if(password == confirmPassword){
+
+      // confirmAlert({
+      //   title:"Success",
+      //   message:"Password Changed",
+      //   buttons:[
+      //     {
+      //       label:"Ok",
+      //       onClick:()=> navigate('/login')
+      //     }
+      //   ]
+
+      // })
+
+      //navigate('/login');
+
+          fetch(apiurl+"/resetpassword",{
+            method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ otp, newPassword:password }),
+          })
+          .then((response) =>{
+            if(response.status == 200)
+             {
+              confirmAlert({
+                title:"Success",
+                message:"Password Changed",
+                buttons:[
+                  {
+                    label:"Ok",
+                    onClick:() => navigate('/login')
+                  }
+                ]
+
+              })
+
+              //navigate('/login');
+            }
+            else{
+              response.json()
+              .then((data) =>{
+                //console.log(data)
+                setError(data.message)
+              })
+
+            }
+
+          })
+          .catch(err =>{
+            setError(err.message)
+          })
         }
     }
     return (

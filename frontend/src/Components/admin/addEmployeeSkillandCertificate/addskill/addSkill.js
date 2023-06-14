@@ -4,8 +4,7 @@ import { apiurl } from "../../../../utils/HostData";
 import './addskill.css'
 
 const AddSkillForm = () => {
-    const [email, setEmail] = useState('');
-   // const [email, setEmail] = useState('');
+   
     const [categoryEnabled, setCategoryEnabled] = useState(false);
     const [skillEnabled,setSkillEnabled] = useState(false)
     const [error, setError] = useState('');
@@ -30,8 +29,8 @@ const AddSkillForm = () => {
       })
       .then(response =>{
         if(response.status === 201){
-          console.log("Successfull Added")
-          setError("Successfull Added")
+          //console.log("Successfull Added")
+          setError("Skill Set Added Successfully")
         }
         else{
           setError("Unable to Add. Error Code" + response.status)
@@ -148,11 +147,9 @@ const AddSkillForm = () => {
            {skillEnabled && <CDBInput style={{'border-radius':'0px'}} label="New Skill" type="text" icon="stream" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,skill:e.target.value})}/>  }
             <CDBInput style={{'border-radius':'0px'}} label="Sub-Skill-Name" type="text" icon="code-branch" iconClass="text-muted" onInput={e => setNewSubSkill({...newSubSkill,subSkill:e.target.value})} />
           
-            {/* <CDBDropDown>
-              <CDBDropDownMenu>
-                <CDBDropDownItem>Select a Category</CDBDropDownItem>
-              </CDBDropDownMenu>
-            </CDBDropDown> */}
+            <div class="d-flex align-items-center justify-content-center mt-2">
+             <p class="err-message" >{error}</p> 
+             </div>
             <CDBBtn color="primary" style={{ width: '40%' }} className="btn-block mb-3 mt-3 mx-auto" onClick={addSkill}>
               Register
             </CDBBtn>

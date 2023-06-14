@@ -30,12 +30,12 @@ const AddDeptRoleForm = () => {
             response.json()
               .then((departmentlist) => {
                 console.log(departmentlist)
-                
-                for(let i = 0; i <departmentlist.data.length ; i++){
+                setDeparments(departmentlist.data)
+                // for(let i = 0; i <departmentlist.data.length ; i++){
   
-                  setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
-                }
-                setDeparments(oldArray =>[...oldArray,"Add a new Department"]);
+                //   setDeparments(oldArray => [...oldArray,departmentlist.data[i]]);
+                // }
+                setDeparments(oldArray =>[...oldArray,{DepartmentID:0,DepartmentName:"Add a new Department"}]);
   
               })
             }
@@ -64,7 +64,7 @@ const AddDeptRoleForm = () => {
           <br />
           <select id="department" name="department" className='department-dropdown' onChange={e => handleDeptSelection(e.target.value)}>
           {departments.map(department => 
-                <option id={department} value={department}>{department}</option>
+                <option id={department} value={department.DepartmentID}>{department.DepartmentName}</option>
           )}
           </select>
 
