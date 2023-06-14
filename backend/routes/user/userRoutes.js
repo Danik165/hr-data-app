@@ -22,24 +22,7 @@ router.post("/api/addskill",requireUserAuth,async (req,res) =>{
   }
 })
 
-//router.patch("/api/userprofile", requireUserAuth, async (req, res) => {
-//    const userId = req.decodedToken.userId;
-//    // Extract fields to be updated from req.body
-//    const { field1, field2 } = req.body;
-//
-//    try{
-//        // Update the user profile in the database, it would depend on your SQL update query
-//        const [result] = await db.promise().query("UPDATE users SET field1 = ?, field2 = ? WHERE userId = ?", [field1, field2, userId]);
-//
-//        // Depending on the database driver you use, result may contain useful information
-//        // about the operation result, like affected rows.
-//
-//        res.status(200).send({message: "User profile updated successfully."});
-//    } catch (err){
-//        const Error = handleErrors(err);
-//        res.status(Error.code).send(Error);
-//    }
-//})
+
 
 //Completed with new data and stored procedure
 router.get("/api/userprofile",requireUserAuth,async (req,res)=>{
@@ -192,7 +175,8 @@ router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
 
 
 router.get("/api/getallskills",requireUserAuth,async(req,res) =>{
-      const id = req.decodedToken.userId || 1001;
+     // const id = req.decodedToken.userId || 1001;
+     const id = 1444;
   try{
       const {data} = await GetAllSkillDetailsofUser({id:id})
       res.status(200).send({data:data})
