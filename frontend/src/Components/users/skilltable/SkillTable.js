@@ -90,53 +90,6 @@ const removeSubSkill = async (index) => {
 };  
 
 
-
-const addSkill = () => {
-
-    var url,tempObj;
- if(id){
-     tempObj = {userId:id, category:category, skill:skill, subSkillList: subSkill, years: year, level: level
-    }
-     url = apiurl+"/addskillforuser"
- }
- else{
-     tempObj ={ category:category, skill:skill, subSkillList: subSkill, years: year, level: level}
-     url = apiurl+"/addskill"
-   }
-  fetch(url,{
-    method:"POST",
-    headers:{
-      'Content-Type':"application/json"
-    },
-    body:JSON.stringify(tempObj)
-
-  })
-  .then(response =>{
-    if(response.redirected){
-      window.location.replace(response.url);
-    }
-    else if(response.status == 201){
-      response.json()
-      .then(data => {
-        console.log(data.newId)
-        setUserSkills([...userSkills, { listId:data.newId,category, skill, subSkills: subSkill, years: year, level: level, certificate }]);
-      }
-
-      )
-    }
-  })
-  .catch(err =>{
-    console.log(err)
-  })
-  setCategory("");
-  setSkill("");
-  setSubSkill([]);
-  setYear("");
-  setLevel("");
-  setCertificate("");
-};
-
-
 const fetchSubSkillsbyid = async (url) =>{
 
   fetch(url)
@@ -225,7 +178,7 @@ return (
       <button onClick={toggleAddSkillForm} >Add Skill </button>
       <Modal isOpen={showAddSkillForm}  toggle={toggleAddSkillForm}>
             <ModalBody>
-              <AddUserSkill />
+              <AddUserSkill id={id} toggleModal={toggleAddSkillForm}/>
             </ModalBody>
 
       </Modal>
