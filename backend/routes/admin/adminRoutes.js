@@ -78,11 +78,8 @@ router.get("/api/users",requireAdminAuth,async (req,res) => {
 
 router.post("/api/addskillforuser",requireAdminAuth,async (req,res) =>{
   try{
-    //console.log(req.body)
     const { userId,category, skill, level, years, subSkillList } = req.body;
-    //const userId =  req.decodedToken.userId? req.decodedToken.userId:1001;
     const subSkillStringList = subSkillList.join(',');
-    //console.log(subSkillStringList)
     const [rows] = await db.promise().query("CALL ADD_NEW_SKILL_FOR_USER(?,?,?,?,?,?)",[userId,category,skill,subSkillStringList,level,years])
     res.status(201).send({message:"New Skill Set Added Successfully",newId:rows[0][0].userId})
   }
@@ -96,10 +93,6 @@ router.post("/api/addskillforuser",requireAdminAuth,async (req,res) =>{
 router.get("/api/departments",requireAdminAuth,async (req,res) => {
   try{
     const [rows] = await db.promise().query(sqlQuery.selectDepartments);
-    //console.log(rows)
-    //let departmentlist = rows.map(a => a.DepartmentName);
-   // console.log(departmentlist);
-    //const body = {data:departmentlist};
     res.status(200).setHeader('Content-Type', 'application/json').send({data:rows}) ;
   }
   catch(err){
@@ -182,7 +175,6 @@ router.post("/api/addnewsubskill",requireAdminAuth,async(req,res) =>{
 
 router.post("/api/addproject",requireAdminAuth,async(req,res) =>{
   const project = req.body.project;
-  console.log(project)
   try{
     await db.promise().query(sqlQuery.insertProject,[project])
     res.status(201).send({message:"New Project Added Successfully"})
