@@ -8,6 +8,9 @@ const requireAdminAuth = (req,res,next) =>{
     dotenv.config();
 
     if(process.env.Development == 'true'){
+        req.decodedToken = {
+            userId:1444
+        }
     return next();
 
     }

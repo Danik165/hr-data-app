@@ -35,42 +35,43 @@ const Profile = ({ setIsAuthenticated, id }) => {
   const [error, setError] = useState(null);
   const [departments, setDepartments] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [managerList,setManagerList] = useState([])
 
-const calculateAge = dob => {
-  const today = new Date();
-  const birthDate = new Date(dob);
-  let age_y = today.getFullYear() - birthDate.getFullYear();
-  let age_m = today.getMonth() - birthDate.getMonth();
-  let age_d = today.getDate() - birthDate.getDate();
+  const calculateAge = dob => {
+    const today = new Date();
+    const birthDate = new Date(dob);
+    let age_y = today.getFullYear() - birthDate.getFullYear();
+    let age_m = today.getMonth() - birthDate.getMonth();
+    let age_d = today.getDate() - birthDate.getDate();
 
-  if (age_m < 0 || (age_m === 0 && age_d < 0)) {
-    age_y--;
-    age_m = (age_m + 12) % 12;
-    age_m = age_m === 0 ? 11 : age_m - 1;
-    age_d = 30 + (age_d - today.getDate());
-  }
+    if (age_m < 0 || (age_m === 0 && age_d < 0)) {
+      age_y--;
+      age_m = (age_m + 12) % 12;
+      age_m = age_m === 0 ? 11 : age_m - 1;
+      age_d = 30 + (age_d - today.getDate());
+    }
 
-  return `${age_y} Years`;
-};
+    return `${age_y} Years`;
+  };
 
-const calculateTimeAtJeevan = joiningDate => {
-  const today = new Date();
-  const startDate = new Date(joiningDate);
-  let time_y = today.getFullYear() - startDate.getFullYear();
-  let time_m = today.getMonth() - startDate.getMonth();
-  let time_d = today.getDate() - startDate.getDate();
+  const calculateTimeAtJeevan = joiningDate => {
+    const today = new Date();
+    const startDate = new Date(joiningDate);
+    let time_y = today.getFullYear() - startDate.getFullYear();
+    let time_m = today.getMonth() - startDate.getMonth();
+    let time_d = today.getDate() - startDate.getDate();
 
-  if (time_m < 0 || (time_m === 0 && time_d < 0)) {
-    time_y--;
-    time_m = (time_m + 12) % 12;
-    time_m = time_m === 0 ? 11 : time_m - 1;
-    time_d = 30 + (time_d - today.getDate());
-  }
+    if (time_m < 0 || (time_m === 0 && time_d < 0)) {
+      time_y--;
+      time_m = (time_m + 12) % 12;
+      time_m = time_m === 0 ? 11 : time_m - 1;
+      time_d = 30 + (time_d - today.getDate());
+    }
 
-  return `${time_y} Years ${time_m} Months `;
-};
+    return `${time_y} Years ${time_m} Months `;
+  };
 
-const fetchProfile = async (url) => {
+  const fetchProfile = async (url) => {
   setIsLoading(true);
   setError(null);
   try {
@@ -93,14 +94,14 @@ const fetchProfile = async (url) => {
     setError(error.message);
   }
   setIsLoading(false);
-};
+  };
 
 
-const handleDeptChChange = (deptId) =>{
+  const handleDeptChange = (deptId) =>{
     setTempProfile({...tempProfile,departmentId:deptId})
     fetchRole(deptId);
 }
-const fetchRole = (deptId) =>{
+  const fetchRole = (deptId) =>{
     console.log("deptId",deptId)
     fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({deptId:deptId}))
     .then((response) => {
@@ -113,9 +114,6 @@ const fetchRole = (deptId) =>{
         .then((rolelist) =>{
           setRoles(rolelist.data)
           console.log(rolelist.data)
-          //console.log(rolelist.data[0].roleID)
-          //setNewProfile({...newProfile,departmentId:deptId,roleId:rolelist.data[0].roleID})
-
         })
 
   }
@@ -128,15 +126,27 @@ const fetchRole = (deptId) =>{
 
   }
 
-  useEffect(() => {
-    const url = id
-      ? apiurl + '/userprofilebyid?'+new URLSearchParams({ userId: id })
-      : apiurl + '/userprofile';
-    fetchProfile(url);
-    fetchDepartmentList();
-  }, [id]);
+  
+  function fetchManagers(){
+    fetch(apiurl + "/listmanagers")
+    .then((response) =>{
+      if(response.redirected){
+        window.location.replace(response.url);
 
-const fetchDepartmentList = () =>{
+      }
+      else if (response.status == 200){
+        response.json()
+        .then(data =>{
+          setManagerList(data.data)
+        })
+      }
+    })
+    .catch(err =>{
+      console.log(err)
+    })
+  }
+
+  const fetchDepartmentList = () =>{
     fetch(apiurl+"/departments")
     .then((response)=>{
         if(response.redirected){
@@ -146,38 +156,16 @@ const fetchDepartmentList = () =>{
         else {
           response.json()
             .then((departmentlist) => {
-              //console.log("departmentList",departmentlist)
-              setDepartments(departmentlist.data)
-              //fetchRole(tempProfile.DepartmentId);
+              setDepartments(departmentlist.data);
             })
           }
 
     })
     .catch(err =>{
-     // console.log(err.message);
       setError(err.message)
     })
   }
 
-const fetchProfilebyid = async () => {
-  try {
-    const response = await fetch('http://localhost:5000/api/userprofilebyid?' + new URLSearchParams({userId:id}), {
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    });
-    const data = await response.json();
-    console.log('fetchProfilebyid data', data);
-    if (!response.ok) {
-      throw new Error(data.message || 'Could not fetch profile.');
-    }
-    setProfile(data.data[0]);
-    setTempProfile(data.data[0]);
-
-  } catch (error) {
-    console.error("Error:", error);
-  }
-};
 
   const updateProfile = async (event) => {
     event.preventDefault();
@@ -223,6 +211,7 @@ const fetchProfilebyid = async () => {
     setIsLoading(false);
   };
 
+ 
 
  const profileItem = (label, value, field, disabled) => (
     <div className={`profile-item-${field}`}>
@@ -237,6 +226,22 @@ const fetchProfilebyid = async () => {
     </div>
   );
 
+  function onEditClick(){
+    setIsEditing(true);
+    fetchDepartmentList();
+    fetchRole(tempProfile.departmentID)
+   
+  }
+
+  useEffect(() => {
+    const url = id
+      ? apiurl + '/userprofilebyid?'+new URLSearchParams({ userId: id })
+      : apiurl + '/userprofile';
+    fetchProfile(url);
+    fetchDepartmentList();
+    fetchManagers();
+  }, [id]);
+ 
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -275,12 +280,14 @@ const fetchProfilebyid = async () => {
                 {isEditing && <div>
                     <label> Department: </label>
 
-                    <select onChange={e => handleDeptChChange(e.target.value)}>
+                    <select onChange={e => handleDeptChange(e.target.value)} id='department-dropdown'>
                         {
-                            departments.map(department =>
-                                <option key={department.DepartmentID} value={department.DepartmentID}>{department.DepartmentName}</option>
-                                )}
+                          departments.map(department =>
+                            <option key={department.DepartmentID} value={department.DepartmentID} selected={tempProfile.departmentID == department.DepartmentID?true:false}>{department.DepartmentName}</option>
+                            )}
+                            <option key={0} selected = {false}>Test</option>
                    </select>
+                    {/* {document.getElementById('department-dropdown').selectedIndex = tempProfile.DepartmentId} */}
                    </div>
                    }
 
@@ -288,7 +295,7 @@ const fetchProfilebyid = async () => {
                 {isEditing && <div>
                     <label> Role: </label>
 
-                    <select onChange={e => setTempProfile({...tempProfile,roleId:e.target.value})}>
+                    <select onChange={e => setTempProfile({...tempProfile,roleId:e.target.value})} id='role-dropdown'>
                         {
                             roles.map(role =>
                                 <option key={role.roleID} value={role.roleID}>{role.RoleName}</option>
@@ -299,6 +306,16 @@ const fetchProfilebyid = async () => {
 
 
                 {!isEditing && profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', false)}
+                {isEditing && <div>
+                  <label> Manager Name:</label>
+                    <select>
+                      {
+                        managerList.map(manager =>
+                          <option key={manager.employeeId} value={manager.employeeId}>{manager.Name}</option>
+                          )
+                      }
+                    </select>
+                  </div>}
               </>
             }/>
           </div>
@@ -310,7 +327,7 @@ const fetchProfilebyid = async () => {
               <button onClick={() => { setIsEditing(false); setTempProfile(profile); }}>Cancel</button>
             </>
           )
-          : <button onClick={() => setIsEditing(true)}>Edit</button>}
+          : <button onClick={onEditClick}>Edit</button>}
       </form>
     </div>
   );

@@ -6,8 +6,10 @@ const requireUserAuth = (req,res,next) =>{
 
     dotenv.config()
     if(process.env.Development == 'true'){
-    return next();
-
+        req.decodedToken = {
+            userId:1444
+        }
+        return next();
     }
 
     const jwtSecretKey = process.env.JWT_SECRET_KEY;
