@@ -3,7 +3,7 @@ import './profile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl} from '../../../utils/HostData';
 import Card from './Card';
-
+import {confirmAlert} from 'react-confirm-alert';
 
 const Profile = ({ setIsAuthenticated, id }) => {
   const initialProfile = {
@@ -86,6 +86,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
     }
     const profileData = data.data;
     console.log('profileData', profileData);
+    
     profileData.Age = calculateAge(profileData.DOB);
     profileData.TimeatJeevan = calculateTimeAtJeevan(profileData.JoiningDate);
     setProfile(profileData);
@@ -98,11 +99,10 @@ const Profile = ({ setIsAuthenticated, id }) => {
 
 
   const handleDeptChange = (deptId) =>{
-    setTempProfile({...tempProfile,departmentId:deptId})
+    setTempProfile({...tempProfile,departmentID:deptId,RoleID:0})
     fetchRole(deptId);
 }
   const fetchRole = (deptId) =>{
-    console.log("deptId",deptId)
     fetch(apiurl+"/rolebydepartment?" + new URLSearchParams({deptId:deptId}))
     .then((response) => {
       if(response.redirected){
@@ -113,7 +113,6 @@ const Profile = ({ setIsAuthenticated, id }) => {
       response.json()
         .then((rolelist) =>{
           setRoles(rolelist.data)
-          console.log(rolelist.data)
         })
 
   }
@@ -166,6 +165,14 @@ const Profile = ({ setIsAuthenticated, id }) => {
     })
   }
 
+  function profileValidator(data){
+    if(data.RoleID <=0){
+      showError("Input Data Error","Role Cannot be Null")
+      return false
+    }
+    return(true)
+  }
+
 
   const updateProfile = async (event) => {
     event.preventDefault();
@@ -173,6 +180,8 @@ const Profile = ({ setIsAuthenticated, id }) => {
       setIsLoading(true);
       setError(null);
       const data = tempProfile;
+      if(profileValidator(data))
+      {
       console.log('Updating with data:', data);
       const response = await fetch(apiurl + '/updateuser', {
         method: 'PUT',
@@ -183,7 +192,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
           name: data.Name,
           employeeId: data.EmployeeID,
           roleId: data.RoleID,
-          departmentId: data.DepartmentId,
+          departmentId: data.departmentID,
           phone: data.PhoneNumber,
           emailId: data.EmailID,
           gender: data.Gender,
@@ -191,10 +200,10 @@ const Profile = ({ setIsAuthenticated, id }) => {
           city: data.City,
           state: data.State,
           managerID: data.ReportingManagerID,
-          joiningdate: data.JoiningDate,
+          joiningdate: data.JoiningDate.slice(0,10),
           worktype: data.WorkType,
           workstatus: data.WorkStatus,
-          DOB: data.DOB
+          DOB: data.DOB.slice(0,10)
         })
       });
       const responseData = await response.json();
@@ -204,10 +213,12 @@ const Profile = ({ setIsAuthenticated, id }) => {
       }
       setProfile(tempProfile);
       setIsEditing(false);
+    }
     } catch (err) {
       console.error('Updating profile failed with error:', err);
       setError(err.message);
     }
+  
     setIsLoading(false);
   };
 
@@ -233,15 +244,35 @@ const Profile = ({ setIsAuthenticated, id }) => {
    
   }
 
+
+  function showError(title,message){
+    confirmAlert({
+      title: title,
+      message: message,
+      buttons: [
+          {
+              label: 'Ok'
+          
+          }]
+      }
+      )
+  }
+
   useEffect(() => {
     const url = id
       ? apiurl + '/userprofilebyid?'+new URLSearchParams({ userId: id })
       : apiurl + '/userprofile';
+
+
     fetchProfile(url);
     fetchDepartmentList();
     fetchManagers();
   }, [id]);
  
+
+
+
+
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
 
@@ -259,7 +290,11 @@ const Profile = ({ setIsAuthenticated, id }) => {
                 {profileItem("Role", tempProfile.Role, 'Role', false)}
                 {profileItem("Email", tempProfile.EmailID, 'EmailID', false)}
                 {profileItem("Phone", tempProfile.PhoneNumber, 'PhoneNumber', false)}
-                {profileItem("Date of Birth", tempProfile.DOB.slice(0,10), 'DOB', false)}
+                {!isEditing && profileItem("Date of Birth", tempProfile.DOB.slice(0,10), 'DOB', false)}
+                {isEditing && <div>
+                  <label htmlFor="DOB" >Date of Birth: </label>
+                      <input type="date" name="DOB" required pattern="\d{4}-\d{2}-\d{2}" value={tempProfile.DOB.slice(0,10)} onChange={e => setTempProfile({...tempProfile,DOB:e.target.value})}/>
+                </div>}
                 {profileItem("Age", tempProfile.Age, 'Age', false)}
               </>
             }/>
@@ -274,7 +309,14 @@ const Profile = ({ setIsAuthenticated, id }) => {
               <>
                 {profileItem("Work Type", tempProfile.WorkType, 'WorkType', false)}
                 {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', false)}
-                {profileItem("Joining Date", tempProfile.JoiningDate.slice(0,10), 'JoiningDate', false)}
+              
+                {!isEditing && profileItem("Joining Date", tempProfile.JoiningDate.slice(0,10), 'JoiningDate', false)}
+                {isEditing && <div>
+                  <label htmlFor="DOB" >Joining Date: </label>
+                      <input type="date" name="joining-date" required pattern="\d{4}-\d{2}-\d{2}" value={tempProfile.JoiningDate.slice(0,10)} onChange={e => setTempProfile({...tempProfile,JoiningDate:e.target.value})}/>
+                </div>}
+
+
                 {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', false)}
                 {!isEditing && profileItem("Department", tempProfile.Department, 'Department', false)}
                 {isEditing && <div>
@@ -285,33 +327,33 @@ const Profile = ({ setIsAuthenticated, id }) => {
                           departments.map(department =>
                             <option key={department.DepartmentID} value={department.DepartmentID} selected={tempProfile.departmentID == department.DepartmentID?true:false}>{department.DepartmentName}</option>
                             )}
-                            <option key={0} selected = {false}>Test</option>
+        
                    </select>
-                    {/* {document.getElementById('department-dropdown').selectedIndex = tempProfile.DepartmentId} */}
                    </div>
-                   }
+                }
 
-                    {!isEditing && profileItem("Role", tempProfile.Role, 'Role', false)}
+                {!isEditing && profileItem("Role", tempProfile.Role, 'Role', false)}
                 {isEditing && <div>
                     <label> Role: </label>
 
-                    <select onChange={e => setTempProfile({...tempProfile,roleId:e.target.value})} id='role-dropdown'>
+                    <select  onChange={e => setTempProfile({...tempProfile,RoleID:e.target.value})} id='role-dropdown'>
+                        <option key={0} value={0}>Select a Role</option>
                         {
                             roles.map(role =>
-                                <option key={role.roleID} value={role.roleID}>{role.RoleName}</option>
+                                <option key={role.roleID} value={role.roleID} selected={tempProfile.RoleID == role.roleID?true:false}>{role.RoleName}</option>
                                 )}
                    </select>
                    </div>
-                   }
+              }
 
 
                 {!isEditing && profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', false)}
                 {isEditing && <div>
                   <label> Manager Name:</label>
-                    <select>
+                    <select onChange={e => setTempProfile({...tempProfile,ReportingManagerID:e.target.value})}>
                       {
                         managerList.map(manager =>
-                          <option key={manager.employeeId} value={manager.employeeId}>{manager.Name}</option>
+                          <option key={manager.employeeId} value={manager.employeeId} selected={tempProfile.ReportingManagerID == manager.employeeId?true:false}>{manager.Name}</option>
                           )
                       }
                     </select>
@@ -320,6 +362,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
             }/>
           </div>
         </div>
+        
         {isEditing
           ? (
             <>

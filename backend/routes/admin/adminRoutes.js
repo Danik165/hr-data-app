@@ -278,7 +278,7 @@ router.put("/api/updateuser",requireAdminAuth,async(req,res) =>{
     
     const { name, employeeId, roleId, departmentId, emailId,phone,gender,address,city,state,managerID,worktype,workstatus,DOB,joiningdate } = req.body;
 
-    const [rows] = await db.promise().query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,roleId,departmentId]);
+    const [rows] = await db.promise().query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)",[employeeId,name,emailId,phone,gender,address,city,state,managerID,worktype,workstatus,joiningdate,DOB,departmentId,roleId]);
     if(rows.affectedRows == 1){
 
       res.status(200).send({message:"Updated Record Successfully"});
