@@ -320,9 +320,29 @@ const Profile = ({ setIsAuthenticated, id }) => {
             }/>
             <Card title='Work Information' content={
               <>
-                {profileItem("Work Type", tempProfile.WorkType, 'WorkType', false)}
-                {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', false)}
-              
+                {!isEditing && profileItem("Work Type", tempProfile.WorkType, 'WorkType', false)}
+                { isEditing && <div>
+                  <label htmlFor='Work Type'>Work Type: </label>
+                  <select onChange={(e => setTempProfile({...tempProfile,WorkType:e.target.value}))}>
+                    <option key={1} value="WFO" selected={tempProfile.WorkType == "WFO"?true:false}>Work From Office</option>
+                    <option key={2} value="WFH" selected={tempProfile.WorkType == "WFH"?true:false}>Work From Home</option>
+                    <option key={3} value="Hybrid" selected={tempProfile.WorkType == "Hybrid"?true:false}>Hybrid</option>
+                  </select>
+                </div>
+
+                }
+                {!isEditing && profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', false)}
+                { isEditing && <div>
+                  <label htmlFor='Work Status'>Work Status: </label>
+                  <select onChange={(e => setTempProfile({...tempProfile,WorkStatus:e.target.value}))}>
+                    <option key={1} value="Salaried" selected={tempProfile.WorkStatus == "Salaried"?true:false}>Salaried</option>
+                    <option key={2} value="Contract" selected={tempProfile.WorkStatus == "Contract"?true:false}>Contract</option>
+                    <option key={3} value="Intern" selected={tempProfile.WorkStatus == "Intern"?true:false}>Intern</option>
+                  </select>
+                </div>
+
+                }
+                
                 {!isEditing && profileItem("Joining Date", new Date(tempProfile.JoiningDate).toDateString().slice(3), 'JoiningDate', false)}
                 {isEditing && <div>
                   <label htmlFor="DOB" >Joining Date: </label>
@@ -330,7 +350,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
                 </div>}
 
 
-                {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', false)}
+                {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
                 {!isEditing && profileItem("Department", tempProfile.Department, 'Department', false)}
                 {isEditing && <div>
                     <label> Department: </label>
