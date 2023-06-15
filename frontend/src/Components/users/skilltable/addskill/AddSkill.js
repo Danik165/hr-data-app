@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import {apiurl} from '../../../../utils/HostData'
 import { confirmAlert } from 'react-confirm-alert';
-
+import './addskill.css';    
 export default function AddUserSkill({id,toggleModal}){
 
     //var inserturl = "dgsd";

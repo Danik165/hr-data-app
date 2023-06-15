@@ -145,7 +145,17 @@ useEffect(() =>{
     }
   },[])
 return (
+  <div className='skill-container'>
+    <div className='skill-header'>
+      <h2 >Skills</h2>
+      <button onClick={toggleAddSkillForm} >Add new skill</button>
+        <Modal isOpen={showAddSkillForm}  toggle={toggleAddSkillForm}>
+            <ModalBody>
+              <AddUserSkill id={id} toggleModal={toggleAddSkillForm}/>
+            </ModalBody>
 
+      </Modal>
+    </div> 
     <div className="main-content">
       <table className="overflow-hidden">
         <thead>
@@ -167,21 +177,14 @@ return (
               <td>{years}</td>
               <td>{level}</td>
               <td>
-                <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button>
+                {/* <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button> */}
                 <button onClick={() => delConfirmation({index:listId})} ><MDBIcon fas icon="trash-alt" /></button>
               </td>
             </tr>
           ))}
         </tbody>
       </table>
-      <h2 >Add skills</h2>
-      <button onClick={toggleAddSkillForm} >Add Skill </button>
-      <Modal isOpen={showAddSkillForm}  toggle={toggleAddSkillForm}>
-            <ModalBody>
-              <AddUserSkill id={id} toggleModal={toggleAddSkillForm}/>
-            </ModalBody>
-
-      </Modal>
+    </div>
   </div>
 );
 

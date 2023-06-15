@@ -9,7 +9,6 @@ const router = Router();
 
 router.post("/api/addskill",requireUserAuth,async (req,res) =>{
   try{
-   // console.log(req.body)
     const { category, skill, level, years, subSkillList } = req.body;
     const userId =  req.decodedToken.userId;
     const subSkillStringList = subSkillList.join(',');
@@ -88,7 +87,6 @@ router.get("/api/subskillbyskill",requireUserAuth, async (req,res) =>{
     
     }
     catch(err){
-        console.log(err)
         const Error = handleErrors(err)
         res.status(Error.code).send(Error)
     }
@@ -163,7 +161,6 @@ router.post("/api/certificate",requireUserAuth,async(req,res) =>{
 router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
     try{
         const userSkillID = req.query.userskillId;
-        console.log(userSkillID)
         db.promise().query("DELETE from userskills where UsersSkillID = (?)",[userSkillID])
         res.status(200).send({data:"Skill Set Successfully Removed"})
     }
