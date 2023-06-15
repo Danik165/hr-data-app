@@ -167,7 +167,7 @@ return (
               <td>{years}</td>
               <td>{level}</td>
               <td>
-                <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button>
+                {/* <button onClick={() => handleEditSkill(listId)} ><MDBIcon fas icon="pen" /></button> */}
                 <button onClick={() => delConfirmation({index:listId})} ><MDBIcon fas icon="trash-alt" /></button>
               </td>
             </tr>

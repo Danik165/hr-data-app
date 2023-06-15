@@ -97,7 +97,7 @@ export default function CertificateTable({id}){
                         <td>{new Date(obj.Certificate_issue_date).toDateString().slice(3)}</td>
                         <td>{new Date(obj.Certificate_validity_date).toDateString().slice(3)}</td>
                         <td>
-                            <button onClick={() => handleEditCertificate(obj.User_CertificatesID)} ><MDBIcon fas icon="pen" /></button>
+                            {/* <button onClick={() => handleEditCertificate(obj.User_CertificatesID)} ><MDBIcon fas icon="pen" /></button> */}
                             <button onClick={() => delCertificateConfirmation(obj.User_CertificatesID)} ><MDBIcon fas icon="trash-alt" /></button>
                         </td>
                     </tr>
@@ -107,7 +107,7 @@ export default function CertificateTable({id}){
         <button onClick={toggleAddCertificateForm}>Add new Certificate</button>   
         <Modal isOpen={showAddCertificateForm} toggle={toggleAddCertificateForm}>
             <ModalBody>
-                <AddUserCertificate toggleForm={toggleAddCertificateForm}/>
+                <AddUserCertificate id={id} toggleForm={toggleAddCertificateForm}/>
             </ModalBody>
         </Modal>
         </div>
