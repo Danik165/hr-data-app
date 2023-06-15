@@ -80,6 +80,16 @@ export default function CertificateTable({id}){
         setShowAddCertificateForm(!showAddCertificateForm)  }
 
     return(
+        <div className='certificate-container'>
+            <div className='certificate-header'> 
+                <h2>Certificates</h2>
+                <button onClick={toggleAddCertificateForm}>Add new Certificate</button>   
+        <Modal isOpen={showAddCertificateForm} toggle={toggleAddCertificateForm}>
+            <ModalBody>
+                <AddUserCertificate id={id} toggleForm={toggleAddCertificateForm}/>
+            </ModalBody>
+        </Modal>
+            </div>
         <div class='certificate-table-container'>
            <table>
             <thead>
@@ -104,12 +114,8 @@ export default function CertificateTable({id}){
                 ))}
             </tbody>
            </table>
-        <button onClick={toggleAddCertificateForm}>Add new Certificate</button>   
-        <Modal isOpen={showAddCertificateForm} toggle={toggleAddCertificateForm}>
-            <ModalBody>
-                <AddUserCertificate id={id} toggleForm={toggleAddCertificateForm}/>
-            </ModalBody>
-        </Modal>
+        
         </div>
+    </div>
     )
 }

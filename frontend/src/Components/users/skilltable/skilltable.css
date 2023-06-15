@@ -1,12 +1,19 @@
 .main-content {
+    width: 100%;
     flex-grow: 1;
     overflow: auto;
-    padding: 20px;
+    padding-left: 10px;
+    padding-top: 0px;
+    padding-right: 0px;
     font-family: Arial, sans-serif;
     color: #333;
 
 }
-
+.skill-header{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+}
 table {
     width: 100%;
     border-collapse: collapse;
