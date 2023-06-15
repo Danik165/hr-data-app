@@ -1,6 +1,6 @@
 import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
-import SearchCards from "./SearchCards";
+import SearchGrid from "./SearchGrid";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { apiurl } from "../../../utils/HostData";
 const DashboardPage = () =>{
@@ -36,7 +36,6 @@ const DashboardPage = () =>{
         .catch(err => {
             console.log("Error Message")
         })
-        console.log("Search Called")
     }
 
     useEffect(getSearchResults,[]);
@@ -60,7 +59,7 @@ const DashboardPage = () =>{
 
 
             <div className="search-table overflow-hidden  ">
-                <SearchCards profileList={profileList}/>
+                <SearchGrid profileList={profileList}/>
             </div>
         </div>
     )

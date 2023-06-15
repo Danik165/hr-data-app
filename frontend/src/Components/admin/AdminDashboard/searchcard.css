@@ -1,10 +1,3 @@
-/* @media any and (min-width:500px) {
-    
-    .card-container{
-        max-width: 40%;
-        min-width: 350px;
-    }
-} */
 
 @media screen {
     .card-container{
@@ -13,9 +6,6 @@
     }
 }
 
-/* .header-row{
-    background-color: #ffffff;
-} */
 
 .clickable{
     cursor: pointer;
@@ -30,8 +20,6 @@
     min-width: 350px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     font-family: "Google Sans","Noto Sans Myanmar UI",arial,sans-serif;
-    /* border-color: #c49c82; */
-    /* border-width: 2px; */
     border-radius: 15px;
 }
 

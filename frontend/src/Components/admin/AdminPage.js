@@ -21,7 +21,7 @@ const AdminPage = ({ setIsAuthenticated }) => {
           <Route path="/addusers" element={<UserSkillDetails />} />
           <Route path="/addProject" element={ <AddDeptRoleProject />} />
           <Route path="/skills" element={<SkillTable />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<div className='profile-page'><Profile /></div> } />
           <Route path="/userprofile/*" element={<UserProfile />} />
         </Routes>
       </div>

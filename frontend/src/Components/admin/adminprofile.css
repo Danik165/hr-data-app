@@ -93,3 +93,11 @@ body {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+
+.profile-page{
+  display: flex;
+    flex-direction: column;
+  width: 100%;
+  overflow-y:scroll;
+}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MDBIcon } from 'mdb-react-ui-kit';
-import './profilecard.css';
+import './searchcard.css';
 import { useNavigate } from "react-router";
 
-export default function ProfileCard({profile}){
+export default function SearchCard({profile}){
     let navigate = useNavigate();
     const seeProfile = (id)=>{
         console.log(id);
@@ -11,7 +11,7 @@ export default function ProfileCard({profile}){
     }
 
     return(
-        <div class='mb-4 card-container container card bg-light px-0 clickable' onClick={() => seeProfile(profile.EmployeeID)}>
+        <div class='mb-4 pt-0 card-container container card bg-light px-0 clickable' onClick={() => seeProfile(profile.EmployeeID)}>
             <div class='card-body p-0'> 
             <div class="row header-row py-2 w-100 m-0">
                 <div class='col-4'>
