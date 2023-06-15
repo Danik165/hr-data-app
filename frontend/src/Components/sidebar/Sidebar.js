@@ -38,8 +38,8 @@ const Sidebar = ({setIsAuthenticated}) => {
             <NavLink to="/" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="columns">Dashboard</CDBSidebarMenuItem>
             </NavLink>
-            <NavLink to="/skills" activeclassname="activeClicked">
-              <CDBSidebarMenuItem icon="table">Skills</CDBSidebarMenuItem>
+            <NavLink to="/statistics" activeclassname="activeClicked">
+              <CDBSidebarMenuItem icon="table">Statistics</CDBSidebarMenuItem>
             </NavLink>
             <NavLink to="/profile" activeclassname="activeClicked">
               <CDBSidebarMenuItem icon="user">Profile page</CDBSidebarMenuItem>

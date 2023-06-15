@@ -1,0 +1,45 @@
+
+.container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.card {
+    border: 1px solid #ddd;
+    padding: 1em;
+    flex: 1;
+    margin: 0.5em;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+}
+
+.title {
+    font-weight: bold;
+}
+
+.chart-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart {
+    width: 45%;
+}
+
+@media (max-width: 768px) {
+    .row, .chart-container {
+        flex-direction: column;
+    }
+
+    .card, .chart {
+        margin: 0.5em 0;
+    }
+}
