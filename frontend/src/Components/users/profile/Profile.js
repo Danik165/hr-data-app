@@ -200,13 +200,13 @@ const fetchProfilebyid = async () => {
           emailId: data.EmailID,
           gender: data.Gender,
           address: data.Address,
-          city: data.CurrentCity,
-          state: data.CurrentState,
+          city: data.City,
+          state: data.State,
           managerID: data.ReportingManagerID,
-          joiningdate: data.JoiningDate.slice(0,10),
+          joiningdate: data.JoiningDate,
           worktype: data.WorkType,
           workstatus: data.WorkStatus,
-          DOB: data.DOB.slice(0,10)
+          DOB: data.DOB
         })
       });
       const responseData = await response.json();
@@ -250,12 +250,12 @@ const fetchProfilebyid = async () => {
           <div className="profile-right">
             <Card title='Profile Information' content={
               <>
-                {profileItem("Name", tempProfile.Name, 'Name', true)}
-                {profileItem("Role", tempProfile.Role, 'Role', true)}
-                {profileItem("Email", tempProfile.EmailID, 'EmailID', true)}
+                {profileItem("Name", tempProfile.Name, 'Name', false)}
+                {profileItem("Role", tempProfile.Role, 'Role', false)}
+                {profileItem("Email", tempProfile.EmailID, 'EmailID', false)}
                 {profileItem("Phone", tempProfile.PhoneNumber, 'PhoneNumber', false)}
-                {profileItem("Date of Birth", tempProfile.DOB, 'DOB', true)}
-                {profileItem("Age", tempProfile.Age, 'Age', true)}
+                {profileItem("Date of Birth", tempProfile.DOB.slice(0,10), 'DOB', false)}
+                {profileItem("Age", tempProfile.Age, 'Age', false)}
               </>
             }/>
             <Card title='Address Information' content={
@@ -267,11 +267,11 @@ const fetchProfilebyid = async () => {
             }/>
             <Card title='Work Information' content={
               <>
-                {profileItem("Work Type", tempProfile.WorkType, 'WorkType', true)}
-                {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', true)}
-                {profileItem("Joining Date", tempProfile.JoiningDate, 'JoiningDate', true)}
-                {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', true)}
-                {!isEditing && profileItem("Department", tempProfile.Department, 'Department', true)}
+                {profileItem("Work Type", tempProfile.WorkType, 'WorkType', false)}
+                {profileItem("Work Status", tempProfile.WorkStatus, 'WorkStatus', false)}
+                {profileItem("Joining Date", tempProfile.JoiningDate.slice(0,10), 'JoiningDate', false)}
+                {profileItem("Time at Jeevan", tempProfile.TimeatJeevan, 'TimeatJeevan', false)}
+                {!isEditing && profileItem("Department", tempProfile.Department, 'Department', false)}
                 {isEditing && <div>
                     <label> Department: </label>
 
@@ -284,7 +284,7 @@ const fetchProfilebyid = async () => {
                    </div>
                    }
 
-                    {!isEditing && profileItem("Role", tempProfile.Role, 'Role', true)}
+                    {!isEditing && profileItem("Role", tempProfile.Role, 'Role', false)}
                 {isEditing && <div>
                     <label> Role: </label>
 
@@ -298,8 +298,7 @@ const fetchProfilebyid = async () => {
                    }
 
 
-                {profileItem("Reporting Manager ID", tempProfile.ReportingManagerID, 'ReportingManagerID', true)}
-                {profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', true)}
+                {!isEditing && profileItem("Manager Name", tempProfile.ManagerName, 'ManagerName', false)}
               </>
             }/>
           </div>
