@@ -286,4 +286,38 @@ router.put("/api/updateuser",requireAdminAuth,async(req,res) =>{
 
   }
 })
+
+
+
+
+router.post("/api/departments",requireAdminAuth,async(req,res)=>{
+  try{
+    const {department_Name,role_Name} = req.body;
+    const [department_Rows] = await db.promise().query("Insert into department(DepartmentName) values(?)",[department_Name]);
+    const new_Department_ID = department_Rows.insertId;
+
+    const [role_Row] = await db.promise().query("Insert into role(DepartmentID,RoleName) values(?,?)",[new_Department_ID,role_Name]);
+    res.status(201).send({message:"New Department Added Successfully"})
+  }
+  catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+})
+
+
+router.post("/api/role",requireAdminAuth,async (req,res)=>{
+
+  try{
+    const {department_ID,role_Name} = req.body;
+
+    const [role_Row] = await db.promise().query("Insert into role(DepartmentID,RoleName) values(?,?)",[department_ID,role_Name]);
+    res.status(201).send({message:"New Role Added Successfully"})
+    
+  }
+  catch(err){
+    const Error= handleErrors(err);
+    res.status(Error.code).send(Error)
+  }
+})
 module.exports = router;

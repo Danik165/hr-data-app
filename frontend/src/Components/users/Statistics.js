@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Doughnut, Bar } from 'react-chartjs-2';
+// import { Doughnut, Bar } from 'react-chartjs-2';
 import './Statistics.css';
 
 

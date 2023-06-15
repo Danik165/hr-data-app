@@ -97,7 +97,6 @@ const Search = async ({searchValue}) =>{
 };
 
 const GetAllSkillDetailsofUser = async ({id}) =>{
-    //console.log("Get All skills func called",id)
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];
@@ -106,10 +105,7 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
             throw ({message:"No Skills Added for this User"})
         }
         for(let i=0;i<data.length;i++){
-            //console.log( "Data i :",data[i])
            const [skillDetails] = await db.promise().query("CALL GET_SUB_SKILLS_NAME(?)",[data[i].SubSkillIDList]);
-           // console.log("skilldetails: ",skillDetails)
-           // console.log("subskills: ",skillDetails[0][0].subskills.split(",")) //.split(","))
             data[i].subSkills = skillDetails[0][0].subskills.split(",");
         }
 
