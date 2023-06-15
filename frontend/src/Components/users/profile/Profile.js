@@ -207,6 +207,19 @@ const Profile = ({ setIsAuthenticated, id }) => {
         })
       });
       const responseData = await response.json();
+      if(response.status == 200)
+      {
+        confirmAlert({
+          title:"Success",
+          message:"Profile Updated",
+          buttons:[
+            {
+              label:'Ok',
+              onClick:() =>  window.location.reload()
+            }
+          ]
+        })
+      }
       console.log('Server responded with:', responseData);
       if (!response.ok) {
         throw new Error(responseData.message || 'Could not update profile.');
@@ -215,7 +228,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
       setIsEditing(false);
     }
     } catch (err) {
-      console.error('Updating profile failed with error:', err);
+      showError('Updating profile failed', err.message);
       setError(err.message);
     }
   
