@@ -23,7 +23,7 @@ export default function AddUserCertificate({id,toggleForm}){
          }
          else{
             inserturl = apiurl + "/ceriticate";
-            tempObj = {...newSkill}
+            tempObj = {...newCertificate}
          }
         console.log(tempObj)
          fetch(inserturl,{
