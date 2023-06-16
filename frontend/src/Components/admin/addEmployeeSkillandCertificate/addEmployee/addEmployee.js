@@ -55,6 +55,16 @@ const AddEmployeeForm = () => {
       setError("Manager must be selected")
       return false
     }
+    if(newProfile.DOB == "")
+    {
+      setError("Date of Birth Cannot be Null")
+      return false
+    }
+    if(newProfile.joiningDate == "")
+    {
+      setError("Joining Date cannot be null")
+      return false
+    }
    
     return true
   }
