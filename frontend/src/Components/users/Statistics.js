@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 // import { Doughnut, Bar } from 'react-chartjs-2';
 import './Statistics.css';
+import { apiurl } from '../../utils/HostData';
 
 
 const parseYears = (years) => {
@@ -48,7 +49,8 @@ const UserStats = () => {
     const [allData, setAllData] = useState(null);
 
     useEffect(() => {
-        fetch('http://localhost:5000/api/getallskills')
+
+        fetch(apiurl+'/getallskills')
             .then(response => {
                 if(response.redirected) {
                     window.location.replace(response.url);
@@ -58,7 +60,7 @@ const UserStats = () => {
                     .then(setUserData)
                 }});
 
-        fetch('http://localhost:5000/api/skilllist')
+        fetch(apiurl+'/skilllist')
             .then(response =>
                 {
                 if(response.redirected) {
