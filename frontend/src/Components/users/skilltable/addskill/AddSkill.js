@@ -7,8 +7,8 @@ export default function AddUserSkill({id,toggleModal}){
     //var inserturl = "dgsd";
     const [skillStructure,setSkillStructure] = useState([])
     const [newSkill,setNewSkill] = useState({
-        category:"",
-        skill:"",
+        category:"Select Category",
+        skill:"Select Skill",
         subSkillList:[],
         level:"",
         years:""
@@ -17,21 +17,40 @@ export default function AddUserSkill({id,toggleModal}){
     const [skillList,setSkillList] =useState([]);
     const [subSkillList,setSubSkillList] = useState( []);
     const [userSubSkills,setUserSubSkills] = useState([])
+    const [error,setError] = useState("");
 
     const handleCategorySelection = (categoryName) =>{
+    if(categoryName === "Select Category"){
+        setNewSkill({...newSkill,category:"Select Category"})
+        setSkillList([])
+        setSubSkillList([])
+        setUserSubSkills([])
+
+    }
+    else{
+
         setNewSkill({...newSkill,category:categoryName})
         setSkillList(skillStructure.find(({ category: c }) => c === categoryName)?.skills)
         setSubSkillList([])
         setUserSubSkills([])
         unselectskill()
-       
+       }
     }
 
     const handleSkillSelection = (skillName) =>{
+    console.log(skillName)
+        if(skillName === "Select Skill"){
+        setNewSkill({...newSkill,skill:"Select Skill"})
+            setSubSkillList([])
+            setUserSubSkills([])
+            return
+        }
+        else{
         setNewSkill({...newSkill,skill:skillName})
         setSubSkillList(skillList.find(({ skill: s }) => s === skillName)?.subSkills)
         setUserSubSkills([])
         unselectall()
+        }
     }
     const getSkillStructure = () =>{
         fetch(apiurl+"/skilllist")
@@ -67,8 +86,36 @@ export default function AddUserSkill({id,toggleModal}){
         setUserSubSkills([...userSubSkills,sub]);
         //setNewSkill({...newSkill,subSkillList:userSubSkills})
     }
+
+
+     function validateInput(){
+        if(newSkill.category === "Select Category"){
+            setError("Please Select Category")
+            return false;
+        }
+        if(newSkill.skill === "Select Skill"){
+            setError("Please Select Skill")
+            return false;
+        }
+        if(userSubSkills.length === 0){
+            setError("Please Select Sub Skill")
+            return false;
+        }
+        if(newSkill.years === ""){
+            setError("Please Select Years")
+            return false;
+        }
+        if(newSkill.level === ""){
+            setError("Please Select Level")
+            return false;
+        }
+
+        return true;
+       }
     const addSkill = async() =>{
         var inserturl,tempObj;
+        if(validateInput()){
+
         if(id){
               inserturl = apiurl + "/addskillforuser"
              tempObj = {...newSkill,subSkillList:userSubSkills,userId:id}
@@ -107,7 +154,7 @@ export default function AddUserSkill({id,toggleModal}){
           .catch(err =>{
             console.log(err)
           })
-
+        }
     }
     useEffect(()=>{
         getSkillStructure();
@@ -121,14 +168,14 @@ export default function AddUserSkill({id,toggleModal}){
     <div className="user-skill-form">
                  <h2> Add User Skill Form</h2>
                 <select onChange={(e) => handleCategorySelection(e.target.value)} >
-                    <option value="">Select category</option>
+                    <option key={0} value="Select Category">Select category</option>
                     {skillStructure.map(({ category }, i) => (
                     <option key={i} value={category}>{category}</option>
                 ))}
                 </select>
                 
                 <select onChange={(e) => handleSkillSelection(e.target.value)} id='skill-dropdown'>
-                    <option key={0} value="">Select skill</option>
+                    <option key={0} value="Select Skill">Select skill</option>
                     {skillList.map(({ skill }, i) => (
                     <option key={i} value={skill}>{skill}</option>
                  ))}
@@ -136,7 +183,7 @@ export default function AddUserSkill({id,toggleModal}){
                 </select>
 
 
-                {subSkillList.map((sub, index) => (
+                {subSkillList !=[] && subSkillList.map((sub, index) => (
                      <label key={index}>
                      <input
                          type="checkbox"
@@ -167,7 +214,7 @@ export default function AddUserSkill({id,toggleModal}){
                  <option value="Expert">Expert</option>
              </select>
 
-
+               <p>{error}</p>
              <button onClick={addSkill}>Add Skill</button>
             
     </div>

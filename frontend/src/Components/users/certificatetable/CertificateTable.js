@@ -25,7 +25,7 @@ export default function CertificateTable({id}){
         console.log("Del Confirmation Called for ",index);
         confirmAlert({
             title:"Confirm Remove",
-            message:"Are you sure you want to remove this skill?",
+            message:"Are you sure you want to remove this Certificate?",
             buttons:[
               {
                 label:"Yes",

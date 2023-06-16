@@ -7,8 +7,8 @@ export default function AddUserCertificate({id,toggleForm}){
 
     const [newCertificate,setNewCertificate] = useState({
         Certificate_Name:"",
-        Issue_Date:"",
-        Validity_Date:""
+        Issue_date:"",
+        Validity_date:""
     })
 
 
@@ -16,6 +16,7 @@ export default function AddUserCertificate({id,toggleForm}){
         e.preventDefault();
         console.log(newCertificate);
         var inserturl,tempObj;
+
         if(id){
               inserturl = apiurl + "/certificateofuser"
              tempObj = {...newCertificate,userId:id}
@@ -24,7 +25,7 @@ export default function AddUserCertificate({id,toggleForm}){
             inserturl = apiurl + "/ceriticate";
             tempObj = {...newSkill}
          }
-
+        console.log(tempObj)
          fetch(inserturl,{
             method:"POST",
             headers:{
@@ -70,10 +71,10 @@ export default function AddUserCertificate({id,toggleForm}){
                 <input type="text" onChange={e => setNewCertificate({...newCertificate,Certificate_Name:e.target.value})}/>
 
                 <label>Issue Date:</label>
-                <input type="date" onChange={e => setNewCertificate({...newCertificate,Issue_Date:e.target.value})}/>
+                <input type="date" onChange={e => setNewCertificate({...newCertificate,Issue_date:e.target.value})}/>
 
                 <label> Valid Till:</label>
-                <input type="date" onChange={e => setNewCertificate({...newCertificate,Validity_Date:e.target.value})}/>
+                <input type="date" onChange={e => setNewCertificate({...newCertificate,Validity_date:e.target.value})}/>
 
                 <button type='submit' onClick={e => addCertificate(e)}> Submit </button>
             </form>
