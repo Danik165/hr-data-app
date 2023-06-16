@@ -22,7 +22,7 @@ export default function AddUserCertificate({id,toggleForm}){
              tempObj = {...newCertificate,userId:id}
          }
          else{
-            inserturl = apiurl + "/ceriticate";
+            inserturl = apiurl + "/certificate";
             tempObj = {...newCertificate}
          }
         console.log(tempObj)
