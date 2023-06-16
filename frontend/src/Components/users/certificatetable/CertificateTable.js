@@ -14,11 +14,7 @@ export default function CertificateTable({id}){
     const [showAddCertificateForm,setShowAddCertificateForm] = useState(false)
     
     
-    
-    const handleEditCertificate = (index) =>{
-        console.log("Handle Edit Called for ",index);
-    }
-    
+
 
 
     const delCertificateConfirmation = (index) =>{
@@ -41,7 +37,26 @@ export default function CertificateTable({id}){
 
 
     const removeCertificate = (index) =>{
-        console.log("Remove Certificate Called for",index)
+        //console.log("Remove Certificate Called for",index)
+        fetch(apiurl+'/usercertificate?' + new URLSearchParams({userCertificateID:index}),{
+            method:"DELETE",
+        })
+        .then( response =>{
+
+        
+            if(response.status == 200){
+            setUserCertificates(userCertificates.filter((obj,i)=> obj.User_CertificatesID !=index ))
+            confirmAlert({
+                title:"Success",
+                message:"Certificate Removed Successfully",
+                buttons:[
+                    {
+                        label:"Ok"
+                    }
+                ]
+                })
+            }
+        })
     }
     const fetchCertificate = ({url}) =>{
         fetch(url)

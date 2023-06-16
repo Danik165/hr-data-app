@@ -77,9 +77,16 @@ const removeSubSkill = async (index) => {
   } )  
   .then(response => {
     if(response.status == 200){
-      
       setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
-      console.log(userSkills)
+      confirmAlert({
+        title:"Success",
+        message:"Skill Removed Successfully",
+        buttons:[
+            {
+                label:"Ok"
+            }
+        ]
+        })
     }  
   })  
   .catch(err =>{
