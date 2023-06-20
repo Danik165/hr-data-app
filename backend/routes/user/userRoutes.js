@@ -130,7 +130,7 @@ router.get("/api/skilllist",requireUserAuth,async (req,res) =>{
 router.get("/api/certificates",requireUserAuth,async (req,res) =>{
 
   try{
-    const userId = req.decodedToken.userId || 1444;
+    const userId = req.decodedToken.userId ;
     const [rows] = await db.promise().query("CALL GET_CERTIFICATES_OF_USER(?)",[userId])
     res.status(200).send({data:rows[0]})
   }
@@ -158,6 +158,19 @@ router.post("/api/certificate",requireUserAuth,async(req,res) =>{
 
 })
 
+router.delete("/api/certificate",requireUserAuth,async (req,res) =>{
+  try{
+    const userCertificateID = req.query.userCertificateID;
+    db.promise().query("DELETE from user_certificates where User_CertificatesID = (?)",[userCertificateID])
+    res.status(200).send({data:"Certificate Successfully Removed"})
+}
+catch(err){
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error);
+}
+})
+
+
 router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
     try{
         const userSkillID = req.query.userskillId;
@@ -169,6 +182,9 @@ router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
         res.status(Error.code).send(Error);
     }
 })
+
+
+
 
 
 router.get("/api/getallskills",requireUserAuth,async(req,res) =>{

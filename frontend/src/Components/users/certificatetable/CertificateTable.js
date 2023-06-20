@@ -36,7 +36,28 @@ export default function CertificateTable({id}){
 
 
     const removeCertificate = (index) =>{
-        console.log("Remove Certificate Called for",index)
+        fetch(apiurl+"/certificate?" + new URLSearchParams({userCertificateID:index}),{
+            method:"DELETE"
+          } )  
+          .then(response => {
+            if(response.status == 200){
+              setUserCertificates(userCertificates.filter((obj, i) => obj.User_CertificatesID !== index));
+              confirmAlert({
+                title:"Delete Successfull",
+                message:"Certificate Sucessfully Removed",
+                buttons:[
+                  {
+                    label:"Ok"
+               
+                  }  
+                ]  
+              })  
+            }  
+          })  
+          .catch(err =>{
+            console.log(err)
+            alert("Error in Removing User Skill Try Again");
+          })  
     }
     const fetchCertificate = ({url}) =>{
         fetch(url)
@@ -101,7 +122,6 @@ export default function CertificateTable({id}){
                         <td>{new Date(obj.Certificate_issue_date).toDateString().slice(3)}</td>
                         <td>{new Date(obj.Certificate_validity_date).toDateString().slice(3)}</td>
                         <td>
-                            {/* <button onClick={() => handleEditCertificate(obj.User_CertificatesID)} ><MDBIcon fas icon="pen" /></button> */}
                             <button onClick={() => delCertificateConfirmation(obj.User_CertificatesID)} ><MDBIcon fas icon="trash-alt" /></button>
                         </td>
                     </tr>
