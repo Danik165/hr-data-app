@@ -124,6 +124,7 @@ const Profile = ({  id }) => {
 
   return (
     <div className="profile-container">
+      <form>
         <div className="profile-content">
           <div className="profile-left">
             <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
@@ -160,7 +161,7 @@ const Profile = ({  id }) => {
             }/>
           </div>
         </div>
-
+            </form>
     </div>
   );
 };

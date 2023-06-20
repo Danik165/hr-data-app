@@ -21,7 +21,7 @@ const AdminPage = () => {
           <Route path="/addusers" element={<UserSkillDetails />} />
           <Route path="/addProject" element={ <AddDeptRoleProject />} />
           <Route path="/skills" element={<SkillTable />} />
-          <Route path="/profile" element={<div className='profile-page'><Profile /></div> } />
+          <Route path="/profile" element={<div class='w-100 overflow-auto'><Profile /></div> } />
           <Route path="/userprofile/*" element={<UserProfile />} />
         </Routes>
       </div>

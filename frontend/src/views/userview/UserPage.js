@@ -15,7 +15,7 @@ const UserDashboard = () => {
      <Routes>
           <Route path="/" element={<SkillPage />} />
           <Route path="/statistics" element={<Statistics />} />
-          <Route path="/profile" element={<Profile />} />
+          <Route path="/profile" element={<div class='overflow-auto w-100'><Profile /></div>} />
         </Routes>
       </div>
 
