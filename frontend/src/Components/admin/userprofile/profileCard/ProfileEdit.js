@@ -5,7 +5,7 @@ import { apiurl } from '../../../../utils/HostData';
 import Card from './Card';
 import {confirmAlert} from 'react-confirm-alert';
 
-const Profile = ({ setIsAuthenticated, id }) => {
+const Profile = ({id }) => {
   const initialProfile = {
     EmployeeID: '',
     Name: '',

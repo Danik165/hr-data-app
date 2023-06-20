@@ -1,12 +1,12 @@
 
-import Login from './Login'
+import Login from '../../Components/login/Login'
 import './loginPage.css';
 
 import logo from "../../Images/logo.png";
 import sideimg from '../../Images/LoginPageSideImageEdited.png'
 
 
-const LoginPage = ({setIsAuthenticated}) =>{
+const LoginPage = () =>{
     return(
       <div class="login-container h-100 d-flex align-items-center justify-content-center">
       <div class="card mb-2" id="login-card">
@@ -19,7 +19,7 @@ const LoginPage = ({setIsAuthenticated}) =>{
                 <div className='Jeevan-logo'>
                     <img src={logo} alt="Jeevan Logo" class='img-fluid' id="Jeevan-logo-img"></img>
                 </div>
-              <Login setIsAuthenticated={setIsAuthenticated} />
+              <Login />
             </div>
           </div>
         </div>

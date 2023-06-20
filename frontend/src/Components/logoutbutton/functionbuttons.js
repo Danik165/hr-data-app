@@ -1,9 +1,9 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
-import { apiurl } from '../utils/HostData';
+import { apiurl } from '../../utils/HostData';
 import './functionbuttons.css'
 
-const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setIsAuthenticated
+const Logout = () => { 
   let navigate = useNavigate();
 
   const logoutUser = () => {
@@ -11,17 +11,9 @@ const Logout = ({ setIsAuthenticated }) => {  // destructuring props to get setI
     fetch(apiurl+"/logout")
       .then((response) =>{
         if(response.status == 200){
-
-          //window.location.replace(response.url)
           navigate('/login')
         }
-        // response.json()
-        //   .then(data =>{
-        //       console.log(data);
-        //       setIsAuthenticated(false);
-        //       window.location.replace
-        //       navigate('/login');
-        //   })
+       
       })
 
   };

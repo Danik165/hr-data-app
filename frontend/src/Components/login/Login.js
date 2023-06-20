@@ -29,7 +29,7 @@ const Login = (props) => {
       const data = await response.json();
       if (response.status === 200) {
         localStorage.setItem('access_token', data.hrjwt);
-        props.setIsAuthenticated(true);
+       
         console.log(data);
         navigate(data.nextPage);
       } else {

@@ -4,7 +4,7 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl} from '../../../utils/HostData';
 import Card from './Card';
 
-const Profile = ({ setIsAuthenticated, id }) => {
+const Profile = ({  id }) => {
   const initialProfile = {
     EmployeeID: '',
     Name: '',
