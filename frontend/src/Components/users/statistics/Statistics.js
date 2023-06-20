@@ -49,12 +49,25 @@ const UserStats = () => {
 
     useEffect(() => {
         fetch('http://localhost:5000/api/getallskills')
-            .then(response => response.json())
-            .then(setUserData);
+            .then(response => {
+                if(response.redirected) {
+                    window.location.replace(response.url);
+                }
+                else{
+                response.json()
+                    .then(setUserData)
+                }});
 
         fetch('http://localhost:5000/api/skilllist')
-            .then(response => response.json())
-            .then(setAllData);
+            .then(response =>
+                {
+                if(response.redirected) {
+                    window.location.replace(response.url);
+                }
+                else{
+                response.json()
+                    .then(setAllData);
+                }});
     }, []);
 
     if (userData && allData) {

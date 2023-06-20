@@ -50,6 +50,8 @@ const AddSkillForm = () => {
         setSkillEnabled(true)
       }
       else{
+        setSkills([])
+        setSkillEnabled(false);
         fetchSkills(category)
         setCategoryEnabled(false);
         setNewSubSkill({...newSubSkill,category:category})
@@ -106,10 +108,10 @@ const AddSkillForm = () => {
         else {
           response.json()
           .then(skillList => {
-            setSkills([])
-            for(let i =0; i<skillList.data.length;i++){
-              setSkills(oldArray => [...oldArray,skillList.data[i]])
-            }
+            setSkills(skillList.data)
+//            for(let i =0; i<skillList.data.length;i++){
+//              setSkills(oldArray => [...oldArray,skillList.data[i]])
+//            }
               setSkills(oldArray => [...oldArray,"Add a new Skill"])
               setNewSubSkill({...newSubSkill,skill:skillList.data[0],category:category})
           })

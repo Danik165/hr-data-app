@@ -143,7 +143,7 @@ router.get("/api/certificates",requireUserAuth,async (req,res) =>{
 router.post("/api/certificate",requireUserAuth,async(req,res) =>{
 
   try{
-    const userId= req.decodedToken.userId || 1444;
+    const userId= req.decodedToken.userId ;
     const certi_name = req.body.Certificate_Name;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
@@ -172,8 +172,8 @@ router.delete("/api/deleteuserskill",requireUserAuth,async (req,res) =>{
 
 
 router.get("/api/getallskills",requireUserAuth,async(req,res) =>{
-     // const id = req.decodedToken.userId || 1001;
-     const id = 1444;
+     const id = req.decodedToken.userId;
+
   try{
       const {data} = await GetAllSkillDetailsofUser({id:id})
       res.status(200).send({data:data})
