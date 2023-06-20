@@ -15,14 +15,9 @@ export default function CertificateTable({id}){
     
     
     
-    const handleEditCertificate = (index) =>{
-        console.log("Handle Edit Called for ",index);
-    }
-    
 
 
     const delCertificateConfirmation = (index) =>{
-        console.log("Del Confirmation Called for ",index);
         confirmAlert({
             title:"Confirm Remove",
             message:"Are you sure you want to remove this skill?",
@@ -52,7 +47,6 @@ export default function CertificateTable({id}){
             else if(response.status == 200){
                 response.json()
                 .then(data =>{
-                   // console.log(data)
                     setUserCertificates(data.data)
                 })
             }

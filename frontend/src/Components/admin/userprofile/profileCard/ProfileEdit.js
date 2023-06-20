@@ -85,7 +85,7 @@ const Profile = ({id }) => {
       throw new Error(data.message || 'Could not fetch profile.');
     }
     const profileData = data.data;
-    console.log('profileData', profileData);
+    
     
     profileData.Age = calculateAge(profileData.DOB);
     profileData.TimeatJeevan = calculateTimeAtJeevan(profileData.JoiningDate);
@@ -182,7 +182,6 @@ const Profile = ({id }) => {
       const data = tempProfile;
       if(profileValidator(data))
       {
-      console.log('Updating with data:', data);
       const response = await fetch(apiurl + '/updateuser', {
         method: 'PUT',
         headers: {
@@ -220,7 +219,6 @@ const Profile = ({id }) => {
           ]
         })
       }
-      console.log('Server responded with:', responseData);
       if (!response.ok) {
         throw new Error(responseData.message || 'Could not update profile.');
       }

@@ -24,7 +24,6 @@ const UpdatePasswordwithId = async ({userId,newPassword}) =>{
 
 const Login = async ({email,password}) =>{
 
-    //console.log(email)
     try{
         const [rows] = await db.promise().query(sqlQuery.LoginUser,[email]);
 
@@ -58,7 +57,6 @@ function searchJSON(obj, val) {
         if (typeof obj[k] === "object") {
             results = results.concat(searchJSON(obj[k], val));
         }else if (typeof obj[k] == 'string' && obj[k].toLowerCase().search(val) >=0 && !DoNotMatchList.has(k) ) {
-           // console.log(obj[k].search(/Gowtham/i))
           results.push({matchedKey:k,matchValue:obj[k]});
         } 
       }
@@ -80,7 +78,6 @@ const Search = async ({searchValue}) =>{
         }
         for(let i=0;i<data.length;i++){
             [skillDetails] = await db.promise().query("CALL GET_SKILL_DETAILS_OF_USER(?)",[data[i].EmployeeID])
-            //console.log(skillDetails)
             data[i].skills = skillDetails[0];
         }
         for(let index in data){
@@ -100,7 +97,6 @@ const GetAllSkillDetailsofUser = async ({id}) =>{
     try{
         const [categoryDetails] = await db.promise().query("CALL GET_COMPLETE_USER_SKILLS(?)",[id]);
         const data=categoryDetails[0];
-        console.log("Data:",data);
         if(data.length <= 0){
             throw ({message:"No Skills Added for this User"})
         }
@@ -143,7 +139,7 @@ const GetAllSkillSet = async () =>{
 
     }
     catch(err){
-    console.log(err)
+         console.log(err)
         return {success:false,message:"Error at GET_COMPLETE_SKILL_SET"}
       }
 }

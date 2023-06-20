@@ -79,7 +79,6 @@ const removeSubSkill = async (index) => {
     if(response.status == 200){
       
       setUserSkills(userSkills.filter((obj, i) => obj.listId !== index));
-      console.log(userSkills)
     }  
   })  
   .catch(err =>{
@@ -141,7 +140,6 @@ useEffect(() =>{
     else{
         const userUrl = apiurl+"/getallskills";
         fetchSubSkillsbyid(userUrl)
-      //console.log("Fetch sub skills for the user")
     }
   },[])
 return (

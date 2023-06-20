@@ -21,7 +21,7 @@ const EnterNewPassword = () => {
     else {
         const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
         if (!regex.test(password)) {
-            console.log("Invalid password entered"); // This line is new
+            
             setError('Password should be at least 8 characters, have a mix of uppercase and lowercase letters, include at least one number, and one special character.')
             return;
         }
