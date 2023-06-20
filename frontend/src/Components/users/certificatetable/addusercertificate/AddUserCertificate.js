@@ -14,7 +14,6 @@ export default function AddUserCertificate({id,toggleForm}){
 
     const addCertificate = (e) =>{
         e.preventDefault();
-        console.log(newCertificate);
         var inserturl,tempObj;
 
         if(id){

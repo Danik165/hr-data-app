@@ -12,10 +12,10 @@ import { Link, NavLink } from 'react-router-dom';
 
 import "./Sidebar.css"
 import logo from '../../Images/Logo_alt.png';
-import Logout from '../functionbuttons';
+import Logout from '../logoutbutton/functionbuttons';
 
 
-const Sidebar = ({setIsAuthenticated}) => {
+const Sidebar = () => {
 
 
 
@@ -49,7 +49,7 @@ const Sidebar = ({setIsAuthenticated}) => {
 
         <CDBSidebarFooter >
 
-           <CDBSidebarMenuItem icon="power-off"  ><Logout setIsAuthenticated={setIsAuthenticated} />  </CDBSidebarMenuItem>
+           <CDBSidebarMenuItem icon="power-off"  ><Logout  />  </CDBSidebarMenuItem>
 
 
         </CDBSidebarFooter>

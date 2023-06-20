@@ -7,7 +7,7 @@ body, html {
   padding: 0;
 }
 
-.profile-container {
+.editable-profile-container {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -16,7 +16,7 @@ body, html {
   margin: auto;
 }
 
-.profile-content {
+.editable-profile-content {
   display: flex;
   flex-direction: row;
   width: 100%;

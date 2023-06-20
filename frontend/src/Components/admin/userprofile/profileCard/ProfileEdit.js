@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './profile.css';
+import './editprofile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl } from '../../../../utils/HostData';
 import Card from './Card';
 import {confirmAlert} from 'react-confirm-alert';
 
-const Profile = ({ setIsAuthenticated, id }) => {
+const EditableProfile = ({id }) => {
   const initialProfile = {
     EmployeeID: '',
     Name: '',
@@ -85,7 +85,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
       throw new Error(data.message || 'Could not fetch profile.');
     }
     const profileData = data.data;
-    console.log('profileData', profileData);
+    
     
     profileData.Age = calculateAge(profileData.DOB);
     profileData.TimeatJeevan = calculateTimeAtJeevan(profileData.JoiningDate);
@@ -182,7 +182,6 @@ const Profile = ({ setIsAuthenticated, id }) => {
       const data = tempProfile;
       if(profileValidator(data))
       {
-      console.log('Updating with data:', data);
       const response = await fetch(apiurl + '/updateuser', {
         method: 'PUT',
         headers: {
@@ -220,7 +219,6 @@ const Profile = ({ setIsAuthenticated, id }) => {
           ]
         })
       }
-      console.log('Server responded with:', responseData);
       if (!response.ok) {
         throw new Error(responseData.message || 'Could not update profile.');
       }
@@ -290,9 +288,9 @@ const Profile = ({ setIsAuthenticated, id }) => {
   if (error) return <p>Error: {error}</p>;
 
   return (
-    <div className="profile-container">
+    <div className="editable-profile-container">
       <form onSubmit={updateProfile}>
-        <div className="profile-content">
+        <div className="editable-profile-content">
           <div className="profile-left">
             <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
           </div>
@@ -409,7 +407,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
   );
 };
 
-export default Profile;
+export default EditableProfile;
 
 
 

@@ -7,7 +7,6 @@ export default function SearchGrid({profileList}) {
     return(
             <div class='search-grid'>
             {profileList.map(profile =>{
-            console.log(profile)
             return <SearchCard profile={profile} />
             })}
 

@@ -161,7 +161,6 @@ const AddEmployeeForm = () => {
       response.json()
         .then((rolelist) =>{
           setRoles(rolelist.data)
-          //console.log(rolelist.data[0].roleID)
           setNewProfile({...newProfile,departmentId:deptId,roleId:rolelist.data[0].roleID})
 
         })
@@ -187,7 +186,7 @@ const AddEmployeeForm = () => {
         else {
           response.json()
             .then((departmentlist) => {
-              //console.log(departmentlist)
+              
               setDeparments(departmentlist.data) 
               fetchRole(departmentlist.data[0].DepartmentID);
             })
@@ -195,7 +194,6 @@ const AddEmployeeForm = () => {
 
     })
     .catch(err =>{
-     // console.log(err.message);
       setError(err.message)
     })
   }
