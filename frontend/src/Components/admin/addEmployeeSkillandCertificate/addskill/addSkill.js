@@ -18,8 +18,6 @@ const AddSkillForm = () => {
 
 
     const addSkill = () => {
-      console.log(newSubSkill)
-      //console.log(newSubSkill)
       fetch(apiurl+"/addnewsubskill",{
         method:"POST",
         headers:{
@@ -29,17 +27,15 @@ const AddSkillForm = () => {
       })
       .then(response =>{
         if(response.status === 201){
-          //console.log("Successfull Added")
+
           setError("Skill Set Added Successfully")
         }
         else{
           setError("Unable to Add. Error Code" + response.status)
-          //console.log("Error")
         }
       })
       .catch(err =>{
         setError(err.message)
-        //console.log(err)
       })
     }
 
@@ -56,7 +52,6 @@ const AddSkillForm = () => {
         setCategoryEnabled(false);
         setNewSubSkill({...newSubSkill,category:category})
       }
-      console.log("HandleCategory  Called")
     }
     const handleSkillSelection = (skill) =>{
       if(skill == "Add a new Skill"){
@@ -66,7 +61,6 @@ const AddSkillForm = () => {
         setNewSubSkill({...newSubSkill,skill:skill})
         setSkillEnabled(false)
       }
-      console.log("Handle Skill Called")
     }
     const fetchCategorys = () =>{
       fetch(apiurl+"/categories")
@@ -78,7 +72,6 @@ const AddSkillForm = () => {
           else {
             response.json()
               .then((categorylist) => {
-                console.log(categorylist)
                 
                 for(let i = 0; i <categorylist.data.length ; i++){
   
@@ -92,14 +85,14 @@ const AddSkillForm = () => {
   
       })
       .catch(err =>{
-        console.log(err.message);
+
         setError(err.message)
       })
     }
   
     const fetchSkills = (category) =>{
       
-      console.log("Fetch Skills called")
+
       fetch(apiurl+"/skillbycategory?" + new URLSearchParams({categoryName:category}))
       .then(response => {
         if(response.redirected){
@@ -109,17 +102,13 @@ const AddSkillForm = () => {
           response.json()
           .then(skillList => {
             setSkills(skillList.data)
-//            for(let i =0; i<skillList.data.length;i++){
-//              setSkills(oldArray => [...oldArray,skillList.data[i]])
-//            }
-              setSkills(oldArray => [...oldArray,"Add a new Skill"])
-              setNewSubSkill({...newSubSkill,skill:skillList.data[0],category:category})
+            setSkills(oldArray => [...oldArray,"Add a new Skill"])
+            setNewSubSkill({...newSubSkill,skill:skillList.data[0],category:category})
           })
         }
       })
       .catch( err =>{
-        console.log(err.message)
-        setError(err.m)
+        setError(err.message)
       })
     }
     useEffect( () =>{ fetchCategorys(); },[]);

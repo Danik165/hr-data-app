@@ -29,7 +29,6 @@ const AddProjectForm = () => {
       .catch(err =>{
         setMessage(err.message)
       })
-      console.log("Add Certificate Called")
     }
 
 

@@ -27,7 +27,7 @@ const AddCertificateForm = () => {
     .catch(err =>{
       setMessage(err.message)
     })
-    console.log("Add Certificate Called")
+
   }
 
   

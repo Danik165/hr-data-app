@@ -1,21 +1,21 @@
 import React from 'react';
 import './adminprofile.css';
-import AdminSidebar from './adminsidebar/AdminSidebar';
-import SkillTable from '../users/skilltable/SkillTable';
+import AdminSidebar from '../../Components/admin/adminsidebar/AdminSidebar';
+import SkillTable from '../../Components/users/skilltable/SkillTable';
 import { Routes, Route } from 'react-router-dom';
-import Profile  from '../users/profile/Profile';
-import UserSkillDetails from './addEmployeeSkillandCertificate/addUserSkill';
-import AddDeptRoleProject from './addDeptRoleProject/addDeptRoleProject';
-import DashboardPage from './AdminDashboard/dashboardPage';
-import UserProfile from './userprofile/UserProfile';
+import Profile  from '../../Components/users/profile/Profile';
+import UserSkillDetails from '../../Components/admin/addEmployeeSkillandCertificate/addUserSkill';
+import AddDeptRoleProject from '../../Components/admin/addDeptRoleProject/addDeptRoleProject';
+import DashboardPage from '../../Components/admin/AdminDashboard/dashboardPage';
+import UserProfile from '../../Components/admin/userprofile/UserProfile';
 
-const AdminPage = ({ setIsAuthenticated }) => {
+const AdminPage = () => {
  
 
   return (
     <div className="dashboard-container">
       <div  className='dashboard-body'>
-        <AdminSidebar setIsAuthenticated={setIsAuthenticated}  />
+        <AdminSidebar   />
         <Routes>
           <Route path="/" element={<DashboardPage />} />
           <Route path="/addusers" element={<UserSkillDetails />} />

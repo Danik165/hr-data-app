@@ -16,13 +16,11 @@ const DashboardPage = () =>{
         }
         fetch(apiurl+"/getdetails?" + new URLSearchParams({searchValue:searchValue}))
         .then(response =>{
-            //console.log(response.status)
             if(response.redirected){
             window.location.replace(response.url)}
             else if (response.status == 200){
                 response.json()
                 .then(data =>{
-                    //console.log(data);
                     setErrorMessage('Total Records Found(' + data.data.length + ')')
                     setProfileList(data.data);
                 }
