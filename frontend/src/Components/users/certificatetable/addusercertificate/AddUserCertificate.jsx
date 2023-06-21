@@ -24,9 +24,9 @@ export default function AddUserCertificate({id,toggleForm}){
           setError("Validity Date cannot be null")
           return false
         }
-        if(new Date(newCertificate.Issue_date) > new Date(newCertificate.Validity_date))
+        if(new Date(newCertificate.Issue_date) >= new Date(newCertificate.Validity_date))
         {
-          setError("Issue Date cannot be later than validitity date")
+          setError("Validity Date should be later than Issue Date")
           return false
         }
         return true
