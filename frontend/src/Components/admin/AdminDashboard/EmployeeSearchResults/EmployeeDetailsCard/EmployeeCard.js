@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { MDBIcon } from 'mdb-react-ui-kit';
-import './searchcard.css';
+import './employeecard.css';
 import { useNavigate } from "react-router";
 
-export default function SearchCard({profile}){
+export default function EmployeeCard({profile}){
     let navigate = useNavigate();
     const seeProfile = (id)=>{
         

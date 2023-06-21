@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router';
 import { apiurl } from '../../utils/HostData';
-import './functionbuttons.css'
+import './logoutbutton.css'
 
 const Logout = () => { 
   let navigate = useNavigate();
