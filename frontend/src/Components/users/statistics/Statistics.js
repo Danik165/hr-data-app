@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 // import { Doughnut, Bar } from 'react-chartjs-2';
 import './Statistics.css';
-import { apiurl } from '../../utils/HostData';
+
+import { apiurl } from '../../../utils/HostData';
 
 
 const parseYears = (years) => {
