@@ -41,7 +41,7 @@ export default function EmployeeCard({profile}){
                             return  <div class='col-6'> <p class='match-pane-tag'> {matchObjs.matchValue}</p> </div>}):
                              <>
                              <div class='col-6'> <p class='match-pane-tag'>{profile.Address}</p></div>
-                             <div class='col-6'><p class='match-pane-tag'>{profile.DOB}</p></div>
+                             <div class='col-6'><p class='match-pane-tag'>{new Date(profile.DOB).toDateString().slice(3)}</p></div>
                              <div class='col-6'> <p class='match-pane-tag'>{profile.ManagerName}</p></div>
                              <div class='col-6'><p class='match-pane-tag'>{profile.WorkType}</p></div>
                              </>
