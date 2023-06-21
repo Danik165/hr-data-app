@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './editprofile.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl } from '../../../../utils/HostData';
-import Card from './Card';
+import ProfileInfoCard from './profileInfoCard/ProfileInfoCard';
 import {confirmAlert} from 'react-confirm-alert';
 
 const EditableProfile = ({id }) => {
@@ -295,7 +295,7 @@ const EditableProfile = ({id }) => {
             <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
           </div>
           <div className="profile-right">
-            <Card title='Profile Information' content={
+            <ProfileInfoCard title='Profile Information' content={
               <>
                 {profileItem("Name", tempProfile.Name, 'Name', false)}
                 {profileItem("Employee ID", tempProfile.EmployeeID, 'Employee ID', true)}
@@ -309,14 +309,14 @@ const EditableProfile = ({id }) => {
                 {profileItem("Age", tempProfile.Age, 'Age', false)}
               </>
             }/>
-            <Card title='Address Information' content={
+            <ProfileInfoCard title='Address Information' content={
               <>
                 {profileItem("Address", tempProfile.Address, 'Address', false)}
                 {profileItem("City", tempProfile.City, 'City', false)}
                 {profileItem("State", tempProfile.State, 'State', false)}
               </>
             }/>
-            <Card title='Work Information' content={
+            <ProfileInfoCard title='Work Information' content={
               <>
                 {!isEditing && profileItem("Work Type", tempProfile.WorkType, 'WorkType', false)}
                 { isEditing && <div>

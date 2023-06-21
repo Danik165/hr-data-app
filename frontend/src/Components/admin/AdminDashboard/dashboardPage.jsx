@@ -1,6 +1,6 @@
 import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
-import SearchGrid from "./SearchGrid";
+import EmployeeSearchResults from "./EmployeeSearchResults/EmployeeSearchResults";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { apiurl } from "../../../utils/HostData";
 const DashboardPage = () =>{
@@ -57,7 +57,7 @@ const DashboardPage = () =>{
 
 
             <div className="search-table overflow-hidden  ">
-                <SearchGrid profileList={profileList}/>
+                <EmployeeSearchResults profileList={profileList}/>
             </div>
         </div>
     )

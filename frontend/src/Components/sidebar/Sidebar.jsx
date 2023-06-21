@@ -12,7 +12,7 @@ import { Link, NavLink } from 'react-router-dom';
 
 import "./Sidebar.css"
 import logo from '../../Images/Logo_alt.png';
-import Logout from '../logoutbutton/functionbuttons';
+import Logout from '../logoutbutton/LogoutButtons';
 
 
 const Sidebar = () => {

@@ -1,6 +1,6 @@
 import { useState } from "react";
-import AddProjectForm from "./addProject";
-import AddDeptRoleForm from "./addDeptRole";
+import AddProjectForm from "./addProjectForm/addProjectForm";
+import AddDeptRoleForm from "./addDeptorRoleForm/addDeptorRoleForm";
 
 const AddDeptRoleProject = () =>{
     const [displayForm, setDisplayForm] = useState("Department");

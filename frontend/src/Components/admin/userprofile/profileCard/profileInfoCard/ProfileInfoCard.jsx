@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ title, content, isEditable, onChange }) => {
+const ProfileInfoCard = ({ title, content, isEditable, onChange }) => {
   return (
     <div className="info-card">
       <h3 className="card-title">{title}</h3>
@@ -12,4 +12,4 @@ const Card = ({ title, content, isEditable, onChange }) => {
   );
 };
 
-export default Card;
+export default ProfileInfoCard;
