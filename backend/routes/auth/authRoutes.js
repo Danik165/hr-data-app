@@ -28,7 +28,6 @@ router.post("/api/login",async (req,res) => {
       responseObj = {nextPage:"/admin"}
     }
     else{
-      console.log(result)
       responseObj = {nextPage: "/"}
     }
     
@@ -44,7 +43,6 @@ router.post("/api/login",async (req,res) => {
 });
 
 router.get("/api/forgotpassword",async(req,res) =>{
-  console.log(req.query.emailId)
   const emaiId = req.query.emailId;
   try{
     const [rows] = await db.promise().query(sqlQuery.selectUserIdByEmailId,[emaiId])

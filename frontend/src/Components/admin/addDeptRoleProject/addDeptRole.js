@@ -21,7 +21,6 @@ const AddDeptRoleForm = () => {
       const deptUrl = apiurl + "/departments"
     const AddDeptRole = () => {
       if(newDepartment.department_ID == 0){
-        console.log("Calling",deptUrl,"with",newDepartment)
         fetch(deptUrl,{
           method:"POST",
           headers: {
@@ -52,7 +51,6 @@ const AddDeptRoleForm = () => {
 
       }
       else{
-        console.log("Calling",roleUrl,"with",newDepartment)
         fetch(roleUrl,{
           method:"POST",
           headers: {
@@ -105,7 +103,6 @@ const AddDeptRoleForm = () => {
           else {
             response.json()
               .then((departmentlist) => {
-                console.log(departmentlist.data)
                 setDeparments(departmentlist.data)
                 setDeparments(oldArray =>[...oldArray,{DepartmentID:0,DepartmentName:"Add a new Department"}]);
                 setNewDepartment({...newDepartment,department_ID:departmentlist.data[0].DepartmentID})

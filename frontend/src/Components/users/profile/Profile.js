@@ -4,7 +4,7 @@ import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl} from '../../../utils/HostData';
 import Card from './Card';
 
-const Profile = ({ setIsAuthenticated, id }) => {
+const Profile = ({  id }) => {
   const initialProfile = {
     EmployeeID: '',
     Name: '',
@@ -82,7 +82,6 @@ const Profile = ({ setIsAuthenticated, id }) => {
       throw new Error(data.message || 'Could not fetch profile.');
     }
     const profileData = data.data;
-    console.log('profileData', profileData);
     
     profileData.Age = calculateAge(profileData.DOB);
     profileData.TimeatJeevan = calculateTimeAtJeevan(profileData.JoiningDate);
@@ -125,6 +124,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
 
   return (
     <div className="profile-container">
+      <form>
         <div className="profile-content">
           <div className="profile-left">
             <div className="profile-photo"><MDBIcon far icon='user-circle' size='6x' /></div>
@@ -161,7 +161,7 @@ const Profile = ({ setIsAuthenticated, id }) => {
             }/>
           </div>
         </div>
-
+            </form>
     </div>
   );
 };

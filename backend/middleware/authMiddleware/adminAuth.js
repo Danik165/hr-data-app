@@ -25,7 +25,6 @@ req.decodedToken={
                 res.status(Error.code).redirect("/");
             }
             else if(decodedToken.authId != 1){
-                console.log("UnAuthorised Access");
                 res.status(403).send("Access Forbidden").redirect("/login");
             }
             else{

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router";
 export default function SearchCard({profile}){
     let navigate = useNavigate();
     const seeProfile = (id)=>{
-        console.log(id);
+        
         navigate('/admin/userprofile?id='+ id)
     }
 

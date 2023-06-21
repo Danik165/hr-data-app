@@ -148,7 +148,6 @@ useEffect(() =>{
     else{
         const userUrl = apiurl+"/getallskills";
         fetchSubSkillsbyid(userUrl)
-      //console.log("Fetch sub skills for the user")
     }
   },[])
 return (

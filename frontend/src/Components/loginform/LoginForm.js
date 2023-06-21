@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Navigate, useNavigate } from 'react-router';
-import "./login.css";
+import "./loginform.css";
 import { apiurl } from '../../utils/HostData';
 import { Link } from 'react-router-dom';
 
@@ -29,8 +29,7 @@ const Login = (props) => {
       const data = await response.json();
       if (response.status === 200) {
         localStorage.setItem('access_token', data.hrjwt);
-        props.setIsAuthenticated(true);
-        console.log(data);
+       
         navigate(data.nextPage);
       } else {
         setError(data.message);

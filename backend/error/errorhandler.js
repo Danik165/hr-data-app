@@ -2,8 +2,6 @@
 
 const handleErrors = (err) => {
 
-    //console.log("Error Code:",err.code)
-    //console.log("Error Message: ",err.message)
     var Error ={
         code:400,
         message:err.message

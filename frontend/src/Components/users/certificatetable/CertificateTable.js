@@ -18,7 +18,6 @@ export default function CertificateTable({id}){
 
 
     const delCertificateConfirmation = (index) =>{
-        console.log("Del Confirmation Called for ",index);
         confirmAlert({
             title:"Confirm Remove",
             message:"Are you sure you want to remove this Certificate?",
@@ -37,26 +36,28 @@ export default function CertificateTable({id}){
 
 
     const removeCertificate = (index) =>{
-        //console.log("Remove Certificate Called for",index)
-        fetch(apiurl+'/usercertificate?' + new URLSearchParams({userCertificateID:index}),{
-            method:"DELETE",
-        })
-        .then( response =>{
-
-        
+        fetch(apiurl+"/certificate?" + new URLSearchParams({userCertificateID:index}),{
+            method:"DELETE"
+          } )  
+          .then(response => {
             if(response.status == 200){
-            setUserCertificates(userCertificates.filter((obj,i)=> obj.User_CertificatesID !=index ))
-            confirmAlert({
-                title:"Success",
-                message:"Certificate Removed Successfully",
+              setUserCertificates(userCertificates.filter((obj, i) => obj.User_CertificatesID !== index));
+              confirmAlert({
+                title:"Delete Successfull",
+                message:"Certificate Sucessfully Removed",
                 buttons:[
-                    {
-                        label:"Ok"
-                    }
-                ]
-                })
-            }
-        })
+                  {
+                    label:"Ok"
+               
+                  }  
+                ]  
+              })  
+            }  
+          })  
+          .catch(err =>{
+            console.log(err)
+            alert("Error in Removing User Skill Try Again");
+          })  
     }
     const fetchCertificate = ({url}) =>{
         fetch(url)
@@ -67,7 +68,6 @@ export default function CertificateTable({id}){
             else if(response.status == 200){
                 response.json()
                 .then(data =>{
-                   // console.log(data)
                     setUserCertificates(data.data)
                 })
             }
@@ -122,7 +122,6 @@ export default function CertificateTable({id}){
                         <td>{new Date(obj.Certificate_issue_date).toDateString().slice(3)}</td>
                         <td>{new Date(obj.Certificate_validity_date).toDateString().slice(3)}</td>
                         <td>
-                            {/* <button onClick={() => handleEditCertificate(obj.User_CertificatesID)} ><MDBIcon fas icon="pen" /></button> */}
                             <button onClick={() => delCertificateConfirmation(obj.User_CertificatesID)} ><MDBIcon fas icon="trash-alt" /></button>
                         </td>
                     </tr>
