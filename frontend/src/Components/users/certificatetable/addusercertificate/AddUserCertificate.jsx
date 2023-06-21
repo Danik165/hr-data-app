@@ -4,24 +4,45 @@ import { confirmAlert } from 'react-confirm-alert';
 import {apiurl} from '../../../../utils/HostData'
 export default function AddUserCertificate({id,toggleForm}){
 
-
+    const [error,setError] = useState('')
     const [newCertificate,setNewCertificate] = useState({
         Certificate_Name:"",
-        Issue_Date:"",
-        Validity_Date:""
+        Issue_date:"",
+        Validity_date:""
     })
 
+    const validateInput = () =>{
+        if(newCertificate.Certificate_Name == ""){
+            setError("Certificate Name cannot be Null")
+            return false;
+        }
+        if(newCertificate.Issue_date == ''){
+          setError("Issue Date cannot be null")
+          return false
+        }
+        if(newCertificate.Validity_date == ''){
+          setError("Validity Date cannot be null")
+          return false
+        }
+        if(new Date(newCertificate.Issue_date) > new Date(newCertificate.Validity_date))
+        {
+          setError("Issue Date cannot be later than validitity date")
+          return false
+        }
+        return true
+    }
 
     const addCertificate = (e) =>{
         e.preventDefault();
+        if(validateInput()){
         var inserturl,tempObj;
         if(id){
               inserturl = apiurl + "/certificateofuser"
              tempObj = {...newCertificate,userId:id}
          }
          else{
-            inserturl = apiurl + "/ceriticate";
-            tempObj = {...newSkill}
+            inserturl = apiurl + "/certificate";
+            tempObj = {...newCertificate}
          }
 
          fetch(inserturl,{
@@ -52,14 +73,9 @@ export default function AddUserCertificate({id,toggleForm}){
             }
           })
           .catch(err =>{
-            console.log(err)
+            setError(err.message)
           })
-
-
-
-
-       
-
+        }
     }
     return(
         <div className='add-certificate-form-container'>
@@ -69,11 +85,11 @@ export default function AddUserCertificate({id,toggleForm}){
                 <input type="text" onChange={e => setNewCertificate({...newCertificate,Certificate_Name:e.target.value})}/>
 
                 <label>Issue Date:</label>
-                <input type="date" onChange={e => setNewCertificate({...newCertificate,Issue_Date:e.target.value})}/>
+                <input type="date" onChange={e => setNewCertificate({...newCertificate,Issue_date:e.target.value})}/>
 
                 <label> Valid Till:</label>
-                <input type="date" onChange={e => setNewCertificate({...newCertificate,Validity_Date:e.target.value})}/>
-
+                <input type="date" onChange={e => setNewCertificate({...newCertificate,Validity_date:e.target.value})}/>
+                <p>{error}</p>
                 <button type='submit' onClick={e => addCertificate(e)}> Submit </button>
             </form>
         </div>
