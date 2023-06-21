@@ -1,7 +1,7 @@
 
 import { useState,useEffect } from 'react';
 import { CDBInput, CDBCard, CDBCardBody, CDBBtn, CDBContainer,CDBDropDown,CDBDropDownMenu,CDBDropDownToggle,CDBDropDownItem } from 'cdbreact';
-import { apiurl } from '../../../utils/HostData';
+import { apiurl } from '../../../../utils/HostData';
 import {confirmAlert} from 'react-confirm-alert';
 
 

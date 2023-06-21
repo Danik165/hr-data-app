@@ -1,7 +1,6 @@
 import { useState } from "react"
 import AddEmployeeForm from "./addEmployee/addEmployee";
 import AddSkillForm from "./addskill/addSkill";
-import AddCertificateForm from "./addCertificate/addCertificate";
 import './addUserSkill.css'
 
 const UserSkillDetails = () => {
