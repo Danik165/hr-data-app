@@ -61,7 +61,7 @@ export default function AddUserCertificate({id,toggleForm}){
                 toggleForm()
                 confirmAlert({
                     title:"Success",
-                    message:"Skill Set Added Successfully",
+                    message:"New Certificate Added Successfully",
                     buttons:[
                       {
                         label:"Ok",
