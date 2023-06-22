@@ -264,10 +264,11 @@ router.get("/api/certificatesofuser", requireAdminAuth, async (req, res) => {
   }
 });
 
-router.post("/api/certificateofuser", requireAdminAuth, async (req, res) => {
-  try {
-    const userId = req.body.userId;
-    const certi_name = req.body.Certificate_Name;
+router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
+
+  try{
+    const userId= req.body.userId;
+    const certificate_ID = req.body.Certificate_ID;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
 

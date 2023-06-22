@@ -51,33 +51,37 @@ export default function AddUserCertificate({ id, toggleForm }) {
         tempObj = { ...newCertificate };
       }
 
-      fetch(inserturl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ ...tempObj }),
-      })
-        .then((response) => {
-          if (response.redirected) {
-            window.location.replace(response.url);
-          } else if (response.status == 201) {
-            toggleForm();
-            confirmAlert({
-              title: "Success",
-              message: "Certificate Added Successfully",
-              buttons: [
-                {
-                  label: "Ok",
-                  onClick: () => window.location.reload(),
-                },
-              ],
-            });
-          }
-        })
-        .catch((err) => {
-          setError(err.message);
-        });
+         fetch(inserturl,{
+            method:"POST",
+            headers:{
+              'Content-Type':"application/json"
+            },
+            body:JSON.stringify({...tempObj})
+        
+          })
+          .then(response =>{
+            if(response.redirected){
+              window.location.replace(response.url);
+            }
+            else if(response.status == 201){
+                toggleForm()
+                confirmAlert({
+                    title:"Success",
+                    message:"New Certificate Added Successfully",
+                    buttons:[
+                      {
+                        label:"Ok",
+                        onClick:() => window.location.reload()
+                      }
+                    ]
+              
+                  })
+            }
+          })
+          .catch(err =>{
+            setError(err.message)
+          })
+        }
     }
   };
 
