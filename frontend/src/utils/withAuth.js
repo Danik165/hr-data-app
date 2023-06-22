@@ -1,14 +1,14 @@
-import React, { useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 
 const withAuth = (WrappedComponent) => {
   return (props) => {
     const history = useHistory();
-    const isAuthenticated = localStorage.getItem('access_token');
+    const isAuthenticated = localStorage.getItem("access_token");
 
     useEffect(() => {
       if (!isAuthenticated) {
-        history.push('/login');
+        history.push("/login");
       }
     }, [isAuthenticated, history]);
 
