@@ -25,49 +25,56 @@ export default function EmployeeCard({ profile }) {
                 <div class="col">
                   <p class="p-0 m-0 profile-name-value">{profile.Name}</p>
                 </div>
-                <div class='col-8'>
-                    <div class='user-details container'>
-                        <div class='row'>
-                            <div class='col'>
-                                <p class='p-0 m-0 profile-name-value'>{profile.Name}</p>
-                            </div>
-                        </div>
-                        <div class='row'>
-                            <div class='col'>
-                                <p class='p-0 m-0  font-weight-light'>{profile.Role}</p>
-                                <p class='p-0 m-0  font-weight-light'>{profile.Department}</p>
-                            </div>
-                        </div>
-                    </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <p class="p-0 m-0  font-weight-light">{profile.Role}</p>
+                  <p class="p-0 m-0  font-weight-light">{profile.Department}</p>
                 </div>
+              </div>
             </div>
-            
-            <div class='row pt-2 match-details g-0 no-gutters'>
-
-                {
-                    profile.matchedResults.length > 0 ? profile.matchedResults.slice(0,4).map(matchObjs => {
-                            return  <div class='col-6'> <p class='match-pane-tag'> {matchObjs.matchValue}</p> </div>}):
-                             <>
-                             <div class='col-6'> <p class='match-pane-tag'>{profile.Address}</p></div>
-                             <div class='col-6'><p class='match-pane-tag'>{new Date(profile.DOB).toDateString().slice(3)}</p></div>
-                             <div class='col-6'> <p class='match-pane-tag'>{profile.ManagerName}</p></div>
-                             <div class='col-6'><p class='match-pane-tag'>{profile.WorkType}</p></div>
-                             </>
-            }
-
-
-
-            </div>
-            <hr />  
-            <div class='row contact-pane ps-2 g-0 no-gutters'>
-                <div class='col col-6 '>
-                    <p  class='p-0 m-0 contact-tag'>{profile.EmailID}</p>
-                </div>
-                <div class='col col-6'>
-                    <p  class='p-0 m-0 contact-tag'>{profile.PhoneNumber}</p>
-                </div>
-            </div>
-            </div>
+          </div>
         </div>
-    )
+
+        <div class="row pt-2 match-details g-0 no-gutters">
+          {profile.matchedResults.length > 0 ? (
+            profile.matchedResults.slice(0, 4).map((matchObjs) => {
+              return (
+                <div class="col-6">
+                  {" "}
+                  <p class="match-pane-tag"> {matchObjs.matchValue}</p>{" "}
+                </div>
+              );
+            })
+          ) : (
+            <>
+              <div class="col-6">
+                {" "}
+                <p class="match-pane-tag">{profile.Address}</p>
+              </div>
+              <div class="col-6">
+                <p class="match-pane-tag">{profile.DOB}</p>
+              </div>
+              <div class="col-6">
+                {" "}
+                <p class="match-pane-tag">{profile.ManagerName}</p>
+              </div>
+              <div class="col-6">
+                <p class="match-pane-tag">{profile.WorkType}</p>
+              </div>
+            </>
+          )}
+        </div>
+        <hr />
+        <div class="row contact-pane ps-2 g-0 no-gutters">
+          <div class="col col-6 ">
+            <p class="p-0 m-0 contact-tag">{profile.EmailID}</p>
+          </div>
+          <div class="col col-6">
+            <p class="p-0 m-0 contact-tag">{profile.PhoneNumber}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
