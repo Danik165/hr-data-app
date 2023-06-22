@@ -109,6 +109,7 @@ export default function CertificateTable({id}){
            <table>
             <thead>
                 <tr>
+                    <th>Certificate Provider</th>
                     <th>Certificate Name</th>
                     <th>Issue Date</th>
                     <th>Valid Till Date</th>
@@ -118,6 +119,7 @@ export default function CertificateTable({id}){
             <tbody>
                 {userCertificates.map((obj,i) =>(
                     <tr key={obj.User_CertificatesID}>
+                        <td>{obj.CertificateProvider}</td>
                         <td>{obj.CertificateName}</td>
                         <td>{new Date(obj.Certificate_issue_date).toDateString().slice(3)}</td>
                         <td>{new Date(obj.Certificate_validity_date).toDateString().slice(3)}</td>

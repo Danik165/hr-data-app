@@ -236,11 +236,11 @@ router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
 
   try{
     const userId= req.body.userId;
-    const certi_name = req.body.Certificate_Name;
+    const certificate_ID = req.body.Certificate_ID;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
 
-    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certi_name,issue_date,validity_date,userId]);
+    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certificate_ID,issue_date,validity_date,userId]);
     res.status(201).send({data:rows[0]})
   }
   catch(err){

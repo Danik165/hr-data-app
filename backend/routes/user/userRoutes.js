@@ -144,11 +144,11 @@ router.post("/api/certificate",requireUserAuth,async(req,res) =>{
 
   try{
     const userId= req.decodedToken.userId ;
-    const certi_name = req.body.Certificate_Name;
+    const certificate_ID = req.body.Certificate_ID;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
 
-    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certi_name,issue_date,validity_date,userId]);
+    const [rows] = await db.promise().query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)",[certificate_ID,issue_date,validity_date,userId]);
     res.status(201).send({data:rows[0]})
   }
   catch(err){
@@ -204,5 +204,19 @@ router.get("/api/getallskills",requireUserAuth,async(req,res) =>{
     const Error = handleErrors(err)
     res.status(Error.code).send(Error)
   }
+})
+
+
+
+router.get("/api/listcertificates",requireUserAuth,async(req,res) =>{
+try{
+  const [data] = await db.promise().query("Select * from certificates")
+  res.status(200).send({data:data})
+}
+catch(err){
+  const Error = handleErrors(err);
+  res.status(Error.code).send(Error)
+}
+
 })
 module.exports = router;
