@@ -1,36 +1,34 @@
 .forms-container {
-    margin: auto;
+  margin: auto;
 }
 .form {
-    min-height: 500px; /* Adjust this value according to your need */
+  min-height: 500px; /* Adjust this value according to your need */
 }
-
 
 .tabs {
-    display: flex;
-    margin-left: inherit;
-    margin-right: inherit;
-    width: 30rem;
+  display: flex;
+  margin-left: inherit;
+  margin-right: inherit;
+  width: 30rem;
 
-    position: sticky;
-    top: 0;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    z-index: 1;
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+  border-bottom: 1px solid #ddd;
+  z-index: 1;
 }
 .tabs > div {
-    width: 100%;
-    flex-grow: 1;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    text-align: center;
-    box-sizing: border-box;
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  box-sizing: border-box;
 }
 
-
 .tabs > div.active {
-    background-color: #007bff;
-    color: white;
-    border-bottom: auto solid #0c4da2;
+  background-color: #007bff;
+  color: white;
+  border-bottom: auto solid #0c4da2;
 }

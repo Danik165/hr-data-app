@@ -1,31 +1,26 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap');
-@import url('https://jeevantechnologies.com/images/slider/one-bg.png');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&display=swap");
+@import url("https://jeevantechnologies.com/images/slider/one-bg.png");
 
-
-.login-div{
-    background-color: lightcyan;
+.login-div {
+  background-color: lightcyan;
 }
 
-.login-header{
-    color: #0c4da2;
-    font-family: "Georgia","Serif";
-
-
+.login-header {
+  color: #0c4da2;
+  font-family: "Georgia", "Serif";
 }
 
-#links-container{
-    height: 1.5em;
-}    
-
-#remember-me-text, #forgot-pwd-txt{
-    font-size: small;
-    width: 7em;
-
-} 
-
-
-#error-msg{
-    margin:0px;
-    text-align: center;
+#links-container {
+  height: 1.5em;
 }
 
+#remember-me-text,
+#forgot-pwd-txt {
+  font-size: small;
+  width: 7em;
+}
+
+#error-msg {
+  margin: 0px;
+  text-align: center;
+}

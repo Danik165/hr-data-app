@@ -1,27 +1,24 @@
-import React from 'react';
-import { useNavigate } from 'react-router';
-import { apiurl } from '../../utils/HostData';
-import './logoutbutton.css'
+import React from "react";
+import { useNavigate } from "react-router";
+import { apiurl } from "../../utils/HostData";
+import "./logoutbutton.css";
 
-const Logout = () => { 
+const Logout = () => {
   let navigate = useNavigate();
 
   const logoutUser = () => {
-    localStorage.removeItem('access_tokezn');
-    fetch(apiurl+"/logout")
-      .then((response) =>{
-        if(response.status == 200){
-          navigate('/login')
-        }
-       
-      })
-
+    localStorage.removeItem("access_tokezn");
+    fetch(apiurl + "/logout").then((response) => {
+      if (response.status == 200) {
+        navigate("/login");
+      }
+    });
   };
 
-
-
   return (
-    <button onClick={logoutUser} className="logout-btn">Logout</button>
+    <button onClick={logoutUser} className="logout-btn">
+      Logout
+    </button>
   );
 };
 
