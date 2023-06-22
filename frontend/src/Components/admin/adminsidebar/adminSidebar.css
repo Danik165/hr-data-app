@@ -1,16 +1,15 @@
 .logo img {
-    height: 50px;
-    
-  }
-  
-.logo-container{
-    max-width: 100%;
+  height: 50px;
 }
 
-.logo{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    overflow: hidden;
-    z-index: 99;
+.logo-container {
+  max-width: 100%;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 99;
 }
