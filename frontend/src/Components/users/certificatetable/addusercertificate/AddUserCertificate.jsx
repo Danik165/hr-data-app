@@ -81,7 +81,6 @@ export default function AddUserCertificate({ id, toggleForm }) {
           .catch(err =>{
             setError(err.message)
           })
-        }
     }
   };
 
@@ -115,7 +114,6 @@ export default function AddUserCertificate({ id, toggleForm }) {
   return (
     <div className="add-certificate-form-container">
       <h2>Add a New Certificate</h2>
-      {console.log(newCertificate)}
       <form className="add-certificate-form">
         <label>Certificate Provider:</label>
         <select
@@ -153,7 +151,7 @@ export default function AddUserCertificate({ id, toggleForm }) {
               </option>
             ))}
         </select>
-        {/* <input type="text" onChange={e => setNewCertificate({...newCertificate,Certificate_Name:e.target.value})}/> */}
+
 
         <label>Issue Date:</label>
         <input
