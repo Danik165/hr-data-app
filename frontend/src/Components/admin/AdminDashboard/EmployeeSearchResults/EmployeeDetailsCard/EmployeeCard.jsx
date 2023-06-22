@@ -1,21 +1,29 @@
-import React, { useState, useEffect } from 'react';
-import { MDBIcon } from 'mdb-react-ui-kit';
-import './employeecard.css';
+import React, { useState, useEffect } from "react";
+import { MDBIcon } from "mdb-react-ui-kit";
+import "./employeecard.css";
 import { useNavigate } from "react-router";
 
-export default function EmployeeCard({profile}){
-    let navigate = useNavigate();
-    const seeProfile = (id)=>{
-        
-        navigate('/admin/userprofile?id='+ id)
-    }
+export default function EmployeeCard({ profile }) {
+  let navigate = useNavigate();
+  const seeProfile = (id) => {
+    navigate("/admin/userprofile?id=" + id);
+  };
 
-    return(
-        <div class='mb-4 pt-0 card-container container card bg-light px-0 clickable' onClick={() => seeProfile(profile.EmployeeID)}>
-            <div class='card-body p-0'> 
-            <div class="row header-row py-2 w-100 m-0">
-                <div class='col-4'>
-                <MDBIcon far icon="smile" size='4x' />
+  return (
+    <div
+      class="mb-4 pt-0 card-container container card bg-light px-0 clickable"
+      onClick={() => seeProfile(profile.EmployeeID)}
+    >
+      <div class="card-body p-0">
+        <div class="row header-row py-2 w-100 m-0">
+          <div class="col-4">
+            <MDBIcon far icon="smile" size="4x" />
+          </div>
+          <div class="col-8">
+            <div class="user-details container">
+              <div class="row">
+                <div class="col">
+                  <p class="p-0 m-0 profile-name-value">{profile.Name}</p>
                 </div>
                 <div class='col-8'>
                     <div class='user-details container'>
