@@ -1,6 +1,6 @@
 import { CDBBtn, CDBInput } from "cdbreact";
 import { useEffect, useState } from "react";
-import EmployeeSearchResults from "./EmployeeSearchResults/EmployeeList";
+import EmployeeSearchResults from "./EmployeeList/EmployeeList";
 import { MDBIcon } from "mdb-react-ui-kit";
 
 
