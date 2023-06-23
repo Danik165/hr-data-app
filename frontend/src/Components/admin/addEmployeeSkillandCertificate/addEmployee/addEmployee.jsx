@@ -41,7 +41,7 @@ const AddEmployeeForm = () => {
     worktype: "WFH",
     workstatus: "Salaried",
     DOB: "",
-    designation:""
+    designation: "",
   });
 
   const validateInput = () => {
@@ -94,7 +94,7 @@ const AddEmployeeForm = () => {
           joiningdate: newProfile.joiningDate,
           DOB: newProfile.DOB,
           managerID: newProfile.managerID,
-          designation:newProfile.designation
+          designation: newProfile.designation,
         }),
       })
         .then((response) => {
@@ -344,7 +344,6 @@ const AddEmployeeForm = () => {
               ))}
             </select>
 
-
             <CDBInput
               style={{ "border-radius": "0px" }}
               label="Designation"
@@ -443,7 +442,7 @@ const AddEmployeeForm = () => {
             <br />
 
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <p class="err-message">{error}</p>
+              <p className="err-message">*{error}</p>
             </div>
             <CDBBtn
               color="primary"

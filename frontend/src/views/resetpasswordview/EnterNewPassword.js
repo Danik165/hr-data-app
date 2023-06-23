@@ -93,7 +93,7 @@ const EnterNewPassword = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
             required
           />
-          {error && <p className="err-message">{error}</p>}
+          {error && <p className="err-message">*{error}</p>}
           <button type="submit" class="otp-btn mt-3" onClick={checkOTP}>
             Change Password
           </button>

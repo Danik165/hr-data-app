@@ -60,7 +60,7 @@ const DashboardPage = () => {
         </form>
       </div>
       <div class="msg-box align-self-end me-5">
-        {errorMessage && <p>{errorMessage}</p>}
+        {errorMessage && <p className="err-message">*{errorMessage}</p>}
       </div>
 
       <div className="search-table overflow-hidden  ">

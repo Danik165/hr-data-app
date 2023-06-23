@@ -89,7 +89,7 @@ const Login = (props) => {
         </div>
       </div>
       <div class="row mb-2 ">
-        <p id="error-msg">{error}</p>
+        <p className="err-message">*{error}</p>
       </div>
       <div class="d-flex justify-content-center">
         <button type="submit" class="btn btn-primary btn-block mb-4 btn-sm ">

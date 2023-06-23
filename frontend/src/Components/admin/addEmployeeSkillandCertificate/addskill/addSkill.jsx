@@ -189,7 +189,7 @@ const AddSkillForm = () => {
             />
 
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <p class="err-message">{error}</p>
+              <p className="err-message">*{error}</p>
             </div>
             <CDBBtn
               color="primary"

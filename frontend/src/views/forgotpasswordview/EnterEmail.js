@@ -45,7 +45,7 @@ const EnterEmail = () => {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
-          {error && <p className="err-message">{error}</p>}
+          {error && <p className="err-message">*{error}</p>}
           <button type="submit" class="otp-btn mt-3" onClick={generateOTP}>
             Generate OTP
           </button>

@@ -212,7 +212,7 @@ export default function AddUserSkill({ id, toggleModal }) {
         <option value="Expert">Expert</option>
       </select>
 
-      <p>{error}</p>
+      <p className="err-message">*{error}</p>
       <button onClick={addSkill}>Add Skill</button>
     </div>
   );

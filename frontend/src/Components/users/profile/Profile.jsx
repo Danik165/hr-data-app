@@ -114,7 +114,7 @@ const Profile = ({ id }) => {
   }, [id]);
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p className="err-message">Error: {error}</p>;
 
   return (
     <div className="profile-container">

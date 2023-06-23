@@ -26,3 +26,7 @@ body {
   display: inline-block;
   width: 100%;
 }
+
+.err-message {
+  color: #ff0000;
+}

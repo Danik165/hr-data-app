@@ -26,7 +26,7 @@ const EditableProfile = ({ id }) => {
     Role: "",
     ReportingManagerID: "",
     ManagerName: "",
-    designation:""
+    designation: "",
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -188,7 +188,7 @@ const EditableProfile = ({ id }) => {
             worktype: data.WorkType,
             workstatus: data.WorkStatus,
             DOB: data.DOB.slice(0, 10),
-            designation:data.designation
+            designation: data.designation,
           }),
         });
         const responseData = await response.json();
@@ -262,7 +262,7 @@ const EditableProfile = ({ id }) => {
   }, [id]);
 
   if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (error) return <p className="err-message">Error: {error}</p>;
 
   return (
     <div className="editable-profile-container">
@@ -534,7 +534,12 @@ const EditableProfile = ({ id }) => {
                       </select>
                     </div>
                   )}
-                  {profileItem("Designation", tempProfile.designation, "designation", false)}
+                  {profileItem(
+                    "Designation",
+                    tempProfile.designation,
+                    "designation",
+                    false
+                  )}
                   {!isEditing &&
                     profileItem(
                       "Manager Name",

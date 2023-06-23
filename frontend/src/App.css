@@ -12,3 +12,7 @@ select {
   border: none !important;
   border-bottom: 1px solid black !important;
 }
+
+.err-message {
+  color: #ff0000 !important;
+}
