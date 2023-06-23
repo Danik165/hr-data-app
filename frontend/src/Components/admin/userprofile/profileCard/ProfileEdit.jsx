@@ -26,6 +26,7 @@ const EditableProfile = ({ id }) => {
     Role: "",
     ReportingManagerID: "",
     ManagerName: "",
+    designation:""
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -187,6 +188,7 @@ const EditableProfile = ({ id }) => {
             worktype: data.WorkType,
             workstatus: data.WorkStatus,
             DOB: data.DOB.slice(0, 10),
+            designation:data.designation
           }),
         });
         const responseData = await response.json();
@@ -315,7 +317,7 @@ const EditableProfile = ({ id }) => {
                       />
                     </div>
                   )}
-                  {profileItem("Age", tempProfile.Age, "Age", false)}
+                  {profileItem("Age", tempProfile.Age, "Age", true)}
                 </>
               }
             />
@@ -532,7 +534,7 @@ const EditableProfile = ({ id }) => {
                       </select>
                     </div>
                   )}
-
+                  {profileItem("Designation", tempProfile.designation, "designation", false)}
                   {!isEditing &&
                     profileItem(
                       "Manager Name",

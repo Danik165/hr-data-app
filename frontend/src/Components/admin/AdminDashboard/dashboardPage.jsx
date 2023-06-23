@@ -35,7 +35,7 @@ const DashboardPage = () => {
       });
   };
 
-  useEffect(getSearchResults, []);
+  useEffect(getEmployeeList, []);
 
   const showFilterDropDown = () => {
     console.log("Filter Called");

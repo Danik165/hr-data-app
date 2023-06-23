@@ -41,6 +41,7 @@ const AddEmployeeForm = () => {
     worktype: "WFH",
     workstatus: "Salaried",
     DOB: "",
+    designation:""
   });
 
   const validateInput = () => {
@@ -93,6 +94,7 @@ const AddEmployeeForm = () => {
           joiningdate: newProfile.joiningDate,
           DOB: newProfile.DOB,
           managerID: newProfile.managerID,
+          designation:newProfile.designation
         }),
       })
         .then((response) => {
@@ -126,8 +128,6 @@ const AddEmployeeForm = () => {
               workstatus: "Salaried",
               DOB: "",
             });
-            // setError("New Employee Created Successfully")
-            // setTimeout(()=>setError(''),2000)
           } else {
             response.json().then((data) => {
               setError(data.message);
@@ -343,6 +343,18 @@ const AddEmployeeForm = () => {
                 </option>
               ))}
             </select>
+
+
+            <CDBInput
+              style={{ "border-radius": "0px" }}
+              label="Designation"
+              type="text"
+              icon="id-card"
+              iconClass="text-muted"
+              onChange={(e) =>
+                setNewProfile({ ...newProfile, designation: e.target.value })
+              }
+            />
 
             <label htmlFor="Work Type">Work Type: </label>
             <br />

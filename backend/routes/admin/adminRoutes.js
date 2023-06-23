@@ -29,6 +29,7 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
     workstatus,
     DOB,
     joiningdate,
+    designation
   } = req.body;
   var roleID, departmentID;
 
@@ -41,7 +42,7 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
 
     await db
       .promise()
-      .query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+      .query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
         employeeId,
         name,
         emailId,
@@ -57,6 +58,7 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
         DOB,
         departmentId,
         roleId,
+        designation
       ]);
     res.status(201).send({ message: "Successfully added new employee" });
   } catch (err) {
@@ -320,11 +322,12 @@ router.put("/api/updateuser", requireAdminAuth, async (req, res) => {
       workstatus,
       DOB,
       joiningdate,
+      designation
     } = req.body;
 
     const [rows] = await db
       .promise()
-      .query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+      .query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
         employeeId,
         name,
         emailId,
@@ -340,6 +343,7 @@ router.put("/api/updateuser", requireAdminAuth, async (req, res) => {
         DOB,
         departmentId,
         roleId,
+        designation
       ]);
     if (rows.affectedRows == 1) {
       res.status(200).send({ message: "Updated Record Successfully" });

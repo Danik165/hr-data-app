@@ -25,6 +25,7 @@ const Profile = ({ id }) => {
     Role: "",
     ReportingManagerID: "",
     ManagerName: "",
+    designation: "",
   };
 
   const [profile, setProfile] = useState(initialProfile);
@@ -203,6 +204,12 @@ const Profile = ({ id }) => {
                     false
                   )}
                   {profileItem("Role", tempProfile.Role, "Role", false)}
+                  {profileItem(
+                    "Designation",
+                    tempProfile.designation,
+                    "designation",
+                    false
+                  )}
                   {profileItem(
                     "Manager Name",
                     tempProfile.ManagerName,
