@@ -9,7 +9,7 @@ const {
 } = require("../../database/sqlFunctions");
 const router = Router();
 
-router.post("/api/addskill", requireUserAuth, async (req, res) => {
+router.post("/api/addSkill", requireUserAuth, async (req, res) => {
   try {
     const { category, skill, level, years, subSkillList } = req.body;
     const userId = req.decodedToken.userId;

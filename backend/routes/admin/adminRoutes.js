@@ -153,7 +153,7 @@ router.get("/api/users", requireAdminAuth, async (req, res) => {
   }
 });
 
-router.post("/api/addskillforuser", requireAdminAuth, async (req, res) => {
+router.post("/api/addSkillforuser", requireAdminAuth, async (req, res) => {
   try {
     const { userId, category, skill, level, years, subSkillList } = req.body;
     const subSkillStringList = subSkillList.join(",");
