@@ -1,13 +1,13 @@
 import React from "react";
 import "./adminprofile.css";
-import AdminSidebar from "../../Components/admin/adminsidebar/AdminSidebar";
-import SkillTable from "../../Components/users/skilltable/SkillTable";
+import AdminSidebar from "../../components/admin/adminsidebar/AdminSidebar";
+import SkillTable from "../../components/users/skilltable/SkillTable";
 import { Routes, Route } from "react-router-dom";
-import Profile from "../../Components/users/profile/Profile";
-import UserSkillDetails from "../../Components/admin/addEmployeeSkillandCertificate/addUserSkill";
-import AddDeptRoleProject from "../../Components/admin/addDeptRoleProject/addDeptRoleProject";
-import DashboardPage from "../../Components/admin/AdminDashboard/dashboardPage";
-import UserProfile from "../../Components/admin/userprofile/UserProfile";
+import Profile from "../../components/users/profile/Profile";
+import UserSkillDetails from "../../components/admin/addEmployeeSkillandCertificate/addUserSkill";
+import AddDeptRoleProject from "../../components/admin/addDeptRoleProject/addDeptRoleProject";
+import DashboardPage from "../../components/admin/AdminDashboard/dashboardPage";
+import UserProfile from "../../components/admin/userprofile/UserProfile";
 
 const AdminPage = () => {
   return (

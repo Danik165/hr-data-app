@@ -39,7 +39,7 @@ def login():
             access_token = create_access_token(identity=user.user_id)
             return jsonify(access_token=access_token), 200
 
-        return jsonify(message="Invalid email or password"), 401
+        return jsonify(message="Invalid sendOtp or password"), 401
 
     return jsonify(message="Invalid input "), 400
 
@@ -53,7 +53,7 @@ def user_data():
         return jsonify({"msg": "User not found"}), 404
 
     user_data = {
-        "email": user.email,
+        "sendOtp": user.email,
         "role": user.role
     }
 

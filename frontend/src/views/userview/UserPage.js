@@ -1,10 +1,10 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./userpage.css";
-import SkillPage from "../../Components/users/skillPage";
-import Sidebar from "../../Components/sidebar/Sidebar";
-import Profile from "../../Components/users/profile/Profile";
-import Statistics from "../../Components/users/statistics/Statistics";
+import SkillPage from "../../components/users/skillPage";
+import Sidebar from "../../components/sidebar/Sidebar";
+import Profile from "../../components/users/profile/Profile";
+import Statistics from "../../components/users/statistics/Statistics";
 
 const UserDashboard = () => {
   const isAdmin = false;
