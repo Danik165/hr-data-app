@@ -1,4 +1,4 @@
-import Login from "../../components/loginForm2/loginForm2";
+import LoginForm from "../../components/loginForm/loginForm";
 import "./loginPage.css";
 
 import logo from "../../Images/logo.png";
@@ -22,7 +22,7 @@ const LoginPage = () => {
                   id="Jeevan-logo-img"
                 ></img>
               </div>
-              <Login />
+              <LoginForm />
             </div>
           </div>
         </div>

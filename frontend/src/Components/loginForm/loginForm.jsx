@@ -4,7 +4,7 @@ import "./loginForm2.css";
 import { apiurl } from "../../utils/HostData";
 import { Link } from "react-router-dom";
 
-const Login = (props) => {
+const LoginForm = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -100,4 +100,4 @@ const Login = (props) => {
   );
 };
 
-export default Login;
+export default LoginForm;
