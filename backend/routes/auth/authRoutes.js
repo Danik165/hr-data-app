@@ -6,9 +6,9 @@ const {
 } = require("../../middleware/jwt/create_jwt");
 const handleErrors = require("../../error/errorhandler");
 const router = Router();
-const { sendEmail } = require("../../middleware/email/send_email");
+const { sendEmail } = require("../../middleware/sendOtp/sendOtp");
 const { sqlQuery } = require("../../database/query");
-const { generateOtp } = require("../../middleware/email/create_otp");
+const { generateOtp } = require("../../middleware/email/createOtp");
 const {
   hashPassword,
   verifyPassword,
