@@ -1,6 +1,6 @@
 import { useState } from "react";
 import AddEmployeeForm from "./addEmployee/addEmployee";
-import addSkillForm from "./addSkill/addSkill";
+import AddSkillForm from "./addSkill/addSkill";
 import "./addUserSkill.css";
 
 const UserSkillDetails = () => {
@@ -40,7 +40,7 @@ const UserSkillDetails = () => {
       )}
       {displayForm === "Skills" && (
         <div className="form">
-          <addSkillForm />
+          <AddSkillForm />
         </div>
       )}
     </div>
