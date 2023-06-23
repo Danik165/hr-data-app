@@ -1,6 +1,6 @@
 const { Router, json } = require("express");
 const { requireUserAuth } = require("../../middleware/authMiddleware/userAuth");
-const db = require("../../database/connectDb");
+const db = require("../../database/sqlDbConnect");
 const handleErrors = require("../../error/errorhandler");
 const { sqlQuery } = require("../../database/query");
 const {

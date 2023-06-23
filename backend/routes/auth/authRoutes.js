@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const db = require("../../database/connectDb");
+const db = require("../../database/sqlDbConnect");
 const {
   generateToken,
   generateForgotPasswordToken,

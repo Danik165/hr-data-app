@@ -3,7 +3,7 @@ const {
   hashPassword,
   verifyPassword,
 } = require("../middleware/encryption/encrypt");
-const db = require("./connectDb");
+const db = require("./sqlDbConnect");
 const { sqlQuery } = require("./query");
 
 const UpdatePasswordwithId = async ({ userId, newPassword }) => {
