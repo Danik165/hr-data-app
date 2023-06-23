@@ -14,8 +14,8 @@ const router = Router();
 //Completed with new data and stored procedure
 router.post("/api/register", requireAdminAuth, async (req, res) => {
   const {
+    employeecode,
     name,
-    employeeId,
     roleId,
     departmentId,
     emailId,
@@ -29,21 +29,14 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
     workstatus,
     DOB,
     joiningdate,
-    designation
+    designation,
   } = req.body;
-  var roleID, departmentID;
 
   try {
-    // let [rows] = await db.promise().query(sqlQuery.selectDepartmentIdByName,[department])
-    // departmentID = rows[0].DepartmentID;
-
-    // [rows] = await db.promise().query(sqlQuery.selectRoleIdByDepartmentIdandRoleName,[departmentID,role])
-    // roleID = rows[0].roleID;
-
     await db
       .promise()
       .query("CALL ADD_NEW_EMPLOYEE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
-        employeeId,
+        employeecode,
         name,
         emailId,
         phone,
@@ -58,7 +51,7 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
         DOB,
         departmentId,
         roleId,
-        designation
+        designation,
       ]);
     res.status(201).send({ message: "Successfully added new employee" });
   } catch (err) {
@@ -67,6 +60,59 @@ router.post("/api/register", requireAdminAuth, async (req, res) => {
   }
 });
 
+router.put("/api/updateuser", requireAdminAuth, async (req, res) => {
+  try {
+    const {
+      userId,
+      name,
+      employeecode,
+      roleId,
+      departmentId,
+      emailId,
+      phone,
+      gender,
+      address,
+      city,
+      state,
+      managerID,
+      worktype,
+      workstatus,
+      DOB,
+      joiningdate,
+      designation,
+    } = req.body;
+
+    const [rows] = await db
+      .promise()
+      .query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
+        userId,
+        name,
+        employeecode,
+        emailId,
+        phone,
+        gender,
+        address,
+        city,
+        state,
+        managerID,
+        worktype,
+        workstatus,
+        joiningdate,
+        DOB,
+        departmentId,
+        roleId,
+        designation,
+      ]);
+    if (rows.affectedRows == 1) {
+      res.status(200).send({ message: "Updated Record Successfully" });
+    } else {
+      throw { code: 404, message: "Employee does not exist." };
+    }
+  } catch (err) {
+    const Error = handleErrors(err);
+    res.status(Error.code).send(Error);
+  }
+});
 //Completed with new data and stored procedure
 router.get("/api/userprofilebyid", requireAdminAuth, async (req, res) => {
   try {
@@ -121,12 +167,10 @@ router.post("/api/addskillforuser", requireAdminAuth, async (req, res) => {
         level,
         years,
       ]);
-    res
-      .status(201)
-      .send({
-        message: "New Skill Set Added Successfully",
-        newId: rows[0][0].userId,
-      });
+    res.status(201).send({
+      message: "New Skill Set Added Successfully",
+      newId: rows[0][0].userId,
+    });
   } catch (err) {
     const Err = handleErrors(err);
     res.status(Err.code).send({ message: Err.message });
@@ -266,10 +310,9 @@ router.get("/api/certificatesofuser", requireAdminAuth, async (req, res) => {
   }
 });
 
-router.post("/api/certificateofuser",requireAdminAuth,async(req,res) =>{
-
-  try{
-    const userId= req.body.userId;
+router.post("/api/certificateofuser", requireAdminAuth, async (req, res) => {
+  try {
+    const userId = req.body.userId;
     const certificate_ID = req.body.Certificate_ID;
     const issue_date = req.body.Issue_date || null;
     const validity_date = req.body.Validity_date || null;
@@ -298,58 +341,6 @@ router.get("/api/listmanagers", requireAdminAuth, async (req, res) => {
         manager_access_id,
       ]);
     res.status(200).send({ data: rows });
-  } catch (err) {
-    const Error = handleErrors(err);
-    res.status(Error.code).send(Error);
-  }
-});
-
-router.put("/api/updateuser", requireAdminAuth, async (req, res) => {
-  try {
-    const {
-      name,
-      employeeId,
-      roleId,
-      departmentId,
-      emailId,
-      phone,
-      gender,
-      address,
-      city,
-      state,
-      managerID,
-      worktype,
-      workstatus,
-      DOB,
-      joiningdate,
-      designation
-    } = req.body;
-
-    const [rows] = await db
-      .promise()
-      .query("CALL UPDATE_USER_PROFILE(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", [
-        employeeId,
-        name,
-        emailId,
-        phone,
-        gender,
-        address,
-        city,
-        state,
-        managerID,
-        worktype,
-        workstatus,
-        joiningdate,
-        DOB,
-        departmentId,
-        roleId,
-        designation
-      ]);
-    if (rows.affectedRows == 1) {
-      res.status(200).send({ message: "Updated Record Successfully" });
-    } else {
-      throw { code: 404, message: "Employee does not exist." };
-    }
   } catch (err) {
     const Error = handleErrors(err);
     res.status(Error.code).send(Error);

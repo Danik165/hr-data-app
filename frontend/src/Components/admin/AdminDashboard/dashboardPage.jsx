@@ -7,7 +7,7 @@ const DashboardPage = () => {
   const [searchValue, setSearchValue] = useState("");
   const [profileList, setProfileList] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [totalRecords, setTotalRecords] = useState("");
   const getEmployeeList = (e) => {
     if (e) {
       e.preventDefault();
@@ -22,12 +22,12 @@ const DashboardPage = () => {
           window.location.replace(response.url);
         } else if (response.status == 200) {
           response.json().then((data) => {
-            setErrorMessage("Total Records Found(" + data.data.length + ")");
+            setTotalRecords("Total Records Found(" + data.data.length + ")");
             setProfileList(data.data);
           });
         } else if (response.status == 400) {
           setProfileList([]);
-          setErrorMessage("No Records Found");
+          setTotalRecords("No Records Found");
         }
       })
       .catch((err) => {
@@ -60,6 +60,7 @@ const DashboardPage = () => {
         </form>
       </div>
       <div class="msg-box align-self-end me-5">
+        {totalRecords && <p>{totalRecords}</p>}
         {errorMessage && <p className="err-message">*{errorMessage}</p>}
       </div>
 

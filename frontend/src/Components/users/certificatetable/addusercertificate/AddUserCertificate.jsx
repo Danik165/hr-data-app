@@ -169,7 +169,7 @@ export default function AddUserCertificate({ id, toggleForm }) {
             })
           }
         />
-        <p className="err-message">*{error}</p>
+        {error && <p className="err-message">*{error}</p>}
         <button type="submit" onClick={(e) => addCertificate(e)}>
           {" "}
           Submit{" "}

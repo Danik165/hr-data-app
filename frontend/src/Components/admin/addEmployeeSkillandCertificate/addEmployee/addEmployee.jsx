@@ -25,7 +25,7 @@ const AddEmployeeForm = () => {
   const [managerList, setManagerList] = useState([]);
 
   const [newProfile, setNewProfile] = useState({
-    employeeId: 0,
+    employeeId: "",
     name: "",
     email: "",
     confirmEmail: "",
@@ -45,15 +45,28 @@ const AddEmployeeForm = () => {
   });
 
   const validateInput = () => {
-    console.log(newProfile);
-    if (!/^\d+$/.test(newProfile.employeeId) || newProfile.employeeId <= 0) {
-      setError("Employee ID must be a Number greater than 0");
+    // if (!/^\d+$/.test(newProfile.employeeId) || newProfile.employeeId <= 0) {
+    //   setError("Employee ID must be a Number greater than 0");
+    //   return false;
+    // } else
+    if (newProfile.employeeId.length == 0) {
+      setError("Employee Code cannot be empty");
       return false;
-    } else if (newProfile.email != newProfile.confirmEmail) {
+    }
+    if (newProfile.name.length == 0) {
+      setError("Name cannot be empty");
+      return false;
+    }
+    if (newProfile.email != newProfile.confirmEmail) {
       setError("Emails Do Not match");
       return false;
-    } else if (newProfile.email.length == 0) {
+    }
+    if (newProfile.email.length == 0) {
       setError("Must have an Email Id");
+      return false;
+    }
+    if (newProfile.designation.length == 0) {
+      setError("Designation Cannot be Empty");
       return false;
     }
     if (newProfile.managerID <= 0) {
@@ -81,7 +94,7 @@ const AddEmployeeForm = () => {
         body: JSON.stringify({
           name: newProfile.name,
           phone: newProfile.phone,
-          employeeId: newProfile.employeeId,
+          employeecode: newProfile.employeeId,
           roleId: newProfile.roleId,
           departmentId: parseInt(newProfile.departmentId),
           emailId: newProfile.email,
@@ -111,7 +124,7 @@ const AddEmployeeForm = () => {
             });
 
             setNewProfile({
-              employeeId: 1,
+              employeeId: "",
               name: "",
               email: "",
               confirmEmail: "",
@@ -219,7 +232,7 @@ const AddEmployeeForm = () => {
             </div>
             <CDBInput
               style={{ "border-radius": "0px" }}
-              label="Employee ID"
+              label="Employee Code"
               type="text"
               icon="id-card"
               iconClass="text-muted"
@@ -442,7 +455,7 @@ const AddEmployeeForm = () => {
             <br />
 
             <div class="d-flex align-items-center justify-content-center mt-2">
-              <p className="err-message">*{error}</p>
+              {error && <p className="err-message">*{error}</p>}
             </div>
             <CDBBtn
               color="primary"

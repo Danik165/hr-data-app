@@ -183,7 +183,7 @@ const AddDeptRoleForm = () => {
               }
             />
             <div class="row mb-2 ">
-              <p className="err-message">*{error}</p>
+              {error && <p className="err-message">*{error}</p>}
             </div>
             <CDBBtn
               color="primary"

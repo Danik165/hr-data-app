@@ -7,6 +7,7 @@ import { confirmAlert } from "react-confirm-alert";
 
 const EditableProfile = ({ id }) => {
   const initialProfile = {
+    userId: id,
     EmployeeID: "",
     Name: "",
     EmailID: "",
@@ -173,8 +174,9 @@ const EditableProfile = ({ id }) => {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
+            userId: id,
             name: data.Name,
-            employeeId: data.EmployeeID,
+            employeecode: data.EmployeeID,
             roleId: data.RoleID,
             departmentId: data.departmentID,
             phone: data.PhoneNumber,
