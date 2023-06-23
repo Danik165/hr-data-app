@@ -320,7 +320,7 @@ router.post("/api/certificateofuser", requireAdminAuth, async (req, res) => {
     const [rows] = await db
       .promise()
       .query("CALL ADD_CERTIFICATE_FOR_USER(?,?,?,?)", [
-        certi_name,
+        certificate_ID,
         issue_date,
         validity_date,
         userId,

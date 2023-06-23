@@ -8,7 +8,7 @@ const handleErrors = require("../../error/errorhandler");
 const router = Router();
 const { sendEmail } = require("../../middleware/sendOtp/sendOtp");
 const { sqlQuery } = require("../../database/query");
-const { generateOtp } = require("../../middleware/email/createOtp");
+const { generateOtp } = require("../../middleware/sendOtp/createOtp");
 const {
   hashPassword,
   verifyPassword,
@@ -123,11 +123,9 @@ router.post("/api/resetpassword", async (req, res) => {
                   .status(200)
                   .send({ message: "Password Updated Successfully." });
               } else {
-                res
-                  .status(500)
-                  .send({
-                    message: "Unable to Process Request now. Try Again Later",
-                  });
+                res.status(500).send({
+                  message: "Unable to Process Request now. Try Again Later",
+                });
               }
             } else {
               res.status(400).send({ message: "OTP does not match" });
