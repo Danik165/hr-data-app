@@ -13,7 +13,7 @@ import logo from "../../../Images/Logo_alt.png";
 import Logout from "../../logoutbutton/LogoutButtons";
 
 import "./adminSidebar.css";
-const AdminSidebar = () => {
+const adminSidebar = () => {
   return (
     <div
       style={{ display: "flex", height: "100%", overflow: "scroll initial" }}
@@ -67,4 +67,4 @@ const AdminSidebar = () => {
   );
 };
 
-export default AdminSidebar;
+export default adminSidebar;
