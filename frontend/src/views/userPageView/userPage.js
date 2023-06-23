@@ -1,12 +1,12 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import "./userpage.css";
+import "./userPage.css";
 import SkillPage from "../../components/users/skillPage";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Profile from "../../components/users/profile/Profile";
 import Statistics from "../../components/users/statistics/Statistics";
 
-const UserDashboard = () => {
+const UserPage = () => {
   const isAdmin = false;
   return (
     <div className="dashboard-container">
@@ -29,4 +29,4 @@ const UserDashboard = () => {
   );
 };
 
-export default UserDashboard;
+export default UserPage;

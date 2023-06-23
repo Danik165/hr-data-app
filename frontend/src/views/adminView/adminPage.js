@@ -1,5 +1,5 @@
 import React from "react";
-import "./adminprofile.css";
+import "./adminPage.css";
 import AdminSidebar from "../../components/admin/adminsidebar/AdminSidebar";
 import SkillTable from "../../components/users/skilltable/SkillTable";
 import { Routes, Route } from "react-router-dom";

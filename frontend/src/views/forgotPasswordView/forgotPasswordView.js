@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import "./enteremail.css";
+import "./forgotPasswordView.css";
 import logo from "../../Images/logo.png";
 import { apiurl } from "../../utils/HostData";
 
-const EnterEmail = () => {
+const ForgotPasswordView = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
@@ -55,4 +55,4 @@ const EnterEmail = () => {
   );
 };
 
-export default EnterEmail;
+export default ForgotPasswordView;

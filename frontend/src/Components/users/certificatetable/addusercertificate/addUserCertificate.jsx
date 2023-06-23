@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./AddUserCertificate.css";
+import "./addUserCertificate.css";
 import { confirmAlert } from "react-confirm-alert";
 import { apiurl } from "../../../../utils/HostData";
 

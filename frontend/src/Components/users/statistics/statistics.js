@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import { Doughnut, Bar } from 'react-chartjs-2';
-import "./Statistics.css";
+import "./statistics.css";
 
 import { apiurl } from "../../../utils/HostData";
 

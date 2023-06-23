@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./profile.css";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { apiurl } from "../../../utils/HostData";
-import ProfileInfoCard from "./profileInfoCard/ProfileInfoCard";
+import ProfileInfoCard from "./profileInfoCard/profileInfoCard";
 
 const Profile = ({ id }) => {
   const initialProfile = {

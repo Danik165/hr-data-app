@@ -1,9 +1,9 @@
 import { confirmAlert } from "react-confirm-alert";
 import { useEffect, useState } from "react";
-import "./certificatetable.css";
+import "./certificateTable.css";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { apiurl } from "../../../utils/HostData";
-import AddUserCertificate from "./addusercertificate/AddUserCertificate";
+import AddUserCertificate from "./addusercertificate/addUserCertificate";
 import { Modal, ModalBody } from "reactstrap";
 
 export default function CertificateTable({ id }) {
