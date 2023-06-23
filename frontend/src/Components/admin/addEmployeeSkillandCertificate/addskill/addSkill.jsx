@@ -11,9 +11,9 @@ import {
   CDBDropDownItem,
 } from "cdbreact";
 import { apiurl } from "../../../../utils/HostData";
-import "./addskill.css";
+import "./addSkill.css";
 
-const AddSkillForm = () => {
+const addSkillForm = () => {
   const [categoryEnabled, setCategoryEnabled] = useState(false);
   const [skillEnabled, setSkillEnabled] = useState(false);
   const [error, setError] = useState("");
@@ -205,4 +205,4 @@ const AddSkillForm = () => {
     </div>
   );
 };
-export default AddSkillForm;
+export default addSkillForm;

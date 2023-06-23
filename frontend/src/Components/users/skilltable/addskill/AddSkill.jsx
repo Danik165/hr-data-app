@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { apiurl } from "../../../../utils/HostData";
 import { confirmAlert } from "react-confirm-alert";
-import "./addskill.css";
+import "./addSkill.css";
 export default function AddUserSkill({ id, toggleModal }) {
   //var inserturl = "dgsd";
   const [skillStructure, setSkillStructure] = useState([]);
@@ -110,10 +110,10 @@ export default function AddUserSkill({ id, toggleModal }) {
     var inserturl, tempObj;
     if (validateInput()) {
       if (id) {
-        inserturl = apiurl + "/addskillforuser";
+        inserturl = apiurl + "/addSkillforuser";
         tempObj = { ...newSkill, subSkillList: userSubSkills, userId: id };
       } else {
-        inserturl = apiurl + "/addskill";
+        inserturl = apiurl + "/addSkill";
         tempObj = { ...newSkill, subSkillList: userSubSkills };
       }
       fetch(inserturl, {

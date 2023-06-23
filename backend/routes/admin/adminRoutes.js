@@ -127,7 +127,7 @@ router.get("/api/userprofilebyid", requireAdminAuth, async (req, res) => {
   }
 });
 
-router.get("/api/admindashboard", requireAdminAuth, async (req, res) => {
+router.get("/api/adminDashboard", requireAdminAuth, async (req, res) => {
   try {
     const [rows] = await db
       .promise()

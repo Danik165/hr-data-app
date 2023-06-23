@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import './skilltable.css';
 import { MDBIcon } from 'mdb-react-ui-kit';
 import { apiurl } from '../../../utils/HostData';
-import AddUserSkill from './addskill/AddSkill';
+import AddUserSkill from './addSkill/addSkill';
 import {
   Button, Modal, ModalFooter,
   ModalHeader, ModalBody
@@ -22,9 +22,9 @@ const UserPage = ({id}) => {
   const [certificate, setCertificate] = useState("");
   const [userSkills, setUserSkills] = useState([]);
   const [skillStructure,setSkillStructure] = useState([]);
-  const [showAddSkillForm,setShowAddSkillForm] = useState(false)
+  const [showaddSkillForm,setShowaddSkillForm] = useState(false)
 
-  const toggleAddSkillForm = () => setShowAddSkillForm(!showAddSkillForm);
+  const toggleaddSkillForm = () => setShowaddSkillForm(!showaddSkillForm);
 
 const skillOptions = category ? skillStructure.find(({ category: c }) => c === category)?.skills : [];
 
@@ -154,10 +154,10 @@ return (
   <div className='skill-container'>
     <div className='skill-header'>
       <h2 >Skills</h2>
-      <button onClick={toggleAddSkillForm} >Add new skill</button>
-        <Modal isOpen={showAddSkillForm}  toggle={toggleAddSkillForm}>
+      <button onClick={toggleaddSkillForm} >Add new skill</button>
+        <Modal isOpen={showaddSkillForm}  toggle={toggleaddSkillForm}>
             <ModalBody>
-              <AddUserSkill id={id} toggleModal={toggleAddSkillForm}/>
+              <AddUserSkill id={id} toggleModal={toggleaddSkillForm}/>
             </ModalBody>
 
       </Modal>
