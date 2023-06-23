@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import "./loginform.css";
+import "./loginForm2.css";
 import { apiurl } from "../../utils/HostData";
 import { Link } from "react-router-dom";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import "./editprofile.css";
+import "./editProfile.css";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { apiurl } from "../../../../utils/HostData";
 import ProfileInfoCard from "./profileInfoCard/ProfileInfoCard";
@@ -255,8 +255,8 @@ const EditableProfile = ({ id }) => {
 
   useEffect(() => {
     const url = id
-      ? apiurl + "/userprofilebyid?" + new URLSearchParams({ userId: id })
-      : apiurl + "/userprofile";
+      ? apiurl + "/userProfilebyid?" + new URLSearchParams({ userId: id })
+      : apiurl + "/userProfile";
 
     fetchProfile(url);
     fetchDepartmentList();

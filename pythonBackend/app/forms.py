@@ -9,6 +9,6 @@ class RegistrationForm(FlaskForm):
     role = SelectField('Role', choices=[('employee', 'Employee'), ('HR', 'HR')])
     team = SelectField('Team', choices=[], coerce=int)
 
-class LoginForm(FlaskForm):
+class loginForm2(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
     password = PasswordField('Password', validators=[DataRequired()])

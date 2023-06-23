@@ -1,7 +1,7 @@
 from flask import Blueprint, request, jsonify
 from flask_jwt_extended import create_access_token
 from .models import User, db
-from .forms import RegistrationForm, LoginForm
+from .forms import RegistrationForm, loginForm2
 from flask_jwt_extended import jwt_required, get_jwt_identity
 
 auth_bp = Blueprint('auth', __name__)
@@ -29,7 +29,7 @@ def register():
 @auth_bp.route('/login', methods=['POST'])
 def login():
 
-    form = LoginForm(request.form)
+    form = loginForm2(request.form)
     print(form)
 
     if form.validate():

@@ -1,9 +1,9 @@
 import CertificateTable from "../../users/certificatetable/CertificateTable";
-import EditableProfile from "./profileCard/ProfileEdit";
+import EditableProfile from "./profileCard/profileEdit";
 import UserPage from "../../users/skilltable/SkillTable";
-import "./UserProfile.css";
+import "./userProfile.css";
 
-const UserProfile = () => {
+const userProfile = () => {
   const queryParameters = new URLSearchParams(window.location.search);
   const id = queryParameters.get("id");
   return (
@@ -21,4 +21,4 @@ const UserProfile = () => {
   );
 };
 
-export default UserProfile;
+export default userProfile;
