@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router";
 import { apiurl } from "../../utils/HostData";
-import "./logoutbutton.css";
+import "./logoutButton.css";
 
 const Logout = () => {
   let navigate = useNavigate();
