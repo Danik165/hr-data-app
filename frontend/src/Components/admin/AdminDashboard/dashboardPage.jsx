@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import EmployeeSearchResults from "./EmployeeList/EmployeeList";
 import { MDBIcon } from "mdb-react-ui-kit";
 
-
-
 import { apiurl } from "../../../utils/HostData";
 const DashboardPage = () => {
   const [searchValue, setSearchValue] = useState("");
@@ -38,7 +36,7 @@ const DashboardPage = () => {
       });
   };
 
-  useEffect(getSearchResults, []);
+  useEffect(getEmployeeList, []);
 
   const showFilterDropDown = () => {
     console.log("Filter Called");

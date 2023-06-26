@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { MDBIcon } from "mdb-react-ui-kit";
-import "./employeecard.css";
+import "./employeeCard.css";
 import { useNavigate } from "react-router";
 
 export default function EmployeeCard({ profile }) {

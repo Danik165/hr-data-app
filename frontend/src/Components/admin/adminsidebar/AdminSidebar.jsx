@@ -10,7 +10,7 @@ import {
 import { Link, NavLink, Route } from "react-router-dom";
 
 import logo from "../../../Images/Logo_alt.png";
-import Logout from "../../logoutbutton/LogoutButtons";
+import Logout from "../../logoutButton/logoutButton";
 
 import "./adminSidebar.css";
 const AdminSidebar = () => {

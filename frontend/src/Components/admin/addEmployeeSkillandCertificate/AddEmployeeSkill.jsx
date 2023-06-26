@@ -1,7 +1,7 @@
 import { useState } from "react";
-import AddEmployeeForm from "./AddEmployeeForm/AddEmployeeForm";
-import AddSkillForm from "./AddSkillForm/AddSkillForm";
-import "./addUserSkill.css";
+import AddEmployeeForm from "./addEmployee/addEmployee";
+import AddSkillForm from "./addSkill/addSkill";
+import "./addEmployeeSkill.css";
 
 const UserSkillDetails = () => {
   const [displayForm, setDisplayForm] = useState("Employee");

@@ -1,14 +1,16 @@
 import React from "react";
-import "./adminPage.css";
-import AdminSidebar from "../../components/admin/adminsidebar/AdminSidebar";
-import SkillTable from "../../components/users/skilltable/SkillTable";
 import { Routes, Route } from "react-router-dom";
-import Profile from "../../components/users/profile/Profile";
-import UserSkillDetails from "../../components/admin/addEmployeeSkillAndCertificate/addUserSkill";
-import AddDeptRoleProject from "../../components/admin/addDeptRoleProject/addDeptRoleProject";
-import DashboardPage from "../../components/admin/adminDashboard/dashboardPage";
-import UserProfile from "../../components/admin/userprofile/UserProfile";
 
+import AdminSidebar from "../../Components/admin/adminsidebar/adminSidebar";
+
+import DashboardPage from "../../components/admin/adminDashboard/dashboardPage";
+import UserSkillDetails from "../../components/admin/addEmployeeSkillAndCertificate/AddEmployeeSkill";
+import AddDeptRoleProject from "../../components/admin/addDeptRoleProject/addDeptRoleProject";
+import SkillTable from "../../Components/users/skillTable/skillTable";
+import Profile from "../../Components/users/profile/profile";
+import UserProfile from "../../Components/admin/userProfile/userProfile";
+
+import "./adminPage.css";
 const AdminPage = () => {
   return (
     <div className="dashboard-container">

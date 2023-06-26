@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import EmployeeCard from "./EmployeeDetailsCard/EmployeeCard";
-import "./employeelist.css";
+import EmployeeCard from "./EmployeeDetailsCard/employeeCard";
+import "./employeeList.css";
 
 export default function EmployeeSearchResults({ profileList }) {
   return (

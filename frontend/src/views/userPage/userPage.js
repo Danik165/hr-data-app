@@ -3,8 +3,8 @@ import { Routes, Route } from "react-router-dom";
 import "./userPage.css";
 import SkillPage from "../../components/users/userDashboard/userDashboard";
 import Sidebar from "../../Components/users/sideBar/Sidebar";
-import Profile from "../../components/users/profile/Profile";
-import Statistics from "../../components/users/statistics/Statistics";
+import Profile from "../../Components/users/profile/profile";
+import Statistics from "../../Components/users/statistics/statistics";
 
 const UserPage = () => {
   return (

@@ -1,4 +1,4 @@
-import "./filtermodal.css";
+import "./filterModal.css";
 
 export default function FilterModal() {
   return (
