@@ -1,6 +1,6 @@
-import SkillTable from "./skilltable/SkillTable";
+import SkillTable from "../skilltable/SkillTable";
 //import './certificatetable/CertificateTable'
-import CertificateTable from "./certificatetable/CertificateTable";
+import CertificateTable from "../certificateTable/CertificateTable";
 
 export default function SkillPage() {
   return (

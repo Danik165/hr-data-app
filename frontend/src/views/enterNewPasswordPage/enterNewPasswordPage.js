@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import "./enterNewPassword.css";
+import "./enterNewPasswordPage.css";
 import logo from "../../Images/logo.png";
 import { apiurl } from "../../utils/HostData";
 import { confirmAlert } from "react-confirm-alert"; // Import

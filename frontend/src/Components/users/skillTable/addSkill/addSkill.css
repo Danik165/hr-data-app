@@ -1,0 +1,9 @@
+.user-skill-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.add-skill-form > * {
+  margin-top: 0.5rem;
+}

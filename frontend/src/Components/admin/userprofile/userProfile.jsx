@@ -1,6 +1,6 @@
-import CertificateTable from "../../users/certificatetable/CertificateTable";
-import EditableProfile from "./profileCard/profileEdit";
-import UserPage from "../../users/skilltable/SkillTable";
+import CertificateTable from "../../users/certificateTable/CertificateTable";
+import EditableProfile from "./profileEdit/profileEdit";
+import UserPage from "../../users/skilltable/skillTable";
 import "./userProfile.css";
 
 const userProfile = () => {

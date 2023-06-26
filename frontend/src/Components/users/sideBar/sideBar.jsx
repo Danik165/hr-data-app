@@ -10,8 +10,8 @@ import {
 import { Link, NavLink } from "react-router-dom";
 
 import "./sideBar.css";
-import logo from "../../Images/Logo_alt.png";
-import Logout from "../logoutbutton/LogoutButtons";
+import logo from "../../../Images/Logo_alt.png";
+import Logout from "../../logoutButton/logoutButton";
 
 const Sidebar = () => {
   return (

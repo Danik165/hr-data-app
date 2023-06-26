@@ -1,17 +1,16 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import "./userPage.css";
-import SkillPage from "../../components/users/skillPage";
-import Sidebar from "../../components/sidebar/Sidebar";
+import SkillPage from "../../components/users/userDashboard/userDashboard";
+import Sidebar from "../../Components/users/sideBar/Sidebar";
 import Profile from "../../components/users/profile/Profile";
 import Statistics from "../../components/users/statistics/Statistics";
 
 const UserPage = () => {
-  const isAdmin = false;
   return (
     <div className="dashboard-container">
       <div className="dashboard-body">
-        <Sidebar isAdmin={isAdmin} />
+        <Sidebar />
         <Routes>
           <Route path="/" element={<SkillPage />} />
           <Route path="/statistics" element={<Statistics />} />

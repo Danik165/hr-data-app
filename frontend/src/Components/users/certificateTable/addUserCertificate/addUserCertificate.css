@@ -1,0 +1,9 @@
+.add-certificate-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.add-certificate-form > * {
+  margin-top: 0.5rem;
+}

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Navigate, useNavigate } from "react-router";
-import "./forgotPasswordView.css";
+import "./forgotPasswordPage.css";
 import logo from "../../Images/logo.png";
 import { apiurl } from "../../utils/HostData";
 

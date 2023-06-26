@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import UserPage from "./views/userPageview/userPage";
-import AdminPage from "./views/adminView/adminPage";
-import ForgotPasswordView from "./views/forgotPasswordView/forgotPasswordView";
-import EnterNewPassword from "./views/enterNewPasswordView/enterNewPassword";
-import LoginPage from "./views/loginview/loginPage";
+import UserPage from "./views/userPage/userPage";
+import AdminPage from "./views/adminPage/adminPage";
+import ForgotPasswordView from "./views/forgotPasswordPage/forgotPasswordPage";
+import EnterNewPassword from "./views/enterNewPasswordPage/enterNewPasswordPage";
+import LoginPage from "./views/loginPage/loginPage";
 
 import "./App.css";
 
