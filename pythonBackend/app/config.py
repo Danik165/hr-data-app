@@ -23,5 +23,5 @@
 #
 #
 #     # Use the extended forms we created
-#     SECURITY_LOGIN_FORM = 'forms.ExtendedLoginForm'
+#     SECURITY_LOGIN_FORM = 'forms.ExtendedloginForm2'
 #     SECURITY_REGISTER_FORM = 'forms.ExtendedRegisterForm'
