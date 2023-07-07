@@ -46,7 +46,7 @@
     "axios": "^1.3.6",
     "axobject-query": "^3.1.1",
     "babel-jest": "^27.5.1",
-    "babel-loader": "^8.3.0",
+    "babel-loader": "^9.1.3",
     "babel-plugin-istanbul": "^6.1.1",
     "babel-plugin-jest-hoist": "^27.5.1",
     "babel-plugin-macros": "^3.1.0",
