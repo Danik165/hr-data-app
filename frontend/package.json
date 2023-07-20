@@ -783,7 +783,7 @@
     "which-boxed-primitive": "^1.0.2",
     "which-collection": "^1.0.1",
     "which-typed-array": "^1.1.9",
-    "word-wrap": "^1.2.3",
+    "word-wrap": "^1.2.4",
     "workbox-background-sync": "^6.5.4",
     "workbox-broadcast-update": "^6.5.4",
     "workbox-build": "^6.5.4",
