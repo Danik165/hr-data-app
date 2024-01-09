@@ -661,7 +661,7 @@
     "selfsigned": "^2.1.1",
     "semver": "^6.3.0",
     "send": "^0.18.0",
-    "serialize-javascript": "^6.0.1",
+    "serialize-javascript": "^6.0.2",
     "serve-index": "^1.9.1",
     "serve-static": "^1.15.0",
     "setprototypeof": "^1.2.0",
