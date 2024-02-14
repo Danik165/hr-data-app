@@ -770,7 +770,7 @@
     "webidl-conversions": "^6.1.0",
     "webpack": "^5.80.0",
     "webpack-dev-middleware": "^5.3.3",
-    "webpack-dev-server": "^4.13.3",
+    "webpack-dev-server": "^5.0.0",
     "webpack-manifest-plugin": "^4.1.1",
     "webpack-sources": "^3.2.3",
     "websocket-driver": "^0.7.4",
