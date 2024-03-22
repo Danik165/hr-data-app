@@ -769,7 +769,7 @@
     "web-vitals": "^2.1.4",
     "webidl-conversions": "^6.1.0",
     "webpack": "^5.80.0",
-    "webpack-dev-middleware": "^5.3.3",
+    "webpack-dev-middleware": "^5.3.4",
     "webpack-dev-server": "^4.13.3",
     "webpack-manifest-plugin": "^4.1.1",
     "webpack-sources": "^3.2.3",
