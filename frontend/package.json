@@ -201,7 +201,7 @@
     "escape-html": "^1.0.3",
     "escape-string-regexp": "^1.0.5",
     "escodegen": "^2.0.0",
-    "eslint": "^8.39.0",
+    "eslint": "^9.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-import-resolver-node": "^0.3.7",
     "eslint-module-utils": "^2.8.0",
