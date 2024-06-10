@@ -718,7 +718,7 @@
     "terminal-link": "^2.1.1",
     "terser": "^5.17.1",
     "terser-webpack-plugin": "^5.3.7",
-    "test-exclude": "^6.0.0",
+    "test-exclude": "^7.0.0",
     "text-table": "^0.2.0",
     "thenify": "^3.3.1",
     "thenify-all": "^1.6.0",
