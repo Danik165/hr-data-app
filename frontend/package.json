@@ -88,7 +88,7 @@
     "char-regex": "^1.0.2",
     "chart.js": "^4.3.0",
     "check-types": "^11.2.2",
-    "chokidar": "^3.5.3",
+    "chokidar": "^4.0.0",
     "chrome-trace-event": "^1.0.3",
     "ci-info": "^3.8.0",
     "cjs-module-lexer": "^1.2.2",
