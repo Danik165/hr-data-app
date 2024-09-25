@@ -644,7 +644,7 @@
     "retry": "^0.13.1",
     "reusify": "^1.0.4",
     "rimraf": "^3.0.2",
-    "rollup": "^2.79.1",
+    "rollup": "^3.29.5",
     "rollup-plugin-terser": "^7.0.2",
     "run-parallel": "^1.2.0",
     "safe-array-concat": "^1.0.0",
