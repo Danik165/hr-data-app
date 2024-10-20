@@ -301,7 +301,7 @@
     "http-parser-js": "^0.5.8",
     "http-proxy": "^1.18.1",
     "http-proxy-agent": "^4.0.1",
-    "http-proxy-middleware": "^2.0.6",
+    "http-proxy-middleware": "^2.0.7",
     "https-proxy-agent": "^5.0.1",
     "human-signals": "^2.1.0",
     "iconv-lite": "^0.6.3",
